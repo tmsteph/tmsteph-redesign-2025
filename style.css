@@ -1,0 +1,94 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4faff;
+  color: #222;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to bottom right, #63abe2, #8fd3f4);
+  color: white;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.btn-primary {
+  background: #00509e;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #003f7f;
+}
+
+/* Section Styling */
+.section {
+  padding: 4rem 2rem;
+}
+
+.section.alt {
+  background-color: #e6f1f7;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #1d3557;
+}
+
+ul.project-list,
+ul.link-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul.project-list li,
+ul.link-list li {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+ul.link-list a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+ul.link-list a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #d4e9f4;
+  color: #333;
+  font-size: 0.9rem;
+}
