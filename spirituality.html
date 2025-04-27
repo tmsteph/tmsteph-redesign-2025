@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spirituality - Thomas Stephens</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Spirituality</h1>
+      <p class="tagline">Seeking Connection. Seeking Meaning.</p>
+      <a href="index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Expanding Awareness</h2>
+      <p>I have always been fascinated with the bigger picture — why we are here, where we came from, and where we are going. Spirituality is not a dogma to me; it is a living journey. </p>
+
+      <p>Through study, practice, and reflection, I believe we can all learn to look beyond our individual desires and develop a broader awareness — recognizing that we are all part of something greater: the universal consciousness.</p>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <h2>Practices</h2>
+      <p>Yoga, meditation, nature immersion, and study of ancient philosophies have been central to my personal journey. These practices help cultivate presence, peace, and purpose.</p>
+      
+      <p>I seek to blend spirituality with daily living — not as something separate, but as the very foundation of creativity, learning, and innovation.</p>
+    </div>
+  </section>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Future Projects</h2>
+      <p>Part of my mission is to create spaces — both physical and digital — where people can explore spirituality freely, without judgment. Where philosophy, art, and community weave together a new path forward.</p>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Expand.</p>
+    </div>
+  </footer>
+
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      starField.appendChild(star);
+    }
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+  </script>
+
+</body>
+</html>
