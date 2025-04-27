@@ -79,12 +79,12 @@
 
   <script>
     const starField = document.getElementById('starfield');
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 200; i++) {
       const star = document.createElement('div');
       star.className = 'star';
       star.style.top = Math.random() * 100 + 'vh';
       star.style.left = Math.random() * 100 + 'vw';
-      star.style.animationDuration = (1.5 + Math.random() * 2) + 's'; // faster twinkle!
+      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
       starField.appendChild(star);
     }
   </script>
