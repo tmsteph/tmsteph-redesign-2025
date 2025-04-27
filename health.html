@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Health & Wellness - Thomas Stephens</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Health & Wellness</h1>
+      <p class="tagline">Building Stronger Bodies and Minds.</p>
+      <a href="index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Health Is the Foundation</h2>
+      <p>In a world full of distractions and demands, taking care of your physical and mental health is critical to achieving anything meaningful. I've learned — often the hard way — that good habits are what build lasting strength.</p>
+
+      <p>Health isn't just about survival. It's about thriving. It's about feeling energized, capable, and focused each day.</p>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <h2>Building Good Habits</h2>
+      <p>Small, consistent habits are the real secret. Exercise, sunlight, proper sleep, hydration, and meditation are simple but powerful tools. When you stack small wins daily, they transform your life over time.</p>
+      
+      <p>Learning to program yourself for success — physically, mentally, and spiritually — is the highest form of self-care. It’s about creating a system where excellence becomes automatic.</p>
+    </div>
+  </section>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Supplements and Support</h2>
+      <p>Natural supplements like magnesium, L-theanine, and adaptogens have helped me personally balance stress, energy, and focus. While not magic pills, they are helpful tools when combined with proper lifestyle foundations.</p>
+
+      <p>Ultimately, true health comes from within: nurturing your body, your mind, and your soul in balance.</p>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Strong Body. Clear Mind. Open Heart.</p>
+    </div>
+  </footer>
+
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      starField.appendChild(star);
+    }
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+  </script>
+
+</body>
+</html>
