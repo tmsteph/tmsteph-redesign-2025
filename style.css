@@ -1,4 +1,4 @@
-/* Base Reset */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -8,19 +8,19 @@
 /* Body Styling */
 body {
   font-family: 'Quicksand', sans-serif;
-  background: #0b1d3a; /* Deep space blue */
-  color: #ffe066; /* Soft gold text */
+  background: #2c5e94; /* Deep calm blue */
+  color: #ffe066; /* Soft golden text */
   overflow-x: hidden;
-  position: relative;
   min-height: 100vh;
+  position: relative;
 }
 
-/* Handwritten Font */
+/* Handwritten Sections */
 .handwritten {
   font-family: 'Caveat', cursive;
 }
 
-/* Starfield Container */
+/* Starfield */
 #starfield {
   position: fixed;
   top: 0;
@@ -31,25 +31,23 @@ body {
   pointer-events: none;
 }
 
-/* Individual Stars */
 .star {
   position: absolute;
   width: 2px;
   height: 2px;
-  background-color: #fffacd; /* Light yellow */
+  background-color: #fff8dc;
   border-radius: 50%;
-  box-shadow: 0 0 4px 2px #fffacd; /* Subtle glow */
   opacity: 0.8;
   animation: twinkle 1.5s infinite alternate;
 }
 
-/* Twinkle Animation */
+/* Twinkle animation */
 @keyframes twinkle {
   from { opacity: 0.4; }
   to { opacity: 1; }
 }
 
-/* Clouds Container */
+/* Clouds */
 #clouds {
   position: fixed;
   top: 0;
@@ -60,89 +58,46 @@ body {
   pointer-events: none;
 }
 
-/* Cloud Styles */
 .cloud {
-  background: #fff;
-  background: linear-gradient(top, #fff 5%, #f1f1f1 100%);
-  border-radius: 100px;
-  box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
-  height: 120px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
   position: absolute;
-  width: 350px;
-}
-
-.cloud:after, .cloud:before {
-  background: #fff;
-  content: '';
-  position: absolute;
-  z-index: -1;
-}
-
-.cloud:after {
-  border-radius: 100px;
-  height: 100px;
-  left: 50px;
-  top: -50px;
-  width: 100px;
-}
-
-.cloud:before {
-  border-radius: 200px;
-  width: 180px;
-  height: 180px;
-  right: 50px;
-  top: -90px;
-}
-
-/* Cloud Animations */
-@keyframes animateCloud {
-  0% { margin-left: -1000px; }
-  100% { margin-left: 100%; }
 }
 
 .x1 {
-  animation: animateCloud 35s linear infinite;
-  transform: scale(0.65);
+  width: 200px;
+  height: 60px;
   top: 10%;
+  left: -20%;
+  animation: moveclouds 60s linear infinite;
 }
 
 .x2 {
-  animation: animateCloud 20s linear infinite;
-  transform: scale(0.3);
-  top: 20%;
-}
-
-.x3 {
-  animation: animateCloud 30s linear infinite;
-  transform: scale(0.5);
+  width: 300px;
+  height: 80px;
   top: 30%;
+  left: -30%;
+  animation: moveclouds 90s linear infinite;
 }
 
-.x4 {
-  animation: animateCloud 18s linear infinite;
-  transform: scale(0.4);
-  top: 40%;
+/* Cloud animation */
+@keyframes moveclouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(150vw); }
 }
 
-.x5 {
-  animation: animateCloud 25s linear infinite;
-  transform: scale(0.55);
-  top: 50%;
-}
-
-/* Fade-In Animation */
+/* Fade-in only for Welcome */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 1s ease-out, transform 1s ease-out;
 }
-
 .fade-in.appear {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Hero Section */
+/* Header */
 .hero {
   position: relative;
   text-align: center;
@@ -163,32 +118,21 @@ body {
 h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  text-shadow: 0 0 5px rgba(255, 224, 100, 0.8);
+  text-shadow: 0px 0px 5px rgba(255, 224, 100, 0.8);
 }
 
 h2 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
   text-align: center;
-  text-shadow: 0 0 3px rgba(255, 224, 100, 0.7);
+  text-shadow: 0px 0px 3px rgba(255, 224, 100, 0.7);
 }
 
-/* Paragraphs */
 p {
   font-size: 1.2rem;
   margin-bottom: 1.2rem;
   text-align: center;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-}
-
-/* Links */
-a {
-  color: #ffef8b;
-  text-decoration: underline;
-}
-
-a:hover {
-  color: #ffffff;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
 }
 
 /* Buttons */
@@ -196,12 +140,12 @@ a:hover {
   display: inline-block;
   background: #FFD700;
   color: #2a2a2a;
-  padding: 0.8rem 1.5rem;
+  padding: 0.7rem 1.4rem;
   margin: 0.5rem;
   text-decoration: none;
   border-radius: 8px;
-  transition: all 0.3s ease;
   font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .btn-primary:hover, .btn-secondary:hover {
@@ -209,27 +153,46 @@ a:hover {
   transform: scale(1.05);
 }
 
-/* Sections */
+/* Section and Cards */
 .section {
   padding: 4rem 2rem;
   text-align: center;
+  z-index: 2;
 }
 
-.section.alt {
-  background: rgba(255, 255, 255, 0.07);
-}
-
-/* Cards */
 .card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  margin: 3rem 1rem;
+  margin: 2rem;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #ffd700;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 2rem;
+  font-size: 1rem;
   opacity: 0.8;
 }
