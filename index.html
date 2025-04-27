@@ -1,80 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thomas Stephens - tmsteph</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <header class="hero">
-    <!-- First cloud -->
-    <svg class="cloud cloud1" viewBox="0 0 64 64" width="150" height="80" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
-            fill="white" opacity="0.6">
-        <animateTransform attributeName="transform" attributeType="XML"
-          type="translate" values="0 0; 10 0; 0 0" dur="12s" repeatCount="indefinite" />
-      </path>
-    </svg>
+/* Body */
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(to bottom, #63a8e2, #a5d8ff);
+  color: #FFD700;
+  overflow-x: hidden;
+}
 
-    <!-- Second cloud -->
-    <svg class="cloud cloud2" viewBox="0 0 64 64" width="100" height="60" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
-            fill="white" opacity="0.4">
-        <animateTransform attributeName="transform" attributeType="XML"
-          type="translate" values="0 0; -8 0; 0 0" dur="18s" repeatCount="indefinite" />
-      </path>
-    </svg>
+/* Handwritten font */
+.handwritten {
+  font-family: 'Caveat', cursive;
+}
 
-    <div class="container">
-      <h1 class="handwritten">Thomas Stephens</h1>
-      <p class="tagline">Technologist | Dreamer | Founder of <a href="https://3dvr.tech" target="_blank">3dvr.tech</a></p>
-      <a href="#about" class="btn-primary">Explore More</a>
-    </div>
-  </header>
+/* Hero Section */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 6rem 2rem;
+  overflow: hidden;
+}
 
-  <section id="about" class="section card">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>Hi, I'm Thomas! Builder of dreams, creator of TommyOS, and founder of <a href="https://3dvr.tech" target="_blank">3dvr.tech</a>. I collect knowledge, build open systems, and explore new ways of living freely.</p>
-    </div>
-  </section>
+.cloud {
+  position: absolute;
+  top: 20px;
+  opacity: 0.6;
+  z-index: 1;
+}
 
-  <section id="projects" class="section card alt">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="project-grid">
-        <a class="project-card" href="https://tommyos.vercel.app" target="_blank">TommyOS<br><small>Portable OS in your browser</small></a>
-        <a class="project-card" href="https://tommycal.vercel.app" target="_blank">TommyCal<br><small>Personal Calendar Demo</small></a>
-        <a class="project-card" href="https://3dvr.tech" target="_blank">3dvr.tech<br><small>Open Source Tech</small></a>
-        <a class="project-card" href="https://github.com/tmsteph" target="_blank">GitHub Portfolio</a>
-      </div>
-    </div>
-  </section>
+.cloud1 {
+  right: 10px;
+}
 
-  <section id="vision" class="section card">
-    <div class="container">
-      <h2>Vision</h2>
-      <p>I want computing to be personal, empowering, and magical. Open-source software, self-hosted lives, and truly free creativity are the future. Let’s build a world where you own your tech, not the other way around!</p>
-    </div>
-  </section>
+.cloud2 {
+  left: 20px;
+  top: 80px;
+}
 
-  <section id="contact" class="section card alt">
-    <div class="container">
-      <h2>Contact Me</h2>
-      <p>Email: <a href="mailto:tmsteph1290@gmail.com">tmsteph1290@gmail.com</a><br>
-         WhatsApp: <a href="https://wa.me/18643602659" target="_blank">864-360-2659</a></p>
-    </div>
-  </section>
+/* Container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+  position: relative;
+  z-index: 2; /* so text appears above clouds */
+}
 
-  <footer>
-    <div class="container">
-      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Fly.</p>
-    </div>
-  </footer>
+/* Text */
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
 
-</body>
-</html>
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+a {
+  color: #ffef8b;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #ffffff;
+}
+
+/* Button */
+.btn-primary {
+  display: inline-block;
+  background: #FFD700;
+  color: #2a2a2a;
+  padding: 0.8rem 1.5rem;
+  margin-top: 2rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background: #fff9c4;
+  transform: scale(1.05);
+}
+
+/* Sections */
+.section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.section.alt {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  margin: 3rem 1rem;
+}
+
+/* Project Grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #FFD700;
+  font-weight: bold;
+}
+
+.project-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  opacity: 0.8;
+}
