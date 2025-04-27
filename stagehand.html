@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stagehand Life - Thomas Stephens</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Stagehand Life</h1>
+      <p class="tagline">Behind the Scenes. Building the Impossible.</p>
+      <a href="index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Learning by Doing</h2>
+      <p>Before diving into the world of open-source technology and independent entrepreneurship, I spent years working as a professional stagehand and AV technician. It was a career built on precision, teamwork, adaptability, and bringing dreams to life — often under impossible deadlines.</p>
+
+      <p>I learned firsthand how to safely set up and tear down massive productions, from high-end corporate events to Broadway shows, working across Audio, Video, Lighting, and Rigging departments.</p>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <h2>Skills That Translate</h2>
+      <p>Stagehand work taught me some of the most valuable skills in my life: fluid decision-making under pressure, building complex systems from scratch, staying calm when plans change, and always focusing on delivering results safely and efficiently.</p>
+      
+      <p>These are the same principles I bring to my projects today — whether it's designing a new app, a decentralized system, or a full portable operating environment.</p>
+    </div>
+  </section>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Bringing It Full Circle</h2>
+      <p>I believe that every experience, even ones that seem unrelated, can become a tool when building your dreams. Working backstage taught me how to build the frontiers of tomorrow.</p>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Perform.</p>
+    </div>
+  </footer>
+
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      starField.appendChild(star);
+    }
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+  </script>
+
+</body>
+</html>
