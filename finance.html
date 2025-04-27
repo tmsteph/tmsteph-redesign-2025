@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finance & Freedom - Thomas Stephens</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Finance & Freedom</h1>
+      <p class="tagline">Becoming the Creator, Not Just the Consumer.</p>
+      <a href="index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Wealth Is Simpler Than We Think</h2>
+      <p>Humans need only a few things to survive: air, water, food, and shelter. Everything else is built on top of that foundation. Yet in our modern world, these basics have become artificially scarce, complicated by systems of control and dependency.</p>
+      
+      <p>Building wealth — real wealth — begins by understanding this simplicity, and shifting from consumer thinking to producer thinking.</p>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <h2>From Employee to Entrepreneur</h2>
+      <p>Most people trade time for a paycheck, giving away their creativity and energy to employers in exchange for security. But true freedom comes from learning to treat yourself like a business — investing in your skills, building assets, solving problems for others, and growing independent streams of income.</p>
+      
+      <p>Success comes when you work not for immediate rewards, but for future returns.</p>
+    </div>
+  </section>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Freedom Through Creation</h2>
+      <p>When you become a producer — of ideas, solutions, services, or experiences — you step into your true creative power. You start shaping your own life instead of renting it out.</p>
+
+      <p>My mission is to create systems, platforms, and communities that make it easier for anyone to take this journey — to build freedom by building value.</p>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Prosper.</p>
+    </div>
+  </footer>
+
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      starField.appendChild(star);
+    }
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+  </script>
+
+</body>
+</html>
