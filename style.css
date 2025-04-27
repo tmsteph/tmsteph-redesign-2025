@@ -13,7 +13,6 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
-  z-index: 1; /* important */
 }
 
 /* Handwritten */
@@ -21,42 +20,44 @@ body {
   font-family: 'Caveat', cursive;
 }
 
-/* Background */
-#background {
+/* Fixed Starfield Background */
+#starfield {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  background: #2c5e94;
   z-index: 0;
-  pointer-events: none;
+  background-image:
+    radial-gradient(#ffe066 1px, transparent 1px),
+    radial-gradient(#ffe066 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px;
+  background-position: 0 0, 50px 50px;
+  animation: twinkle 2s infinite alternate;
 }
 
-/* Clouds */
-#cloud-left, #cloud-right {
+/* Twinkle animation */
+@keyframes twinkle {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+/* Clouds attached to content */
+.cloud {
   position: absolute;
   top: 0;
-  opacity: 0.4;
+  opacity: 0.5;
+  z-index: 1;
 }
 
-#cloud-left {
+.cloud-left {
   left: 0;
 }
 
-#cloud-right {
+.cloud-right {
   right: 0;
 }
 
-/* Stars */
-#stars {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-/* Main sections must appear above */
+/* Main Content above clouds and stars */
 .hero,
 .section,
 footer {
@@ -64,56 +65,49 @@ footer {
   z-index: 2;
 }
 
-/* Container must appear above everything */
-.container {
-  position: relative;
-  z-index: 3;
-}
-
-/* Fade-in */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.fade-in.appear {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 6rem 2rem;
-}
-
 /* Container */
 .container {
   max-width: 900px;
   margin: auto;
   padding: 2rem;
+  text-align: center;
+}
+
+/* Fade-in on load */
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnimation 2s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 8rem 2rem 4rem 2rem;
 }
 
 /* Typography */
 h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
-  text-shadow: 0px 0px 5px rgba(255, 224, 100, 0.8);
+  text-shadow: 0 0 5px rgba(255, 224, 100, 0.8);
 }
 
 h2 {
   font-size: 2rem;
-  margin-bottom: 1.2rem;
-  text-align: center;
-  text-shadow: 0px 0px 3px rgba(255, 224, 100, 0.7);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 3px rgba(255, 224, 100, 0.7);
 }
 
 p {
   font-size: 1.2rem;
-  margin-bottom: 1.2rem;
-  text-align: center;
-  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 
 /* Buttons */
@@ -123,8 +117,8 @@ p {
   color: #2a2a2a;
   padding: 0.7rem 1.4rem;
   margin: 0.5rem;
-  text-decoration: none;
   border-radius: 8px;
+  text-decoration: none;
   font-weight: bold;
   transition: background 0.3s ease, transform 0.3s ease;
 }
@@ -134,10 +128,9 @@ p {
   transform: scale(1.05);
 }
 
-/* Sections */
+/* Section Cards */
 .section {
   padding: 4rem 2rem;
-  text-align: center;
 }
 
 .card {
@@ -174,6 +167,6 @@ p {
 footer {
   text-align: center;
   padding: 2rem;
-  font-size: 1rem;
   opacity: 0.8;
+  font-size: 1rem;
 }
