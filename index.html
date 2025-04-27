@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thomas Stephens - tmsteph</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -10,80 +10,65 @@
 </head>
 <body>
 
-  <div id="starfield"></div>
-  <div id="clouds">
-    <div class="cloud x1"></div>
-    <div class="cloud x2"></div>
+<div id="background">
+  <div id="cloud-left">
+    <svg viewBox="0 0 200 60" width="150" height="50">
+      <ellipse cx="50" cy="30" rx="50" ry="30" fill="#ccc" />
+      <ellipse cx="120" cy="30" rx="40" ry="25" fill="#ccc" />
+    </svg>
   </div>
+  <div id="cloud-right">
+    <svg viewBox="0 0 200 60" width="150" height="50">
+      <ellipse cx="50" cy="30" rx="50" ry="30" fill="#ccc" />
+      <ellipse cx="120" cy="30" rx="40" ry="25" fill="#ccc" />
+    </svg>
+  </div>
+</div>
 
-  <header class="hero">
-    <div class="container">
-      <h1 class="handwritten">Thomas Stephens</h1>
-      <p class="tagline">Dream. Build. Share.</p>
-      <a href="https://tommyos.vercel.app" class="btn-primary">Explore TommyOS</a>
-      <a href="https://3dvr.tech" class="btn-secondary">Visit 3dvr.tech</a>
+<!-- Main Content -->
+<header class="hero fade-in">
+  <div class="container">
+    <h1 class="handwritten">Thomas Stephens</h1>
+    <p class="tagline">Dream. Build. Share.</p>
+    <a href="https://tommyos.vercel.app" class="btn-primary">Explore TommyOS</a>
+    <a href="https://3dvr.tech" class="btn-secondary">Visit 3dvr.tech</a>
+  </div>
+</header>
+
+<section class="section card fade-in">
+  <div class="container">
+    <h2>Welcome</h2>
+    <p>I'm Thomas Stephens, a lifelong learner and creator.  
+       I build open-source systems, help others develop their ideas, and dream of a world where technology, health, and spirituality uplift humanity.</p>
+  </div>
+</section>
+
+<section class="section card">
+  <div class="container">
+    <h2>My Vision</h2>
+    <p>To create a bridge between ancient wisdom and futuristic technology.  
+       To empower people everywhere to live freely, create openly, and thrive naturally.</p>
+  </div>
+</section>
+
+<section class="section card">
+  <div class="container">
+    <h2>Explore More</h2>
+    <div class="project-grid">
+      <a class="project-card" href="spirituality.html">Spirituality</a>
+      <a class="project-card" href="health.html">Health & Wellness</a>
+      <a class="project-card" href="finance.html">Finance & Freedom</a>
+      <a class="project-card" href="stagehand.html">Stagehand Life</a>
+      <a class="project-card" href="opensource.html">Open Source Projects</a>
     </div>
-  </header>
+  </div>
+</section>
 
-  <section class="section card fade-in">
-    <div class="container">
-      <h2>Welcome</h2>
-      <p>I'm Thomas Stephens, a lifelong learner and creator.  
-         I build open-source systems, help others develop their ideas, and dream of a world where technology, health, and spirituality uplift humanity.</p>
-    </div>
-  </section>
-
-  <section class="section card">
-    <div class="container">
-      <h2>My Vision</h2>
-      <p>To create a bridge between ancient wisdom and futuristic technology.  
-         To empower people everywhere to live freely, create openly, and thrive naturally.</p>
-    </div>
-  </section>
-
-  <section class="section card">
-    <div class="container">
-      <h2>Explore More</h2>
-      <div class="project-grid">
-        <a class="project-card" href="spirituality.html">Spirituality</a>
-        <a class="project-card" href="health.html">Health & Wellness</a>
-        <a class="project-card" href="finance.html">Finance & Freedom</a>
-        <a class="project-card" href="stagehand.html">Stagehand Life</a>
-        <a class="project-card" href="opensource.html">Open Source Projects</a>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Share.</p>
-    </div>
-  </footer>
-
-  <script>
-    // Starfield generation
-    const starField = document.getElementById('starfield');
-    for (let i = 0; i < 75; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.top = Math.random() * 100 + 'vh';
-      star.style.left = Math.random() * 100 + 'vw';
-      star.style.animationDuration = (1 + Math.random()) + 's';
-      starField.appendChild(star);
-    }
-
-    // Fade-in only the first section
-    const fade = document.querySelector('.fade-in');
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('appear');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.2 });
-
-    observer.observe(fade);
-  </script>
+<footer>
+  <div class="container">
+    <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Share.</p>
+  </div>
+</footer>
 
 </body>
 </html>
