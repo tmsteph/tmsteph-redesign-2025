@@ -12,11 +12,11 @@
 
   <div id="starfield"></div>
 
-  <header class="hero">
+  <header class="hero fade-in">
     <!-- Clouds -->
     <svg class="cloud cloud1" viewBox="0 0 64 64" width="150" height="80" xmlns="http://www.w3.org/2000/svg">
       <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
-            fill="white" opacity="0.6">
+            fill="#e0e0e0" opacity="0.7">
         <animateTransform attributeName="transform" attributeType="XML"
           type="translate" values="0 0; 10 0; 0 0" dur="12s" repeatCount="indefinite" />
       </path>
@@ -24,7 +24,7 @@
 
     <svg class="cloud cloud2" viewBox="0 0 64 64" width="100" height="60" xmlns="http://www.w3.org/2000/svg">
       <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
-            fill="white" opacity="0.4">
+            fill="#e0e0e0" opacity="0.5">
         <animateTransform attributeName="transform" attributeType="XML"
           type="translate" values="0 0; -8 0; 0 0" dur="18s" repeatCount="indefinite" />
       </path>
@@ -37,14 +37,14 @@
     </div>
   </header>
 
-  <section id="about" class="section card">
+  <section id="about" class="section card fade-in">
     <div class="container">
       <h2>About Me</h2>
       <p>Hi, I'm Thomas! Builder of dreams, creator of <a href="https://tommyos.vercel.app" target="_blank">TommyOS</a>, and founder of <a href="https://3dvr.tech" target="_blank">3dvr.tech</a>. I collect knowledge, build open systems, and explore new ways of living freely.</p>
     </div>
   </section>
 
-  <section id="projects" class="section card alt">
+  <section id="projects" class="section card alt fade-in">
     <div class="container">
       <h2>Projects</h2>
       <div class="project-grid">
@@ -56,14 +56,15 @@
     </div>
   </section>
 
-  <section id="vision" class="section card">
+  <section id="explore" class="section card fade-in">
     <div class="container">
-      <h2>Vision</h2>
-      <p>I want computing to be personal, empowering, and magical. Open-source software, self-hosted lives, and truly free creativity are the future. Let’s build a world where you own your tech, not the other way around!</p>
+      <h2>Explore More</h2>
+      <p><a class="btn-secondary" href="spirituality.html">Spirituality</a></p>
+      <p><a class="btn-secondary" href="health.html">Health & Wellness</a></p>
     </div>
   </section>
 
-  <section id="contact" class="section card alt">
+  <section id="contact" class="section card alt fade-in">
     <div class="container">
       <h2>Contact Me</h2>
       <p>Email: <a href="mailto:tmsteph1290@gmail.com">tmsteph1290@gmail.com</a><br>
@@ -71,7 +72,7 @@
     </div>
   </section>
 
-  <footer>
+  <footer class="fade-in">
     <div class="container">
       <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Fly.</p>
     </div>
@@ -87,6 +88,18 @@
       star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
       starField.appendChild(star);
     }
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
   </script>
 
 </body>
