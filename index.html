@@ -13,60 +13,36 @@
   <div id="starfield"></div>
 
   <header class="hero fade-in">
-    <!-- Clouds -->
-    <svg class="cloud cloud1" viewBox="0 0 64 64" width="150" height="80" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
-            fill="#e0e0e0" opacity="0.7">
-        <animateTransform attributeName="transform" attributeType="XML"
-          type="translate" values="0 0; 10 0; 0 0" dur="12s" repeatCount="indefinite" />
-      </path>
-    </svg>
-
-    <svg class="cloud cloud2" viewBox="0 0 64 64" width="100" height="60" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
-            fill="#e0e0e0" opacity="0.5">
-        <animateTransform attributeName="transform" attributeType="XML"
-          type="translate" values="0 0; -8 0; 0 0" dur="18s" repeatCount="indefinite" />
-      </path>
-    </svg>
-
     <div class="container">
       <h1 class="handwritten">Thomas Stephens</h1>
-      <p class="tagline">Technologist | Dreamer | Founder of <a href="https://3dvr.tech" target="_blank">3dvr.tech</a></p>
-      <a href="https://tommyos.vercel.app" target="_blank" class="btn-primary">Explore TommyOS</a>
+      <p class="tagline">Technologist | Dreamer | Builder</p>
     </div>
   </header>
 
-  <section id="about" class="section card fade-in">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>Hi, I'm Thomas! Builder of dreams, creator of <a href="https://tommyos.vercel.app" target="_blank">TommyOS</a>, and founder of <a href="https://3dvr.tech" target="_blank">3dvr.tech</a>. I collect knowledge, build open systems, and explore new ways of living freely.</p>
-    </div>
+  <section class="small-quotes fade-in">
+    <p><em>"You have to fail a few times."</em></p>
+    <p><em>"It's how we learn."</em></p>
+    <p><em>"Practice feeling good."</em></p>
+    <p><em>"Make long-term friends and long-term decisions."</em></p>
+    <p><em>— Mikasteve</em></p>
   </section>
 
-  <section id="projects" class="section card alt fade-in">
+  <section class="section card fade-in">
     <div class="container">
-      <h2>Projects</h2>
+      <h2>Explore</h2>
       <div class="project-grid">
-        <a class="project-card" href="https://tommyos.vercel.app" target="_blank">TommyOS<br><small>Portable OS in your browser</small></a>
-        <a class="project-card" href="https://tommycal.vercel.app" target="_blank">TommyCal<br><small>Personal Calendar Demo</small></a>
-        <a class="project-card" href="https://3dvr.tech" target="_blank">3dvr.tech<br><small>Open Source Tech</small></a>
-        <a class="project-card" href="https://github.com/tmsteph" target="_blank">GitHub Portfolio</a>
+        <a class="project-card" href="spirituality.html">Spirituality</a>
+        <a class="project-card" href="health.html">Health & Wellness</a>
+        <a class="project-card" href="finance.html">Finance & Freedom</a>
+        <a class="project-card" href="stagehand.html">Stagehand Life</a>
+        <a class="project-card" href="opensource.html">Open Source Projects</a>
       </div>
     </div>
   </section>
 
-  <section id="explore" class="section card fade-in">
+  <section class="section card fade-in">
     <div class="container">
-      <h2>Explore More</h2>
-      <p><a class="btn-secondary" href="spirituality.html">Spirituality</a></p>
-      <p><a class="btn-secondary" href="health.html">Health & Wellness</a></p>
-    </div>
-  </section>
-
-  <section id="contact" class="section card alt fade-in">
-    <div class="container">
-      <h2>Contact Me</h2>
+      <h2>Contact</h2>
       <p>Email: <a href="mailto:tmsteph1290@gmail.com">tmsteph1290@gmail.com</a><br>
          WhatsApp: <a href="https://wa.me/18643602659" target="_blank">864-360-2659</a></p>
     </div>
@@ -74,13 +50,13 @@
 
   <footer class="fade-in">
     <div class="container">
-      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Fly.</p>
+      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Expand.</p>
     </div>
   </footer>
 
   <script>
     const starField = document.getElementById('starfield');
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 100; i++) {
       const star = document.createElement('div');
       star.className = 'star';
       star.style.top = Math.random() * 100 + 'vh';
