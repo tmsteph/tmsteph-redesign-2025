@@ -1,67 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thomas Stephens - tmsteph</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thomas Stephens</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
   <div id="starfield"></div>
+  <div id="clouds">
+    <div class="cloud x1"></div>
+    <div class="cloud x2"></div>
+    <div class="cloud x3"></div>
+    <div class="cloud x4"></div>
+    <div class="cloud x5"></div>
+  </div>
 
   <header class="hero fade-in">
     <div class="container">
       <h1 class="handwritten">Thomas Stephens</h1>
-      <p class="tagline">Technologist | Dreamer | Builder</p>
-      <a href="https://tommyos.vercel.app" target="_blank" class="btn-primary">Explore TommyOS</a>
+      <p class="tagline">Dream. Build. Share.</p>
+      <a href="#spirituality" class="btn-primary">Explore Spirituality</a>
+      <a href="#health" class="btn-secondary">Explore Health</a>
+      <a href="#technology" class="btn-primary">Explore Technology</a>
+      <a href="#opensource" class="btn-secondary">Explore Open Source</a>
+      <a href="#freedom" class="btn-primary">Explore Personal Freedom</a>
     </div>
   </header>
 
-  <section id="about" class="section card fade-in">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>Hi, I'm Thomas! Builder of dreams, creator of <a href="https://tommyos.vercel.app" target="_blank">TommyOS</a>, and founder of <a href="https://3dvr.tech" target="_blank">3dvr.tech</a>. I collect knowledge, build open systems, and explore new ways of living freely.</p>
-    </div>
-  </section>
-
-  <section id="projects" class="section card alt fade-in">
-    <div class="container">
-      <h2>Explore</h2>
-      <div class="project-grid">
-        <a class="project-card" href="spirituality.html">Spirituality</a>
-        <a class="project-card" href="health.html">Health & Wellness</a>
-        <a class="project-card" href="finance.html">Finance & Freedom</a>
-        <a class="project-card" href="stagehand.html">Stagehand Life</a>
-        <a class="project-card" href="opensource.html">Open Source Projects</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="vision" class="section card fade-in">
-    <div class="container">
-      <h2>My Vision</h2>
-      <p>I believe technology should be portable, empowering, and personal — not locked behind corporate walls. I want to create open-source tools that anyone can use anywhere: operating systems, calendars, forums, and more. Whether you're in a city or camping in the woods, you should have the power to create, work, and live freely with your technology at your side.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="section card alt fade-in">
-    <div class="container">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:tmsteph1290@gmail.com">tmsteph1290@gmail.com</a><br>
-         WhatsApp: <a href="https://wa.me/18643602659" target="_blank">864-360-2659</a></p>
-    </div>
-  </section>
+  <!-- Sections for Welcome, Spirituality, Health, Technology, Open Source, Personal Freedom, and Contact go here -->
 
   <footer class="fade-in">
     <div class="container">
-      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Expand.</p>
+      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Share.</p>
     </div>
   </footer>
 
   <script>
+    // Generate starfield
     const starField = document.getElementById('starfield');
     for (let i = 0; i < 100; i++) {
       const star = document.createElement('div');
@@ -72,6 +51,7 @@
       starField.appendChild(star);
     }
 
+    // Fade-in effect
     const faders = document.querySelectorAll('.fade-in');
     const appearOptions = { threshold: 0.2 };
     const appearOnScroll = new IntersectionObserver(function(entries, observer) {
