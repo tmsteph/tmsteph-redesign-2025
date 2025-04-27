@@ -10,12 +10,10 @@
 </head>
 <body>
 
-  <div id="stars"></div>
-  <div id="stars2"></div>
-  <div id="stars3"></div>
+  <div id="starfield"></div>
 
   <header class="hero">
-    <!-- First cloud -->
+    <!-- Clouds -->
     <svg class="cloud cloud1" viewBox="0 0 64 64" width="150" height="80" xmlns="http://www.w3.org/2000/svg">
       <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
             fill="white" opacity="0.6">
@@ -24,7 +22,6 @@
       </path>
     </svg>
 
-    <!-- Second cloud -->
     <svg class="cloud cloud2" viewBox="0 0 64 64" width="100" height="60" xmlns="http://www.w3.org/2000/svg">
       <path d="M20 50h24a14 14 0 1 0-2.2-27.7 10 10 0 0 0-19.6 4.2A12 12 0 0 0 20 50z"
             fill="white" opacity="0.4">
@@ -79,6 +76,18 @@
       <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Fly.</p>
     </div>
   </footer>
+
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (2 + Math.random() * 3) + 's';
+      starField.appendChild(star);
+    }
+  </script>
 
 </body>
 </html>
