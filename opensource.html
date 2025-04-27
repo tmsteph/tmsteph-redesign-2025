@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open Source Projects - Thomas Stephens</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Open Source Projects</h1>
+      <p class="tagline">Building the Tools for Freedom.</p>
+      <a href="index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Why Open Source?</h2>
+      <p>Today, we have unprecedented access to information and creativity. Yet much of modern technology remains closed, controlled, and difficult for everyday people to truly own.</p>
+
+      <p>I believe in building and supporting open systems — tools that anyone can use, modify, and extend — because true empowerment comes from understanding and ownership.</p>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <h2>Projects I Believe In</h2>
+      <ul>
+        <li><strong>Linux:</strong> Open, powerful, endlessly customizable operating systems.</li>
+        <li><strong>Android:</strong> Open mobile technology that can be shaped for any purpose.</li>
+        <li><strong>Chromium & Firefox:</strong> Browsers that form the gateway to the modern internet, open for all.</li>
+        <li><strong>Krita:</strong> Free, powerful digital drawing and painting.</li>
+        <li><strong>Inkscape:</strong> Professional-quality vector graphics tools, without the corporate strings.</li>
+        <li><strong>Blender:</strong> 3D modeling, animation, and creation at a world-class level.</li>
+        <li><strong>Godot:</strong> Open game engine empowering indie developers and dreamers worldwide.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>What I'm Building</h2>
+      <p>Through <a href="https://3dvr.tech" target="_blank">3dvr.tech</a> and <a href="https://tommyos.vercel.app" target="_blank">TommyOS</a>, I'm developing new systems that anyone can use — portable, self-hosted, open-source tools that help people create, communicate, and build their dreams anywhere in the world.</p>
+
+      <p>The future is not owned — it's shared.</p>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Share.</p>
+    </div>
+  </footer>
+
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      starField.appendChild(star);
+    }
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+  </script>
+
+</body>
+</html>
