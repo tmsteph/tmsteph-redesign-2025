@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Thomas Stephens</title>
+  <title>Thomas Stephens - tmsteph</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
@@ -14,109 +14,75 @@
   <div id="clouds">
     <div class="cloud x1"></div>
     <div class="cloud x2"></div>
-    <div class="cloud x3"></div>
-    <div class="cloud x4"></div>
-    <div class="cloud x5"></div>
   </div>
 
-  <header class="hero fade-in">
+  <header class="hero">
     <div class="container">
       <h1 class="handwritten">Thomas Stephens</h1>
       <p class="tagline">Dream. Build. Share.</p>
-      <a href="#spirituality" class="btn-primary">Explore Spirituality</a>
-      <a href="#health" class="btn-secondary">Explore Health</a>
-      <a href="#technology" class="btn-primary">Explore Technology</a>
-      <a href="#opensource" class="btn-secondary">Explore Open Source</a>
-      <a href="#freedom" class="btn-primary">Explore Personal Freedom</a>
+      <a href="https://tommyos.vercel.app" class="btn-primary">Explore TommyOS</a>
+      <a href="https://3dvr.tech" class="btn-secondary">Visit 3dvr.tech</a>
     </div>
   </header>
 
-  <section id="welcome" class="section card fade-in">
+  <section class="section card fade-in">
     <div class="container">
       <h2>Welcome</h2>
-      <p>I'm Thomas Stephens, passionate about empowering individuals through open-source technology, holistic health, and spiritual growth. Join me on a journey to explore the intersections of these realms.</p>
+      <p>I'm Thomas Stephens, a lifelong learner and creator.  
+         I build open-source systems, help others develop their ideas, and dream of a world where technology, health, and spirituality uplift humanity.</p>
     </div>
   </section>
 
-  <section id="vision" class="section card alt fade-in">
+  <section class="section card">
     <div class="container">
       <h2>My Vision</h2>
-      <p>To create a world where technology serves as a bridge to personal freedom, health is approached holistically, and spirituality is integrated into daily life.</p>
+      <p>To create a bridge between ancient wisdom and futuristic technology.  
+         To empower people everywhere to live freely, create openly, and thrive naturally.</p>
     </div>
   </section>
 
-  <section id="spirituality" class="section card fade-in">
+  <section class="section card">
     <div class="container">
-      <h2>Spirituality</h2>
-      <p>Exploring the depths of spiritual growth and understanding to foster inner peace and enlightenment.</p>
+      <h2>Explore More</h2>
+      <div class="project-grid">
+        <a class="project-card" href="spirituality.html">Spirituality</a>
+        <a class="project-card" href="health.html">Health & Wellness</a>
+        <a class="project-card" href="finance.html">Finance & Freedom</a>
+        <a class="project-card" href="stagehand.html">Stagehand Life</a>
+        <a class="project-card" href="opensource.html">Open Source Projects</a>
+      </div>
     </div>
   </section>
 
-  <section id="health" class="section card alt fade-in">
-    <div class="container">
-      <h2>Health</h2>
-      <p>Advocating for holistic health approaches that nurture the body, mind, and spirit for overall well-being.</p>
-    </div>
-  </section>
-
-  <section id="technology" class="section card fade-in">
-    <div class="container">
-      <h2>Technology</h2>
-      <p>Leveraging innovative technologies to create solutions that enhance daily life and promote growth.</p>
-    </div>
-  </section>
-
-  <section id="opensource" class="section card alt fade-in">
-    <div class="container">
-      <h2>Open Source</h2>
-      <p>Contributing to and supporting open-source projects that drive collaboration and shared progress.</p>
-    </div>
-  </section>
-
-  <section id="freedom" class="section card fade-in">
-    <div class="container">
-      <h2>Personal Freedom</h2>
-      <p>Championing the pursuit of personal freedom through knowledge, self-expression, and empowerment.</p>
-    </div>
-  </section>
-
-  <section id="contact" class="section card alt fade-in">
-    <div class="container">
-      <h2>Contact</h2>
-      <p>Interested in collaborating or learning more? Reach out to me at <a href="mailto:contact@tmsteph.com">contact@tmsteph.com</a>.</p>
-    </div>
-  </section>
-
-  <footer class="fade-in">
+  <footer>
     <div class="container">
       <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Share.</p>
     </div>
   </footer>
 
   <script>
-    // Generate starfield
+    // Starfield generation
     const starField = document.getElementById('starfield');
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 75; i++) {
       const star = document.createElement('div');
       star.className = 'star';
       star.style.top = Math.random() * 100 + 'vh';
       star.style.left = Math.random() * 100 + 'vw';
-      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      star.style.animationDuration = (1 + Math.random()) + 's';
       starField.appendChild(star);
     }
 
-    // Fade-in effect
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOptions = { threshold: 0.2 };
-    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+    // Fade-in only the first section
+    const fade = document.querySelector('.fade-in');
+    const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (!entry.isIntersecting) return;
         entry.target.classList.add('appear');
         observer.unobserve(entry.target);
       });
-    }, appearOptions);
+    }, { threshold: 0.2 });
 
-    faders.forEach(fader => { appearOnScroll.observe(fader); });
+    observer.observe(fade);
   </script>
 
 </body>
