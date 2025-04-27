@@ -13,6 +13,7 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
+  z-index: 1; /* important */
 }
 
 /* Handwritten */
@@ -20,7 +21,7 @@ body {
   font-family: 'Caveat', cursive;
 }
 
-/* Background Container */
+/* Background */
 #background {
   position: fixed;
   top: 0;
@@ -55,7 +56,21 @@ body {
   left: 0;
 }
 
-/* Fade-in only first sections */
+/* Main sections must appear above */
+.hero,
+.section,
+footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Container must appear above everything */
+.container {
+  position: relative;
+  z-index: 3;
+}
+
+/* Fade-in */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -71,8 +86,6 @@ body {
 .hero {
   text-align: center;
   padding: 6rem 2rem;
-  z-index: 2;
-  position: relative;
 }
 
 /* Container */
@@ -80,8 +93,6 @@ body {
   max-width: 900px;
   margin: auto;
   padding: 2rem;
-  position: relative;
-  z-index: 2;
 }
 
 /* Typography */
