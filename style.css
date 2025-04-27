@@ -20,7 +20,7 @@ body {
   font-family: 'Caveat', cursive;
 }
 
-/* Starfield fixed background */
+/* Fixed Starfield Background */
 #starfield {
   position: fixed;
   width: 100%;
@@ -28,33 +28,43 @@ body {
   background: transparent;
   z-index: 0;
   pointer-events: none;
-  animation: twinkle 2s infinite alternate;
+  animation: twinkle 3s ease-in-out infinite alternate;
 }
 
-/* Stars twinkle */
+/* Twinkling animation for stars */
 @keyframes twinkle {
-  from { opacity: 0.6; }
-  to { opacity: 1; }
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
 }
 
 /* Clouds */
 .cloud {
   position: absolute;
-  top: 0;
+  top: 2rem;
   opacity: 0.5;
   z-index: 2;
   pointer-events: none;
+  animation: moveClouds 40s ease-in-out infinite alternate;
 }
 
+/* Left and Right cloud directions */
 .cloud-left {
   left: 0;
+  animation-direction: alternate;
 }
 
 .cloud-right {
   right: 0;
+  animation-direction: alternate-reverse;
 }
 
-/* Hero, Sections, Footer must be above starfield */
+/* Cloud movement back and forth */
+@keyframes moveClouds {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50px); }
+}
+
+/* Hero, Section, Footer stacking */
 .hero,
 .section,
 footer {
@@ -82,7 +92,7 @@ footer {
   }
 }
 
-/* Hero */
+/* Hero Section */
 .hero {
   padding: 8rem 2rem 5rem 2rem;
 }
