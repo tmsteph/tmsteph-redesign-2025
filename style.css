@@ -20,9 +20,9 @@ body {
   font-family: 'Caveat', cursive;
 }
 
-/* Fixed Starfield Background */
+/* Stars */
 #starfield {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   background: transparent;
@@ -31,9 +31,9 @@ body {
   animation: twinkle 1s ease-in-out infinite alternate;
 }
 
-/* Twinkling animation for stars */
+/* Twinkle stronger now */
 @keyframes twinkle {
-  0% { opacity: 0.5; }
+  0% { opacity: 0.2; }
   100% { opacity: 1; }
 }
 
@@ -45,50 +45,50 @@ body {
   pointer-events: none;
 }
 
-/* Individual Cloud Animations */
+/* Individual cloud movement */
 .cloud1 {
   left: 5%;
   top: 2rem;
-  animation: moveCloud1 12s ease-in-out infinite alternate;
+  animation: cloudMove1 3s ease-in-out infinite alternate;
 }
 
 .cloud2 {
   left: 10%;
   top: 6rem;
-  animation: moveCloud2 14s ease-in-out infinite alternate;
+  animation: cloudMove2 3s ease-in-out infinite alternate;
 }
 
 .cloud3 {
   right: 5%;
   top: 2rem;
-  animation: moveCloud3 11s ease-in-out infinite alternate;
+  animation: cloudMove3 3s ease-in-out infinite alternate;
 }
 
 .cloud4 {
   right: 10%;
   top: 8rem;
-  animation: moveCloud4 13s ease-in-out infinite alternate;
+  animation: cloudMove4 3s ease-in-out infinite alternate;
 }
 
-/* Cloud Dancing Keyframes */
-@keyframes moveCloud1 {
+/* Cloud Dancing Keyframes (small jiggle ~20px) */
+@keyframes cloudMove1 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(40px); }
+  100% { transform: translateX(20px); }
 }
 
-@keyframes moveCloud2 {
+@keyframes cloudMove2 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(60px); }
+  100% { transform: translateX(15px); }
 }
 
-@keyframes moveCloud3 {
+@keyframes cloudMove3 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-40px); }
+  100% { transform: translateX(-20px); }
 }
 
-@keyframes moveCloud4 {
+@keyframes cloudMove4 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-60px); }
+  100% { transform: translateX(-15px); }
 }
 
 /* Hero, Section, Footer stacking */
@@ -107,16 +107,14 @@ footer {
   text-align: center;
 }
 
-/* Fade-in only on page load */
+/* Fade-in */
 .fade-in {
   opacity: 0;
   animation: fadeInAnimation 2s ease forwards;
 }
 
 @keyframes fadeInAnimation {
-  to {
-    opacity: 1;
-  }
+  to { opacity: 1; }
 }
 
 /* Hero Section */
