@@ -28,66 +28,67 @@ body {
   background: transparent;
   z-index: 0;
   pointer-events: none;
-  animation: twinkle 1.5s ease-in-out infinite alternate;
+  animation: twinkle 1s ease-in-out infinite alternate;
 }
 
 /* Twinkling animation for stars */
 @keyframes twinkle {
-  0% { opacity: 0.6; }
+  0% { opacity: 0.5; }
   100% { opacity: 1; }
 }
 
 /* Clouds */
 .cloud {
   position: absolute;
-  top: 2rem;
   opacity: 0.5;
   z-index: 2;
   pointer-events: none;
 }
 
-/* Specific cloud animations */
+/* Individual Cloud Animations */
 .cloud1 {
   left: 5%;
-  animation: moveClouds1 30s ease-in-out infinite alternate;
+  top: 2rem;
+  animation: moveCloud1 12s ease-in-out infinite alternate;
 }
 
 .cloud2 {
   left: 10%;
   top: 6rem;
-  animation: moveClouds2 35s ease-in-out infinite alternate;
+  animation: moveCloud2 14s ease-in-out infinite alternate;
 }
 
 .cloud3 {
   right: 5%;
-  animation: moveClouds3 32s ease-in-out infinite alternate;
+  top: 2rem;
+  animation: moveCloud3 11s ease-in-out infinite alternate;
 }
 
 .cloud4 {
   right: 10%;
   top: 8rem;
-  animation: moveClouds4 37s ease-in-out infinite alternate;
+  animation: moveCloud4 13s ease-in-out infinite alternate;
 }
 
 /* Cloud Dancing Keyframes */
-@keyframes moveClouds1 {
+@keyframes moveCloud1 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(50px); }
+  100% { transform: translateX(40px); }
 }
 
-@keyframes moveClouds2 {
+@keyframes moveCloud2 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(70px); }
+  100% { transform: translateX(60px); }
 }
 
-@keyframes moveClouds3 {
+@keyframes moveCloud3 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50px); }
+  100% { transform: translateX(-40px); }
 }
 
-@keyframes moveClouds4 {
+@keyframes moveCloud4 {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-70px); }
+  100% { transform: translateX(-60px); }
 }
 
 /* Hero, Section, Footer stacking */
