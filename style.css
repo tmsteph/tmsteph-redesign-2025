@@ -1,11 +1,17 @@
-/* Reset */
+/* ===========================
+   RESET & BASE
+=========================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   font-family: 'Quicksand', sans-serif;
   background: #2c5e94;
@@ -15,124 +21,18 @@ body {
   position: relative;
 }
 
-/* Handwritten */
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===========================
+   TYPOGRAPHY
+=========================== */
 .handwritten {
   font-family: 'Caveat', cursive;
 }
 
-/* Stars inside hero */
-#starfield {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* Each star twinkles differently */
-.twinkle1 {
-  animation: twinkle 1s ease-in-out infinite alternate;
-}
-.twinkle2 {
-  animation: twinkle 1.3s ease-in-out infinite alternate;
-}
-.twinkle3 {
-  animation: twinkle 0.9s ease-in-out infinite alternate;
-}
-.twinkle4 {
-  animation: twinkle 1.5s ease-in-out infinite alternate;
-}
-.twinkle5 {
-  animation: twinkle 1.1s ease-in-out infinite alternate;
-}
-
-/* Twinkle Animation */
-@keyframes twinkle {
-  0% { opacity: 0.2; }
-  100% { opacity: 1; }
-}
-
-/* Clouds */
-.cloud {
-  position: absolute;
-  opacity: 0.5;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Cloud Animations */
-.cloud1 {
-  left: 5%;
-  top: 2rem;
-  animation: cloudMove1 3s ease-in-out infinite alternate;
-}
-.cloud2 {
-  left: 10%;
-  top: 6rem;
-  animation: cloudMove2 3.2s ease-in-out infinite alternate;
-}
-.cloud3 {
-  right: 5%;
-  top: 2rem;
-  animation: cloudMove3 2.8s ease-in-out infinite alternate;
-}
-.cloud4 {
-  right: 10%;
-  top: 8rem;
-  animation: cloudMove4 3.4s ease-in-out infinite alternate;
-}
-
-/* Tiny Jiggle Animations */
-@keyframes cloudMove1 {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(12px); }
-}
-@keyframes cloudMove2 {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(10px); }
-}
-@keyframes cloudMove3 {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-12px); }
-}
-@keyframes cloudMove4 {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-10px); }
-}
-
-/* Hero, Section, Footer stacking */
-.hero,
-.section,
-footer {
-  position: relative;
-  z-index: 3;
-}
-
-/* Container */
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-/* Fade-in on load */
-.fade-in {
-  opacity: 0;
-  animation: fadeInAnimation 2s ease forwards;
-}
-
-@keyframes fadeInAnimation {
-  to { opacity: 1; }
-}
-
-/* Hero Section */
-.hero {
-  padding: 8rem 2rem 5rem 2rem;
-}
-
-/* Typography */
 h1 {
   font-size: 3rem;
   margin-bottom: 1rem;
@@ -151,8 +51,88 @@ p {
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
 }
 
-/* Buttons */
-.btn-primary, .btn-secondary {
+/* ===========================
+   HERO & STARS
+=========================== */
+#starfield {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Each star twinkles differently */
+.twinkle1 { animation: twinkle 1s ease-in-out infinite alternate; }
+.twinkle2 { animation: twinkle 1.3s ease-in-out infinite alternate; }
+.twinkle3 { animation: twinkle 0.9s ease-in-out infinite alternate; }
+.twinkle4 { animation: twinkle 1.5s ease-in-out infinite alternate; }
+.twinkle5 { animation: twinkle 1.1s ease-in-out infinite alternate; }
+
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+/* ===========================
+   CLOUDS
+=========================== */
+.cloud {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.cloud1 { left: 5%; top: 2rem; animation: cloudMove1 3s ease-in-out infinite alternate; }
+.cloud2 { left: 10%; top: 6rem; animation: cloudMove2 3.2s ease-in-out infinite alternate; }
+.cloud3 { right: 5%; top: 2rem; animation: cloudMove3 2.8s ease-in-out infinite alternate; }
+.cloud4 { right: 10%; top: 8rem; animation: cloudMove4 3.4s ease-in-out infinite alternate; }
+
+@keyframes cloudMove1 { 0% { transform: translateX(0); } 100% { transform: translateX(12px); } }
+@keyframes cloudMove2 { 0% { transform: translateX(0); } 100% { transform: translateX(10px); } }
+@keyframes cloudMove3 { 0% { transform: translateX(0); } 100% { transform: translateX(-12px); } }
+@keyframes cloudMove4 { 0% { transform: translateX(0); } 100% { transform: translateX(-10px); } }
+
+/* ===========================
+   LAYOUT
+=========================== */
+.hero,
+.section,
+footer {
+  position: relative;
+  z-index: 3;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.hero {
+  padding: 8rem 2rem 5rem 2rem;
+}
+
+/* ===========================
+   FADE-IN ANIMATION
+=========================== */
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnimation 2s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+  to { opacity: 1; }
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+.btn-primary,
+.btn-secondary {
   display: inline-block;
   background: #FFD700;
   color: #2a2a2a;
@@ -164,12 +144,15 @@ p {
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.btn-primary:hover, .btn-secondary:hover {
+.btn-primary:hover,
+.btn-secondary:hover {
   background: #fff9c4;
   transform: scale(1.05);
 }
 
-/* Sections */
+/* ===========================
+   SECTIONS & CARDS
+=========================== */
 .section {
   padding: 5rem 2rem;
 }
@@ -177,16 +160,20 @@ p {
 .card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 15px;
-  margin: 2rem;
+  margin: 2rem auto;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 900px;
 }
 
-/* Project Grid */
+/* ===========================
+   PROJECT GRID
+=========================== */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
+  justify-items: center;
 }
 
 .project-card {
@@ -197,6 +184,7 @@ p {
   color: #ffd700;
   font-weight: bold;
   transition: background 0.3s ease, transform 0.3s ease;
+  text-align: center;
 }
 
 .project-card:hover {
@@ -204,10 +192,65 @@ p {
   transform: translateY(-5px);
 }
 
-/* Footer */
+/* ===========================
+   FOOTER
+=========================== */
 footer {
   text-align: center;
   padding: 2rem;
   opacity: 0.8;
   font-size: 1rem;
+}
+
+/* ===========================
+   MOBILE FIXES
+=========================== */
+@media (max-width: 640px) {
+  .container {
+    margin-inline: auto;
+    padding: 1.25rem;
+    text-align: center;
+  }
+
+  .card {
+    margin: 1rem auto;
+    width: calc(100% - 2rem);
+    max-width: 900px;
+  }
+
+  /* Explore More: force a single centered column */
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    justify-items: center;
+  }
+
+  .project-card {
+    width: min(100%, 420px);
+    margin-inline: auto;
+  }
+
+  /* Ensure text stays centered */
+  h1, h2, p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Center email & WhatsApp links */
+  .section.card .container,
+  footer .container {
+    display: grid;
+    place-items: center;
+  }
+
+  .section.card p a {
+    display: inline-block;
+    word-break: break-word;
+  }
+
+  /* Adjust hero padding for small screens */
+  .hero {
+    padding: 6rem 1rem 3.5rem 1rem;
+  }
 }
