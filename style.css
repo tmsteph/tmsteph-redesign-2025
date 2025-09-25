@@ -203,7 +203,7 @@ footer {
 }
 
 .section.card p.contact-line {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
