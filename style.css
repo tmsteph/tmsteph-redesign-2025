@@ -202,6 +202,27 @@ footer {
   font-size: 1rem;
 }
 
+.section.card p.contact-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: nowrap;
+  font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+  max-width: 100%;
+}
+
+.section.card p.contact-line .contact-label {
+  flex: 0 1 auto;
+  white-space: nowrap;
+}
+
+.section.card p.contact-line .contact-link {
+  flex: 0 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+}
+
 /* ===========================
    MOBILE FIXES
 =========================== */
@@ -247,6 +268,18 @@ footer {
   .section.card p a {
     display: inline-block;
     word-break: break-word;
+  }
+
+  .section.card p.contact-line {
+    font-size: clamp(0.85rem, 3.4vw, 1.1rem);
+  }
+
+  .section.card p a.contact-link {
+    font-size: inherit;
+    word-break: normal;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   /* Adjust hero padding for small screens */
