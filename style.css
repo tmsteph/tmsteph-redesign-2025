@@ -187,6 +187,10 @@ footer {
   text-align: center;
   flex: 1 1 240px;
   max-width: 280px;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .project-card:hover {
