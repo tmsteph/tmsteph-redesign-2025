@@ -249,6 +249,15 @@ footer {
     word-break: break-word;
   }
 
+  .section.card p a.contact-link {
+    font-size: clamp(0.85rem, 3.8vw, 1.2rem);
+    word-break: normal;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   /* Adjust hero padding for small screens */
   .hero {
     padding: 6rem 1rem 3.5rem 1rem;
