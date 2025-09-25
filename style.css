@@ -202,6 +202,24 @@ footer {
   font-size: 1rem;
 }
 
+.section.card p.contact-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: nowrap;
+}
+
+.section.card p.contact-line .contact-label {
+  flex: 0 0 auto;
+}
+
+.section.card p.contact-line .contact-link {
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+}
+
 /* ===========================
    MOBILE FIXES
 =========================== */
@@ -252,7 +270,6 @@ footer {
   .section.card p a.contact-link {
     font-size: clamp(0.85rem, 3.8vw, 1.2rem);
     word-break: normal;
-    white-space: nowrap;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
