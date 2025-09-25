@@ -21,6 +21,16 @@ body {
   position: relative;
 }
 
+a {
+  color: #7fffe1;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+a:visited {
+  color: #49d8c5;
+}
+
 img, svg {
   max-width: 100%;
   height: auto;
