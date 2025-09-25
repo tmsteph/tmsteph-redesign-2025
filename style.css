@@ -169,6 +169,7 @@ footer {
    PROJECT GRID
 =========================== */
 .project-grid {
+  --project-card-width: clamp(200px, 28vw, 240px);
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
@@ -178,16 +179,17 @@ footer {
 
 .project-card {
   background: rgba(255, 255, 255, 0.08);
-  padding: 1.5rem;
+  padding: 1.1rem 1rem;
   border-radius: 12px;
   text-decoration: none;
   color: #ffd700;
   font-weight: bold;
   transition: background 0.3s ease, transform 0.3s ease;
   text-align: center;
-  flex: 1 1 240px;
-  max-width: 280px;
-  min-height: 120px;
+  flex: 0 0 var(--project-card-width);
+  width: var(--project-card-width);
+  max-width: 240px;
+  min-height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,6 +249,7 @@ footer {
 
   /* Explore More: force a single centered column */
   .project-grid {
+    --project-card-width: min(100%, 420px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -254,10 +257,10 @@ footer {
   }
 
   .project-card {
-    width: min(100%, 420px);
+    width: var(--project-card-width);
     max-width: none;
     margin-inline: auto;
-    flex: 0 1 auto;
+    flex: 0 0 var(--project-card-width);
   }
 
   /* Ensure text stays centered */
