@@ -155,6 +155,24 @@ footer {
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
+.btn-primary:visited,
+.btn-secondary:visited {
+  color: #2a2a2a;
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-primary,
+  .btn-secondary {
+    color: #1f1f1f;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+  }
+
+  .btn-primary:visited,
+  .btn-secondary:visited {
+    color: #1f1f1f;
+  }
+}
+
 .btn-primary:hover,
 .btn-secondary:hover {
   background: #fff9c4;
