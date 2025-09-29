@@ -127,6 +127,39 @@ footer {
   padding: 8rem 2rem 5rem 2rem;
 }
 
+.login-link {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffe066;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  animation-delay: 0.5s;
+  z-index: 5;
+}
+
+.login-link:hover,
+.login-link:focus {
+  background: rgba(255, 255, 255, 0.3);
+  color: #2a2a2a;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .login-link {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
 /* ===========================
    FADE-IN ANIMATION
 =========================== */
