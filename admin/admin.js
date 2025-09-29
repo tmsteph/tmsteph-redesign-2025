@@ -1,10 +1,16 @@
 (function () {
-  const peers = [
+  const primaryPeers = [
     'https://3dvr.fly.dev/gun',
     'https://portal.3dvr.tech/gun'
   ];
+  const fallbackPeers = [
+    'https://gun-manhattan.herokuapp.com/gun',
+    'https://gun.eco/gun'
+  ];
 
-  const gun = Gun({ peers });
+  const peers = Array.from(new Set([...primaryPeers, ...fallbackPeers]));
+
+  const gun = Gun({ peers, localStorage: true });
   const user = gun.user();
   user.recall({ sessionStorage: true });
 
@@ -44,6 +50,8 @@
 
   let mode = 'login';
   let listenersAttached = false;
+  let hasConnectedPeer = false;
+  let connectionNoticeTimeout = null;
 
   const setAuthMessage = (message, type = 'info') => {
     authMessage.textContent = message;
@@ -90,11 +98,62 @@
     setMode(mode === 'login' ? 'register' : 'login');
   });
 
+  const clearConnectionNoticeTimeout = () => {
+    if (connectionNoticeTimeout) {
+      clearTimeout(connectionNoticeTimeout);
+      connectionNoticeTimeout = null;
+    }
+  };
+
+  const scheduleConnectionWarning = () => {
+    clearConnectionNoticeTimeout();
+    connectionNoticeTimeout = setTimeout(() => {
+      if (!hasConnectedPeer) {
+        setAuthMessage(
+          'Unable to reach the sync service. You can use cached credentials, and changes will sync once a connection is restored.',
+          'warning'
+        );
+      }
+    }, 4000);
+  };
+
+  gun.on('hi', (peer) => {
+    hasConnectedPeer = true;
+    clearConnectionNoticeTimeout();
+    const peerName = peer?.url || 'a sync peer';
+    if (adminPanel.hidden) {
+      setAuthMessage(`Connected to ${peerName}. You can log in now.`, 'success');
+      setTimeout(() => {
+        if (!user.is) {
+          setAuthMessage('');
+        }
+      }, 2500);
+    } else {
+      setPanelMessage(`Connected to ${peerName}.`, 'success');
+    }
+  });
+
+  gun.on('bye', () => {
+    const activePeers = Object.values(gun._.opt?.peers || {}).filter((p) => p?.wire);
+    if (!activePeers.length) {
+      hasConnectedPeer = false;
+      if (adminPanel.hidden) {
+        setAuthMessage('Attempting to reconnect to the sync service...', 'warning');
+      } else {
+        setPanelMessage('Lost connection to sync service. Changes will save locally and sync when reconnected.', 'warning');
+      }
+      scheduleConnectionWarning();
+    }
+  });
+
+  scheduleConnectionWarning();
+
   const showAdminPanel = () => {
     authSection.hidden = true;
     adminPanel.hidden = false;
     aliasDisplay.textContent = user.is?.alias || 'Admin';
     attachUserListeners();
+    clearConnectionNoticeTimeout();
   };
 
   const showAuthPanel = (message = '') => {
@@ -103,6 +162,9 @@
     authSection.hidden = false;
     if (message) {
       setAuthMessage(message, 'info');
+    }
+    if (!hasConnectedPeer) {
+      scheduleConnectionWarning();
     }
   };
 
@@ -212,7 +274,11 @@
     } else {
       user.auth(alias, password, (ack) => {
         if (ack.err) {
-          setAuthMessage(ack.err, 'error');
+          const errorMessage =
+            typeof ack.err === 'string' && ack.err.includes('Wrong user or password')
+              ? 'Incorrect alias or password. Please try again, or create an account first.'
+              : ack.err || 'Login failed. Please try again.';
+          setAuthMessage(errorMessage, 'error');
           return;
         }
         setAuthMessage('Login successful! Redirecting...', 'success');
@@ -229,7 +295,11 @@
     event.preventDefault();
     const value = statusInput.value.trim();
     putToMultipleNodes(value, [sharedProfile.get('status'), legacyProfile.get('status')], () => {
-      setPanelMessage('Status saved!', 'success');
+      if (hasConnectedPeer) {
+        setPanelMessage('Status saved!', 'success');
+      } else {
+        setPanelMessage('Status saved locally. It will sync when a connection is available.', 'warning');
+      }
     });
   });
 
@@ -237,7 +307,11 @@
     event.preventDefault();
     const value = noteInput.value.trim();
     putToMultipleNodes(value, [sharedDashboard.get('note'), legacyDashboard.get('note')], () => {
-      setPanelMessage('Note saved!', 'success');
+      if (hasConnectedPeer) {
+        setPanelMessage('Note saved!', 'success');
+      } else {
+        setPanelMessage('Note saved locally. It will sync when a connection is available.', 'warning');
+      }
     });
   });
 

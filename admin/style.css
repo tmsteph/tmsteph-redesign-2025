@@ -90,6 +90,10 @@ textarea {
   color: #9cffb0;
 }
 
+.form-message[data-state="warning"] {
+  color: #ffd27f;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
