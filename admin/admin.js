@@ -1,6 +1,7 @@
 (function () {
   const peers = [
-    'https://3dvr.fly.dev/gun'
+    'https://3dvr.fly.dev/gun',
+    'https://portal.3dvr.tech/gun'
   ];
 
   const gun = Gun({ peers });
@@ -31,6 +32,15 @@
 
   const aliasInput = document.getElementById('alias');
   const passwordInput = document.getElementById('password');
+
+  const SHARED_APP_KEY = 'portal.3dvr.tech';
+
+  const sharedApp = user.get('apps').get(SHARED_APP_KEY);
+  const sharedProfile = sharedApp.get('profile');
+  const sharedDashboard = sharedApp.get('dashboard');
+
+  const legacyProfile = user.get('profile');
+  const legacyDashboard = user.get('dashboard');
 
   let mode = 'login';
   let listenersAttached = false;
@@ -100,25 +110,72 @@
     if (listenersAttached) return;
     listenersAttached = true;
 
-    user.get('profile').get('status').on((value) => {
-      const status = value || '';
-      statusInput.value = status;
-      statusPreview.textContent = status || 'No status set yet.';
+    const bindField = ({ primary, fallback, onValue }) => {
+      let hasPrimaryValue = false;
+
+      primary.on((value) => {
+        hasPrimaryValue = true;
+        onValue(value);
+      });
+
+      if (fallback) {
+        fallback.on((value) => {
+          if (!hasPrimaryValue && value !== undefined && value !== null && value !== '') {
+            onValue(value);
+          }
+        });
+      }
+    };
+
+    bindField({
+      primary: sharedProfile.get('status'),
+      fallback: legacyProfile.get('status'),
+      onValue: (value) => {
+        const status = value || '';
+        statusInput.value = status;
+        statusPreview.textContent = status || 'No status set yet.';
+      }
     });
 
-    user.get('dashboard').get('note').on((value) => {
-      const note = value || '';
-      noteInput.value = note;
-      notePreview.textContent = note || 'Your notes will show up here.';
+    bindField({
+      primary: sharedDashboard.get('note'),
+      fallback: legacyDashboard.get('note'),
+      onValue: (value) => {
+        const note = value || '';
+        noteInput.value = note;
+        notePreview.textContent = note || 'Your notes will show up here.';
+      }
     });
   };
 
-  const handleGunAck = (ack, onSuccess) => {
-    if (ack.err) {
-      setPanelMessage(ack.err, 'error');
-    } else if (typeof onSuccess === 'function') {
-      onSuccess(ack);
+  const putToMultipleNodes = (value, nodes, onSuccess) => {
+    const filteredNodes = nodes.filter(Boolean);
+    if (!filteredNodes.length) {
+      if (typeof onSuccess === 'function') {
+        onSuccess();
+      }
+      return;
     }
+
+    let pending = filteredNodes.length;
+    let errorMessage = null;
+
+    filteredNodes.forEach((node) => {
+      node.put(value, (ack) => {
+        if (ack.err && !errorMessage) {
+          errorMessage = ack.err;
+        }
+
+        pending -= 1;
+        if (pending === 0) {
+          if (errorMessage) {
+            setPanelMessage(errorMessage, 'error');
+          } else if (typeof onSuccess === 'function') {
+            onSuccess();
+          }
+        }
+      });
+    });
   };
 
   authForm.addEventListener('submit', (event) => {
@@ -171,17 +228,17 @@
   statusForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const value = statusInput.value.trim();
-    user.get('profile').get('status').put(value, (ack) => handleGunAck(ack, () => {
+    putToMultipleNodes(value, [sharedProfile.get('status'), legacyProfile.get('status')], () => {
       setPanelMessage('Status saved!', 'success');
-    }));
+    });
   });
 
   noteForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const value = noteInput.value.trim();
-    user.get('dashboard').get('note').put(value, (ack) => handleGunAck(ack, () => {
+    putToMultipleNodes(value, [sharedDashboard.get('note'), legacyDashboard.get('note')], () => {
       setPanelMessage('Note saved!', 'success');
-    }));
+    });
   });
 
   gun.on('auth', () => {
