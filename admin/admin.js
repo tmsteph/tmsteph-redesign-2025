@@ -1,14 +1,5 @@
 (function () {
-  const primaryPeers = [
-    'https://3dvr.fly.dev/gun',
-    'https://portal.3dvr.tech/gun'
-  ];
-  const fallbackPeers = [
-    'https://gun-manhattan.herokuapp.com/gun',
-    'https://gun.eco/gun'
-  ];
-
-  const peers = Array.from(new Set([...primaryPeers, ...fallbackPeers]));
+  const peers = ['https://gun-relay-3dvr.fly.dev/gun'];
 
   const gun = Gun({ peers, localStorage: true });
   const user = gun.user();
