@@ -4,6 +4,7 @@
   }
 
   let refreshing = false;
+  let hasActiveServiceWorker = navigator.serviceWorker.controller !== null;
 
   window.addEventListener('load', () => {
     const manifestLink = document.querySelector('link[rel="manifest"]');
@@ -35,9 +36,15 @@
   });
 
   navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!hasActiveServiceWorker) {
+      hasActiveServiceWorker = true;
+      return;
+    }
+
     if (refreshing) {
       return;
     }
+
     refreshing = true;
     window.location.reload();
   });
