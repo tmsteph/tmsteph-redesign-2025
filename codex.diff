@@ -1,0 +1,887 @@
+diff --git a/admin/index.html b/admin/index.html
+index 9c476ddc304ec2db699c0ca000737e14b0ee33f7..b6c2c5675760950b6049cf63677bf2d47b4387b7 100644
+--- a/admin/index.html
++++ b/admin/index.html
+@@ -1,37 +1,41 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++  <meta name="theme-color" content="#0b1d39" />
+   <title>Admin Control Center - tmsteph</title>
+   <link rel="stylesheet" href="../style.css" />
+   <link rel="stylesheet" href="./style.css" />
+   <link rel="icon" href="../favicon.ico" type="image/x-icon" />
++  <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png" />
++  <link rel="manifest" href="../manifest.webmanifest" />
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
+   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
++  <script src="../pwa.js" defer></script>
+ </head>
+ <body class="admin-body">
+   <header class="hero hero-compact">
+     <div class="container">
+       <h1 class="handwritten">Admin Control Center</h1>
+       <p class="tagline">Securely manage your personal launchpad.</p>
+       <a href="../index.html" class="btn-secondary">⬅ Back to Home</a>
+     </div>
+   </header>
+ 
+   <main class="container admin-container">
+     <section id="auth-section" class="section card form-card">
+       <h2 id="auth-heading">Log In</h2>
+       <p class="form-subtitle">Access your personal dashboard powered by GUN and synced with portal.3dvr.tech.</p>
+       <form id="auth-form" autocomplete="off">
+         <div class="input-group">
+           <label for="alias">Alias</label>
+           <input type="text" id="alias" name="alias" required placeholder="Choose a username" />
+         </div>
+         <div class="input-group">
+           <label for="password">Password</label>
+           <input type="password" id="password" name="password" required placeholder="Enter your password" />
+         </div>
+         <div class="input-group" id="confirm-password-group" hidden>
+           <label for="confirm-password">Confirm Password</label>
+diff --git a/favicon-16x16.png b/favicon-16x16.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..0040381eb57290a4a1e3727403a745f15e49629d
+GIT binary patch
+literal 375
+zcmV--0f_#IP)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0003#Nkl<Zc%1E%
+zF-rmg7=|BDP4hHq2&G8Vp+O;Oh_GmAaOod3H$>4ML{kM3Gz29%MiEgI4b>3UFED6I
+zB9ICy%{)^ymGiu72x<u~u(5A{AD;Jx&meY&H5xdfk?=p@j{v5Zvmm1NXU_C$is)XJ
+zp<a>s2{!?s6+tkN%`3$AC02G`F}Whw07Uv794>bePm~!RPkup~EdslXUNSj_(C95S
+zMPp>pK}VbU(?Czr<2KVG8cAmrisd?`vdZSk+jj*$z(YzVEh%(+E!-akxVkBG5ib!t
+zkjNM7`Xg3ljmTt@jpH0rK_T2DGCSttbj|-e1Ax0{nW?2G0Qv$p&e#0}{Z^cIqrQQ!
+zy@~Aw4+9|)yG`J|sv_4k9y2uxrMkXBsiNYv8`+xk(CRQ!l~pbi6=tF-01S=3^9K!2
+VY*fsW0yzKx002ovPDHLkV1l?hl<5Ef
+
+literal 0
+HcmV?d00001
+
+diff --git a/favicon-32x32.png b/favicon-32x32.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..83013c9ff4b7edda54e73a2b71b17b7d14445bcb
+GIT binary patch
+literal 698
+zcmV;r0!96aP)<h;3K|Lk000e1NJLTq001BW001Be1^@s6b9#F80007kNkl<Zc%1E*
+zT}V@57{`A*y3Kj~!cBCNPE(snbrD45jdT%o6;4QqASjj>N*_iyT~ycygkX9R6j3*s
+zbyF)Uqb@WkZvq1|$>A_dYi4V+P2G-j+v&>9BMS<S*v0;L|MxsE&+mE8dERr5Ml9JS
+zvyKwhGkFRi1&{(r0i*!_3xIThF-JAU1=@e!?Dj0Nslgfdxmjs6*^KP1&BkiclPwBJ
+zi!yV;7(Rc533r&!?l2ua9)9>D2>>-zU8d)0XE|n*vJlarK{N;y8PloRm;pe~i&-VW
+z$|{!Ce%ws+epB4vba*+{=}wwl5TN@)X*{{tAK_U0HwNA>5RzmnHt5(_mrIi^A5)&P
+zW>q?{qb8Hh<r#6`ao59>*MYbn8J8Ftm*~3Z;jF!oXjEkYt3|Ky^TAlsxS$l{%(ZF7
+znkrKeTa~Z%U;#U~Wd7A&RXXs_8B+N2VjX?gEBNv~%-at^21i2-49zp_lGX-bbVB0M
+zD?hf~xr%j5kq%3dj>bKC0JtU>xp;d9N54NFquN1q^wJbJ9(svH|NM<xRjTJsTPZD#
+ziRn@eKnly8?s8*oaB{N4jicYs^v|WFvFGfC=(QSk0hTr6i*W0)mqX_#sj@k#J>ud)
+z-!DasXb`ZL>DLBewT4|1hufx@aEBG^8dU5+-S#XlH=D^3(~@47Wr(hLHX>0u4y4Ky
+z=(HM6957+8&*%QjS$YTN7#a)VpO0cTYH4XSQdyEXta=9m1Qw#|0W3>22-xe5*z1jd
+zjQRLUqV;OxouUfB;AoKMD__}GWngP%2E`^VIavZZVj3|SeEtX{;}Xx_1n7P~OL!@9
+gJ2a`E)Aa`U4IJCqz19M@Jpcdz07*qoM6N<$f|~X|a{vGU
+
+literal 0
+HcmV?d00001
+
+diff --git a/favicon-48x48.png b/favicon-48x48.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..448fcbfe977008c00402c9167c6ce68dd849b16a
+GIT binary patch
+literal 869
+zcmV-r1DgDaP)<h;3K|Lk000e1NJLTq001xm001xu1^@s6R|5Hm0009lNkl<Zc%1E-
+zT}V@57{~u-U+&ZC%(>Jiim|MAp@!K9CQZ8#kw{1{62z`545FKaAQVLECI})TgxrM)
+zffu1=7Yc!*jq0LlCbrgW(%fpYZ{64FLNwOSSu^n*gY&yP&-0w;egEfup7XwkL&y%C
+zAn_l=V|xNSg%iLwoB+1r1h5S!fNeMdY{Lm)8%_Y*a01wd6TmhCDx-NwhvEX!j*|!0
+z;>fF?ORy0HP*<fuvq6apodgAHA>>jXB2mEWk73yr!54cNW=jaBxgbolL9B)8Kieq<
+z>=p&NLJV|kQLUFI`S>D0tP()25};fsL9;;#0C+PSgyD*XHYZ~OWMUp(J}5y+;r3RR
+z_m?7PtOq(<_icOf=|H&x`ql-?;2fm@wvn<V`^k<)d{|sdIZ#uLGRgL8+K2mtF3elk
+z;SI!)oymv3RE*k6Ia=zoke@63Hvzjraem^{cY9)J>9Qdj``w^UcNF6$KgLad+<EN4
+z`C28;RVz~FWlR7;BwqVMv4qM0Njwe=Pk1mq;Ypd7u^#wnO)Rk@jR=pr3U}NWjIDri
+zWEE9M5?`Nf4cTaG$i|W*f>}!l3$}H<{}jUXhX5QuqiN-3Ou)dX8#NU&T&&MZ@@X|f
+zXf;AKoZ7f1Nx(E0#KUJl_D%_rB+$|G4cG44@%4K+Wh_Ae$B#;3?ABtauLvR`K^x2X
+zS!iHn75bJ1)Lpfpw|@m=(>^S_BDC?1r!#S@T}|s}^eC|jNdhzGAZE<LEnA*S07I1m
+zH!tNvSCo+u-`=P~&yy9(Tzlp;y5f#vaBLM#H>^oMwMu|21)uUh#snC<wdiP4K`Kr?
+zWH?HKq}U$faq4)+O6Z_A0~gLJ(bu^jV^cm%y!GMTd<b@D1pZ(gN;w~uWfI)JoR_re
+zdHgYW12M|HjQ4;{%tNz5xpiDlhtWwdt#8lt03F^y488qMT0dg~p1=0M=}vEV-DGiT
+z9Szs5usP`W4aQ2S@2L~_j4m8IEWw!yIm!=7P+BO0CTHW55&-<cIPA^{%%4LTo%G?w
+vloyd`>c7AQ_n(+$I00<K31Aye0NeZmP^kK*lBq@o00000NkvXXu0mjf12~AR
+
+literal 0
+HcmV?d00001
+
+diff --git a/favicon-64x64.png b/favicon-64x64.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..1911522fef62dfeb2c78902338cb40893e80e5c7
+GIT binary patch
+literal 1196
+zcmV;d1XKHoP)<h;3K|Lk000e1NJLTq002M$002M;1^@s6s%dfF000DYNkl<Zc%1E-
+zYfPI}7{`CTLi=`5RtRo`%)!`<4kB!Bk~k(|$#l_75x;D~84`*6V01Ii#KlFIePfY$
+zL$ewEfZO7>WEdl6h{-gVF~XDx(nKypKrXgGq0kF0tse-9mzKU1=6SchzmGlVJm-J@
+zJ?A->S0iN>hPjK;iWVRm)d0}~M57uYT7YO&14IiDjcR~s0isb25G_D7ssW+}h(<L)
+zv;fhl28b3Q8r1;N0z{)4AX<QER0Bi{5RG26fM}Q!wCvlJ#3T6<`I}ALV>6H>X))+E
+z`21m}y&*=%0t`6<boI|-zv-jB+eb%_kGYWiPaT?QA4aZymP78w#1$J*BpO@XJoRed
+zKYr8eG`zAul_LkzNRo6*jydBEarT=Dj#LlHs;{USAepq(ow}F8JZV`m@^VbF>nkb;
+zoIAOGS%Z%U#Tf8(aWW;_E&qGJidh0LK4Xho*3j(c(=W$q`^}4EB1k9<$rc@JQuX9+
+zG_mzQ6T5d<$j(Sua=%fNpd3DYJ%fW!q(m%x=d6R{ACJh2V=-$PtiK<<PV=9#^H*HF
+zaB@Iaoa~GQ4m@rpYn_qj-;&ox5i=k&-57E30H4=S$d1!9=;y?l(Ixe*h#aswDf)Jo
+zY`L`(6=8taABtM`MnyWd<XbmU6|n?<9}W->gC@c%*pi*duNO9R`RXK%EpA#mJPeEm
+zR;+JD7%(;&q`limUQXnbr^T$Ld~XWnd*>6b(-q`~-OKe34?p}o%?-PkKrp^st_TAF
+zKDglI^sx+CbyKZ+_7tvSPvI&co$<*zE`8^s=F%A51O6rTtB4!`aQ?~!^*>I<)pm8V
+zj>=LSt+hE+y}TBqA@YtA3B?!?4#RWD`?>I~EAAM2orXhYHtJ4oz@V3Bf?^B+@Xdy)
+zI59x!YkjoZJ#oh=Dv&r<kuIyQq6}D|q1nx&l|5`f*u~qYNBRDzX*|B@TV*5;mDyxn
+zrxlX~BhlIGqqEmXRqg!resGhC!aOs(wpu9OW+7pbwJw>o?97+=x@qyeqR1H#iQrtA
+zR=bDyzi?7^w2$n4cB;=g7H#uDR_q6z+s1%@<8sgO=0_u3Y;;Afld{MWdx6{5fCU<w
+z-BHVYv$6ArA`D0{X!xpn0}tn#<7gXw2u{~r%=U^fK%;@;Z5A49vZ;SJi)VLRNi@dZ
+z$IXdaDodk3q_lT?W5!V2E>Kh;QB)u?HM5q6W;fT`J+yXu7<L93a|HodlWJgRzQp1E
+zX>3{_`4!0H3vs<Y_E|!41}u;y=_o6)QdVM(tNoeF<M;!yFGz}50xM1bNPw!^KV{Xu
+z;|%!25#Y(gH*vXRCqPh$0lwKVkG<4O%|$1D!?SV6_@r)(hswL?8I*q|R!k0PYMY^{
+zZHA-o4U?H}V8@pEZ-QAFMzYo!Nweya%vwxFEna^Jw<pAqBfu}+URpXl)LoroYDV6_
+z{&$x3EPf}Th$SEr)d0}~M57uYT7YO&14IiDjcR~s0iwC<4fqQ&tx1e+=MDM*0000<
+KMNUMnLSTX!eJ;KL
+
+literal 0
+HcmV?d00001
+
+diff --git a/favicon.ico b/favicon.ico
+new file mode 100644
+index 0000000000000000000000000000000000000000..692a2993929d631616125fabffec8738cc3f872c
+GIT binary patch
+literal 4962
+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
+QB^0j_=ekLK{(rUVU-88ToB#j-
+
+literal 0
+HcmV?d00001
+
+diff --git a/finance.html b/finance.html
+index a81ef9d80590fa3ce4577a11bd2231034d43fdb1..1b32092efb862eb5602ddec1c95606f2f3839bca 100644
+--- a/finance.html
++++ b/finance.html
+@@ -1,34 +1,38 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
++  <meta name="theme-color" content="#0b1d39">
+   <title>Finance & Freedom - Thomas Stephens</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
++  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png">
++  <link rel="manifest" href="manifest.webmanifest">
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
++  <script src="pwa.js" defer></script>
+ </head>
+ <body>
+ 
+   <div id="starfield"></div>
+ 
+   <header class="hero fade-in">
+     <div class="container">
+       <h1 class="handwritten">Finance & Freedom</h1>
+       <p class="tagline">Becoming the Creator, Not Just the Consumer.</p>
+       <a href="index.html" class="btn-primary">← Back to Home</a>
+     </div>
+   </header>
+ 
+   <section class="section card fade-in">
+     <div class="container">
+       <h2>Wealth Is Simpler Than We Think</h2>
+       <p>Humans need only a few things to survive: air, water, food, and shelter. Everything else is built on top of that foundation. Yet in our modern world, these basics have become artificially scarce, complicated by systems of control and dependency.</p>
+       
+       <p>Building wealth — real wealth — begins by understanding this simplicity, and shifting from consumer thinking to producer thinking.</p>
+     </div>
+   </section>
+ 
+   <section class="section card alt fade-in">
+     <div class="container">
+       <h2>From Employee to Entrepreneur</h2>
+diff --git a/health.html b/health.html
+index d4c9f67aab2351190d6947676132da3ef1aaa1aa..1653ce73874a4095f98efde4599e0fe2d1531dc6 100644
+--- a/health.html
++++ b/health.html
+@@ -1,34 +1,38 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
++  <meta name="theme-color" content="#0b1d39">
+   <title>Health & Wellness - Thomas Stephens</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
++  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png">
++  <link rel="manifest" href="manifest.webmanifest">
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
++  <script src="pwa.js" defer></script>
+ </head>
+ <body>
+ 
+   <div id="starfield"></div>
+ 
+   <header class="hero fade-in">
+     <div class="container">
+       <h1 class="handwritten">Health & Wellness</h1>
+       <p class="tagline">Building Stronger Bodies and Minds.</p>
+       <a href="index.html" class="btn-primary">← Back to Home</a>
+     </div>
+   </header>
+ 
+   <section class="section card fade-in">
+     <div class="container">
+       <h2>The Foundation of Everything</h2>
+       <p>Good health is the foundation of a good life. Without a strong body, a clear mind, and a peaceful spirit, even the best dreams remain out of reach.</p>
+ 
+       <p>True health is about more than surviving — it's about thriving. It's about feeling energized, capable, and confident to build the life you dream of.</p>
+     </div>
+   </section>
+ 
+   <section class="section card alt fade-in">
+     <div class="container">
+       <h2>Small Habits Create Big Changes</h2>
+diff --git a/icons/pwa-icon-192.png b/icons/pwa-icon-192.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..3160c39a3c647fbd953f96964317163675df8c2e
+GIT binary patch
+literal 2610
+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
+R!|{S#CI%MzB;9*S{{>^#p!xs+
+
+literal 0
+HcmV?d00001
+
+diff --git a/icons/pwa-icon-512.png b/icons/pwa-icon-512.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..0f6e29d5b9c6b60254195662e374d9260adcde51
+GIT binary patch
+literal 7534
+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
+AV*mgE
+
+literal 0
+HcmV?d00001
+
+diff --git a/index.html b/index.html
+index f9650ae479c23ff9fc120c0ab22feef59af60e06..338117a8a25d4da18089a31f859654ff38c8a0a7 100644
+--- a/index.html
++++ b/index.html
+@@ -1,34 +1,38 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++  <meta name="theme-color" content="#0b1d39" />
+   <title>Thomas Stephens - tmsteph</title>
+   <link rel="stylesheet" href="style.css" />
+   <link rel="icon" href="favicon.ico" type="image/x-icon" />
++  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png" />
++  <link rel="manifest" href="manifest.webmanifest" />
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
++  <script src="pwa.js" defer></script>
+ </head>
+ <body>
+ 
+ <!-- HERO SECTION -->
+ <header class="hero fade-in">
+ 
+   <a href="admin/index.html" class="login-link fade-in">Log In</a>
+ 
+   <!-- Stars ONLY inside hero now -->
+   <div id="starfield">
+     <svg width="100%" height="100%">
+       <!-- 50 stars, each one will have its OWN twinkle class! -->
+       <circle class="star twinkle1" cx="5%" cy="10%" r="1.5" fill="#ffe066" />
+       <circle class="star twinkle2" cx="12%" cy="25%" r="1" fill="#ffe066" />
+       <circle class="star twinkle3" cx="30%" cy="5%" r="1.2" fill="#ffe066" />
+       <circle class="star twinkle4" cx="48%" cy="15%" r="1.5" fill="#ffe066" />
+       <circle class="star twinkle5" cx="75%" cy="10%" r="1.2" fill="#ffe066" />
+       <circle class="star twinkle1" cx="90%" cy="20%" r="1" fill="#ffe066" />
+       <circle class="star twinkle2" cx="10%" cy="35%" r="1.5" fill="#ffe066" />
+       <circle class="star twinkle3" cx="20%" cy="50%" r="1" fill="#ffe066" />
+       <circle class="star twinkle4" cx="40%" cy="40%" r="1.2" fill="#ffe066" />
+       <circle class="star twinkle5" cx="60%" cy="30%" r="1.5" fill="#ffe066" />
+       <circle class="star twinkle1" cx="80%" cy="45%" r="1" fill="#ffe066" />
+       <circle class="star twinkle2" cx="95%" cy="35%" r="1.2" fill="#ffe066" />
+       <circle class="star twinkle3" cx="5%" cy="65%" r="1" fill="#ffe066" />
+diff --git a/manifest.webmanifest b/manifest.webmanifest
+new file mode 100644
+index 0000000000000000000000000000000000000000..a244b767a255ff3f1c4db8f3eedbcf8fe84ead51
+--- /dev/null
++++ b/manifest.webmanifest
+@@ -0,0 +1,22 @@
++{
++  "name": "Thomas Stephens - tmsteph",
++  "short_name": "tmsteph",
++  "description": "Dream. Build. Share. Explore Thomas Stephens' work across tech, health, spirituality, and finance.",
++  "start_url": "./index.html",
++  "scope": "./",
++  "display": "standalone",
++  "background_color": "#0b1d39",
++  "theme_color": "#0b1d39",
++  "icons": [
++    {
++      "src": "icons/pwa-icon-192.png",
++      "sizes": "192x192",
++      "type": "image/png"
++    },
++    {
++      "src": "icons/pwa-icon-512.png",
++      "sizes": "512x512",
++      "type": "image/png"
++    }
++  ]
++}
+diff --git a/opensource.html b/opensource.html
+index 863a7d983d7fddeb7e896b1bd1225d97beb855a5..50d08610ed877b58f8d198f8eb310416c082c27f 100644
+--- a/opensource.html
++++ b/opensource.html
+@@ -1,34 +1,38 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
++  <meta name="theme-color" content="#0b1d39">
+   <title>Open Source Projects - Thomas Stephens</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
++  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png">
++  <link rel="manifest" href="manifest.webmanifest">
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
++  <script src="pwa.js" defer></script>
+ </head>
+ <body>
+ 
+   <div id="starfield"></div>
+ 
+   <header class="hero fade-in">
+     <div class="container">
+       <h1 class="handwritten">Open Source Projects</h1>
+       <p class="tagline">Building the Tools for Freedom.</p>
+       <a href="index.html" class="btn-primary">← Back to Home</a>
+     </div>
+   </header>
+ 
+   <section class="section card fade-in">
+     <div class="container">
+       <h2>Why Open Source?</h2>
+       <p>Today, we have unprecedented access to information and creativity. Yet much of modern technology remains closed, controlled, and difficult for everyday people to truly own.</p>
+ 
+       <p>I believe in building and supporting open systems — tools that anyone can use, modify, and extend — because true empowerment comes from understanding and ownership.</p>
+     </div>
+   </section>
+ 
+   <section class="section card alt fade-in">
+     <div class="container">
+       <h2>Projects I Believe In</h2>
+diff --git a/pwa.js b/pwa.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..0e647ef0412336fcfa756e897aca413fb828d34b
+--- /dev/null
++++ b/pwa.js
+@@ -0,0 +1,44 @@
++(function () {
++  if (!('serviceWorker' in navigator)) {
++    return;
++  }
++
++  let refreshing = false;
++
++  window.addEventListener('load', () => {
++    const manifestLink = document.querySelector('link[rel="manifest"]');
++    const manifestHref = manifestLink ? manifestLink.href : window.location.href;
++    const serviceWorkerUrl = new URL('service-worker.js', manifestHref).href;
++
++    navigator.serviceWorker
++      .register(serviceWorkerUrl)
++      .then((registration) => {
++        if (registration.waiting && navigator.serviceWorker.controller) {
++          registration.waiting.postMessage({ type: 'SKIP_WAITING' });
++        }
++
++        registration.addEventListener('updatefound', () => {
++          const newWorker = registration.installing;
++          if (!newWorker) {
++            return;
++          }
++          newWorker.addEventListener('statechange', () => {
++            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
++              newWorker.postMessage({ type: 'SKIP_WAITING' });
++            }
++          });
++        });
++      })
++      .catch((error) => {
++        console.error('Service worker registration failed:', error);
++      });
++  });
++
++  navigator.serviceWorker.addEventListener('controllerchange', () => {
++    if (refreshing) {
++      return;
++    }
++    refreshing = true;
++    window.location.reload();
++  });
++})();
+diff --git a/service-worker.js b/service-worker.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..692f9666eda4783042866ace2800243ab44345e5
+--- /dev/null
++++ b/service-worker.js
+@@ -0,0 +1,117 @@
++const CACHE_NAME = 'tmsteph-pwa-v1';
++const STATIC_ASSETS = [
++  '/',
++  '/index.html',
++  '/style.css',
++  '/finance.html',
++  '/health.html',
++  '/opensource.html',
++  '/spirituality.html',
++  '/stagehand.html',
++  '/pwa.js',
++  '/favicon.ico',
++  '/favicon-16x16.png',
++  '/favicon-32x32.png',
++  '/favicon-48x48.png',
++  '/favicon-64x64.png',
++  '/manifest.webmanifest',
++  '/icons/pwa-icon-192.png',
++  '/icons/pwa-icon-512.png',
++  '/admin/index.html',
++  '/admin/style.css',
++  '/admin/admin.js'
++];
++
++self.addEventListener('install', (event) => {
++  event.waitUntil(
++    caches.open(CACHE_NAME).then((cache) =>
++      cache.addAll(
++        STATIC_ASSETS.map((asset) => new URL(asset, self.location.origin).toString())
++      )
++    )
++  );
++  self.skipWaiting();
++});
++
++self.addEventListener('activate', (event) => {
++  event.waitUntil(
++    caches.keys().then((keys) =>
++      Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)))
++    )
++  );
++  self.clients.claim();
++});
++
++self.addEventListener('fetch', (event) => {
++  const { request } = event;
++
++  if (request.method !== 'GET') {
++    return;
++  }
++
++  if (request.mode === 'navigate') {
++    event.respondWith(networkFirst(request));
++    return;
++  }
++
++  if (isStaticAsset(request) || isSameOrigin(request)) {
++    event.respondWith(staleWhileRevalidate(request));
++    return;
++  }
++});
++
++function isStaticAsset(request) {
++  const url = new URL(request.url);
++  return STATIC_ASSETS.includes(url.pathname);
++}
++
++function isSameOrigin(request) {
++  const url = new URL(request.url);
++  return url.origin === self.location.origin;
++}
++
++async function networkFirst(request) {
++  try {
++    const response = await fetch(request);
++    const cache = await caches.open(CACHE_NAME);
++    cache.put(request, response.clone());
++    return response;
++  } catch (error) {
++    const cached = await caches.match(request, { ignoreSearch: true });
++    if (cached) {
++      return cached;
++    }
++
++    if (request.mode === 'navigate') {
++      const fallback = await caches.match(
++        new URL('/index.html', self.location.origin).toString(),
++        { ignoreSearch: true }
++      );
++      if (fallback) {
++        return fallback;
++      }
++    }
++
++    throw error;
++  }
++}
++
++async function staleWhileRevalidate(request) {
++  const cache = await caches.open(CACHE_NAME);
++  const cachedResponse = await caches.match(request, { ignoreSearch: true });
++
++  const networkFetch = fetch(request)
++    .then((response) => {
++      cache.put(request, response.clone());
++      return response;
++    })
++    .catch(() => cachedResponse);
++
++  return cachedResponse || networkFetch;
++}
++
++self.addEventListener('message', (event) => {
++  if (event.data && event.data.type === 'SKIP_WAITING') {
++    self.skipWaiting();
++  }
++});
+diff --git a/spirituality.html b/spirituality.html
+index 826ba2b40d440ddec5ce0eb41f29f6e4faf860aa..fe798243ba18ab4a44d1061c4ea5f3ce4fd69b0b 100644
+--- a/spirituality.html
++++ b/spirituality.html
+@@ -1,34 +1,38 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
++  <meta name="theme-color" content="#0b1d39">
+   <title>Spirituality - Thomas Stephens</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
++  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png">
++  <link rel="manifest" href="manifest.webmanifest">
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
++  <script src="pwa.js" defer></script>
+ </head>
+ <body>
+ 
+   <div id="starfield"></div>
+ 
+   <header class="hero fade-in">
+     <div class="container">
+       <h1 class="handwritten">Spirituality</h1>
+       <p class="tagline">Seeking Connection. Seeking Meaning.</p>
+       <a href="index.html" class="btn-primary">← Back to Home</a>
+     </div>
+   </header>
+ 
+   <section class="section card fade-in">
+     <div class="container">
+       <h2>Expanding Awareness</h2>
+       <p>I have always been fascinated by the bigger picture — why we are here, where we came from, and where we are going. Spirituality, for me, is a living exploration, not a set of fixed beliefs.</p>
+ 
+       <p>Through study, practice, and reflection, I seek to develop broader awareness — recognizing that we are all part of something greater, part of a universal consciousness connecting all life across time and space.</p>
+     </div>
+   </section>
+ 
+   <section class="section card alt fade-in">
+     <div class="container">
+       <h2>Practices</h2>
+diff --git a/stagehand.html b/stagehand.html
+index a06dba03604ac53fee0d34c9b3d5aa9b542c65c7..121ba58b90bddea9e132de9bf6a747f37bf483ab 100644
+--- a/stagehand.html
++++ b/stagehand.html
+@@ -1,34 +1,38 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
++  <meta name="theme-color" content="#0b1d39">
+   <title>Stagehand Life - Thomas Stephens</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
++  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png">
++  <link rel="manifest" href="manifest.webmanifest">
+   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
++  <script src="pwa.js" defer></script>
+ </head>
+ <body>
+ 
+   <div id="starfield"></div>
+ 
+   <header class="hero fade-in">
+     <div class="container">
+       <h1 class="handwritten">Stagehand Life</h1>
+       <p class="tagline">Behind the Scenes. Building the Impossible.</p>
+       <a href="index.html" class="btn-primary">← Back to Home</a>
+     </div>
+   </header>
+ 
+   <section class="section card fade-in">
+     <div class="container">
+       <h2>Learning by Doing</h2>
+       <p>Before diving into the world of open-source technology and independent entrepreneurship, I spent years working as a professional stagehand and AV technician. It was a career built on precision, teamwork, adaptability, and bringing dreams to life — often under impossible deadlines.</p>
+ 
+       <p>I learned firsthand how to safely set up and tear down massive productions, from high-end corporate events to Broadway shows, working across Audio, Video, Lighting, and Rigging departments.</p>
+     </div>
+   </section>
+ 
+   <section class="section card alt fade-in">
+     <div class="container">
+       <h2>Skills That Translate</h2>
