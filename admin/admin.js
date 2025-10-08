@@ -1,9 +1,11 @@
 (function () {
-  const peers = ['https://gun-relay-3dvr.fly.dev/gun'];
+  const RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
+  const peers = Object.freeze([RELAY_URL]);
 
   const gun = Gun({ peers, localStorage: true });
   const user = gun.user();
-  user.recall({ sessionStorage: true });
+  const RECALL_OPTIONS = { localStorage: true };
+  user.recall(RECALL_OPTIONS);
 
   const authSection = document.getElementById('auth-section');
   const adminPanel = document.getElementById('admin-panel');
