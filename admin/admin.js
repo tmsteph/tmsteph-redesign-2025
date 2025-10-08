@@ -14,8 +14,6 @@
   const authSubmit = document.getElementById('auth-submit');
   const authToggleText = document.getElementById('auth-toggle-text');
   const toggleAuthBtn = document.getElementById('toggle-auth');
-  const confirmPasswordGroup = document.getElementById('confirm-password-group');
-  const confirmPasswordInput = document.getElementById('confirm-password');
   const authMessage = document.getElementById('auth-message');
   const panelMessage = document.getElementById('panel-message');
   const aliasDisplay = document.getElementById('alias-display');
@@ -66,8 +64,6 @@
 
   const resetAuthForm = () => {
     authForm.reset();
-    confirmPasswordGroup.hidden = mode !== 'register';
-    confirmPasswordInput.required = mode === 'register';
   };
 
   const setMode = (nextMode) => {
@@ -244,12 +240,6 @@
     }
 
     if (mode === 'register') {
-      const confirmPassword = confirmPasswordInput.value;
-      if (password !== confirmPassword) {
-        setAuthMessage('Passwords do not match. Please try again.', 'error');
-        return;
-      }
-
       user.create(alias, password, (ack) => {
         if (ack.err) {
           setAuthMessage(ack.err, 'error');

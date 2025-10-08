@@ -144,6 +144,11 @@ footer {
   z-index: 5;
 }
 
+.login-link.logged-in {
+  background: rgba(255, 255, 255, 0.3);
+  color: #2a2a2a;
+}
+
 .login-link:hover,
 .login-link:focus {
   background: rgba(255, 255, 255, 0.3);
