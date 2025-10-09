@@ -18,15 +18,18 @@
     return alias.trim() || 'Account';
   };
 
+  const ADMIN_URL = 'admin/index.html';
   const updateLoginLink = () => {
     if (user.is) {
       const alias = formatAlias(user.is.alias);
       loginLink.textContent = alias;
       loginLink.setAttribute('aria-label', `Open admin panel for ${alias}`);
+      loginLink.setAttribute('href', `${ADMIN_URL}#admin-panel`);
       loginLink.classList.add('logged-in');
     } else {
       loginLink.textContent = 'Log In';
       loginLink.setAttribute('aria-label', 'Log in to the admin control center');
+      loginLink.setAttribute('href', `${ADMIN_URL}#auth-section`);
       loginLink.classList.remove('logged-in');
     }
   };
