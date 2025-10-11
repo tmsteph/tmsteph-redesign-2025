@@ -27,6 +27,10 @@
   const noteInput = document.getElementById('note-input');
   const notePreview = document.getElementById('note-preview');
 
+  const commandCentralForm = document.getElementById('command-central-form');
+  const commandCentralToggle = document.getElementById('command-central-toggle');
+  const commandCentralPreview = document.getElementById('command-central-preview');
+
   const aliasInput = document.getElementById('alias');
   const passwordInput = document.getElementById('password');
 
@@ -43,6 +47,8 @@
   let listenersAttached = false;
   let hasConnectedPeer = false;
   let connectionNoticeTimeout = null;
+
+  const toBoolean = (value) => value === true || value === 'true';
 
   const setAuthMessage = (message, type = 'info') => {
     authMessage.textContent = message;
@@ -197,6 +203,22 @@
         notePreview.textContent = note || 'Your notes will show up here.';
       }
     });
+
+    if (commandCentralToggle && commandCentralPreview) {
+      const updateCommandCentralPreview = (value) => {
+        const enabled = toBoolean(value);
+        commandCentralToggle.checked = enabled;
+        commandCentralPreview.textContent = enabled
+          ? 'Command Central is visible on your homepage.'
+          : 'Command Central is hidden.';
+      };
+
+      bindField({
+        primary: sharedDashboard.get('commandCentralEnabled'),
+        fallback: legacyDashboard.get('commandCentralEnabled'),
+        onValue: updateCommandCentralPreview
+      });
+    }
   };
 
   const putToMultipleNodes = (value, nodes, onSuccess) => {
@@ -297,6 +319,24 @@
       }
     });
   });
+
+  if (commandCentralForm && commandCentralToggle) {
+    commandCentralForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const enabled = commandCentralToggle.checked;
+      putToMultipleNodes(
+        enabled,
+        [sharedDashboard.get('commandCentralEnabled'), legacyDashboard.get('commandCentralEnabled')],
+        () => {
+          if (hasConnectedPeer) {
+            setPanelMessage('Command Central preference saved!', 'success');
+          } else {
+            setPanelMessage('Preference saved locally. It will sync when a connection is available.', 'warning');
+          }
+        }
+      );
+    });
+  }
 
   gun.on('auth', () => {
     showAdminPanel();
