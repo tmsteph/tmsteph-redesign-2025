@@ -116,6 +116,9 @@
       if (!trimmed) {
         return false;
       }
+      if (/^SEA\s*\{/.test(trimmed)) {
+        return true;
+      }
       if (trimmed === user.is?.pub) {
         return true;
       }
