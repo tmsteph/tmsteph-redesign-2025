@@ -4,7 +4,15 @@
 
   const gun = Gun({ peers, localStorage: true });
   const user = gun.user();
-  const RECALL_OPTIONS = { localStorage: true };
+  const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
+
+  if (typeof user.recall === 'function') {
+    try {
+      user.recall(RECALL_OPTIONS);
+    } catch (err) {
+      // Ignore recall errors. We'll rely on manual login if automatic recall fails.
+    }
+  }
 
   const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
   const sanitizeAlias = (alias) => {
@@ -13,16 +21,6 @@
     }
     const trimmed = alias.trim();
     return trimmed.length ? trimmed : '';
-  };
-
-  const recallUserSession = () => {
-    if (typeof user.recall === 'function') {
-      user.recall(RECALL_OPTIONS, () => {
-        if (user.is) {
-          showAdminPanel();
-        }
-      });
-    }
   };
 
   const authSection = document.getElementById('auth-section');
@@ -420,8 +418,6 @@
     showAdminPanel();
     setAuthMessage('');
   });
-
-  recallUserSession();
 
   window.addEventListener('load', () => {
     if (user.is) {
