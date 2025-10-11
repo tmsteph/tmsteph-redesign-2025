@@ -122,10 +122,25 @@
       if (trimmed.startsWith('~')) {
         return true;
       }
-      if (trimmed.length < 40) {
-        return false;
+      if (/^[0-9a-f]{32,}$/i.test(trimmed)) {
+        return true;
       }
-      return /^[A-Za-z0-9_-]+$/.test(trimmed);
+
+      if (trimmed.length >= 30) {
+        const nonBaseChars = trimmed.replace(/[A-Za-z0-9+/=_-]/g, '');
+        const baseCharRatio = 1 - nonBaseChars.length / trimmed.length;
+        if (baseCharRatio >= 0.9) {
+          const alnum = trimmed.replace(/[^A-Za-z0-9]/g, '');
+          const hasUpper = /[A-Z]/.test(alnum);
+          const hasLower = /[a-z]/.test(alnum);
+          const hasDigit = /\d/.test(alnum);
+          if (hasUpper && hasLower && hasDigit) {
+            return true;
+          }
+        }
+      }
+
+      return false;
     };
 
     const isLikelyAlias = (value) => {
