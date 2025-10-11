@@ -44,6 +44,43 @@ textarea {
   resize: vertical;
 }
 
+.password-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.password-field input {
+  flex: 1;
+}
+
+.password-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  color: #fff7d6;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.45rem 0.85rem;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #0b1d39;
+  outline: none;
+}
+
+.password-toggle:active {
+  background: rgba(255, 215, 0, 0.8);
+  border-color: rgba(255, 215, 0, 0.9);
+  color: #0b1d39;
+}
+
 .input-group input:focus,
 textarea:focus {
   border-color: #ffd700;
