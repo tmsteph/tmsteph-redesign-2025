@@ -140,6 +140,17 @@ textarea {
   margin-bottom: 2rem;
 }
 
+.panel-header > div {
+  flex: 1 1 22rem;
+  max-width: 34rem;
+}
+
+.panel-header h2 {
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  word-break: break-word;
+}
+
 .panel-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
