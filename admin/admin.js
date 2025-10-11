@@ -5,7 +5,25 @@
   const gun = Gun({ peers, localStorage: true });
   const user = gun.user();
   const RECALL_OPTIONS = { localStorage: true };
-  user.recall(RECALL_OPTIONS);
+
+  const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
+  const sanitizeAlias = (alias) => {
+    if (typeof alias !== 'string') {
+      return '';
+    }
+    const trimmed = alias.trim();
+    return trimmed.length ? trimmed : '';
+  };
+
+  const recallUserSession = () => {
+    if (typeof user.recall === 'function') {
+      user.recall(RECALL_OPTIONS, () => {
+        if (user.is) {
+          showAdminPanel();
+        }
+      });
+    }
+  };
 
   const authSection = document.getElementById('auth-section');
   const adminPanel = document.getElementById('admin-panel');
@@ -37,12 +55,12 @@
 
   const SHARED_APP_KEY = 'portal.3dvr.tech';
 
-  const sharedApp = user.get('apps').get(SHARED_APP_KEY);
-  const sharedProfile = sharedApp.get('profile');
-  const sharedDashboard = sharedApp.get('dashboard');
+  const getSharedApp = () => safeGet(safeGet(user, 'apps'), SHARED_APP_KEY);
+  const getSharedProfile = () => safeGet(getSharedApp(), 'profile');
+  const getSharedDashboard = () => safeGet(getSharedApp(), 'dashboard');
 
-  const legacyProfile = user.get('profile');
-  const legacyDashboard = user.get('dashboard');
+  const getLegacyProfile = () => safeGet(user, 'profile');
+  const getLegacyDashboard = () => safeGet(user, 'dashboard');
 
   let mode = 'login';
   let listenersAttached = false;
@@ -166,10 +184,25 @@
 
   scheduleConnectionWarning();
 
+  const persistAlias = (aliasCandidate) => {
+    const aliasValue = sanitizeAlias(aliasCandidate);
+    if (!aliasValue) {
+      return;
+    }
+    const aliasNode = safeGet(user, 'alias');
+    if (typeof aliasNode?.put === 'function') {
+      aliasNode.put(aliasValue);
+    }
+  };
+
   const showAdminPanel = () => {
     authSection.hidden = true;
     adminPanel.hidden = false;
-    aliasDisplay.textContent = user.is?.alias || 'Admin';
+    const aliasCandidate = sanitizeAlias(user.is?.alias) || sanitizeAlias(aliasInput.value);
+    aliasDisplay.textContent = aliasCandidate || 'Admin';
+    if (aliasCandidate) {
+      persistAlias(aliasCandidate);
+    }
     attachUserListeners();
     clearConnectionNoticeTimeout();
   };
@@ -193,12 +226,14 @@
     const bindField = ({ primary, fallback, onValue }) => {
       let hasPrimaryValue = false;
 
-      primary.on((value) => {
-        hasPrimaryValue = true;
-        onValue(value);
-      });
+      if (typeof primary?.on === 'function') {
+        primary.on((value) => {
+          hasPrimaryValue = value !== undefined && value !== null;
+          onValue(value);
+        });
+      }
 
-      if (fallback) {
+      if (typeof fallback?.on === 'function') {
         fallback.on((value) => {
           if (!hasPrimaryValue && value !== undefined && value !== null && value !== '') {
             onValue(value);
@@ -208,8 +243,8 @@
     };
 
     bindField({
-      primary: sharedProfile.get('status'),
-      fallback: legacyProfile.get('status'),
+      primary: safeGet(getSharedProfile(), 'status'),
+      fallback: safeGet(getLegacyProfile(), 'status'),
       onValue: (value) => {
         const status = value || '';
         statusInput.value = status;
@@ -218,8 +253,8 @@
     });
 
     bindField({
-      primary: sharedDashboard.get('note'),
-      fallback: legacyDashboard.get('note'),
+      primary: safeGet(getSharedDashboard(), 'note'),
+      fallback: safeGet(getLegacyDashboard(), 'note'),
       onValue: (value) => {
         const note = value || '';
         noteInput.value = note;
@@ -237,15 +272,15 @@
       };
 
       bindField({
-        primary: sharedDashboard.get('commandCentralEnabled'),
-        fallback: legacyDashboard.get('commandCentralEnabled'),
+        primary: safeGet(getSharedDashboard(), 'commandCentralEnabled'),
+        fallback: safeGet(getLegacyDashboard(), 'commandCentralEnabled'),
         onValue: updateCommandCentralPreview
       });
     }
   };
 
   const putToMultipleNodes = (value, nodes, onSuccess) => {
-    const filteredNodes = nodes.filter(Boolean);
+    const filteredNodes = nodes.filter((node) => typeof node?.put === 'function');
     if (!filteredNodes.length) {
       if (typeof onSuccess === 'function') {
         onSuccess();
@@ -296,23 +331,25 @@
             setAuthMessage(authAck.err, 'error');
             return;
           }
+          persistAlias(alias);
           showAdminPanel();
         });
       });
     } else {
       user.auth(alias, password, (ack) => {
         if (ack.err) {
-          const errorMessage =
-            typeof ack.err === 'string' && ack.err.includes('Wrong user or password')
-              ? 'Incorrect alias or password. Please try again, or create an account first.'
-              : ack.err || 'Login failed. Please try again.';
-          setAuthMessage(errorMessage, 'error');
-          return;
-        }
-        setAuthMessage('Login successful! Redirecting...', 'success');
-        showAdminPanel();
-      });
-    }
+        const errorMessage =
+          typeof ack.err === 'string' && ack.err.includes('Wrong user or password')
+            ? 'Incorrect alias or password. Please try again, or create an account first.'
+            : ack.err || 'Login failed. Please try again.';
+        setAuthMessage(errorMessage, 'error');
+        return;
+      }
+      setAuthMessage('Login successful! Redirecting...', 'success');
+      persistAlias(alias);
+      showAdminPanel();
+    });
+  }
   });
 
   logoutBtn.addEventListener('click', () => {
@@ -322,7 +359,7 @@
   statusForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const value = statusInput.value.trim();
-    putToMultipleNodes(value, [sharedProfile.get('status'), legacyProfile.get('status')], () => {
+    putToMultipleNodes(value, [safeGet(getSharedProfile(), 'status'), safeGet(getLegacyProfile(), 'status')], () => {
       if (hasConnectedPeer) {
         setPanelMessage('Status saved!', 'success');
       } else {
@@ -334,7 +371,7 @@
   noteForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const value = noteInput.value.trim();
-    putToMultipleNodes(value, [sharedDashboard.get('note'), legacyDashboard.get('note')], () => {
+    putToMultipleNodes(value, [safeGet(getSharedDashboard(), 'note'), safeGet(getLegacyDashboard(), 'note')], () => {
       if (hasConnectedPeer) {
         setPanelMessage('Note saved!', 'success');
       } else {
@@ -349,7 +386,10 @@
       const enabled = commandCentralToggle.checked;
       putToMultipleNodes(
         enabled,
-        [sharedDashboard.get('commandCentralEnabled'), legacyDashboard.get('commandCentralEnabled')],
+        [
+          safeGet(getSharedDashboard(), 'commandCentralEnabled'),
+          safeGet(getLegacyDashboard(), 'commandCentralEnabled')
+        ],
         () => {
           if (hasConnectedPeer) {
             setPanelMessage('Command Central preference saved!', 'success');
@@ -362,9 +402,12 @@
   }
 
   gun.on('auth', () => {
+    persistAlias(user.is?.alias);
     showAdminPanel();
     setAuthMessage('');
   });
+
+  recallUserSession();
 
   window.addEventListener('load', () => {
     if (user.is) {

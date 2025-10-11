@@ -163,11 +163,31 @@
       }
     };
 
-    const refreshState = () => {
-      if (!user.is && typeof user.recall === 'function') {
-        user.recall(recallOptions);
-      }
+    const applyLoginState = () => {
       updateLoginLink();
+      if (user.is) {
+        bindCommandCentral();
+      } else {
+        updateCommandCentralVisibility(false);
+      }
+    };
+
+    const recallSession = (callback) => {
+      if (typeof user.recall === 'function') {
+        user.recall(recallOptions, () => {
+          callback?.();
+        });
+      } else if (callback) {
+        callback();
+      }
+    };
+
+    const refreshState = () => {
+      if (!user.is) {
+        recallSession(applyLoginState);
+        return;
+      }
+      applyLoginState();
     };
 
     const initAliasBinding = () => {
@@ -192,8 +212,7 @@
     };
 
     const handleAuth = () => {
-      updateLoginLink();
-      bindCommandCentral();
+      applyLoginState();
     };
 
     const init = () => {
@@ -202,9 +221,7 @@
       }
       hasInitialized = true;
 
-      if (typeof user.recall === 'function') {
-        user.recall(recallOptions);
-      }
+      recallSession(applyLoginState);
 
       initAliasBinding();
 
@@ -218,12 +235,7 @@
         globalTarget.addEventListener('storage', refreshState);
       }
 
-      updateLoginLink();
-      if (user.is) {
-        bindCommandCentral();
-      } else {
-        updateCommandCentralVisibility(false);
-      }
+      applyLoginState();
     };
 
     const destroy = () => {
