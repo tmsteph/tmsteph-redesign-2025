@@ -203,6 +203,13 @@
     if (aliasCandidate) {
       persistAlias(aliasCandidate);
     }
+    if (typeof window !== 'undefined') {
+      if (window.history?.replaceState) {
+        window.history.replaceState(null, '', '#admin-panel');
+      } else {
+        window.location.hash = '#admin-panel';
+      }
+    }
     attachUserListeners();
     clearConnectionNoticeTimeout();
   };
@@ -213,6 +220,13 @@
     authSection.hidden = false;
     if (message) {
       setAuthMessage(message, 'info');
+    }
+    if (typeof window !== 'undefined') {
+      if (window.history?.replaceState) {
+        window.history.replaceState(null, '', '#auth-section');
+      } else {
+        window.location.hash = '#auth-section';
+      }
     }
     if (!hasConnectedPeer) {
       scheduleConnectionWarning();

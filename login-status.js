@@ -273,12 +273,68 @@
     if (!root) {
       return null;
     }
+
     const doc = root.document;
     if (!doc) {
       return null;
     }
-    const controller = createLoginStatusController({ root, doc });
-    controller.init();
+
+    let controller = null;
+    let hasStarted = false;
+
+    const startController = () => {
+      if (hasStarted) {
+        return controller;
+      }
+      hasStarted = true;
+      controller = createLoginStatusController({ root, doc });
+      controller.init();
+      if (root && typeof root === 'object') {
+        root.loginStatusController = controller;
+      }
+      return controller;
+    };
+
+    if (typeof root.Gun === 'function') {
+      return startController();
+    }
+
+    const MAX_ATTEMPTS = 80;
+    let attempts = 0;
+
+    const scheduleRetry = () => {
+      if (typeof root.setTimeout !== 'function') {
+        return;
+      }
+      const tryInit = () => {
+        if (typeof root.Gun === 'function') {
+          startController();
+          return;
+        }
+        attempts += 1;
+        if (attempts < MAX_ATTEMPTS) {
+          root.setTimeout(tryInit, 50);
+        }
+      };
+      root.setTimeout(tryInit, 0);
+    };
+
+    if (root.addEventListener) {
+      root.addEventListener(
+        'load',
+        () => {
+          if (typeof root.Gun === 'function') {
+            startController();
+          } else if (!hasStarted) {
+            scheduleRetry();
+          }
+        },
+        { once: true }
+      );
+    }
+
+    scheduleRetry();
+
     return controller;
   };
 
