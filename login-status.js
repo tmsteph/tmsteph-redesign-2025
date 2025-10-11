@@ -13,7 +13,7 @@
   const DEFAULT_ADMIN_URL = 'admin/index.html';
   const DEFAULT_RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
   const DEFAULT_SHARED_APP_KEY = 'portal.3dvr.tech';
-  const DEFAULT_RECALL_OPTIONS = Object.freeze({ localStorage: true });
+  const DEFAULT_RECALL_OPTIONS = Object.freeze({ sessionStorage: true, localStorage: true });
 
   const sanitizeAlias = (alias) => {
     if (typeof alias !== 'string') {
@@ -67,6 +67,14 @@
     const user = options.user ?? (typeof gun.user === 'function' ? gun.user() : null);
     if (!user) {
       return createNoopController();
+    }
+
+    if (typeof user.recall === 'function') {
+      try {
+        user.recall(recallOptions);
+      } catch (err) {
+        // Swallow recall failures; we'll fall back to manual refresh attempts.
+      }
     }
 
     const commandCentralElement =
@@ -172,20 +180,15 @@
       }
     };
 
-    const recallSession = (callback) => {
-      if (typeof user.recall === 'function') {
-        user.recall(recallOptions, () => {
-          callback?.();
-        });
-      } else if (callback) {
-        callback();
-      }
-    };
-
     const refreshState = () => {
       if (!user.is) {
-        recallSession(applyLoginState);
-        return;
+        if (typeof user.recall === 'function') {
+          try {
+            user.recall(recallOptions);
+          } catch (err) {
+            // Ignore recall errors; we'll continue using the current state.
+          }
+        }
       }
       applyLoginState();
     };
@@ -220,8 +223,6 @@
         return;
       }
       hasInitialized = true;
-
-      recallSession(applyLoginState);
 
       initAliasBinding();
 
@@ -273,12 +274,68 @@
     if (!root) {
       return null;
     }
+
     const doc = root.document;
     if (!doc) {
       return null;
     }
-    const controller = createLoginStatusController({ root, doc });
-    controller.init();
+
+    let controller = null;
+    let hasStarted = false;
+
+    const startController = () => {
+      if (hasStarted) {
+        return controller;
+      }
+      hasStarted = true;
+      controller = createLoginStatusController({ root, doc });
+      controller.init();
+      if (root && typeof root === 'object') {
+        root.loginStatusController = controller;
+      }
+      return controller;
+    };
+
+    if (typeof root.Gun === 'function') {
+      return startController();
+    }
+
+    const MAX_ATTEMPTS = 80;
+    let attempts = 0;
+
+    const scheduleRetry = () => {
+      if (typeof root.setTimeout !== 'function') {
+        return;
+      }
+      const tryInit = () => {
+        if (typeof root.Gun === 'function') {
+          startController();
+          return;
+        }
+        attempts += 1;
+        if (attempts < MAX_ATTEMPTS) {
+          root.setTimeout(tryInit, 50);
+        }
+      };
+      root.setTimeout(tryInit, 0);
+    };
+
+    if (root.addEventListener) {
+      root.addEventListener(
+        'load',
+        () => {
+          if (typeof root.Gun === 'function') {
+            startController();
+          } else if (!hasStarted) {
+            scheduleRetry();
+          }
+        },
+        { once: true }
+      );
+    }
+
+    scheduleRetry();
+
     return controller;
   };
 
