@@ -33,6 +33,7 @@
 
   const aliasInput = document.getElementById('alias');
   const passwordInput = document.getElementById('password');
+  const passwordToggle = document.getElementById('password-toggle');
 
   const SHARED_APP_KEY = 'portal.3dvr.tech';
 
@@ -68,8 +69,19 @@
     }
   };
 
+  let isPasswordVisible = false;
+
+  const setPasswordVisibility = (visible) => {
+    isPasswordVisible = visible;
+    passwordInput.type = visible ? 'text' : 'password';
+    passwordToggle.textContent = visible ? 'Hide' : 'Show';
+    passwordToggle.setAttribute('aria-pressed', visible ? 'true' : 'false');
+    passwordToggle.setAttribute('aria-label', visible ? 'Hide password' : 'Show password');
+  };
+
   const resetAuthForm = () => {
     authForm.reset();
+    setPasswordVisibility(false);
   };
 
   const setMode = (nextMode) => {
@@ -88,6 +100,17 @@
     resetAuthForm();
     setAuthMessage('');
   };
+
+  setPasswordVisibility(false);
+
+  passwordToggle.addEventListener('click', () => {
+    setPasswordVisibility(!isPasswordVisible);
+    if (isPasswordVisible) {
+      passwordInput.focus({ preventScroll: true });
+      const { value } = passwordInput;
+      passwordInput.setSelectionRange(value.length, value.length);
+    }
+  });
 
   toggleAuthBtn.addEventListener('click', () => {
     setMode(mode === 'login' ? 'register' : 'login');
