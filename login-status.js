@@ -108,6 +108,26 @@
     };
 
     const MAX_ALIAS_LENGTH = 64;
+    const looksLikeGunKey = (value) => {
+      if (typeof value !== 'string') {
+        return false;
+      }
+      const trimmed = value.trim();
+      if (!trimmed) {
+        return false;
+      }
+      if (trimmed === user.is?.pub) {
+        return true;
+      }
+      if (trimmed.startsWith('~')) {
+        return true;
+      }
+      if (trimmed.length < 40) {
+        return false;
+      }
+      return /^[A-Za-z0-9_-]+$/.test(trimmed);
+    };
+
     const isLikelyAlias = (value) => {
       if (typeof value !== 'string') {
         return false;
@@ -116,7 +136,10 @@
       if (!trimmed || trimmed.length > MAX_ALIAS_LENGTH) {
         return false;
       }
-      return !trimmed.startsWith('~');
+      if (looksLikeGunKey(trimmed)) {
+        return false;
+      }
+      return true;
     };
 
     let hasInitialized = false;
@@ -209,6 +232,9 @@
         cachedAlias = stored;
         return stored;
       }
+      if (stored) {
+        setStoredAlias(null);
+      }
       return null;
     };
 
@@ -261,7 +287,7 @@
           aliasNode.on((value) => {
             if (typeof value === 'string') {
               const aliasValue = value.trim();
-              if (aliasValue) {
+              if (isLikelyAlias(aliasValue)) {
                 cachedAlias = aliasValue;
                 setStoredAlias(aliasValue);
               } else {
