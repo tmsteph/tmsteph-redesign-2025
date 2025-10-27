@@ -249,6 +249,10 @@ footer {
   box-shadow: 0 18px 40px -24px rgba(11, 29, 57, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.07);
   transition: transform 180ms ease, box-shadow 180ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .chakra-card:hover,
@@ -276,6 +280,10 @@ footer {
   box-shadow: 0 12px 24px -14px rgba(0, 0, 0, 0.6);
 }
 
+.chakra-card .chakra-icon {
+  margin-bottom: 0.75rem;
+}
+
 .chakra-step .chakra-icon {
   margin-bottom: 0;
 }
@@ -300,10 +308,17 @@ footer {
   align-items: flex-start;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: transform 180ms ease, box-shadow 180ms ease;
+  text-align: left;
 }
 
 .chakra-step h3 {
   font-size: 1.1rem;
+}
+
+.chakra-card p,
+.chakra-step p {
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .chakra-root {
@@ -509,5 +524,66 @@ footer {
   /* Adjust hero padding for small screens */
   .hero {
     padding: 6rem 1rem 3.5rem 1rem;
+  }
+
+  .chakra-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .chakra-card {
+    padding: 1.35rem 1.2rem;
+    max-width: 420px;
+    margin-inline: auto;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .chakra-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .chakra-step {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    gap: 1rem;
+  }
+
+  .chakra-step .chakra-icon {
+    margin-bottom: 0.75rem;
+    align-self: flex-start;
+  }
+
+  .chakra-card h3,
+  .chakra-card p,
+  .chakra-step h3,
+  .chakra-step p {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.3rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  p {
+    font-size: 1.05rem;
+  }
+
+  .chakra-card,
+  .chakra-step {
+    padding: 1.1rem 1rem;
+  }
+
+  .chakra-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
   }
 }
