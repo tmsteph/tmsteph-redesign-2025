@@ -267,17 +267,31 @@ footer {
 }
 
 .chakra-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 64px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
   font-weight: 700;
+  font-size: 1.1rem;
   color: #fff;
   letter-spacing: 0.08em;
   margin-bottom: 1rem;
-  box-shadow: 0 12px 24px -14px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 32px -18px rgba(0, 0, 0, 0.55);
+  clip-path: polygon(50% 0%, 72% 12%, 92% 28%, 82% 50%, 92% 72%, 72% 88%, 50% 100%, 28% 88%, 8% 72%, 18% 50%, 8% 28%, 28% 12%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  position: relative;
+  isolation: isolate;
+}
+
+.chakra-icon::after {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border-radius: 18%;
+  background: rgba(255, 255, 255, 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .chakra-card .chakra-icon {
@@ -582,8 +596,13 @@ footer {
   }
 
   .chakra-icon {
-    width: 50px;
-    height: 50px;
+    width: 54px;
     font-size: 1rem;
+  }
+}
+
+@supports not (clip-path: polygon(50% 0%, 72% 12%, 92% 28%, 82% 50%, 92% 72%, 72% 88%, 50% 100%, 28% 88%, 8% 72%, 18% 50%, 8% 28%, 28% 12%)) {
+  .chakra-icon {
+    border-radius: 22%;
   }
 }
