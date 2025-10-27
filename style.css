@@ -233,6 +233,138 @@ footer {
 }
 
 /* ===========================
+   CHAKRA VISUALS
+=========================== */
+.chakra-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-block: 1.5rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.chakra-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 18px 40px -24px rgba(11, 29, 57, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.chakra-card:hover,
+.chakra-step:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 44px -22px rgba(11, 29, 57, 0.75);
+}
+
+.chakra-card h3,
+.chakra-step h3 {
+  margin-bottom: 0.5rem;
+}
+
+.chakra-icon {
+  width: 64px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+  box-shadow: 0 16px 32px -18px rgba(0, 0, 0, 0.55);
+  clip-path: polygon(50% 0%, 72% 12%, 92% 28%, 82% 50%, 92% 72%, 72% 88%, 50% 100%, 28% 88%, 8% 72%, 18% 50%, 8% 28%, 28% 12%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  position: relative;
+  isolation: isolate;
+}
+
+.chakra-icon::after {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border-radius: 18%;
+  background: rgba(255, 255, 255, 0.12);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.chakra-card .chakra-icon {
+  margin-bottom: 0.75rem;
+}
+
+.chakra-step .chakra-icon {
+  margin-bottom: 0;
+}
+
+.chakra-summary {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.chakra-path {
+  display: grid;
+  gap: 1.5rem;
+  margin-block: 1.75rem 2rem;
+}
+
+.chakra-step {
+  background: rgba(11, 29, 57, 0.35);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  text-align: left;
+}
+
+.chakra-step h3 {
+  font-size: 1.1rem;
+}
+
+.chakra-card p,
+.chakra-step p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.chakra-root {
+  background: linear-gradient(135deg, #d92027, #ff7b54);
+}
+
+.chakra-sacral {
+  background: linear-gradient(135deg, #ff8a5c, #ffdd67);
+}
+
+.chakra-solar {
+  background: linear-gradient(135deg, #f8b500, #fce38a);
+  color: #4a2a00;
+}
+
+.chakra-heart {
+  background: linear-gradient(135deg, #3dd598, #57c5b6);
+}
+
+.chakra-throat {
+  background: linear-gradient(135deg, #1ca7ec, #73d2f6);
+}
+
+.chakra-third-eye {
+  background: linear-gradient(135deg, #7b4397, #9f5afd);
+}
+
+.chakra-crown {
+  background: linear-gradient(135deg, #d16ba5, #c777b9, #ba83ca);
+}
+
+/* ===========================
    PROJECT GRID
 =========================== */
 .project-grid {
@@ -406,5 +538,71 @@ footer {
   /* Adjust hero padding for small screens */
   .hero {
     padding: 6rem 1rem 3.5rem 1rem;
+  }
+
+  .chakra-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .chakra-card {
+    padding: 1.35rem 1.2rem;
+    max-width: 420px;
+    margin-inline: auto;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .chakra-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .chakra-step {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    gap: 1rem;
+  }
+
+  .chakra-step .chakra-icon {
+    margin-bottom: 0.75rem;
+    align-self: flex-start;
+  }
+
+  .chakra-card h3,
+  .chakra-card p,
+  .chakra-step h3,
+  .chakra-step p {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2.3rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  p {
+    font-size: 1.05rem;
+  }
+
+  .chakra-card,
+  .chakra-step {
+    padding: 1.1rem 1rem;
+  }
+
+  .chakra-icon {
+    width: 54px;
+    font-size: 1rem;
+  }
+}
+
+@supports not (clip-path: polygon(50% 0%, 72% 12%, 92% 28%, 82% 50%, 92% 72%, 72% 88%, 50% 100%, 28% 88%, 8% 72%, 18% 50%, 8% 28%, 28% 12%)) {
+  .chakra-icon {
+    border-radius: 22%;
   }
 }
