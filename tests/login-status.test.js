@@ -157,6 +157,62 @@ describe('login status controller', () => {
     expect(loginLink.textContent).toBe('Account');
   });
 
+  it('ignores aliases that resemble Gun public keys', () => {
+    const { loginLink, commandCentral } = setupDom();
+    const { user, aliasNode } = createUserStub();
+    const gun = createGunStub(user);
+
+    const controller = createLoginStatusController({
+      root: window,
+      doc: document,
+      gun,
+      user,
+      loginLink,
+      commandCentralElement: commandCentral
+    });
+
+    controller.init();
+
+    const noisyKey = 'U8TlH9jJEDW7j-mg40n9BJOoSGHm8M6_cxPuXeK.M4n8YnHIKufYG_icvJj0JFna4yQe2264rQxsoS3tv0w!';
+
+    user.is = { alias: noisyKey, pub: 'abcdefghijklmnopqrstuvwxyz1234567890' };
+    gun.emit('auth');
+
+    expect(loginLink.textContent).toBe('Account');
+
+    aliasNode.emit(noisyKey);
+
+    expect(loginLink.textContent).toBe('Account');
+  });
+
+  it('ignores SEA encrypted alias payloads', () => {
+    const { loginLink, commandCentral } = setupDom();
+    const { user, aliasNode } = createUserStub();
+    const gun = createGunStub(user);
+
+    const controller = createLoginStatusController({
+      root: window,
+      doc: document,
+      gun,
+      user,
+      loginLink,
+      commandCentralElement: commandCentral
+    });
+
+    controller.init();
+
+    const seaPayload = 'SEA{"ct":"Y9+Vds1vJb==","iv":"8zhp","s":"5w"}';
+
+    user.is = { alias: seaPayload };
+    gun.emit('auth');
+
+    expect(loginLink.textContent).toBe('Account');
+
+    aliasNode.emit(seaPayload);
+
+    expect(loginLink.textContent).toBe('Account');
+  });
+
   it('shows the Command Central section when the preference is enabled', () => {
     const { loginLink, commandCentral } = setupDom();
     const { user, commandCentralPrimary } = createUserStub();

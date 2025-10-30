@@ -85,8 +85,83 @@
 
     const sharedAppKey = options.sharedAppKey || DEFAULT_SHARED_APP_KEY;
 
+    const STORAGE_KEY = 'loginStatus.alias';
+
+    const getStoredAlias = () => {
+      try {
+        return root?.localStorage?.getItem(STORAGE_KEY) || null;
+      } catch (err) {
+        return null;
+      }
+    };
+
+    const setStoredAlias = (value) => {
+      try {
+        if (value) {
+          root?.localStorage?.setItem(STORAGE_KEY, value);
+        } else {
+          root?.localStorage?.removeItem(STORAGE_KEY);
+        }
+      } catch (err) {
+        // Ignore storage errors (e.g., when disabled).
+      }
+    };
+
+    const MAX_ALIAS_LENGTH = 64;
+    const looksLikeGunKey = (value) => {
+      if (typeof value !== 'string') {
+        return false;
+      }
+      const trimmed = value.trim();
+      if (!trimmed) {
+        return false;
+      }
+      if (/^SEA\s*\{/.test(trimmed)) {
+        return true;
+      }
+      if (trimmed === user.is?.pub) {
+        return true;
+      }
+      if (trimmed.startsWith('~')) {
+        return true;
+      }
+      if (/^[0-9a-f]{32,}$/i.test(trimmed)) {
+        return true;
+      }
+
+      if (trimmed.length >= 30) {
+        const nonBaseChars = trimmed.replace(/[A-Za-z0-9+/=_-]/g, '');
+        const baseCharRatio = 1 - nonBaseChars.length / trimmed.length;
+        if (baseCharRatio >= 0.9) {
+          const alnum = trimmed.replace(/[^A-Za-z0-9]/g, '');
+          const hasUpper = /[A-Z]/.test(alnum);
+          const hasLower = /[a-z]/.test(alnum);
+          const hasDigit = /\d/.test(alnum);
+          if (hasUpper && hasLower && hasDigit) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    };
+
+    const isLikelyAlias = (value) => {
+      if (typeof value !== 'string') {
+        return false;
+      }
+      const trimmed = value.trim();
+      if (!trimmed || trimmed.length > MAX_ALIAS_LENGTH) {
+        return false;
+      }
+      if (looksLikeGunKey(trimmed)) {
+        return false;
+      }
+      return true;
+    };
+
     let hasInitialized = false;
-    let cachedAlias = null;
+    let cachedAlias = getStoredAlias();
     let commandCentralAttached = false;
     let commandCentralPrimaryNode = null;
     let commandCentralFallbackNode = null;
@@ -154,9 +229,36 @@
 
     const formatAlias = options.formatAlias || sanitizeAlias;
 
+    const resolveAlias = () => {
+      const liveAlias = user.is?.alias;
+      if (typeof liveAlias === 'string') {
+        const trimmed = liveAlias.trim();
+        if (isLikelyAlias(trimmed)) {
+          cachedAlias = trimmed;
+          setStoredAlias(cachedAlias);
+          return cachedAlias;
+        }
+        cachedAlias = null;
+        setStoredAlias(null);
+      }
+
+      if (isLikelyAlias(cachedAlias)) {
+        return cachedAlias;
+      }
+      const stored = getStoredAlias();
+      if (isLikelyAlias(stored)) {
+        cachedAlias = stored;
+        return stored;
+      }
+      if (stored) {
+        setStoredAlias(null);
+      }
+      return null;
+    };
+
     const updateLoginLink = () => {
       if (user.is) {
-        const aliasCandidate = cachedAlias ?? user.is.alias ?? user._?.alias;
+        const aliasCandidate = resolveAlias();
         const alias = formatAlias(aliasCandidate);
         loginLink.textContent = alias;
         loginLink.setAttribute('aria-label', `Open admin panel for ${alias}`);
@@ -201,8 +303,15 @@
         const aliasNode = user.get('alias');
         if (aliasNode?.on) {
           aliasNode.on((value) => {
-            if (typeof value === 'string' && value.trim()) {
-              cachedAlias = value;
+            if (typeof value === 'string') {
+              const aliasValue = value.trim();
+              if (isLikelyAlias(aliasValue)) {
+                cachedAlias = aliasValue;
+                setStoredAlias(aliasValue);
+              } else {
+                cachedAlias = null;
+                setStoredAlias(null);
+              }
               if (user.is) {
                 updateLoginLink();
               }
