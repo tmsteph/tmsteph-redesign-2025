@@ -101,6 +101,36 @@
             <p id="command-central-preview" class="preview-value">Command Central is hidden.</p>
           </div>
         </div>
+
+        <div class="panel-card" id="photo-vault">
+          <h3>Secure Photo Vault</h3>
+          <p class="panel-description">
+            Encrypt and sync cherished family photos using the same GUN + SEA keys that protect your private notes.
+          </p>
+          <form id="photo-upload-form" class="stacked-form" autocomplete="off">
+            <label for="photo-file">Choose a photo</label>
+            <input type="file" id="photo-file" accept="image/*" required />
+
+            <label for="photo-caption">Caption (optional)</label>
+            <input
+              type="text"
+              id="photo-caption"
+              maxlength="120"
+              placeholder="Add a short note so everyone knows the moment"
+            />
+
+            <p class="form-helper">Images are encrypted locally before syncing. Max size 3&nbsp;MB.</p>
+            <button type="submit" class="btn-primary">Encrypt &amp; Upload</button>
+          </form>
+          <p id="photo-message" class="form-message" role="status" aria-live="polite"></p>
+
+          <div class="panel-preview">
+            <p class="preview-label">Photo library</p>
+            <div id="photo-list" class="photo-list" aria-live="polite">
+              <p class="empty-state-text">No photos uploaded yet.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <p id="panel-message" class="form-message" role="status"></p>

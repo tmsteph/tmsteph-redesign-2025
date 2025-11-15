@@ -47,23 +47,36 @@
   const commandCentralToggle = document.getElementById('command-central-toggle');
   const commandCentralPreview = document.getElementById('command-central-preview');
 
+  const photoForm = document.getElementById('photo-upload-form');
+  const photoFileInput = document.getElementById('photo-file');
+  const photoCaptionInput = document.getElementById('photo-caption');
+  const photoList = document.getElementById('photo-list');
+  const photoMessage = document.getElementById('photo-message');
+
   const aliasInput = document.getElementById('alias');
   const passwordInput = document.getElementById('password');
   const passwordToggle = document.getElementById('password-toggle');
 
   const SHARED_APP_KEY = 'portal.3dvr.tech';
+  const MAX_PHOTO_SIZE_BYTES = 3 * 1024 * 1024;
 
   const getSharedApp = () => safeGet(safeGet(user, 'apps'), SHARED_APP_KEY);
   const getSharedProfile = () => safeGet(getSharedApp(), 'profile');
   const getSharedDashboard = () => safeGet(getSharedApp(), 'dashboard');
+  const getSharedPhotos = () => safeGet(getSharedApp(), 'photos');
 
   const getLegacyProfile = () => safeGet(user, 'profile');
   const getLegacyDashboard = () => safeGet(user, 'dashboard');
+  const getLegacyPhotos = () => safeGet(user, 'photos');
 
   let mode = 'login';
   let listenersAttached = false;
   let hasConnectedPeer = false;
   let connectionNoticeTimeout = null;
+  let photoMessageTimeout = null;
+
+  const photoCache = new Map();
+  let photoListenersAttached = false;
 
   const toBoolean = (value) => value === true || value === 'true';
 
@@ -83,6 +96,238 @@
         }
       }, 3500);
     }
+  };
+
+  const setPhotoMessage = (message, type = 'info') => {
+    if (!photoMessage) {
+      return;
+    }
+    photoMessage.textContent = message;
+    photoMessage.dataset.state = message ? type : '';
+    if (photoMessageTimeout) {
+      clearTimeout(photoMessageTimeout);
+      photoMessageTimeout = null;
+    }
+    if (message) {
+      photoMessageTimeout = setTimeout(() => {
+        if (photoMessage.textContent === message) {
+          photoMessage.textContent = '';
+          photoMessage.dataset.state = '';
+        }
+      }, 4000);
+    }
+  };
+
+  const resetPhotoVaultState = () => {
+    photoCache.clear();
+    if (photoList) {
+      photoList.innerHTML = '<p class="empty-state-text">No photos uploaded yet.</p>';
+    }
+    if (photoForm) {
+      photoForm.reset();
+    }
+    setPhotoMessage('', 'info');
+  };
+
+  const createPhotoId = () => {
+    if (typeof Gun?.text?.random === 'function') {
+      return Gun.text.random(18);
+    }
+    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  };
+
+  const readFileAsDataUrl = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error || new Error('Unable to read file'));
+      reader.readAsDataURL(file);
+    });
+
+  const formatBytes = (bytes) => {
+    if (!Number.isFinite(bytes)) {
+      return '';
+    }
+    if (bytes < 1024) {
+      return `${bytes} B`;
+    }
+    if (bytes < 1024 * 1024) {
+      return `${(bytes / 1024).toFixed(1)} KB`;
+    }
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  };
+
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) {
+      return '';
+    }
+    try {
+      return new Date(timestamp).toLocaleString(undefined, {
+        dateStyle: 'medium',
+        timeStyle: 'short'
+      });
+    } catch (err) {
+      return '';
+    }
+  };
+
+  const sanitizeCaption = (value) => {
+    if (typeof value !== 'string') {
+      return '';
+    }
+    return value.trim().slice(0, 120);
+  };
+
+  const getPhotoNode = (photosNode, id) => {
+    if (!id) {
+      return null;
+    }
+    return typeof photosNode?.get === 'function' ? photosNode.get(id) : null;
+  };
+
+  const renderPhotoList = () => {
+    if (!photoList) {
+      return;
+    }
+    if (!photoCache.size) {
+      photoList.innerHTML = '<p class="empty-state-text">No photos uploaded yet.</p>';
+      return;
+    }
+
+    const fragment = document.createDocumentFragment();
+    const sortedPhotos = Array.from(photoCache.values()).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+    sortedPhotos.forEach((photo) => {
+      const card = document.createElement('article');
+      card.className = 'photo-card';
+
+      const img = document.createElement('img');
+      img.src = photo.data;
+      img.alt = photo.caption ? `Photo: ${photo.caption}` : `Photo uploaded ${formatTimestamp(photo.createdAt)}`;
+      card.appendChild(img);
+
+      const details = document.createElement('div');
+      details.className = 'photo-details';
+
+      const title = document.createElement('h4');
+      title.textContent = photo.caption || photo.name || 'Photo';
+      details.appendChild(title);
+
+      const meta = document.createElement('p');
+      meta.className = 'photo-meta';
+      const sizeLabel = photo.size ? ` • ${formatBytes(photo.size)}` : '';
+      meta.textContent = `${formatTimestamp(photo.createdAt) || 'Unknown date'}${sizeLabel}`;
+      details.appendChild(meta);
+
+      if (photo.caption) {
+        const captionParagraph = document.createElement('p');
+        captionParagraph.className = 'photo-caption';
+        captionParagraph.textContent = photo.caption;
+        details.appendChild(captionParagraph);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'photo-actions';
+
+      const downloadLink = document.createElement('a');
+      downloadLink.href = photo.data;
+      downloadLink.download = photo.name || 'photo.jpg';
+      downloadLink.textContent = 'Download';
+      downloadLink.className = 'photo-action-button';
+      downloadLink.setAttribute('role', 'button');
+      actions.appendChild(downloadLink);
+
+      const deleteButton = document.createElement('button');
+      deleteButton.type = 'button';
+      deleteButton.className = 'photo-action-button';
+      deleteButton.dataset.photoDelete = 'true';
+      deleteButton.dataset.photoId = photo.id;
+      deleteButton.textContent = 'Delete';
+      actions.appendChild(deleteButton);
+
+      details.appendChild(actions);
+      card.appendChild(details);
+      fragment.appendChild(card);
+    });
+
+    photoList.innerHTML = '';
+    photoList.appendChild(fragment);
+  };
+
+  const attachPhotoLibraryListeners = () => {
+    if (photoListenersAttached || !photoList || typeof Gun?.SEA?.decrypt !== 'function') {
+      return;
+    }
+
+    photoListenersAttached = true;
+
+    const attach = (node, source) => {
+      if (!node || typeof node.map !== 'function') {
+        return;
+      }
+
+      node.map().on(async (record, key) => {
+        if (!key) {
+          return;
+        }
+
+        if (!record) {
+          if (photoCache.delete(key)) {
+            renderPhotoList();
+          }
+          return;
+        }
+
+        if (!record.encrypted) {
+          return;
+        }
+
+        try {
+          const decrypted = await Gun.SEA.decrypt(record.encrypted, user._?.sea);
+          if (!decrypted || !decrypted.data) {
+            return;
+          }
+
+          const existing = photoCache.get(key);
+          if (existing && existing.source === 'shared' && source === 'legacy') {
+            return;
+          }
+
+          photoCache.set(key, { ...decrypted, id: key, source });
+          renderPhotoList();
+        } catch (err) {
+          setPhotoMessage('Unable to decrypt one of your photos. Try logging out and back in.', 'warning');
+        }
+      });
+    };
+
+    attach(getSharedPhotos(), 'shared');
+    attach(getLegacyPhotos(), 'legacy');
+  };
+
+  const deletePhotoById = (photoId) => {
+    if (!photoId) {
+      return;
+    }
+    setPhotoMessage('Removing photo...', 'info');
+
+    const targets = [getPhotoNode(getSharedPhotos(), photoId), getPhotoNode(getLegacyPhotos(), photoId)].filter(Boolean);
+
+    if (!targets.length) {
+      photoCache.delete(photoId);
+      renderPhotoList();
+      setPhotoMessage('Photo removed locally.', 'success');
+      return;
+    }
+
+    putToMultipleNodes(null, targets, () => {
+      photoCache.delete(photoId);
+      renderPhotoList();
+      const message = hasConnectedPeer
+        ? 'Photo deleted from your vault.'
+        : 'Photo removed locally. It will disappear elsewhere when reconnected.';
+      setPhotoMessage(message, hasConnectedPeer ? 'success' : 'warning');
+    });
   };
 
   let isPasswordVisible = false;
@@ -216,6 +461,7 @@
     user.leave();
     adminPanel.hidden = true;
     authSection.hidden = false;
+    resetPhotoVaultState();
     if (message) {
       setAuthMessage(message, 'info');
     }
@@ -289,6 +535,8 @@
         onValue: updateCommandCentralPreview
       });
     }
+
+    attachPhotoLibraryListeners();
   };
 
   const putToMultipleNodes = (value, nodes, onSuccess) => {
@@ -410,6 +658,90 @@
           }
         }
       );
+    });
+  }
+
+  if (photoForm && photoFileInput) {
+    photoForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!user.is) {
+        setPhotoMessage('Please log in to upload photos.', 'error');
+        return;
+      }
+
+      const file = photoFileInput.files && photoFileInput.files[0];
+      if (!file) {
+        setPhotoMessage('Choose a photo to upload.', 'error');
+        return;
+      }
+
+      if (!file.type || !file.type.startsWith('image/')) {
+        setPhotoMessage('Only image files are supported.', 'error');
+        return;
+      }
+
+      if (file.size > MAX_PHOTO_SIZE_BYTES) {
+        setPhotoMessage('Please choose an image smaller than 3 MB.', 'error');
+        return;
+      }
+
+      if (!Gun || !Gun.SEA || typeof Gun.SEA.encrypt !== 'function' || !user._?.sea) {
+        setPhotoMessage('Encryption service unavailable. Refresh and try again.', 'error');
+        return;
+      }
+
+      setPhotoMessage('Encrypting photo...', 'info');
+
+      try {
+        const dataUrl = await readFileAsDataUrl(file);
+        const caption = sanitizeCaption(photoCaptionInput ? photoCaptionInput.value : '');
+        const payload = {
+          id: createPhotoId(),
+          name: file.name || 'photo.jpg',
+          type: file.type,
+          size: file.size,
+          caption,
+          createdAt: Date.now(),
+          data: dataUrl
+        };
+
+        const encrypted = await Gun.SEA.encrypt(payload, user._.sea);
+        if (!encrypted) {
+          throw new Error('Encryption failed');
+        }
+
+        const targets = [
+          getPhotoNode(getSharedPhotos(), payload.id),
+          getPhotoNode(getLegacyPhotos(), payload.id)
+        ].filter(Boolean);
+
+        if (!targets.length) {
+          setPhotoMessage('Unable to reach your photo vault. Try again after reconnecting.', 'error');
+          return;
+        }
+
+        putToMultipleNodes({ id: payload.id, encrypted }, targets, () => {
+          const message = hasConnectedPeer
+            ? 'Photo uploaded and synced!'
+            : 'Photo saved locally. It will sync when a connection is available.';
+          setPhotoMessage(message, hasConnectedPeer ? 'success' : 'warning');
+          photoForm.reset();
+        });
+      } catch (err) {
+        setPhotoMessage('Unable to encrypt or upload that photo. Please try again.', 'error');
+      }
+    });
+  }
+
+  if (photoList) {
+    photoList.addEventListener('click', (event) => {
+      const deleteBtn = event.target.closest('[data-photo-delete="true"]');
+      if (!deleteBtn) {
+        return;
+      }
+      const { photoId } = deleteBtn.dataset;
+      deletePhotoById(photoId);
     });
   }
 
