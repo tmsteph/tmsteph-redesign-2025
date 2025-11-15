@@ -58,7 +58,7 @@
   const passwordToggle = document.getElementById('password-toggle');
 
   const SHARED_APP_KEY = 'portal.3dvr.tech';
-  const MAX_PHOTO_SIZE_BYTES = 3 * 1024 * 1024;
+  const MAX_PHOTO_SIZE_BYTES = 10 * 1024 * 1024;
 
   const getSharedApp = () => safeGet(safeGet(user, 'apps'), SHARED_APP_KEY);
   const getSharedProfile = () => safeGet(getSharedApp(), 'profile');
@@ -682,7 +682,7 @@
       }
 
       if (file.size > MAX_PHOTO_SIZE_BYTES) {
-        setPhotoMessage('Please choose an image smaller than 3 MB.', 'error');
+        setPhotoMessage('Please choose an image smaller than 10 MB.', 'error');
         return;
       }
 
