@@ -443,6 +443,76 @@ footer {
   margin-top: 0.25rem;
 }
 
+.multiview-player-toggle {
+  margin: 1rem 0 1.5rem;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(11, 29, 57, 0.65);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+}
+
+.multiview-player-copy {
+  flex: 1 1 220px;
+}
+
+.multiview-player-copy p {
+  margin: 0;
+}
+
+.multiview-player-help {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 0.25rem;
+}
+
+.multiview-player-options {
+  display: inline-flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.multiview-player-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  transition: border 0.2s ease, background 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.multiview-player-option input {
+  accent-color: #ffe066;
+}
+
+.multiview-player-option span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.multiview-player-option strong {
+  font-size: 0.95rem;
+}
+
+.multiview-player-option small {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.multiview-player-option:has(input:checked) {
+  border-color: #ffe066;
+  background: rgba(255, 224, 102, 0.18);
+  color: #fffef0;
+}
+
 .multiview-status {
   min-height: 1.5rem;
   font-size: 0.95rem;
@@ -538,6 +608,11 @@ footer {
 
   .multiview-input {
     width: 100%;
+  }
+
+  .multiview-player-toggle {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .multiview-grid {

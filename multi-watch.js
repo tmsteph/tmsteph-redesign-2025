@@ -4,6 +4,8 @@
   const addButton = document.querySelector('[data-add-video]');
   const clearButton = document.querySelector('[data-clear-videos]');
   const status = document.querySelector('[data-multiview-status]');
+  const playerOptions = document.querySelectorAll('[data-player-option]');
+  const playerHelp = document.querySelector('[data-player-help]');
 
   if (!grid || !input || !addButton || !clearButton || !status) {
     return;
@@ -18,8 +20,70 @@
 
   const PRIVACY_HOST = 'https://www.youtube-nocookie.com';
   const STANDARD_HOST = 'https://www.youtube.com';
+  const HOST_PREFERENCE_KEY = 'multiview-player-host';
   const FALLBACK_DELAY = 5000;
   let fallbackUsed = false;
+  let preferredHost = PRIVACY_HOST;
+
+  try {
+    const storedPreference = window.localStorage?.getItem(HOST_PREFERENCE_KEY);
+    if (storedPreference === 'standard') {
+      preferredHost = STANDARD_HOST;
+    }
+  } catch (error) {
+    // Ignore storage errors
+  }
+
+  function hostToPreference(host) {
+    return host === STANDARD_HOST ? 'standard' : 'privacy';
+  }
+
+  function updatePlayerInputs(host) {
+    if (!playerOptions.length) return;
+    const currentPreference = hostToPreference(host);
+    playerOptions.forEach((input) => {
+      const optionPreference = input.value === 'standard' ? 'standard' : 'privacy';
+      const isSelected = optionPreference === currentPreference;
+      input.checked = isSelected;
+      input.setAttribute('aria-checked', String(isSelected));
+    });
+  }
+
+  function updatePlayerHelp(host) {
+    if (!playerHelp) return;
+    const preference = hostToPreference(host);
+    playerHelp.dataset.mode = preference;
+    playerHelp.textContent =
+      preference === 'standard'
+        ? 'Standard mode loads youtube.com so you can sign in, but ads or tracking may appear.'
+        : 'Ad-free mode keeps things on youtube-nocookie.com, which hides sign-in prompts and account controls.';
+  }
+
+  updatePlayerInputs(preferredHost);
+  updatePlayerHelp(preferredHost);
+
+  function persistPreferredHost(host) {
+    try {
+      window.localStorage?.setItem(HOST_PREFERENCE_KEY, hostToPreference(host));
+    } catch (error) {
+      // Ignore storage errors
+    }
+  }
+
+  function setPreferredHost(host) {
+    if (preferredHost === host) return;
+    preferredHost = host;
+    persistPreferredHost(host);
+    updatePlayerInputs(host);
+    updatePlayerHelp(host);
+    const tone = host === STANDARD_HOST ? 'warning' : 'info';
+    const message =
+      host === STANDARD_HOST
+        ? 'Using the standard YouTube player so you can sign in or interact with the video.'
+        : 'Back on the ad-free youtube-nocookie player. Sign-in prompts will stay hidden.';
+    updateStatus(message, tone);
+    hydrateFrames();
+  }
 
   function buildEmbedUrl(host, id) {
     const params = new URLSearchParams({
@@ -118,7 +182,7 @@
     const fallbackButton = document.createElement('button');
     fallbackButton.type = 'button';
     fallbackButton.className = 'multiview-fallback-button';
-    fallbackButton.textContent = 'Load standard YouTube player';
+    fallbackButton.textContent = 'Load standard YouTube player (enables sign-in)';
     fallbackButton.addEventListener('click', () => {
       applyEmbedSource(iframe, STANDARD_HOST);
       fallbackNote.hidden = true;
@@ -139,20 +203,23 @@
   function hydrateFrames() {
     const frames = grid.querySelectorAll('iframe[data-video-id]');
     fallbackUsed = false;
+    const usingPrivacyHost = preferredHost === PRIVACY_HOST;
     frames.forEach((iframe, index) => {
       iframe.removeAttribute('src');
       iframe.dataset.loaded = 'false';
-      iframe.dataset.currentHost = PRIVACY_HOST;
+      iframe.dataset.currentHost = preferredHost;
 
       const notice = iframe.closest('.multiview-frame-wrapper')?.querySelector('.multiview-fallback-note');
       if (notice) {
-        notice.hidden = true;
-        notice.dataset.fallbackShown = 'false';
+        notice.hidden = !usingPrivacyHost;
+        notice.dataset.fallbackShown = usingPrivacyHost ? 'false' : 'true';
       }
 
       window.setTimeout(() => {
-        applyEmbedSource(iframe, PRIVACY_HOST);
-        scheduleFallback(iframe, notice);
+        applyEmbedSource(iframe, preferredHost);
+        if (usingPrivacyHost) {
+          scheduleFallback(iframe, notice);
+        }
       }, index * 350);
     });
   }
@@ -245,6 +312,13 @@
 
   addButton.addEventListener('click', addVideo);
   clearButton.addEventListener('click', clearVideos);
+  playerOptions.forEach((input) => {
+    input.addEventListener('change', (event) => {
+      if (!(event.target instanceof HTMLInputElement) || !event.target.checked) return;
+      const nextHost = event.target.value === 'standard' ? STANDARD_HOST : PRIVACY_HOST;
+      setPreferredHost(nextHost);
+    });
+  });
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
