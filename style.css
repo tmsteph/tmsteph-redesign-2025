@@ -498,6 +498,38 @@ footer {
   text-decoration: underline;
 }
 
+.multiview-fallback-note {
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  background: rgba(11, 29, 57, 0.75);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.multiview-fallback-button {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid #ffe066;
+  background: transparent;
+  color: #ffe066;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.multiview-fallback-button:hover,
+.multiview-fallback-button:focus-visible {
+  background: rgba(255, 224, 102, 0.15);
+  color: #fff6c2;
+}
+
 @media (max-width: 640px) {
   .multiview-controls {
     flex-direction: column;

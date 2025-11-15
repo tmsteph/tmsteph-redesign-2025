@@ -18,7 +18,7 @@
 
   const PRIVACY_HOST = 'https://www.youtube-nocookie.com';
   const STANDARD_HOST = 'https://www.youtube.com';
-  const FALLBACK_DELAY = 4000;
+  const FALLBACK_DELAY = 5000;
   let fallbackUsed = false;
 
   function buildEmbedUrl(host, id) {
@@ -43,17 +43,23 @@
     iframe.src = buildEmbedUrl(host, iframe.dataset.videoId);
   }
 
-  function scheduleFallback(iframe) {
+  function scheduleFallback(iframe, notice) {
+    if (!notice) return;
+
     const timerId = window.setTimeout(() => {
-      if (iframe.dataset.loaded === 'true' || iframe.dataset.currentHost === STANDARD_HOST) {
+      if (
+        iframe.dataset.loaded === 'true' ||
+        iframe.dataset.currentHost === STANDARD_HOST ||
+        notice.dataset.fallbackShown === 'true'
+      ) {
         return;
       }
-      applyEmbedSource(iframe, STANDARD_HOST);
-      iframe.dataset.fallbackApplied = 'true';
+      notice.hidden = false;
+      notice.dataset.fallbackShown = 'true';
       if (!fallbackUsed) {
         fallbackUsed = true;
         updateStatus(
-          'One of the embeds needed the standard YouTube player. Ads or sign-in prompts may appear.',
+          'One video refused the ad-free player. Use the backup button if you still want to load it.',
           'warning',
         );
       }
@@ -68,7 +74,6 @@
 
     const iframe = document.createElement('iframe');
     iframe.className = 'multiview-frame';
-    iframe.loading = 'lazy';
     iframe.allowFullscreen = true;
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
@@ -84,10 +89,11 @@
     });
 
     iframe.addEventListener('error', () => {
-      if (iframe.dataset.currentHost === STANDARD_HOST) {
-        return;
+      const notice = wrapper.querySelector('.multiview-fallback-note');
+      if (notice) {
+        notice.hidden = false;
+        notice.dataset.fallbackShown = 'true';
       }
-      applyEmbedSource(iframe, STANDARD_HOST);
     });
 
     wrapper.appendChild(iframe);
@@ -100,6 +106,33 @@
     link.textContent = 'Open on YouTube';
     wrapper.appendChild(link);
 
+    const fallbackNote = document.createElement('div');
+    fallbackNote.className = 'multiview-fallback-note';
+    fallbackNote.hidden = true;
+    fallbackNote.dataset.fallbackShown = 'false';
+
+    const noteText = document.createElement('p');
+    noteText.textContent = 'Having trouble loading this video ad-free?';
+    fallbackNote.appendChild(noteText);
+
+    const fallbackButton = document.createElement('button');
+    fallbackButton.type = 'button';
+    fallbackButton.className = 'multiview-fallback-button';
+    fallbackButton.textContent = 'Load standard YouTube player';
+    fallbackButton.addEventListener('click', () => {
+      applyEmbedSource(iframe, STANDARD_HOST);
+      fallbackNote.hidden = true;
+      fallbackNote.dataset.fallbackShown = 'true';
+      fallbackUsed = true;
+      updateStatus(
+        'Loaded one video with the standard player. Ads or sign-in prompts may appear there.',
+        'warning',
+      );
+    });
+
+    fallbackNote.appendChild(fallbackButton);
+    wrapper.appendChild(fallbackNote);
+
     return wrapper;
   }
 
@@ -111,9 +144,15 @@
       iframe.dataset.loaded = 'false';
       iframe.dataset.currentHost = PRIVACY_HOST;
 
+      const notice = iframe.closest('.multiview-frame-wrapper')?.querySelector('.multiview-fallback-note');
+      if (notice) {
+        notice.hidden = true;
+        notice.dataset.fallbackShown = 'false';
+      }
+
       window.setTimeout(() => {
         applyEmbedSource(iframe, PRIVACY_HOST);
-        scheduleFallback(iframe);
+        scheduleFallback(iframe, notice);
       }, index * 350);
     });
   }
