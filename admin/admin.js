@@ -59,6 +59,8 @@
 
   const SHARED_APP_KEY = 'portal.3dvr.tech';
   const MAX_PHOTO_SIZE_BYTES = 10 * 1024 * 1024;
+  const MAX_ENCRYPTED_FIELD_LENGTH = 30 * 1024;
+  const PHOTO_CHUNK_SIZE = 15 * 1024;
 
   const getSharedApp = () => safeGet(safeGet(user, 'apps'), SHARED_APP_KEY);
   const getSharedProfile = () => safeGet(getSharedApp(), 'profile');
@@ -178,6 +180,70 @@
     return value.trim().slice(0, 120);
   };
 
+  const splitIntoChunks = (value, chunkSize) => {
+    if (typeof value !== 'string' || !value.length) {
+      return [];
+    }
+
+    const size = Number.isFinite(chunkSize) && chunkSize > 0 ? chunkSize : PHOTO_CHUNK_SIZE;
+    const chunks = [];
+    for (let index = 0; index < value.length; index += size) {
+      chunks.push(value.slice(index, index + size));
+    }
+    return chunks;
+  };
+
+  const createEncryptedPhotoRecord = (payload, encrypted) => {
+    if (typeof encrypted !== 'string' || !encrypted.length) {
+      throw new Error('Invalid encrypted payload');
+    }
+
+    if (encrypted.length <= MAX_ENCRYPTED_FIELD_LENGTH) {
+      return { id: payload.id, encrypted };
+    }
+
+    const chunkSize = PHOTO_CHUNK_SIZE;
+    const chunkedRecord = {
+      id: payload.id,
+      chunkCount: 0,
+      chunkSize,
+      chunkVersion: 'v1'
+    };
+
+    const chunks = splitIntoChunks(encrypted, chunkSize);
+    chunkedRecord.chunkCount = chunks.length;
+    chunks.forEach((chunk, index) => {
+      chunkedRecord[`chunk_${index}`] = chunk;
+    });
+
+    return chunkedRecord;
+  };
+
+  const getEncryptedPayloadFromRecord = (record) => {
+    if (!record) {
+      return null;
+    }
+
+    if (typeof record.encrypted === 'string' && record.encrypted.length) {
+      return record.encrypted;
+    }
+
+    const chunkCount = Number(record.chunkCount);
+    if (!Number.isFinite(chunkCount) || chunkCount <= 0) {
+      return null;
+    }
+
+    const chunks = [];
+    for (let index = 0; index < chunkCount; index += 1) {
+      const chunkValue = record[`chunk_${index}`];
+      if (typeof chunkValue !== 'string' || !chunkValue.length) {
+        return null;
+      }
+      chunks.push(chunkValue);
+    }
+    return chunks.join('');
+  };
+
   const getPhotoNode = (photosNode, id) => {
     if (!id) {
       return null;
@@ -278,12 +344,13 @@
           return;
         }
 
-        if (!record.encrypted) {
+        const encryptedPayload = getEncryptedPayloadFromRecord(record);
+        if (!encryptedPayload) {
           return;
         }
 
         try {
-          const decrypted = await Gun.SEA.decrypt(record.encrypted, user._?.sea);
+          const decrypted = await Gun.SEA.decrypt(encryptedPayload, user._?.sea);
           if (!decrypted || !decrypted.data) {
             return;
           }
@@ -721,7 +788,9 @@
           return;
         }
 
-        putToMultipleNodes({ id: payload.id, encrypted }, targets, () => {
+        const recordToStore = createEncryptedPhotoRecord(payload, encrypted);
+
+        putToMultipleNodes(recordToStore, targets, () => {
           const message = hasConnectedPeer
             ? 'Photo uploaded and synced!'
             : 'Photo saved locally. It will sync when a connection is available.';
