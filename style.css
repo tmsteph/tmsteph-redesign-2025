@@ -468,6 +468,13 @@ footer {
   gap: 1rem;
 }
 
+.multiview-frame-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .multiview-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -475,6 +482,20 @@ footer {
   border-radius: 14px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
   background: #0b1d39;
+}
+
+.multiview-open-link {
+  align-self: flex-end;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.multiview-open-link:hover,
+.multiview-open-link:focus-visible {
+  color: #ffe066;
+  text-decoration: underline;
 }
 
 @media (max-width: 640px) {

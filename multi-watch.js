@@ -16,14 +16,106 @@
 
   const videos = [...new Set(defaultVideos)];
 
+  const PRIVACY_HOST = 'https://www.youtube-nocookie.com';
+  const STANDARD_HOST = 'https://www.youtube.com';
+  const FALLBACK_DELAY = 4000;
+  let fallbackUsed = false;
+
+  function buildEmbedUrl(host, id) {
+    const params = new URLSearchParams({
+      rel: '0',
+      modestbranding: '1',
+      playsinline: '1',
+    });
+
+    if (host === STANDARD_HOST) {
+      params.set('enablejsapi', '1');
+      if (window.location.origin && window.location.origin.startsWith('http')) {
+        params.set('origin', window.location.origin);
+      }
+    }
+
+    return `${host}/embed/${id}?${params.toString()}`;
+  }
+
+  function applyEmbedSource(iframe, host) {
+    iframe.dataset.currentHost = host;
+    iframe.src = buildEmbedUrl(host, iframe.dataset.videoId);
+  }
+
+  function scheduleFallback(iframe) {
+    const timerId = window.setTimeout(() => {
+      if (iframe.dataset.loaded === 'true' || iframe.dataset.currentHost === STANDARD_HOST) {
+        return;
+      }
+      applyEmbedSource(iframe, STANDARD_HOST);
+      iframe.dataset.fallbackApplied = 'true';
+      if (!fallbackUsed) {
+        fallbackUsed = true;
+        updateStatus(
+          'One of the embeds needed the standard YouTube player. Ads or sign-in prompts may appear.',
+          'warning',
+        );
+      }
+    }, FALLBACK_DELAY);
+
+    iframe.dataset.fallbackTimer = String(timerId);
+  }
+
   function createFrame(id) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'multiview-frame-wrapper';
+
     const iframe = document.createElement('iframe');
     iframe.className = 'multiview-frame';
     iframe.loading = 'lazy';
     iframe.allowFullscreen = true;
-    iframe.src = `https://www.youtube-nocookie.com/embed/${id}`;
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
     iframe.title = `YouTube video ${id}`;
-    return iframe;
+    iframe.dataset.videoId = id;
+
+    iframe.addEventListener('load', () => {
+      iframe.dataset.loaded = 'true';
+      if (iframe.dataset.fallbackTimer) {
+        window.clearTimeout(Number(iframe.dataset.fallbackTimer));
+        delete iframe.dataset.fallbackTimer;
+      }
+    });
+
+    iframe.addEventListener('error', () => {
+      if (iframe.dataset.currentHost === STANDARD_HOST) {
+        return;
+      }
+      applyEmbedSource(iframe, STANDARD_HOST);
+    });
+
+    wrapper.appendChild(iframe);
+
+    const link = document.createElement('a');
+    link.href = `https://youtu.be/${id}`;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.className = 'multiview-open-link';
+    link.textContent = 'Open on YouTube';
+    wrapper.appendChild(link);
+
+    return wrapper;
+  }
+
+  function hydrateFrames() {
+    const frames = grid.querySelectorAll('iframe[data-video-id]');
+    fallbackUsed = false;
+    frames.forEach((iframe, index) => {
+      iframe.removeAttribute('src');
+      iframe.dataset.loaded = 'false';
+      iframe.dataset.currentHost = PRIVACY_HOST;
+
+      window.setTimeout(() => {
+        applyEmbedSource(iframe, PRIVACY_HOST);
+        scheduleFallback(iframe);
+      }, index * 350);
+    });
   }
 
   function renderGrid() {
@@ -41,6 +133,8 @@
     videos.forEach((id) => {
       grid.appendChild(createFrame(id));
     });
+
+    hydrateFrames();
   }
 
   function updateStatus(message, tone = 'info') {
