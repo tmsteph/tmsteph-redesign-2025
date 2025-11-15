@@ -59,8 +59,8 @@
 
   const SHARED_APP_KEY = 'portal.3dvr.tech';
   const MAX_PHOTO_SIZE_BYTES = 10 * 1024 * 1024;
-  const MAX_ENCRYPTED_FIELD_LENGTH = 30 * 1024;
-  const PHOTO_CHUNK_SIZE = 15 * 1024;
+  const MAX_ENCRYPTED_FIELD_LENGTH = 12 * 1024;
+  const PHOTO_CHUNK_SIZE = 12 * 1024;
 
   const getSharedApp = () => safeGet(safeGet(user, 'apps'), SHARED_APP_KEY);
   const getSharedProfile = () => safeGet(getSharedApp(), 'profile');
@@ -199,27 +199,51 @@
     }
 
     if (encrypted.length <= MAX_ENCRYPTED_FIELD_LENGTH) {
-      return { id: payload.id, encrypted };
+      return {
+        metadata: {
+          id: payload.id,
+          encrypted,
+          chunkVersion: 'inline'
+        },
+        chunks: []
+      };
     }
 
     const chunkSize = PHOTO_CHUNK_SIZE;
-    const chunkedRecord = {
-      id: payload.id,
-      chunkCount: 0,
-      chunkSize,
-      chunkVersion: 'v1'
-    };
-
     const chunks = splitIntoChunks(encrypted, chunkSize);
-    chunkedRecord.chunkCount = chunks.length;
-    chunks.forEach((chunk, index) => {
-      chunkedRecord[`chunk_${index}`] = chunk;
-    });
 
-    return chunkedRecord;
+    return {
+      metadata: {
+        id: payload.id,
+        chunkCount: chunks.length,
+        chunkSize,
+        chunkVersion: 'v2'
+      },
+      chunks
+    };
   };
 
-  const getEncryptedPayloadFromRecord = (record) => {
+  const fetchChunkValue = (photoNode, chunkKey) =>
+    new Promise((resolve) => {
+      if (!photoNode || typeof photoNode.get !== 'function') {
+        resolve(null);
+        return;
+      }
+      const chunkNode = photoNode.get(chunkKey);
+      if (!chunkNode || typeof chunkNode.once !== 'function') {
+        resolve(null);
+        return;
+      }
+      chunkNode.once((value) => {
+        if (typeof value === 'string' && value.length) {
+          resolve(value);
+        } else {
+          resolve(null);
+        }
+      });
+    });
+
+  const getEncryptedPayloadFromRecord = async (record, photoNode) => {
     if (!record) {
       return null;
     }
@@ -233,6 +257,18 @@
       return null;
     }
 
+    if (record.chunkVersion === 'v2') {
+      if (!photoNode) {
+        return null;
+      }
+      const chunkKeys = Array.from({ length: chunkCount }, (_, index) => `chunk_${index}`);
+      const chunkValues = await Promise.all(chunkKeys.map((key) => fetchChunkValue(photoNode, key)));
+      if (chunkValues.some((chunk) => typeof chunk !== 'string')) {
+        return null;
+      }
+      return chunkValues.join('');
+    }
+
     const chunks = [];
     for (let index = 0; index < chunkCount; index += 1) {
       const chunkValue = record[`chunk_${index}`];
@@ -242,6 +278,61 @@
       chunks.push(chunkValue);
     }
     return chunks.join('');
+  };
+
+  const writePhotoRecordToNode = (node, metadata, chunks) =>
+    new Promise((resolve, reject) => {
+      if (!node || typeof node.put !== 'function') {
+        resolve();
+        return;
+      }
+
+      const value = { ...metadata };
+      node.put(value, (ack) => {
+        if (ack?.err) {
+          reject(new Error(typeof ack.err === 'string' ? ack.err : 'Unable to save encrypted photo metadata.'));
+          return;
+        }
+
+        if (!chunks?.length) {
+          resolve();
+          return;
+        }
+
+        const writeChunk = (index) => {
+          if (index >= chunks.length) {
+            resolve();
+            return;
+          }
+
+          const chunkNode = typeof node.get === 'function' ? node.get(`chunk_${index}`) : null;
+          if (!chunkNode || typeof chunkNode.put !== 'function') {
+            reject(new Error('Unable to save encrypted photo chunk.'));
+            return;
+          }
+
+          chunkNode.put(chunks[index], (chunkAck) => {
+            if (chunkAck?.err) {
+              reject(
+                new Error(typeof chunkAck.err === 'string' ? chunkAck.err : 'Unable to save encrypted photo chunk.')
+              );
+              return;
+            }
+
+            writeChunk(index + 1);
+          });
+        };
+
+        writeChunk(0);
+      });
+    });
+
+  const putPhotoRecordToNodes = (metadata, chunks, nodes) => {
+    const targets = nodes.filter((node) => typeof node?.put === 'function');
+    if (!targets.length) {
+      return Promise.reject(new Error('No available photo storage targets.'));
+    }
+    return Promise.all(targets.map((node) => writePhotoRecordToNode(node, metadata, chunks)));
   };
 
   const getPhotoNode = (photosNode, id) => {
@@ -344,7 +435,8 @@
           return;
         }
 
-        const encryptedPayload = getEncryptedPayloadFromRecord(record);
+        const photoNode = typeof node?.get === 'function' ? node.get(key) : null;
+        const encryptedPayload = await getEncryptedPayloadFromRecord(record, photoNode);
         if (!encryptedPayload) {
           return;
         }
@@ -788,15 +880,24 @@
           return;
         }
 
-        const recordToStore = createEncryptedPhotoRecord(payload, encrypted);
+        const { metadata, chunks } = createEncryptedPhotoRecord(payload, encrypted);
 
-        putToMultipleNodes(recordToStore, targets, () => {
-          const message = hasConnectedPeer
-            ? 'Photo uploaded and synced!'
-            : 'Photo saved locally. It will sync when a connection is available.';
-          setPhotoMessage(message, hasConnectedPeer ? 'success' : 'warning');
-          photoForm.reset();
-        });
+        try {
+          await putPhotoRecordToNodes(metadata, chunks, targets);
+        } catch (uploadErr) {
+          const failureMessage =
+            typeof uploadErr?.message === 'string'
+              ? uploadErr.message
+              : 'Unable to sync that photo right now. Please try again.';
+          setPhotoMessage(failureMessage, 'error');
+          return;
+        }
+
+        const message = hasConnectedPeer
+          ? 'Photo uploaded and synced!'
+          : 'Photo saved locally. It will sync when a connection is available.';
+        setPhotoMessage(message, hasConnectedPeer ? 'success' : 'warning');
+        photoForm.reset();
       } catch (err) {
         setPhotoMessage('Unable to encrypt or upload that photo. Please try again.', 'error');
       }
