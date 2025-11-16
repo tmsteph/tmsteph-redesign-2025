@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1d39" />
+    <title>Multi-View Theater | tmsteph</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png" />
+    <link rel="manifest" href="../manifest.webmanifest" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="../pwa.js" defer></script>
+    <script src="../multi-watch.js" defer></script>
+  </head>
+  <body class="watch-page">
+    <header class="watch-hero">
+      <div class="watch-hero-content">
+        <a class="watch-back-link" href="../index.html">← Back to tmsteph.com</a>
+        <p class="tagline">Dream. Build. Share.</p>
+        <h1 class="handwritten">Multi-View Theater</h1>
+        <p>
+          Load several videos at once, compare tutorials, or keep tabs on multiple live streams without juggling tabs. The
+          Multi-View Theater now lives on its own page so it can grow independently.
+        </p>
+      </div>
+    </header>
+    <main class="watch-main">
+      <section class="section card">
+        <div class="container">
+          <div class="watch-heading">
+            <h2>Video control room</h2>
+            <p>Paste up to a handful of YouTube links or IDs and the grid below will build side-by-side players.</p>
+          </div>
+
+          <div class="multiview-controls">
+            <label class="sr-only" for="multiview-input">Paste a YouTube link or video ID</label>
+            <input
+              id="multiview-input"
+              class="multiview-input"
+              type="text"
+              placeholder="Paste a YouTube link or video ID"
+              autocomplete="off"
+            />
+            <button class="btn-primary" data-add-video type="button">Add Video</button>
+            <button class="btn-secondary" data-clear-videos type="button">Clear All</button>
+          </div>
+          <p class="multiview-hint">Tip: Use full URLs (youtu.be or youtube.com) or just the 11-character video ID.</p>
+
+          <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
+            <div class="multiview-player-copy">
+              <p id="multiview-player-label">Player preference</p>
+              <p class="multiview-player-help" data-player-help>
+                Standard mode loads youtube.com so you can sign in, comment, or pull in playlists tied to your account. Switch
+                to ad-free mode if you need the privacy-enhanced player or proxy mode for an open-source alternative.
+              </p>
+              <p class="multiview-brave-note" data-brave-note hidden>
+                Brave Shields detected. Embedded sign-in prompts may be blocked. Standard or proxy mode works best when you need
+                to confirm your account.
+              </p>
+            </div>
+            <div class="multiview-player-options">
+              <label class="multiview-player-option">
+                <input type="radio" name="multiview-player" value="privacy" data-player-option />
+                <span>
+                  <strong>Ad-free mode</strong>
+                  <small>Uses privacy-enhanced embeds.</small>
+                </span>
+              </label>
+              <label class="multiview-player-option">
+                <input type="radio" name="multiview-player" value="standard" data-player-option checked />
+                <span>
+                  <strong>Standard mode</strong>
+                  <small>Allows sign-in & community features.</small>
+                </span>
+              </label>
+              <label class="multiview-player-option">
+                <input type="radio" name="multiview-player" value="proxy" data-player-option />
+                <span>
+                  <strong>Proxy mode</strong>
+                  <small>Loads piped.video, an open-source frontend.</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="multiview-brave-panel" data-brave-panel hidden>
+            <div>
+              <h3>Brave compatibility lab</h3>
+              <p>
+                Brave blocks third-party sign-in cookies by default. Follow these steps and use the quick actions if you need to
+                authenticate without leaving Shields enabled globally.
+              </p>
+              <ol>
+                <li>Click the Brave Shields icon and switch this site to “Allow all cookies.”</li>
+                <li>Reload this page so the permission sticks.</li>
+                <li>Pick Standard mode below and use the YouTube “Sign in” button inside one of the frames.</li>
+              </ol>
+            </div>
+            <div class="multiview-brave-actions">
+              <button type="button" class="btn-secondary" data-open-brave-shields>Review Brave Shields steps</button>
+              <button type="button" class="btn-primary" data-open-brave-signin>Open YouTube sign-in tab</button>
+            </div>
+            <p class="multiview-brave-footnote">
+              The sign-in helper opens youtube.com directly so Brave treats it as first-party. Close it after authenticating,
+              then interact with the embeds again.
+            </p>
+          </div>
+
+          <div class="multiview-status" aria-live="polite" data-multiview-status></div>
+
+          <div class="multiview-diagnostics">
+            <div class="multiview-diagnostics-copy">
+              <p>
+                Still hitting errors? Run diagnostics to test which hosts load inside your browser and learn why the sign-in
+                prompt might be blocked.
+              </p>
+              <p class="multiview-diagnostics-note">
+                Brave, Firefox strict mode, and content blockers often deny third-party cookies that YouTube relies on for
+                embedded sign-ins. The proxy player uses piped.video, which blocks ads on its own but does not offer account-based
+                features.
+              </p>
+            </div>
+            <div class="multiview-diagnostics-actions">
+              <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
+              <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
+            </div>
+          </div>
+
+          <div class="multiview-grid" data-multiview-grid data-default-videos="dQw4w9WgXcQ, Zi_XLOBDo_Y"></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
