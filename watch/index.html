@@ -63,6 +63,38 @@
             <p class="multiview-search-hint">Filter the grid by video ID to quickly jump to a stream.</p>
           </div>
 
+          <div class="multiview-utilities">
+            <div class="multiview-history-panel" data-history-panel>
+              <div class="multiview-history-header">
+                <h3>Recent theater history</h3>
+                <button type="button" class="multiview-history-clear" data-clear-history>Clear history</button>
+              </div>
+              <p class="multiview-history-empty" data-history-empty>
+                Videos you add will show up here so you can re-open a stream without copy and paste.
+              </p>
+              <ul class="multiview-history-list" data-history-list></ul>
+            </div>
+
+            <div class="multiview-youtube-search">
+              <h3>Search YouTube</h3>
+              <p>Skip the tab shuffle. Results come from the open-source piped.video API.</p>
+              <form class="multiview-youtube-search-form" data-youtube-search-form>
+                <label class="sr-only" for="multiview-youtube-query">Search YouTube videos</label>
+                <input
+                  id="multiview-youtube-query"
+                  class="multiview-youtube-input"
+                  type="search"
+                  placeholder="Search YouTube"
+                  data-youtube-query
+                  autocomplete="off"
+                />
+                <button class="btn-primary" type="submit" data-youtube-search-button>Search</button>
+              </form>
+              <p class="multiview-youtube-status" data-youtube-search-status aria-live="polite"></p>
+              <ul class="multiview-youtube-results" data-youtube-search-results></ul>
+            </div>
+          </div>
+
           <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
             <div class="multiview-player-copy">
               <p id="multiview-player-label">Player preference</p>

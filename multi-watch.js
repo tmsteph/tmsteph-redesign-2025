@@ -13,6 +13,15 @@
   const bravePanel = document.querySelector('[data-brave-panel]');
   const braveShieldsButton = document.querySelector('[data-open-brave-shields]');
   const braveSigninButton = document.querySelector('[data-open-brave-signin]');
+  const historyPanel = document.querySelector('[data-history-panel]');
+  const historyList = document.querySelector('[data-history-list]');
+  const historyEmptyMessage = document.querySelector('[data-history-empty]');
+  const clearHistoryButton = document.querySelector('[data-clear-history]');
+  const youtubeSearchForm = document.querySelector('[data-youtube-search-form]');
+  const youtubeQueryInput = document.querySelector('[data-youtube-query]');
+  const youtubeSearchButton = document.querySelector('[data-youtube-search-button]');
+  const youtubeResultsList = document.querySelector('[data-youtube-search-results]');
+  const youtubeSearchStatus = document.querySelector('[data-youtube-search-status]');
 
   if (!grid || !input || !addButton || !clearButton || !status) {
     return;
@@ -24,6 +33,11 @@
     .filter(Boolean);
 
   const videos = [...new Set(defaultVideos)];
+  let videoHistory = sanitizeHistory(readStorage(HISTORY_STORAGE_KEY, []));
+  let volumePreferences = readStorage(VOLUME_STORAGE_KEY, {});
+  if (typeof volumePreferences !== 'object' || volumePreferences === null) {
+    volumePreferences = {};
+  }
 
   const HOSTS = {
     privacy: {
@@ -65,6 +79,13 @@
     'https://support.brave.com/hc/en-us/articles/360022806212-How-do-I-use-Shields-while-browsing';
   const YOUTUBE_SIGNIN_URL =
     'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&hl=en&continue=https%3A%2F%2Fwww.youtube.com%2F';
+  const HISTORY_STORAGE_KEY = 'multiview-history';
+  const HISTORY_LIMIT = 12;
+  const VOLUME_STORAGE_KEY = 'multiview-volume-preferences';
+  const DEFAULT_VOLUME = 70;
+  const YOUTUBE_SEARCH_ENDPOINT = 'https://piped.video/api/v1/search';
+  const SEARCH_RESULTS_LIMIT = 8;
+  const VIDEO_METADATA_ENDPOINT = 'https://noembed.com/embed';
 
   const DIAGNOSTIC_TARGETS = [
     {
@@ -123,6 +144,45 @@
   updatePlayerInputs(preferredMode);
   updatePlayerHelp(preferredMode);
 
+  function readStorage(key, fallback) {
+    try {
+      const raw = window.localStorage?.getItem(key);
+      if (!raw) return fallback;
+      const parsed = JSON.parse(raw);
+      return typeof parsed === 'undefined' ? fallback : parsed;
+    } catch (error) {
+      return fallback;
+    }
+  }
+
+  function writeStorage(key, value) {
+    try {
+      window.localStorage?.setItem(key, JSON.stringify(value));
+    } catch (error) {
+      // Ignore storage errors
+    }
+  }
+
+  function sanitizeHistory(value) {
+    if (!Array.isArray(value)) {
+      return [];
+    }
+    return value
+      .filter((entry) => entry && typeof entry.id === 'string')
+      .map((entry) => ({
+        id: entry.id,
+        title: typeof entry.title === 'string' ? entry.title : null,
+      }));
+  }
+
+  function persistHistory() {
+    writeStorage(HISTORY_STORAGE_KEY, videoHistory);
+  }
+
+  function persistVolume() {
+    writeStorage(VOLUME_STORAGE_KEY, volumePreferences);
+  }
+
   function persistPreferredMode(mode) {
     try {
       window.localStorage?.setItem(HOST_PREFERENCE_KEY, mode);
@@ -152,9 +212,6 @@
 
     if (mode !== 'proxy') {
       params.set('modestbranding', '1');
-    }
-
-    if (mode === 'standard') {
       params.set('enablejsapi', '1');
       if (window.location.origin && window.location.origin.startsWith('http')) {
         params.set('origin', window.location.origin);
@@ -200,6 +257,351 @@
     iframe.dataset.fallbackTimer = String(timerId);
   }
 
+  function getVideoVolume(videoId) {
+    const stored = Number(volumePreferences?.[videoId]);
+    if (Number.isFinite(stored)) {
+      return Math.min(100, Math.max(0, stored));
+    }
+    return DEFAULT_VOLUME;
+  }
+
+  function setVideoVolumePreference(videoId, value) {
+    const next = Math.min(100, Math.max(0, Math.round(value)));
+    volumePreferences = {
+      ...volumePreferences,
+      [videoId]: next,
+    };
+    persistVolume();
+    return next;
+  }
+
+  function sendPlayerCommand(iframe, command, args = []) {
+    if (!iframe?.contentWindow) return;
+    try {
+      iframe.contentWindow.postMessage(
+        JSON.stringify({
+          event: 'command',
+          func: command,
+          args,
+        }),
+        '*',
+      );
+    } catch (error) {
+      // Ignore messaging errors
+    }
+  }
+
+  function applyVolumePreference(iframe) {
+    if (!iframe || iframe.dataset.currentMode === 'proxy') return;
+    const volume = getVideoVolume(iframe.dataset.videoId);
+    sendPlayerCommand(iframe, 'setVolume', [volume]);
+    if (volume === 0) {
+      sendPlayerCommand(iframe, 'mute');
+    } else {
+      sendPlayerCommand(iframe, 'unMute');
+    }
+  }
+
+  function scheduleVolumeSync(iframe, attempts = 4) {
+    if (!iframe || iframe.dataset.currentMode === 'proxy') return;
+    let runs = 0;
+    const timer = window.setInterval(() => {
+      if (!iframe || iframe.dataset.currentMode === 'proxy') {
+        window.clearInterval(timer);
+        return;
+      }
+      applyVolumePreference(iframe);
+      runs += 1;
+      if (runs >= attempts) {
+        window.clearInterval(timer);
+      }
+    }, 700);
+  }
+
+  function handleVolumeInput(videoId, slider, iframe) {
+    if (!slider) return;
+    const nextVolume = setVideoVolumePreference(videoId, Number(slider.value));
+    slider.value = String(nextVolume);
+    if (iframe?.dataset.currentMode !== 'proxy') {
+      applyVolumePreference(iframe);
+    }
+  }
+
+  function updateVolumeControlsAvailability() {
+    const disable = preferredMode === 'proxy';
+    const sliders = grid.querySelectorAll('[data-volume-slider]');
+    sliders.forEach((slider) => {
+      slider.disabled = disable;
+      const wrapper = slider.closest('.multiview-volume-control');
+      if (wrapper) {
+        wrapper.classList.toggle('is-disabled', disable);
+      }
+    });
+  }
+
+  function getHistoryTitle(entry) {
+    if (!entry) return '';
+    return entry.title && entry.title.trim() ? entry.title.trim() : `YouTube video ${entry.id}`;
+  }
+
+  function renderHistory() {
+    if (!historyList) return;
+    historyList.innerHTML = '';
+
+    if (!videoHistory.length) {
+      if (historyEmptyMessage) {
+        historyEmptyMessage.hidden = false;
+      }
+      if (clearHistoryButton) {
+        clearHistoryButton.disabled = true;
+      }
+      if (historyPanel) {
+        historyPanel.dataset.hasHistory = 'false';
+      }
+      return;
+    }
+
+    if (historyPanel) {
+      historyPanel.dataset.hasHistory = 'true';
+    }
+    if (historyEmptyMessage) {
+      historyEmptyMessage.hidden = true;
+    }
+    if (clearHistoryButton) {
+      clearHistoryButton.disabled = false;
+    }
+
+    videoHistory.forEach((entry) => {
+      const item = document.createElement('li');
+      item.className = 'multiview-history-item';
+
+      const meta = document.createElement('div');
+      meta.className = 'multiview-history-meta';
+
+      const title = document.createElement('strong');
+      title.textContent = getHistoryTitle(entry);
+      meta.appendChild(title);
+
+      const idBadge = document.createElement('small');
+      idBadge.textContent = entry.id;
+      meta.appendChild(idBadge);
+
+      const addButton = document.createElement('button');
+      addButton.type = 'button';
+      addButton.className = 'multiview-history-add';
+      addButton.textContent = 'Add to grid';
+      addButton.addEventListener('click', () => {
+        addVideoToTheater(entry.id, {
+          title: entry.title,
+          message: 'Loaded from your history. Enjoy the throwback!',
+        });
+      });
+
+      item.appendChild(meta);
+      item.appendChild(addButton);
+      historyList.appendChild(item);
+    });
+  }
+
+  function recordHistory({ id, title }) {
+    if (!id) return;
+    const cleanedTitle = title && title.trim() ? title.trim() : null;
+    const filtered = videoHistory.filter((entry) => entry.id !== id);
+    filtered.unshift({ id, title: cleanedTitle });
+    videoHistory = filtered.slice(0, HISTORY_LIMIT);
+    persistHistory();
+    renderHistory();
+    if (!cleanedTitle) {
+      requestHistoryTitle(id);
+    }
+  }
+
+  function requestHistoryTitle(videoId) {
+    fetchVideoTitle(videoId).then((videoTitle) => {
+      if (!videoTitle) return;
+      const entry = videoHistory.find((item) => item.id === videoId);
+      if (entry && entry.title !== videoTitle) {
+        entry.title = videoTitle;
+        persistHistory();
+        renderHistory();
+      }
+    });
+  }
+
+  async function fetchVideoTitle(videoId) {
+    if (!videoId) return null;
+    try {
+      const url = `${VIDEO_METADATA_ENDPOINT}?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${videoId}`)}`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        return null;
+      }
+      const data = await response.json();
+      return typeof data.title === 'string' ? data.title : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function refreshHistoryTitles() {
+    videoHistory.forEach((entry) => {
+      if (!entry.title) {
+        requestHistoryTitle(entry.id);
+      }
+    });
+  }
+
+  function clearHistory() {
+    if (!videoHistory.length) return;
+    videoHistory = [];
+    persistHistory();
+    renderHistory();
+  }
+
+  function setSearchStatus(message, tone = 'info') {
+    if (!youtubeSearchStatus) return;
+    youtubeSearchStatus.textContent = message;
+    youtubeSearchStatus.dataset.tone = tone;
+  }
+
+  function normalizeSearchResults(payload) {
+    const source = Array.isArray(payload) ? payload : payload?.items;
+    if (!Array.isArray(source)) {
+      return [];
+    }
+
+    return source
+      .filter((item) => item && (item.type === 'stream' || !item.type || item.type === 'video'))
+      .map((item) => {
+        let fallbackId = null;
+        if (typeof item.url === 'string') {
+          try {
+            const parsed = new URL(item.url, 'https://www.youtube.com');
+            fallbackId = parsed.searchParams.get('v') || parsed.pathname.split('/').pop();
+          } catch (error) {
+            // Ignore malformed URLs
+          }
+        }
+        return {
+          id: item.id || fallbackId || '',
+          title: item.title || null,
+          channel: item.uploaderName || item.author || '',
+          thumbnail: item.thumbnail || item.thumbnailUrl || null,
+          uploaded: item.uploadedDate || item.uploaded || '',
+          views: item.views,
+          duration: item.duration || item.lengthSeconds,
+        };
+      })
+      .filter((item) => item.id);
+  }
+
+  function renderYoutubeResults(results) {
+    if (!youtubeResultsList) return;
+    youtubeResultsList.innerHTML = '';
+
+    if (!results.length) {
+      return;
+    }
+
+    results.forEach((result) => {
+      const item = document.createElement('li');
+      item.className = 'multiview-youtube-result';
+
+      const thumb = document.createElement(result.thumbnail ? 'img' : 'div');
+      thumb.className = 'multiview-youtube-thumbnail';
+      if (result.thumbnail) {
+        thumb.src = result.thumbnail;
+        thumb.alt = '';
+        thumb.loading = 'lazy';
+      } else {
+        thumb.setAttribute('aria-hidden', 'true');
+      }
+      item.appendChild(thumb);
+
+      const meta = document.createElement('div');
+      meta.className = 'multiview-youtube-result-meta';
+
+      const title = document.createElement('p');
+      title.className = 'multiview-youtube-result-title';
+      title.textContent = result.title || 'YouTube video';
+      meta.appendChild(title);
+
+      const facts = [];
+      if (result.channel) {
+        facts.push(result.channel);
+      }
+      if (result.uploaded) {
+        facts.push(result.uploaded);
+      }
+      if (typeof result.views === 'number') {
+        facts.push(`${result.views.toLocaleString()} views`);
+      } else if (typeof result.views === 'string' && result.views) {
+        facts.push(result.views);
+      }
+
+      if (facts.length) {
+        const channel = document.createElement('p');
+        channel.className = 'multiview-youtube-result-channel';
+        channel.textContent = facts.join(' • ');
+        meta.appendChild(channel);
+      }
+
+      item.appendChild(meta);
+
+      const addButton = document.createElement('button');
+      addButton.type = 'button';
+      addButton.className = 'multiview-youtube-add';
+      addButton.textContent = 'Add to grid';
+      addButton.addEventListener('click', () => {
+        addVideoToTheater(result.id, {
+          title: result.title,
+          message: 'Loaded from search! Enjoy the stream.',
+        });
+      });
+
+      item.appendChild(addButton);
+      youtubeResultsList.appendChild(item);
+    });
+  }
+
+  async function handleYoutubeSearch(event) {
+    event.preventDefault();
+    if (!youtubeQueryInput) return;
+    const query = youtubeQueryInput.value.trim();
+    if (!query) {
+      setSearchStatus('Enter a search above to preview results.', 'warning');
+      renderYoutubeResults([]);
+      return;
+    }
+
+    setSearchStatus('Searching YouTube…');
+    if (youtubeSearchButton) {
+      youtubeSearchButton.disabled = true;
+    }
+    renderYoutubeResults([]);
+
+    try {
+      const response = await fetch(`${YOUTUBE_SEARCH_ENDPOINT}?q=${encodeURIComponent(query)}&region=US`);
+      if (!response.ok) {
+        throw new Error('Search failed');
+      }
+      const payload = await response.json();
+      const results = normalizeSearchResults(payload).slice(0, SEARCH_RESULTS_LIMIT);
+      if (!results.length) {
+        setSearchStatus('No videos found for that search yet.', 'warning');
+        return;
+      }
+      renderYoutubeResults(results);
+      setSearchStatus(`Showing ${results.length} result${results.length > 1 ? 's' : ''}.`);
+    } catch (error) {
+      setSearchStatus('Search failed. Try again in a moment.', 'error');
+    } finally {
+      if (youtubeSearchButton) {
+        youtubeSearchButton.disabled = false;
+      }
+    }
+  }
+
   function createFrame(id) {
     const wrapper = document.createElement('div');
     wrapper.className = 'multiview-frame-wrapper';
@@ -218,6 +620,9 @@
       if (iframe.dataset.fallbackTimer) {
         window.clearTimeout(Number(iframe.dataset.fallbackTimer));
         delete iframe.dataset.fallbackTimer;
+      }
+      if (preferredMode !== 'proxy') {
+        applyVolumePreference(iframe);
       }
     });
 
@@ -247,8 +652,34 @@
     deleteButton.textContent = 'Remove';
     deleteButton.addEventListener('click', () => removeVideo(id));
 
-    actions.appendChild(link);
-    actions.appendChild(deleteButton);
+    const buttonRow = document.createElement('div');
+    buttonRow.className = 'multiview-frame-buttons';
+    buttonRow.appendChild(link);
+    buttonRow.appendChild(deleteButton);
+
+    const volumeControl = document.createElement('label');
+    volumeControl.className = 'multiview-volume-control';
+
+    const volumeLabel = document.createElement('span');
+    volumeLabel.textContent = 'Volume';
+    volumeControl.appendChild(volumeLabel);
+
+    const volumeSlider = document.createElement('input');
+    volumeSlider.type = 'range';
+    volumeSlider.min = '0';
+    volumeSlider.max = '100';
+    volumeSlider.step = '1';
+    volumeSlider.value = String(getVideoVolume(id));
+    volumeSlider.dataset.volumeSlider = 'true';
+    volumeSlider.addEventListener('input', () => handleVolumeInput(id, volumeSlider, iframe));
+    if (preferredMode === 'proxy') {
+      volumeSlider.disabled = true;
+      volumeControl.classList.add('is-disabled');
+    }
+    volumeControl.appendChild(volumeSlider);
+
+    actions.appendChild(buttonRow);
+    actions.appendChild(volumeControl);
     wrapper.appendChild(actions);
 
     const fallbackNote = document.createElement('div');
@@ -303,8 +734,13 @@
         if (usingPrivacyMode) {
           scheduleFallback(iframe, notice, preferredMode);
         }
+        if (preferredMode !== 'proxy') {
+          scheduleVolumeSync(iframe);
+        }
       }, index * 350);
     });
+
+    updateVolumeControlsAvailability();
   }
 
   function getFilteredVideos() {
@@ -348,6 +784,22 @@
     });
 
     hydrateFrames();
+  }
+
+  function addVideoToTheater(videoId, options = {}) {
+    if (!videoId) return false;
+    if (videos.includes(videoId)) {
+      if (options.duplicateMessage !== false) {
+        updateStatus(options.duplicateMessage || 'That video is already in your theater.', 'warning');
+      }
+      return false;
+    }
+
+    videos.push(videoId);
+    renderGrid();
+    updateStatus(options.message || 'Video added! Enjoy the show.', 'success');
+    recordHistory({ id: videoId, title: options.title || null });
+    return true;
   }
 
   function removeVideo(videoId) {
@@ -405,17 +857,11 @@
       return;
     }
 
-    if (videos.includes(videoId)) {
-      updateStatus('That video is already in your theater.', 'warning');
-      input.value = '';
-      return;
-    }
-
-    videos.push(videoId);
-    renderGrid();
-    updateStatus('Video added! Enjoy the show.', 'success');
+    const added = addVideoToTheater(videoId);
     input.value = '';
-    input.focus();
+    if (added) {
+      input.focus();
+    }
   }
 
   function clearVideos() {
@@ -542,6 +988,26 @@
 
     diagnosticsButton.disabled = false;
     diagnosticsButton.textContent = originalLabel;
+  }
+
+  renderHistory();
+  refreshHistoryTitles();
+  if (youtubeSearchStatus) {
+    setSearchStatus('Results appear below once you run a search.');
+  }
+
+  if (clearHistoryButton) {
+    clearHistoryButton.addEventListener('click', () => {
+      if (!videoHistory.length) {
+        return;
+      }
+      clearHistory();
+      updateStatus('Cleared your recent history. Queue up something new!', 'info');
+    });
+  }
+
+  if (youtubeSearchForm) {
+    youtubeSearchForm.addEventListener('submit', handleYoutubeSearch);
   }
 
   addButton.addEventListener('click', addVideo);
