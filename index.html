@@ -145,6 +145,10 @@
           Ad-free mode uses youtube-nocookie.com and blocks sign-in prompts. Switch to the standard player if you
           need to comment, like, or access playlists tied to your account.
         </p>
+        <p class="multiview-brave-note" data-brave-note hidden>
+          Brave Shields detected. Embedded sign-in prompts may be blocked. Standard or proxy mode works best when you
+          need to confirm your account.
+        </p>
       </div>
       <div class="multiview-player-options">
         <label class="multiview-player-option">
@@ -161,10 +165,35 @@
             <small>Allows sign-in & community features.</small>
           </span>
         </label>
+        <label class="multiview-player-option">
+          <input type="radio" name="multiview-player" value="proxy" data-player-option />
+          <span>
+            <strong>Proxy mode</strong>
+            <small>Loads piped.video, an open-source frontend.</small>
+          </span>
+        </label>
       </div>
     </div>
 
     <div class="multiview-status" aria-live="polite" data-multiview-status></div>
+
+    <div class="multiview-diagnostics">
+      <div class="multiview-diagnostics-copy">
+        <p>
+          Still hitting errors? Run diagnostics to test which hosts load inside your browser and learn why the sign-in
+          prompt might be blocked.
+        </p>
+        <p class="multiview-diagnostics-note">
+          Brave, Firefox strict mode, and content blockers often deny third-party cookies that YouTube relies on for
+          embedded sign-ins. The proxy player uses piped.video, which blocks ads on its own but does not offer
+          account-based features.
+        </p>
+      </div>
+      <div class="multiview-diagnostics-actions">
+        <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
+        <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
+      </div>
+    </div>
 
     <div class="multiview-grid" data-multiview-grid data-default-videos="dQw4w9WgXcQ, Zi_XLOBDo_Y"></div>
   </div>

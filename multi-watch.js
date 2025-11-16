@@ -6,6 +6,9 @@
   const status = document.querySelector('[data-multiview-status]');
   const playerOptions = document.querySelectorAll('[data-player-option]');
   const playerHelp = document.querySelector('[data-player-help]');
+  const diagnosticsButton = document.querySelector('[data-run-diagnostics]');
+  const diagnosticsOutput = document.querySelector('[data-diagnostics-output]');
+  const braveNote = document.querySelector('[data-brave-note]');
 
   if (!grid || !input || !addButton || !clearButton || !status) {
     return;
@@ -18,106 +21,163 @@
 
   const videos = [...new Set(defaultVideos)];
 
-  const PRIVACY_HOST = 'https://www.youtube-nocookie.com';
-  const STANDARD_HOST = 'https://www.youtube.com';
-  const HOST_PREFERENCE_KEY = 'multiview-player-host';
+  const HOSTS = {
+    privacy: {
+      id: 'privacy',
+      host: 'https://www.youtube-nocookie.com',
+      embedPath: '/embed/',
+      fallbackAllowed: true,
+      help:
+        'Ad-free mode keeps everything on youtube-nocookie.com so sign-in prompts stay hidden and tracking is limited.',
+      status:
+        'Back on the ad-free youtube-nocookie player. Sign-in prompts will stay hidden while videos load privately.',
+      tone: 'info',
+    },
+    standard: {
+      id: 'standard',
+      host: 'https://www.youtube.com',
+      embedPath: '/embed/',
+      fallbackAllowed: false,
+      help: 'Standard mode loads youtube.com so you can sign in, comment, or use playlists tied to your account.',
+      status: 'Using the standard YouTube player so you can sign in or interact with the video.',
+      tone: 'warning',
+    },
+    proxy: {
+      id: 'proxy',
+      host: 'https://piped.video',
+      embedPath: '/embed/',
+      fallbackAllowed: false,
+      help:
+        'Proxy mode loads piped.video, an open-source frontend that blocks ads automatically but does not support Google sign-in.',
+      status: 'Using the piped.video proxy player. Ads are stripped but account features stay disabled.',
+      tone: 'info',
+    },
+  };
+
+  const HOST_PREFERENCE_KEY = 'multiview-player-mode';
+  const DEFAULT_MODE = 'privacy';
   const FALLBACK_DELAY = 5000;
+
+  const DIAGNOSTIC_TARGETS = [
+    {
+      id: 'privacy',
+      label: 'Ad-free youtube-nocookie player',
+      url: 'https://www.youtube-nocookie.com/favicon.ico',
+      suggestion: 'switching to Standard or Proxy mode',
+    },
+    {
+      id: 'standard',
+      label: 'Standard youtube.com embed',
+      url: 'https://www.youtube.com/favicon.ico',
+      suggestion: 'opening the video directly on youtube.com or trying Proxy mode',
+    },
+    {
+      id: 'proxy',
+      label: 'Proxy piped.video player',
+      url: 'https://piped.video/favicon.ico',
+      suggestion: 'switching back to Ad-free or Standard mode',
+    },
+  ];
+
   let fallbackUsed = false;
-  let preferredHost = PRIVACY_HOST;
+  let preferredMode = DEFAULT_MODE;
 
   try {
     const storedPreference = window.localStorage?.getItem(HOST_PREFERENCE_KEY);
-    if (storedPreference === 'standard') {
-      preferredHost = STANDARD_HOST;
+    if (storedPreference && HOSTS[storedPreference]) {
+      preferredMode = storedPreference;
     }
   } catch (error) {
     // Ignore storage errors
   }
 
-  function hostToPreference(host) {
-    return host === STANDARD_HOST ? 'standard' : 'privacy';
+  function getHostConfig(mode) {
+    return HOSTS[mode] || HOSTS[DEFAULT_MODE];
   }
 
-  function updatePlayerInputs(host) {
+  function updatePlayerInputs(mode) {
     if (!playerOptions.length) return;
-    const currentPreference = hostToPreference(host);
-    playerOptions.forEach((input) => {
-      const optionPreference = input.value === 'standard' ? 'standard' : 'privacy';
-      const isSelected = optionPreference === currentPreference;
-      input.checked = isSelected;
-      input.setAttribute('aria-checked', String(isSelected));
+    playerOptions.forEach((option) => {
+      const value = option.value;
+      const isSelected = value === mode;
+      option.checked = isSelected;
+      option.setAttribute('aria-checked', String(isSelected));
     });
   }
 
-  function updatePlayerHelp(host) {
+  function updatePlayerHelp(mode) {
     if (!playerHelp) return;
-    const preference = hostToPreference(host);
-    playerHelp.dataset.mode = preference;
-    playerHelp.textContent =
-      preference === 'standard'
-        ? 'Standard mode loads youtube.com so you can sign in, but ads or tracking may appear.'
-        : 'Ad-free mode keeps things on youtube-nocookie.com, which hides sign-in prompts and account controls.';
+    const config = getHostConfig(mode);
+    playerHelp.dataset.mode = config.id;
+    playerHelp.textContent = config.help;
   }
 
-  updatePlayerInputs(preferredHost);
-  updatePlayerHelp(preferredHost);
+  updatePlayerInputs(preferredMode);
+  updatePlayerHelp(preferredMode);
 
-  function persistPreferredHost(host) {
+  function persistPreferredMode(mode) {
     try {
-      window.localStorage?.setItem(HOST_PREFERENCE_KEY, hostToPreference(host));
+      window.localStorage?.setItem(HOST_PREFERENCE_KEY, mode);
     } catch (error) {
       // Ignore storage errors
     }
   }
 
-  function setPreferredHost(host) {
-    if (preferredHost === host) return;
-    preferredHost = host;
-    persistPreferredHost(host);
-    updatePlayerInputs(host);
-    updatePlayerHelp(host);
-    const tone = host === STANDARD_HOST ? 'warning' : 'info';
-    const message =
-      host === STANDARD_HOST
-        ? 'Using the standard YouTube player so you can sign in or interact with the video.'
-        : 'Back on the ad-free youtube-nocookie player. Sign-in prompts will stay hidden.';
-    updateStatus(message, tone);
+  function setPreferredMode(mode) {
+    const nextMode = HOSTS[mode] ? mode : DEFAULT_MODE;
+    if (preferredMode === nextMode) return;
+    preferredMode = nextMode;
+    persistPreferredMode(nextMode);
+    updatePlayerInputs(nextMode);
+    updatePlayerHelp(nextMode);
+    const config = getHostConfig(nextMode);
+    updateStatus(config.status, config.tone);
     hydrateFrames();
   }
 
-  function buildEmbedUrl(host, id) {
+  function buildEmbedUrl(mode, id) {
+    const config = getHostConfig(mode);
     const params = new URLSearchParams({
       rel: '0',
-      modestbranding: '1',
       playsinline: '1',
     });
 
-    if (host === STANDARD_HOST) {
+    if (mode !== 'proxy') {
+      params.set('modestbranding', '1');
+    }
+
+    if (mode === 'standard') {
       params.set('enablejsapi', '1');
       if (window.location.origin && window.location.origin.startsWith('http')) {
         params.set('origin', window.location.origin);
       }
     }
 
-    return `${host}/embed/${id}?${params.toString()}`;
+    if (mode === 'proxy') {
+      params.set('autoplay', '0');
+      params.set('controls', '1');
+    }
+
+    return `${config.host}${config.embedPath}${id}?${params.toString()}`;
   }
 
-  function applyEmbedSource(iframe, host) {
-    iframe.dataset.currentHost = host;
-    iframe.src = buildEmbedUrl(host, iframe.dataset.videoId);
+  function applyEmbedSource(iframe, mode) {
+    iframe.dataset.currentMode = mode;
+    iframe.src = buildEmbedUrl(mode, iframe.dataset.videoId);
   }
 
-  function scheduleFallback(iframe, notice) {
-    if (!notice) return;
+  function scheduleFallback(iframe, notice, mode) {
+    if (!notice || !HOSTS[mode]?.fallbackAllowed) return;
 
     const timerId = window.setTimeout(() => {
       if (
         iframe.dataset.loaded === 'true' ||
-        iframe.dataset.currentHost === STANDARD_HOST ||
+        iframe.dataset.currentMode !== mode ||
         notice.dataset.fallbackShown === 'true'
       ) {
         return;
       }
+
       notice.hidden = false;
       notice.dataset.fallbackShown = 'true';
       if (!fallbackUsed) {
@@ -172,7 +232,7 @@
 
     const fallbackNote = document.createElement('div');
     fallbackNote.className = 'multiview-fallback-note';
-    fallbackNote.hidden = true;
+    fallbackNote.hidden = !getHostConfig(preferredMode).fallbackAllowed;
     fallbackNote.dataset.fallbackShown = 'false';
 
     const noteText = document.createElement('p');
@@ -182,9 +242,9 @@
     const fallbackButton = document.createElement('button');
     fallbackButton.type = 'button';
     fallbackButton.className = 'multiview-fallback-button';
-    fallbackButton.textContent = 'Load standard YouTube player (enables sign-in)';
+    fallbackButton.textContent = 'Load standard YouTube player (shows ads & sign-in)';
     fallbackButton.addEventListener('click', () => {
-      applyEmbedSource(iframe, STANDARD_HOST);
+      applyEmbedSource(iframe, 'standard');
       fallbackNote.hidden = true;
       fallbackNote.dataset.fallbackShown = 'true';
       fallbackUsed = true;
@@ -203,22 +263,24 @@
   function hydrateFrames() {
     const frames = grid.querySelectorAll('iframe[data-video-id]');
     fallbackUsed = false;
-    const usingPrivacyHost = preferredHost === PRIVACY_HOST;
+    const config = getHostConfig(preferredMode);
+    const usingPrivacyMode = config.fallbackAllowed;
+
     frames.forEach((iframe, index) => {
       iframe.removeAttribute('src');
       iframe.dataset.loaded = 'false';
-      iframe.dataset.currentHost = preferredHost;
+      iframe.dataset.currentMode = preferredMode;
 
       const notice = iframe.closest('.multiview-frame-wrapper')?.querySelector('.multiview-fallback-note');
       if (notice) {
-        notice.hidden = !usingPrivacyHost;
-        notice.dataset.fallbackShown = usingPrivacyHost ? 'false' : 'true';
+        notice.hidden = !usingPrivacyMode;
+        notice.dataset.fallbackShown = usingPrivacyMode ? 'false' : 'true';
       }
 
       window.setTimeout(() => {
-        applyEmbedSource(iframe, preferredHost);
-        if (usingPrivacyHost) {
-          scheduleFallback(iframe, notice);
+        applyEmbedSource(iframe, preferredMode);
+        if (usingPrivacyMode) {
+          scheduleFallback(iframe, notice, preferredMode);
         }
       }, index * 350);
     });
@@ -263,7 +325,7 @@
         return basicPattern.test(id) ? id : null;
       }
 
-      if (url.hostname.includes('youtube.com')) {
+      if (url.hostname.includes('youtube.com') || url.hostname.includes('piped.video')) {
         const id = url.searchParams.get('v');
         if (id && basicPattern.test(id)) {
           return id;
@@ -310,13 +372,122 @@
     input.focus();
   }
 
+  function appendDiagnostic(message, tone = 'info') {
+    if (!diagnosticsOutput) return;
+    const item = document.createElement('li');
+    item.textContent = message;
+    item.dataset.tone = tone;
+    diagnosticsOutput.appendChild(item);
+  }
+
+  function testImage(url, timeout = 5000) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      let settled = false;
+      const started = performance.now();
+      const timer = window.setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        resolve({ ok: false, reason: 'timeout' });
+      }, timeout);
+
+      img.onload = () => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timer);
+        resolve({ ok: true, duration: Math.round(performance.now() - started) });
+      };
+
+      img.onerror = () => {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timer);
+        resolve({ ok: false, reason: 'blocked' });
+      };
+
+      img.referrerPolicy = 'no-referrer';
+      img.src = `${url}?_=${Date.now()}`;
+    });
+  }
+
+  function testFirstPartyCookies() {
+    try {
+      const testName = `multiview_${Date.now()}`;
+      document.cookie = `${testName}=1; SameSite=Lax`;
+      const enabled = document.cookie.includes(`${testName}=1`);
+      document.cookie = `${testName}=; expires=${new Date(0).toUTCString()}; SameSite=Lax`;
+      return enabled;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function detectBrave() {
+    try {
+      if (window.navigator.brave && typeof window.navigator.brave.isBrave === 'function') {
+        return window.navigator.brave.isBrave();
+      }
+    } catch (error) {
+      // Ignore detection errors
+    }
+    return Promise.resolve(false);
+  }
+
+  const braveDetection = detectBrave();
+  let braveDetected = false;
+  braveDetection.then((isBrave) => {
+    braveDetected = isBrave;
+    if (isBrave && braveNote) {
+      braveNote.hidden = false;
+    }
+  });
+
+  async function runDiagnostics() {
+    if (!diagnosticsButton || !diagnosticsOutput) return;
+    diagnosticsButton.disabled = true;
+    const originalLabel = diagnosticsButton.textContent;
+    diagnosticsButton.textContent = 'Running diagnostics…';
+    diagnosticsOutput.innerHTML = '';
+
+    appendDiagnostic(`Browser agent: ${navigator.userAgent}`);
+
+    const isBrave = await braveDetection;
+    if (isBrave) {
+      appendDiagnostic(
+        'Brave Shields detected. Embedded sign-in prompts may be blocked by default. Try Standard mode or open-in-YouTube links for sign-in steps.',
+        'warning',
+      );
+    }
+
+    const cookiesEnabled = testFirstPartyCookies();
+    appendDiagnostic(
+      cookiesEnabled
+        ? 'First-party cookies are enabled in this tab.'
+        : 'First-party cookies appear blocked. Embedded sign-in flows will fail until they are allowed.',
+      cookiesEnabled ? 'success' : 'error',
+    );
+
+    for (const target of DIAGNOSTIC_TARGETS) {
+      const result = await testImage(target.url);
+      if (result.ok) {
+        appendDiagnostic(`${target.label} responded in ${result.duration}ms.`, 'success');
+      } else {
+        appendDiagnostic(`${target.label} failed (${result.reason}). Try ${target.suggestion}.`, 'error');
+      }
+    }
+
+    appendDiagnostic('Diagnostics complete. Switch hosts or open the video directly if a test failed.', 'info');
+
+    diagnosticsButton.disabled = false;
+    diagnosticsButton.textContent = originalLabel;
+  }
+
   addButton.addEventListener('click', addVideo);
   clearButton.addEventListener('click', clearVideos);
-  playerOptions.forEach((input) => {
-    input.addEventListener('change', (event) => {
+  playerOptions.forEach((option) => {
+    option.addEventListener('change', (event) => {
       if (!(event.target instanceof HTMLInputElement) || !event.target.checked) return;
-      const nextHost = event.target.value === 'standard' ? STANDARD_HOST : PRIVACY_HOST;
-      setPreferredHost(nextHost);
+      setPreferredMode(event.target.value);
     });
   });
   input.addEventListener('keydown', (event) => {
@@ -325,6 +496,10 @@
       addVideo();
     }
   });
+
+  if (diagnosticsButton) {
+    diagnosticsButton.addEventListener('click', runDiagnostics);
+  }
 
   renderGrid();
 })();
