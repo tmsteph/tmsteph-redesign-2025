@@ -58,7 +58,7 @@
   };
 
   const HOST_PREFERENCE_KEY = 'multiview-player-mode';
-  const DEFAULT_MODE = 'privacy';
+  const DEFAULT_MODE = 'standard';
   const FALLBACK_DELAY = 5000;
   const BRAVE_SHIELDS_HELP =
     'https://support.brave.com/hc/en-us/articles/360022806212-How-do-I-use-Shields-while-browsing';
