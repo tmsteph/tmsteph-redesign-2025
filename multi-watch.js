@@ -3,6 +3,7 @@
   const input = document.getElementById('multiview-input');
   const addButton = document.querySelector('[data-add-video]');
   const clearButton = document.querySelector('[data-clear-videos]');
+  const searchInput = document.querySelector('[data-multiview-search]');
   const status = document.querySelector('[data-multiview-status]');
   const playerOptions = document.querySelectorAll('[data-player-option]');
   const playerHelp = document.querySelector('[data-player-help]');
@@ -236,7 +237,19 @@
     link.rel = 'noopener';
     link.className = 'multiview-open-link';
     link.textContent = 'Open on YouTube';
-    wrapper.appendChild(link);
+
+    const actions = document.createElement('div');
+    actions.className = 'multiview-frame-actions';
+
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'multiview-remove-button';
+    deleteButton.textContent = 'Remove';
+    deleteButton.addEventListener('click', () => removeVideo(id));
+
+    actions.appendChild(link);
+    actions.appendChild(deleteButton);
+    wrapper.appendChild(actions);
 
     const fallbackNote = document.createElement('div');
     fallbackNote.className = 'multiview-fallback-note';
@@ -294,6 +307,19 @@
     });
   }
 
+  function getFilteredVideos() {
+    if (!searchInput) {
+      return [...videos];
+    }
+
+    const query = searchInput.value.trim().toLowerCase();
+    if (!query) {
+      return [...videos];
+    }
+
+    return videos.filter((id) => id.toLowerCase().includes(query));
+  }
+
   function renderGrid() {
     grid.innerHTML = '';
 
@@ -306,11 +332,30 @@
       return;
     }
 
-    videos.forEach((id) => {
+    const filteredVideos = getFilteredVideos();
+
+    if (!filteredVideos.length) {
+      const empty = document.createElement('p');
+      empty.textContent = 'No videos match your search yet.';
+      empty.style.opacity = '0.8';
+      empty.style.margin = '1rem auto';
+      grid.appendChild(empty);
+      return;
+    }
+
+    filteredVideos.forEach((id) => {
       grid.appendChild(createFrame(id));
     });
 
     hydrateFrames();
+  }
+
+  function removeVideo(videoId) {
+    const index = videos.indexOf(videoId);
+    if (index === -1) return;
+    videos.splice(index, 1);
+    renderGrid();
+    updateStatus('Removed that video from your theater.', videos.length ? 'info' : 'warning');
   }
 
   function updateStatus(message, tone = 'info') {
@@ -513,6 +558,12 @@
       addVideo();
     }
   });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      renderGrid();
+    });
+  }
 
   if (diagnosticsButton) {
     diagnosticsButton.addEventListener('click', runDiagnostics);
