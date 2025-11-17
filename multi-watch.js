@@ -83,7 +83,7 @@
   const HISTORY_LIMIT = 12;
   const VOLUME_STORAGE_KEY = 'multiview-volume-preferences';
   const DEFAULT_VOLUME = 70;
-  const YOUTUBE_SEARCH_ENDPOINT = 'https://piped.video/api/v1/search';
+  const YOUTUBE_SEARCH_ENDPOINTS = ['https://pipedapi.kavin.rocks/search'];
   const SEARCH_RESULTS_LIMIT = 8;
   const VIDEO_METADATA_ENDPOINT = 'https://noembed.com/embed';
 
@@ -564,6 +564,30 @@
     });
   }
 
+  async function fetchYoutubeSearchResults(query) {
+    const params = new URLSearchParams({ q: query, region: 'US' });
+    const queryString = params.toString();
+
+    for (const endpoint of YOUTUBE_SEARCH_ENDPOINTS) {
+      const url = `${endpoint}?${queryString}`;
+      try {
+        const response = await fetch(url, { headers: { Accept: 'application/json' } });
+        if (!response.ok) {
+          throw new Error(`Search failed (${response.status})`);
+        }
+        const contentType = response.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) {
+          throw new Error(`Unexpected response from ${endpoint}`);
+        }
+        return await response.json();
+      } catch (error) {
+        console.warn('YouTube search endpoint failed', { endpoint, error });
+      }
+    }
+
+    throw new Error('All search endpoints failed');
+  }
+
   async function handleYoutubeSearch(event) {
     event.preventDefault();
     if (!youtubeQueryInput) return;
@@ -581,11 +605,7 @@
     renderYoutubeResults([]);
 
     try {
-      const response = await fetch(`${YOUTUBE_SEARCH_ENDPOINT}?q=${encodeURIComponent(query)}&region=US`);
-      if (!response.ok) {
-        throw new Error('Search failed');
-      }
-      const payload = await response.json();
+      const payload = await fetchYoutubeSearchResults(query);
       const results = normalizeSearchResults(payload).slice(0, SEARCH_RESULTS_LIMIT);
       if (!results.length) {
         setSearchStatus('No videos found for that search yet.', 'warning');
@@ -594,6 +614,7 @@
       renderYoutubeResults(results);
       setSearchStatus(`Showing ${results.length} result${results.length > 1 ? 's' : ''}.`);
     } catch (error) {
+      console.error('YouTube search failed', error);
       setSearchStatus('Search failed. Try again in a moment.', 'error');
     } finally {
       if (youtubeSearchButton) {
