@@ -98,12 +98,59 @@
     </div>
   </section>
 
+  <section class="section card fade-in" id="cycle-tracker">
+    <div class="container">
+      <div class="section-header">
+        <h2>Cycle &amp; Moon Rhythm Planner</h2>
+        <p>Track menstrual cycles, anticipate fertile windows, and see how they line up with the 13-month moon calendar (13 months × 28 days each).</p>
+      </div>
+
+      <div class="tracker-grid">
+        <div class="tracker-form card alt">
+          <h3>Set Your Rhythm</h3>
+          <label for="last-period">Last period start</label>
+          <input type="date" id="last-period" name="last-period" />
+
+          <label for="cycle-length">Average cycle length (days)</label>
+          <input type="number" id="cycle-length" name="cycle-length" min="20" max="40" value="28" />
+
+          <label for="period-length">Typical period length (days)</label>
+          <input type="number" id="period-length" name="period-length" min="2" max="10" value="5" />
+
+          <p class="tracker-note">Predictions are estimates for planning, not medical advice. Always listen to your body.</p>
+        </div>
+
+        <div class="tracker-results">
+          <h3>Upcoming cycles</h3>
+          <div class="cycle-results" id="cycle-results">
+            <p class="muted">Enter a start date to see the next six cycles, fertile windows, and their moon-month placement.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="moon-calendar card alt">
+        <div class="moon-calendar-header">
+          <div>
+            <h3>13-Month Moon Map</h3>
+            <p>Each moon month is four neat weeks (28 days). Use it to plan rest, rituals, and training blocks.</p>
+          </div>
+          <div class="moon-year">
+            <label for="moon-year">Year</label>
+            <input type="number" id="moon-year" name="moon-year" min="2024" max="2100" value="2025" />
+          </div>
+        </div>
+        <div class="moon-calendar-grid" id="moon-calendar"></div>
+      </div>
+    </div>
+  </section>
+
   <footer class="fade-in">
     <div class="container">
       <p class="handwritten">© 2025 Thomas Stephens | Strong Body. Clear Mind. Open Heart.</p>
     </div>
   </footer>
 
+  <script src="cycle-tracker.js"></script>
   <script>
     const starField = document.getElementById('starfield');
     for (let i = 0; i < 100; i++) {
