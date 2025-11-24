@@ -9,10 +9,6 @@
   const playerHelp = document.querySelector('[data-player-help]');
   const diagnosticsButton = document.querySelector('[data-run-diagnostics]');
   const diagnosticsOutput = document.querySelector('[data-diagnostics-output]');
-  const braveNote = document.querySelector('[data-brave-note]');
-  const bravePanel = document.querySelector('[data-brave-panel]');
-  const braveShieldsButton = document.querySelector('[data-open-brave-shields]');
-  const braveSigninButton = document.querySelector('[data-open-brave-signin]');
 
   if (!grid || !input || !addButton || !clearButton || !status) {
     return;
@@ -61,10 +57,6 @@
   const HOST_PREFERENCE_KEY = 'multiview-player-mode';
   const DEFAULT_MODE = 'standard';
   const FALLBACK_DELAY = 5000;
-  const BRAVE_SHIELDS_HELP =
-    'https://support.brave.com/hc/en-us/articles/360022806212-How-do-I-use-Shields-while-browsing';
-  const YOUTUBE_SIGNIN_URL =
-    'https://accounts.google.com/ServiceLogin?service=youtube&uilel=3&hl=en&continue=https%3A%2F%2Fwww.youtube.com%2F';
 
   const DIAGNOSTIC_TARGETS = [
     {
@@ -475,35 +467,6 @@
     }
   }
 
-  function detectBrave() {
-    try {
-      if (window.navigator.brave && typeof window.navigator.brave.isBrave === 'function') {
-        return window.navigator.brave.isBrave();
-      }
-    } catch (error) {
-      // Ignore detection errors
-    }
-    return Promise.resolve(false);
-  }
-
-  const braveDetection = detectBrave();
-  let braveDetected = false;
-  braveDetection.then((isBrave) => {
-    braveDetected = isBrave;
-    if (isBrave) {
-      if (braveNote) {
-        braveNote.hidden = false;
-      }
-      if (bravePanel) {
-        bravePanel.hidden = false;
-      }
-      updateStatus(
-        'Brave Shields detected. Switch this site to "Allow all cookies" or use the compatibility lab before signing in.',
-        'warning',
-      );
-    }
-  });
-
   async function runDiagnostics() {
     if (!diagnosticsButton || !diagnosticsOutput) return;
     diagnosticsButton.disabled = true;
@@ -512,14 +475,6 @@
     diagnosticsOutput.innerHTML = '';
 
     appendDiagnostic(`Browser agent: ${navigator.userAgent}`);
-
-    const isBrave = await braveDetection;
-    if (isBrave) {
-      appendDiagnostic(
-        'Brave Shields detected. Embedded sign-in prompts may be blocked by default. Try Standard mode or open-in-YouTube links for sign-in steps.',
-        'warning',
-      );
-    }
 
     const cookiesEnabled = testFirstPartyCookies();
     appendDiagnostic(
@@ -567,20 +522,6 @@
 
   if (diagnosticsButton) {
     diagnosticsButton.addEventListener('click', runDiagnostics);
-  }
-
-  if (braveShieldsButton) {
-    braveShieldsButton.addEventListener('click', () => {
-      window.open(BRAVE_SHIELDS_HELP, '_blank', 'noopener');
-      updateStatus('Opened Brave Shields instructions in a new tab.', 'info');
-    });
-  }
-
-  if (braveSigninButton) {
-    braveSigninButton.addEventListener('click', () => {
-      window.open(YOUTUBE_SIGNIN_URL, '_blank', 'noopener');
-      updateStatus('YouTube sign-in launched in a dedicated tab. Return here after authenticating.', 'info');
-    });
   }
 
   renderGrid();
