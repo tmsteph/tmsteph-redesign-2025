@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d39">
+  <title>Journal & Content Lab - Thomas Stephens</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <script src="pwa.js" defer></script>
+</head>
+<body>
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Journal & Content Lab</h1>
+      <p class="tagline">Capture ideas, draft freely, and ship work that matters.</p>
+      <a href="index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <h2>Why a journal?</h2>
+      <p>Writing often is the fastest way to clarify what you think, what you want to build, and how you want to share it. This space is a compass for daily notes, blog drafts, and the ideas that want to become real.</p>
+      <div class="journal-intro-grid">
+        <article class="card alt">
+          <h3>Daily clarity</h3>
+          <p>Quick prompts to clear your mind and track the patterns that show up in your work and life.</p>
+        </article>
+        <article class="card alt">
+          <h3>Content pipeline</h3>
+          <p>Move posts from a spark of inspiration to published pieces with a repeatable flow.</p>
+        </article>
+        <article class="card alt">
+          <h3>Idea → creation</h3>
+          <p>Break big visions into small, shippable steps so momentum never stalls.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Daily reflection</h2>
+        <p>Lightweight prompts for morning focus and evening review.</p>
+      </div>
+      <div class="prompt-grid">
+        <div class="prompt-card">
+          <h3>Morning setup</h3>
+          <ul class="prompt-list">
+            <li>Three words for how I want to feel today.</li>
+            <li>Top two priorities that move the needle.</li>
+            <li>One experiment to try (writing, tech, or wellness).</li>
+          </ul>
+        </div>
+        <div class="prompt-card">
+          <h3>Evening rewind</h3>
+          <ul class="prompt-list">
+            <li>What felt energizing? What drained me?</li>
+            <li>A lesson learned worth turning into a post.</li>
+            <li>One thing I can simplify tomorrow.</li>
+          </ul>
+        </div>
+        <div class="prompt-card">
+          <h3>Weekly zoom-out</h3>
+          <ul class="prompt-list">
+            <li>Wins to celebrate and ship.</li>
+            <li>Systems to tune (habits, tools, workflows).</li>
+            <li>Ideas ready for the pipeline below.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Blog content pipeline</h2>
+        <p>Organize posts from spark to scheduled. Each column is a small inbox to clear.</p>
+      </div>
+      <div class="board-grid">
+        <div class="board-column">
+          <div class="board-column-header">
+            <h3>Ideas</h3>
+            <span class="status-pill">Brainstorm</span>
+          </div>
+          <ul class="board-list">
+            <li>Capture raw notes, questions, and links.</li>
+            <li>Tag by theme: tech, health, spirituality, open-source, politics.</li>
+            <li>Pick 3 per week to move forward.</li>
+          </ul>
+        </div>
+        <div class="board-column">
+          <div class="board-column-header">
+            <h3>Drafting</h3>
+            <span class="status-pill status-in-progress">In motion</span>
+          </div>
+          <ul class="board-list">
+            <li>Outline the arc: hook → story → takeaway → call-to-action.</li>
+            <li>Write messy first drafts; capture voice notes if faster.</li>
+            <li>Drop in visuals, embeds, and references.</li>
+          </ul>
+        </div>
+        <div class="board-column">
+          <div class="board-column-header">
+            <h3>Editing</h3>
+            <span class="status-pill status-review">Refine</span>
+          </div>
+          <ul class="board-list">
+            <li>Check clarity, shorten sentences, and tighten the headline.</li>
+            <li>Verify facts, links, and attribution.</li>
+            <li>Run a quick read-aloud for flow.</li>
+          </ul>
+        </div>
+        <div class="board-column">
+          <div class="board-column-header">
+            <h3>Scheduled</h3>
+            <span class="status-pill status-ready">Ready</span>
+          </div>
+          <ul class="board-list">
+            <li>Queue posts with publish dates and channels (site, newsletter, socials).</li>
+            <li>Add image alt text and metadata.</li>
+            <li>Track follow-up threads or companions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Idea → creation system</h2>
+        <p>A simple loop for turning inspiration into a shippable project.</p>
+      </div>
+      <div class="creation-grid">
+        <article class="creation-step">
+          <div class="step-number">1</div>
+          <div>
+            <h3>Collect</h3>
+            <p>Save sparks from journaling, conversations, and experiments. Keep them short—one sentence per idea.</p>
+          </div>
+        </article>
+        <article class="creation-step">
+          <div class="step-number">2</div>
+          <div>
+            <h3>Shape</h3>
+            <p>Clarify the problem, audience, and a tiny first milestone. Decide the format: post, tool, demo, or video.</p>
+          </div>
+        </article>
+        <article class="creation-step">
+          <div class="step-number">3</div>
+          <div>
+            <h3>Build</h3>
+            <p>Timebox a prototype session. Capture screenshots, snippets, and notes that can double as behind-the-scenes content.</p>
+          </div>
+        </article>
+        <article class="creation-step">
+          <div class="step-number">4</div>
+          <div>
+            <h3>Ship + reflect</h3>
+            <p>Publish quickly, gather one insight, and feed it back into the journal for the next iteration.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Publishing checklist</h2>
+        <p>Keep releases smooth across blog, newsletter, and social channels.</p>
+      </div>
+      <div class="checklist-grid">
+        <article class="checklist-card">
+          <h3>Story & structure</h3>
+          <ul class="prompt-list">
+            <li>Clear takeaway in the first 2–3 sentences.</li>
+            <li>One strong visual or code snippet per section.</li>
+            <li>Links to related posts for depth.</li>
+          </ul>
+        </article>
+        <article class="checklist-card">
+          <h3>Access & usability</h3>
+          <ul class="prompt-list">
+            <li>Readable on mobile with short paragraphs.</li>
+            <li>Alt text on images and descriptive link titles.</li>
+            <li>Metadata set: title, description, canonical URL.</li>
+          </ul>
+        </article>
+        <article class="checklist-card">
+          <h3>Distribution</h3>
+          <ul class="prompt-list">
+            <li>Newsletter summary with a key quote.</li>
+            <li>Social snippet tailored for each platform.</li>
+            <li>Follow-up tasks: comments, DMs, or future threads.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Rituals & templates</h2>
+        <p>Keep momentum with simple rituals you can run on repeat.</p>
+      </div>
+      <div class="template-grid">
+        <article class="template-card">
+          <h3>Daily log</h3>
+          <p>Time, focus, mood, and one highlight. Great for spotting trends and creating weekly summaries.</p>
+        </article>
+        <article class="template-card">
+          <h3>Content sprint</h3>
+          <p>45 minutes: 10 to outline, 25 to draft, 10 to tighten. Mark next actions before stopping.</p>
+        </article>
+        <article class="template-card">
+          <h3>Idea vault</h3>
+          <p>Tag ideas by topic, effort, and impact. Schedule vault reviews twice a week to pick the next build.</p>
+        </article>
+        <article class="template-card">
+          <h3>Retro</h3>
+          <p>What shipped? What lagged? What system or habit would unblock the next publish?</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Write boldly. Build often. Share openly.</p>
+    </div>
+  </footer>
+
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      star.style.animationDuration = (1 + Math.random() * 1.5) + 's';
+      starField.appendChild(star);
+    }
+
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('appear');
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+  </script>
+</body>
+</html>
