@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#050d1a" />
+  <title>Live Solar System · tmsteph</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="icons/pwa-icon-192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="solar-system.js" defer></script>
+</head>
+<body class="solar-page">
+  <header class="watch-hero">
+    <div class="watch-hero-content">
+      <a class="watch-back-link" href="index.html">← Back to Home</a>
+      <h1 class="handwritten">Live Solar System</h1>
+      <p>Watch a real-time, continuously updating model of our planetary neighborhood.</p>
+    </div>
+  </header>
+
+  <main class="solar-main">
+    <div class="container solar-layout">
+      <section class="solar-canvas-card" aria-labelledby="solar-system-visual">
+        <h2 id="solar-system-visual" class="sr-only">Solar system visualization</h2>
+        <canvas class="solar-canvas" data-solar-canvas></canvas>
+      </section>
+
+      <aside class="solar-meta">
+        <h3>Live orbital snapshot</h3>
+        <p>
+          Positions are calculated from orbital periods with a running clock, so the
+          planets drift continuously as time passes.
+        </p>
+        <ul class="solar-legend" data-solar-legend>
+          <li><span class="solar-dot" style="background:#c9c2b2"></span> Mercury · 88 days</li>
+          <li><span class="solar-dot" style="background:#f2b07c"></span> Venus · 225 days</li>
+          <li><span class="solar-dot" style="background:#6db7ff"></span> Earth · 365 days</li>
+          <li><span class="solar-dot" style="background:#ff6b4a"></span> Mars · 687 days</li>
+          <li><span class="solar-dot" style="background:#f9d48b"></span> Jupiter · 4,333 days</li>
+          <li><span class="solar-dot" style="background:#f2d6a0"></span> Saturn · 10,759 days</li>
+          <li><span class="solar-dot" style="background:#a0e7ff"></span> Uranus · 30,687 days</li>
+          <li><span class="solar-dot" style="background:#6fb1ff"></span> Neptune · 60,190 days</li>
+        </ul>
+        <p class="solar-timestamp">Updated: <span data-solar-timestamp></span></p>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
