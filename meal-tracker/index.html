@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d39">
+  <title>Meal Tracker - Thomas Stephens</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="shortcut icon" href="../favicon-16x16.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <script src="../pwa.js" defer></script>
+</head>
+<body>
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Meal Tracker</h1>
+      <p class="tagline">Capture meals for the whole family in one place.</p>
+      <a href="../index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Log a meal</h2>
+        <p>Save each meal to Gun.js so everyone can see what was cooked, when, and for which meal slot.</p>
+      </div>
+
+      <div class="tracker-grid">
+        <form class="tracker-form" id="meal-form">
+          <h3>New entry</h3>
+          <label for="meal-type">Meal type</label>
+          <select id="meal-type" name="meal-type" required>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+          </select>
+
+          <label for="meal-date">Date</label>
+          <input type="date" id="meal-date" name="meal-date" required>
+
+          <label for="meal-menu">Menu</label>
+          <textarea id="meal-menu" name="meal-menu" rows="4" placeholder="What was served?" required></textarea>
+
+          <button class="btn-primary" type="submit">Save meal</button>
+        </form>
+
+        <div class="tracker-results">
+          <h3>Family meal log</h3>
+          <p class="tracker-note" id="meal-empty">No meals yet. Add the first one above.</p>
+          <ul class="meal-list" id="meal-list" aria-live="polite"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Eat well. Gather often.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js" defer></script>
+  <script src="meal-tracker.js" defer></script>
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      starField.appendChild(star);
+    }
+  </script>
+</body>
+</html>
