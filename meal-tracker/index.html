@@ -28,7 +28,7 @@
     <div class="container">
       <div class="section-header">
         <h2>Log a meal</h2>
-        <p>Save each meal to Gun.js so everyone can see what was cooked, when, and for which meal slot.</p>
+        <p>Save each meal to Gun.js so everyone can see what was cooked or planned, when, and for which meal slot.</p>
       </div>
 
       <div class="tracker-grid">
@@ -46,14 +46,14 @@
           <input type="date" id="meal-date" name="meal-date" required>
 
           <label for="meal-menu">Menu</label>
-          <textarea id="meal-menu" name="meal-menu" rows="4" placeholder="What was served?" required></textarea>
+          <textarea id="meal-menu" name="meal-menu" rows="4" placeholder="What was or will be served?" required></textarea>
 
           <button class="btn-primary" type="submit">Save meal</button>
         </form>
 
         <div class="tracker-results">
           <h3>Family meal log</h3>
-          <p class="tracker-note" id="meal-empty">No meals yet. Add the first one above.</p>
+          <p class="tracker-note" id="meal-empty">No meals yet. Add the first one above for past or future plans.</p>
           <ul class="meal-list" id="meal-list" aria-live="polite"></ul>
         </div>
       </div>
