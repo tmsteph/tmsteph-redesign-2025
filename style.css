@@ -945,6 +945,8 @@ footer {
 }
 
 .tracker-form input,
+.tracker-form select,
+.tracker-form textarea,
 .moon-year input {
   width: 100%;
   padding: 0.65rem 0.85rem;
@@ -957,6 +959,8 @@ footer {
 }
 
 .tracker-form input:focus,
+.tracker-form select:focus,
+.tracker-form textarea:focus,
 .moon-year input:focus {
   outline: 2px solid rgba(127, 255, 225, 0.35);
   border-color: rgba(127, 255, 225, 0.65);
@@ -1006,6 +1010,53 @@ footer {
   padding: 0;
   display: grid;
   gap: 0.35rem;
+}
+
+.meal-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meal-card {
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(11, 29, 57, 0.4);
+  box-shadow: 0 16px 36px -24px rgba(0, 0, 0, 0.65);
+}
+
+.meal-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.meal-card h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.meal-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.meal-tag,
+.meal-date {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .moon-chip {
