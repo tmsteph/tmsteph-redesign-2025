@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d39">
+  <title>Shopping List - Thomas Stephens</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="shortcut icon" href="../favicon-16x16.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <script src="../pwa.js" defer></script>
+  <script defer src="/_vercel/analytics/script.js"></script>
+</head>
+<body>
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Shopping List</h1>
+      <p class="tagline">Plan groceries, pantry staples, and household essentials together.</p>
+      <a href="../index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Build the list</h2>
+        <p>Capture items you need, where to find them, and when they should be picked up so the whole family can shop in sync.</p>
+      </div>
+
+      <div class="tracker-grid">
+        <form class="tracker-form" id="shopping-form">
+          <h3>New item</h3>
+          <label for="item-name">Item</label>
+          <input type="text" id="item-name" name="item-name" placeholder="Organic bananas" required>
+
+          <label for="item-quantity">Quantity</label>
+          <input type="text" id="item-quantity" name="item-quantity" placeholder="6" autocomplete="off">
+
+          <label for="item-category">Category</label>
+          <select id="item-category" name="item-category" required>
+            <option value="Produce">Produce</option>
+            <option value="Pantry">Pantry</option>
+            <option value="Dairy">Dairy</option>
+            <option value="Meat">Meat & Seafood</option>
+            <option value="Frozen">Frozen</option>
+            <option value="Household">Household</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="item-date">Needed by</label>
+          <input type="date" id="item-date" name="item-date">
+
+          <label for="item-store">Preferred store</label>
+          <input type="text" id="item-store" name="item-store" placeholder="Trader Joe's">
+
+          <label for="item-notes">Notes</label>
+          <textarea id="item-notes" name="item-notes" rows="4" placeholder="Brand, size, or substitutions"></textarea>
+
+          <button class="btn-primary" type="submit">Add to list</button>
+        </form>
+
+        <div class="tracker-results">
+          <h3>Household shopping list</h3>
+          <p class="tracker-note" id="shopping-empty">No items yet. Add your first grocery or household need above.</p>
+          <ul class="meal-list" id="shopping-list" aria-live="polite"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Gather what you need with ease.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js" defer></script>
+  <script src="shopping-list.js" defer></script>
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      starField.appendChild(star);
+    }
+  </script>
+</body>
+</html>
