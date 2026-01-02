@@ -63,51 +63,6 @@ const formatDate = (value) => {
   });
 };
 
-const updateShareControls = (documentRef, windowRef, url) => {
-  const shareInput = documentRef.getElementById('shopping-share-link');
-  if (!shareInput) {
-    return;
-  }
-  shareInput.value = url.toString();
-
-  const status = documentRef.getElementById('shopping-share-status');
-  const copyButton = documentRef.getElementById('shopping-share-copy');
-  if (!copyButton) {
-    return;
-  }
-
-  const setStatus = (message) => {
-    if (status) {
-      status.textContent = message;
-    }
-  };
-
-  copyButton.addEventListener('click', async () => {
-    const textToCopy = shareInput.value;
-    let didCopy = false;
-
-    if (windowRef.navigator?.clipboard?.writeText) {
-      try {
-        await windowRef.navigator.clipboard.writeText(textToCopy);
-        didCopy = true;
-      } catch (error) {
-        didCopy = false;
-      }
-    } else {
-      shareInput.focus();
-      shareInput.select();
-      didCopy = documentRef.execCommand?.('copy') ?? false;
-      shareInput.setSelectionRange(0, 0);
-    }
-
-    setStatus(
-      didCopy
-        ? 'Share link copied!'
-        : 'Copy the link manually to share this list.'
-    );
-  });
-};
-
 export const initShoppingList = ({
   Gun: GunLib = globalThis.Gun,
   document: documentRef = globalThis.document,
@@ -118,7 +73,7 @@ export const initShoppingList = ({
   }
 
   const gun = GunLib({ peers: [RELAY_URL], localStorage: true });
-  const { listId, url } = resolveListContext(windowRef);
+  const { listId } = resolveListContext(windowRef);
 
   const form = documentRef.getElementById('shopping-form');
   const nameInput = documentRef.getElementById('item-name');
@@ -129,8 +84,6 @@ export const initShoppingList = ({
   const notesInput = documentRef.getElementById('item-notes');
   const list = documentRef.getElementById('shopping-list');
   const emptyState = documentRef.getElementById('shopping-empty');
-
-  updateShareControls(documentRef, windowRef, url);
 
   const entries = gun.get('shopping-list').get(listId).get('items');
   const cache = new Map();

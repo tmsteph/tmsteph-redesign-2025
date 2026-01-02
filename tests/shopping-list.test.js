@@ -17,9 +17,6 @@ const baseMarkup = `
   </form>
   <div id="shopping-empty"></div>
   <ul id="shopping-list"></ul>
-  <input id="shopping-share-link" />
-  <button id="shopping-share-copy" type="button">Copy</button>
-  <p id="shopping-share-status"></p>
 `;
 
 const createDom = (url = 'https://example.com/shopping-list/') =>
@@ -70,8 +67,7 @@ describe('shopping list sync', () => {
       window: dom.window,
     });
 
-    const shareInput = dom.window.document.getElementById('shopping-share-link');
-    expect(shareInput.value).toContain('list=family123');
+    expect(dom.window.location.search).toContain('list=family123');
   });
 
   it('adds a list id to the URL when missing', () => {
@@ -121,13 +117,10 @@ describe('shopping list sync', () => {
     );
   });
 
-  it('updates the status after copying the share link', async () => {
-    const dom = createDom('https://example.com/shopping-list/?list=family123');
+  it('reuses the stored list id when returning', () => {
+    const dom = createDom('https://example.com/shopping-list/');
+    dom.window.localStorage.setItem('shoppingListId', 'returning-456');
     const { Gun } = createGunMock();
-
-    dom.window.navigator.clipboard = {
-      writeText: vi.fn().mockResolvedValue(undefined),
-    };
 
     initShoppingList({
       Gun,
@@ -135,12 +128,6 @@ describe('shopping list sync', () => {
       window: dom.window,
     });
 
-    vi.useRealTimers();
-    dom.window.document.getElementById('shopping-share-copy').click();
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    expect(dom.window.document.getElementById('shopping-share-status').textContent).toBe(
-      'Share link copied!'
-    );
+    expect(dom.window.location.search).toContain('list=returning-456');
   });
 });
