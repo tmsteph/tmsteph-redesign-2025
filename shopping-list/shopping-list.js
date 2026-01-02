@@ -1,18 +1,51 @@
 const RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
-const gun = Gun({ peers: [RELAY_URL], localStorage: true });
+const LIST_ID_STORAGE_KEY = 'shoppingListId';
+const LIST_QUERY_PARAM = 'list';
 
-const form = document.getElementById('shopping-form');
-const nameInput = document.getElementById('item-name');
-const quantityInput = document.getElementById('item-quantity');
-const categoryInput = document.getElementById('item-category');
-const dateInput = document.getElementById('item-date');
-const storeInput = document.getElementById('item-store');
-const notesInput = document.getElementById('item-notes');
-const list = document.getElementById('shopping-list');
-const emptyState = document.getElementById('shopping-empty');
+const safeStorage = (storage) => {
+  if (!storage) {
+    return null;
+  }
+  try {
+    const testKey = '__storage_test__';
+    storage.setItem(testKey, testKey);
+    storage.removeItem(testKey);
+    return storage;
+  } catch (error) {
+    return null;
+  }
+};
 
-const entries = gun.get('shopping-list').get('items');
-const cache = new Map();
+const buildListId = (windowRef) => {
+  if (windowRef?.crypto?.randomUUID) {
+    return windowRef.crypto.randomUUID();
+  }
+  return `list-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
+
+const resolveListContext = (windowRef) => {
+  const url = new URL(windowRef.location.href);
+  const storage = safeStorage(windowRef.localStorage);
+  const listFromUrl = url.searchParams.get(LIST_QUERY_PARAM);
+
+  if (listFromUrl) {
+    storage?.setItem(LIST_ID_STORAGE_KEY, listFromUrl);
+    return { listId: listFromUrl, url };
+  }
+
+  const storedList = storage?.getItem(LIST_ID_STORAGE_KEY);
+  if (storedList) {
+    url.searchParams.set(LIST_QUERY_PARAM, storedList);
+    windowRef.history.replaceState({}, '', url);
+    return { listId: storedList, url };
+  }
+
+  const newListId = buildListId(windowRef);
+  storage?.setItem(LIST_ID_STORAGE_KEY, newListId);
+  url.searchParams.set(LIST_QUERY_PARAM, newListId);
+  windowRef.history.replaceState({}, '', url);
+  return { listId: newListId, url };
+};
 
 const formatDate = (value) => {
   if (!value) {
@@ -30,135 +63,216 @@ const formatDate = (value) => {
   });
 };
 
-const renderItems = () => {
-  const items = Array.from(cache.values()).filter((entry) => entry && entry.name);
-  items.sort((a, b) => {
-    if (a.neededBy && b.neededBy) {
-      return a.neededBy.localeCompare(b.neededBy);
-    }
-    if (a.neededBy) {
-      return -1;
-    }
-    if (b.neededBy) {
-      return 1;
-    }
-    return (b.createdAt ?? 0) - (a.createdAt ?? 0);
-  });
+const updateShareControls = (documentRef, windowRef, url) => {
+  const shareInput = documentRef.getElementById('shopping-share-link');
+  if (!shareInput) {
+    return;
+  }
+  shareInput.value = url.toString();
 
-  list.innerHTML = '';
-
-  if (items.length === 0) {
-    emptyState.hidden = false;
+  const status = documentRef.getElementById('shopping-share-status');
+  const copyButton = documentRef.getElementById('shopping-share-copy');
+  if (!copyButton) {
     return;
   }
 
-  emptyState.hidden = true;
+  const setStatus = (message) => {
+    if (status) {
+      status.textContent = message;
+    }
+  };
 
-  for (const item of items) {
-    const li = document.createElement('li');
-    li.className = 'meal-card';
+  copyButton.addEventListener('click', async () => {
+    const textToCopy = shareInput.value;
+    let didCopy = false;
 
-    const header = document.createElement('div');
-    header.className = 'meal-card__header';
-
-    const title = document.createElement('h4');
-    title.textContent = item.quantity ? `${item.name} · ${item.quantity}` : item.name;
-
-    const meta = document.createElement('div');
-    meta.className = 'meal-meta';
-
-    const categoryTag = document.createElement('span');
-    categoryTag.className = 'meal-tag';
-    categoryTag.textContent = item.category || 'General';
-
-    meta.appendChild(categoryTag);
-
-    if (item.neededBy) {
-      const dateTag = document.createElement('span');
-      dateTag.className = 'meal-date';
-      dateTag.textContent = `Needed ${formatDate(item.neededBy)}`;
-      meta.appendChild(dateTag);
+    if (windowRef.navigator?.clipboard?.writeText) {
+      try {
+        await windowRef.navigator.clipboard.writeText(textToCopy);
+        didCopy = true;
+      } catch (error) {
+        didCopy = false;
+      }
+    } else {
+      shareInput.focus();
+      shareInput.select();
+      didCopy = documentRef.execCommand?.('copy') ?? false;
+      shareInput.setSelectionRange(0, 0);
     }
 
-    header.append(title, meta);
-    li.appendChild(header);
-
-    const details = document.createElement('ul');
-    details.className = 'cycle-card__details';
-
-    if (item.store) {
-      const storeLine = document.createElement('li');
-      storeLine.textContent = `Store: ${item.store}`;
-      details.appendChild(storeLine);
-    }
-
-    if (item.notes) {
-      const notesLine = document.createElement('li');
-      notesLine.textContent = `Notes: ${item.notes}`;
-      details.appendChild(notesLine);
-    }
-
-    if (details.children.length > 0) {
-      li.appendChild(details);
-    }
-
-    list.appendChild(li);
-  }
+    setStatus(
+      didCopy
+        ? 'Share link copied!'
+        : 'Copy the link manually to share this list.'
+    );
+  });
 };
 
-entries.map().on((data, key) => {
-  if (!data) {
-    cache.delete(key);
+export const initShoppingList = ({
+  Gun: GunLib = globalThis.Gun,
+  document: documentRef = globalThis.document,
+  window: windowRef = globalThis.window,
+} = {}) => {
+  if (!GunLib || !documentRef || !windowRef) {
+    return null;
+  }
+
+  const gun = GunLib({ peers: [RELAY_URL], localStorage: true });
+  const { listId, url } = resolveListContext(windowRef);
+
+  const form = documentRef.getElementById('shopping-form');
+  const nameInput = documentRef.getElementById('item-name');
+  const quantityInput = documentRef.getElementById('item-quantity');
+  const categoryInput = documentRef.getElementById('item-category');
+  const dateInput = documentRef.getElementById('item-date');
+  const storeInput = documentRef.getElementById('item-store');
+  const notesInput = documentRef.getElementById('item-notes');
+  const list = documentRef.getElementById('shopping-list');
+  const emptyState = documentRef.getElementById('shopping-empty');
+
+  updateShareControls(documentRef, windowRef, url);
+
+  const entries = gun.get('shopping-list').get(listId).get('items');
+  const cache = new Map();
+
+  const renderItems = () => {
+    const items = Array.from(cache.values()).filter((entry) => entry && entry.name);
+    items.sort((a, b) => {
+      if (a.neededBy && b.neededBy) {
+        return a.neededBy.localeCompare(b.neededBy);
+      }
+      if (a.neededBy) {
+        return -1;
+      }
+      if (b.neededBy) {
+        return 1;
+      }
+      return (b.createdAt ?? 0) - (a.createdAt ?? 0);
+    });
+
+    list.innerHTML = '';
+
+    if (items.length === 0) {
+      emptyState.hidden = false;
+      return;
+    }
+
+    emptyState.hidden = true;
+
+    for (const item of items) {
+      const li = documentRef.createElement('li');
+      li.className = 'meal-card';
+
+      const header = documentRef.createElement('div');
+      header.className = 'meal-card__header';
+
+      const title = documentRef.createElement('h4');
+      title.textContent = item.quantity ? `${item.name} · ${item.quantity}` : item.name;
+
+      const meta = documentRef.createElement('div');
+      meta.className = 'meal-meta';
+
+      const categoryTag = documentRef.createElement('span');
+      categoryTag.className = 'meal-tag';
+      categoryTag.textContent = item.category || 'General';
+
+      meta.appendChild(categoryTag);
+
+      if (item.neededBy) {
+        const dateTag = documentRef.createElement('span');
+        dateTag.className = 'meal-date';
+        dateTag.textContent = `Needed ${formatDate(item.neededBy)}`;
+        meta.appendChild(dateTag);
+      }
+
+      header.append(title, meta);
+      li.appendChild(header);
+
+      const details = documentRef.createElement('ul');
+      details.className = 'cycle-card__details';
+
+      if (item.store) {
+        const storeLine = documentRef.createElement('li');
+        storeLine.textContent = `Store: ${item.store}`;
+        details.appendChild(storeLine);
+      }
+
+      if (item.notes) {
+        const notesLine = documentRef.createElement('li');
+        notesLine.textContent = `Notes: ${item.notes}`;
+        details.appendChild(notesLine);
+      }
+
+      if (details.children.length > 0) {
+        li.appendChild(details);
+      }
+
+      list.appendChild(li);
+    }
+  };
+
+  entries.map().on((data, key) => {
+    if (!data) {
+      cache.delete(key);
+      renderItems();
+      return;
+    }
+
+    cache.set(key, {
+      id: key,
+      name: data.name,
+      quantity: data.quantity,
+      category: data.category,
+      neededBy: data.neededBy,
+      store: data.store,
+      notes: data.notes,
+      createdAt: data.createdAt,
+    });
+
     renderItems();
-    return;
-  }
-
-  cache.set(key, {
-    id: key,
-    name: data.name,
-    quantity: data.quantity,
-    category: data.category,
-    neededBy: data.neededBy,
-    store: data.store,
-    notes: data.notes,
-    createdAt: data.createdAt,
   });
 
-  renderItems();
-});
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
+    const name = nameInput.value.trim();
+    const quantity = quantityInput.value.trim();
+    const category = categoryInput.value.trim();
+    const neededBy = dateInput.value;
+    const store = storeInput.value.trim();
+    const notes = notesInput.value.trim();
 
-  const name = nameInput.value.trim();
-  const quantity = quantityInput.value.trim();
-  const category = categoryInput.value.trim();
-  const neededBy = dateInput.value;
-  const store = storeInput.value.trim();
-  const notes = notesInput.value.trim();
+    if (!name || !category) {
+      return;
+    }
 
-  if (!name || !category) {
-    return;
-  }
+    const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    entries.get(id).put({
+      name,
+      quantity,
+      category,
+      neededBy,
+      store,
+      notes,
+      createdAt: Date.now(),
+    });
 
-  const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  entries.get(id).put({
-    name,
-    quantity,
-    category,
-    neededBy,
-    store,
-    notes,
-    createdAt: Date.now(),
+    nameInput.value = '';
+    quantityInput.value = '';
+    storeInput.value = '';
+    notesInput.value = '';
   });
 
-  nameInput.value = '';
-  quantityInput.value = '';
-  storeInput.value = '';
-  notesInput.value = '';
-});
+  const today = new Date().toISOString().split('T')[0];
+  if (!dateInput.value) {
+    dateInput.value = today;
+  }
 
-const today = new Date().toISOString().split('T')[0];
-if (!dateInput.value) {
-  dateInput.value = today;
+  return { listId };
+};
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('DOMContentLoaded', () => {
+    initShoppingList();
+  });
 }
