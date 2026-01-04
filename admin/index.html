@@ -132,6 +132,31 @@
             </div>
           </div>
         </div>
+
+        <div class="panel-card dreamspell-card" id="dreamspell-card">
+          <div class="dreamspell-header">
+            <div>
+              <h3>Dreamspell Calendar</h3>
+              <p class="panel-description">
+                Track your cycle across the 13 Moon and Solar calendars. Your selections sync with your admin login.
+              </p>
+            </div>
+            <div class="dreamspell-toggle" role="tablist" aria-label="Calendar mode">
+              <button type="button" class="dreamspell-toggle-btn" data-calendar-mode="moon" aria-pressed="true">
+                13 Moon
+              </button>
+              <button type="button" class="dreamspell-toggle-btn" data-calendar-mode="sun" aria-pressed="false">
+                Sun
+              </button>
+            </div>
+          </div>
+
+          <p id="dreamspell-today" class="dreamspell-today" aria-live="polite"></p>
+          <div id="dreamspell-calendar" class="dreamspell-calendar" aria-live="polite"></div>
+          <p id="dreamspell-sync" class="form-helper">
+            Sync status will appear here after your calendar is saved.
+          </p>
+        </div>
       </div>
 
       <p id="panel-message" class="form-message" role="status"></p>
