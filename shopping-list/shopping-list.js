@@ -17,9 +17,8 @@ const safeStorage = (storage) => {
   }
 };
 
-const resolveListContext = (windowRef) => {
+const resolveListContext = (windowRef, storage) => {
   const url = new URL(windowRef.location.href);
-  const storage = safeStorage(windowRef.localStorage);
   const listFromUrl = url.searchParams.get(LIST_QUERY_PARAM);
 
   if (listFromUrl) {
@@ -60,8 +59,12 @@ export const initShoppingList = ({
     return null;
   }
 
-  const gun = GunLib({ peers: [RELAY_URL], localStorage: true });
-  const { listId } = resolveListContext(windowRef);
+  const storage = safeStorage(windowRef.localStorage);
+  const gun = GunLib({
+    peers: [RELAY_URL],
+    localStorage: Boolean(storage),
+  });
+  const { listId } = resolveListContext(windowRef, storage);
 
   const form = documentRef.getElementById('shopping-form');
   const nameInput = documentRef.getElementById('item-name');
