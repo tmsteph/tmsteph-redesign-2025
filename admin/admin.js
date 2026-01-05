@@ -53,31 +53,21 @@
   const photoList = document.getElementById('photo-list');
   const photoMessage = document.getElementById('photo-message');
 
-  const dreamspellCard = document.getElementById('dreamspell-card');
-  const dreamspellCalendar = document.getElementById('dreamspell-calendar');
-  const dreamspellToday = document.getElementById('dreamspell-today');
-  const dreamspellSync = document.getElementById('dreamspell-sync');
-  const dreamspellModeButtons = document.querySelectorAll('[data-calendar-mode]');
-
   const aliasInput = document.getElementById('alias');
   const passwordInput = document.getElementById('password');
   const passwordToggle = document.getElementById('password-toggle');
 
   const SHARED_APP_KEY = 'portal.3dvr.tech';
   const MAX_PHOTO_SIZE_BYTES = 10 * 1024 * 1024;
-  const DREAMSPELL_DEFAULT_MODE = 'moon';
-  const DREAMSPELL_DEFAULT_MESSAGE = 'Sync status will appear here after your calendar is saved.';
 
   const getSharedApp = () => safeGet(safeGet(user, 'apps'), SHARED_APP_KEY);
   const getSharedProfile = () => safeGet(getSharedApp(), 'profile');
   const getSharedDashboard = () => safeGet(getSharedApp(), 'dashboard');
   const getSharedPhotos = () => safeGet(getSharedApp(), 'photos');
-  const getSharedDreamspell = () => safeGet(getSharedApp(), 'dreamspell');
 
   const getLegacyProfile = () => safeGet(user, 'profile');
   const getLegacyDashboard = () => safeGet(user, 'dashboard');
   const getLegacyPhotos = () => safeGet(user, 'photos');
-  const getLegacyDreamspell = () => safeGet(user, 'dreamspell');
 
   let mode = 'login';
   let listenersAttached = false;
@@ -89,11 +79,6 @@
   let photoListenersAttached = false;
 
   const toBoolean = (value) => value === true || value === 'true';
-
-  const dreamspellState = {
-    mode: DREAMSPELL_DEFAULT_MODE,
-    activeDays: {}
-  };
 
   const setAuthMessage = (message, type = 'info') => {
     authMessage.textContent = message;
@@ -193,48 +178,6 @@
     return value.trim().slice(0, 120);
   };
 
-  const sanitizeDreamspellMode = (value) => (value === 'sun' ? 'sun' : 'moon');
-
-  const normalizeDreamspellDays = (value) => {
-    if (!value || typeof value !== 'object') {
-      return {};
-    }
-    const normalized = {};
-    Object.entries(value).forEach(([key, entryValue]) => {
-      if (key === '_' || !entryValue) {
-        return;
-      }
-      normalized[key] = true;
-    });
-    return normalized;
-  };
-
-  const formatDateKey = (date) => {
-    if (!(date instanceof Date)) {
-      return '';
-    }
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  };
-
-  const isSameDate = (left, right) =>
-    left.getFullYear() === right.getFullYear() &&
-    left.getMonth() === right.getMonth() &&
-    left.getDate() === right.getDate();
-
-  const getMoonYearStart = () => {
-    const today = new Date();
-    const startDate = new Date(today.getFullYear(), 6, 26);
-    if (today < startDate) {
-      startDate.setFullYear(startDate.getFullYear() - 1);
-    }
-    return startDate;
-  };
-
-  const getDaysInMonth = (year, monthIndex) => new Date(year, monthIndex + 1, 0).getDate();
-
   const getPhotoNode = (photosNode, id) => {
     if (!id) {
       return null;
@@ -311,126 +254,6 @@
     photoList.appendChild(fragment);
   };
 
-  const setDreamspellSyncMessage = (message, type = 'info') => {
-    if (!dreamspellSync) {
-      return;
-    }
-    dreamspellSync.textContent = message;
-    dreamspellSync.dataset.state = message ? type : '';
-  };
-
-  const updateDreamspellToggle = (mode) => {
-    if (!dreamspellModeButtons) {
-      return;
-    }
-    dreamspellModeButtons.forEach((button) => {
-      const isActive = button.dataset.calendarMode === mode;
-      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-  };
-
-  const renderDreamspellCalendar = () => {
-    if (!dreamspellCalendar || !dreamspellCard) {
-      return;
-    }
-
-    const activeDays = dreamspellState.activeDays || {};
-    const today = new Date();
-    dreamspellCalendar.innerHTML = '';
-
-    if (dreamspellState.mode === 'sun') {
-      const year = today.getFullYear();
-      const months = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-      ];
-
-      if (dreamspellToday) {
-        const todayLabel = today.toLocaleDateString(undefined, {
-          weekday: 'long',
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric'
-        });
-        dreamspellToday.textContent = `☀️ Today is ${todayLabel} in the Solar calendar.`;
-      }
-
-      months.forEach((name, monthIndex) => {
-        const month = document.createElement('div');
-        month.className = 'dreamspell-month';
-
-        const header = document.createElement('h4');
-        header.textContent = `${name} ${year}`;
-        month.appendChild(header);
-
-        const grid = document.createElement('div');
-        grid.className = 'dreamspell-grid';
-
-        const daysInMonth = getDaysInMonth(year, monthIndex);
-        for (let dayIndex = 1; dayIndex <= daysInMonth; dayIndex += 1) {
-          const date = new Date(year, monthIndex, dayIndex);
-          const dateKey = formatDateKey(date);
-          const button = document.createElement('button');
-          button.type = 'button';
-          button.className = 'dreamspell-day';
-          button.textContent = dayIndex;
-          button.dataset.date = dateKey;
-          button.dataset.active = activeDays[dateKey] ? 'true' : 'false';
-          button.dataset.today = isSameDate(date, today) ? 'true' : 'false';
-          grid.appendChild(button);
-        }
-
-        month.appendChild(grid);
-        dreamspellCalendar.appendChild(month);
-      });
-
-      return;
-    }
-
-    const months = [
-      'Magnetic', 'Lunar', 'Electric', 'Self-Existing', 'Overtone', 'Rhythmic',
-      'Resonant', 'Galactic', 'Solar', 'Planetary', 'Spectral', 'Crystal', 'Cosmic'
-    ];
-
-    const startDate = getMoonYearStart();
-    const diffDays = Math.floor((today - startDate) / (1000 * 60 * 60 * 24));
-    const moonIndex = Math.floor(diffDays / 28);
-    const dayInMoon = (diffDays % 28) + 1;
-
-    if (dreamspellToday) {
-      dreamspellToday.textContent = `🗓️ Today is ${months[moonIndex]} Moon, Day ${dayInMoon} in the 13 Moon Calendar.`;
-    }
-
-    months.forEach((name, monthIndex) => {
-      const month = document.createElement('div');
-      month.className = 'dreamspell-month';
-
-      const header = document.createElement('h4');
-      header.textContent = `${name} Moon`;
-      month.appendChild(header);
-
-      const grid = document.createElement('div');
-      grid.className = 'dreamspell-grid';
-
-      for (let dayIndex = 1; dayIndex <= 28; dayIndex += 1) {
-        const date = new Date(startDate);
-        date.setDate(startDate.getDate() + monthIndex * 28 + (dayIndex - 1));
-        const dateKey = formatDateKey(date);
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'dreamspell-day';
-        button.textContent = dayIndex;
-        button.dataset.date = dateKey;
-        button.dataset.active = activeDays[dateKey] ? 'true' : 'false';
-        button.dataset.today = isSameDate(date, today) ? 'true' : 'false';
-        grid.appendChild(button);
-      }
-
-      month.appendChild(grid);
-      dreamspellCalendar.appendChild(month);
-    });
-  };
-
   const attachPhotoLibraryListeners = () => {
     if (photoListenersAttached || !photoList || typeof Gun?.SEA?.decrypt !== 'function') {
       return;
@@ -480,50 +303,6 @@
 
     attach(getSharedPhotos(), 'shared');
     attach(getLegacyPhotos(), 'legacy');
-  };
-
-  const setDreamspellMode = (mode, shouldPersist = false) => {
-    const nextMode = sanitizeDreamspellMode(mode);
-    if (dreamspellState.mode === nextMode && !shouldPersist) {
-      return;
-    }
-    dreamspellState.mode = nextMode;
-    updateDreamspellToggle(nextMode);
-    renderDreamspellCalendar();
-    if (shouldPersist) {
-      saveDreamspellMode(nextMode);
-    }
-  };
-
-  const saveDreamspellMode = (mode) => {
-    const nodes = [
-      safeGet(getSharedDreamspell(), 'mode'),
-      safeGet(getLegacyDreamspell(), 'mode')
-    ];
-    putToMultipleNodes(mode, nodes, () => {
-      const message = hasConnectedPeer
-        ? 'Calendar mode synced across your devices.'
-        : 'Calendar mode saved locally. It will sync when a connection is available.';
-      setDreamspellSyncMessage(message, hasConnectedPeer ? 'success' : 'warning');
-    });
-  };
-
-  const saveDreamspellDays = (days) => {
-    const nodes = [
-      safeGet(getSharedDreamspell(), 'activeDays'),
-      safeGet(getLegacyDreamspell(), 'activeDays')
-    ];
-    putToMultipleNodes(days, nodes, () => {
-      const message = hasConnectedPeer
-        ? 'Dreamspell selections synced across your devices.'
-        : 'Selections saved locally. They will sync when a connection is available.';
-      setDreamspellSyncMessage(message, hasConnectedPeer ? 'success' : 'warning');
-    });
-  };
-
-  const setDreamspellDays = (value) => {
-    dreamspellState.activeDays = normalizeDreamspellDays(value);
-    renderDreamspellCalendar();
   };
 
   const deletePhotoById = (photoId) => {
@@ -667,7 +446,6 @@
     if (aliasCandidate) {
       persistAlias(aliasCandidate);
     }
-    setDreamspellSyncMessage(DREAMSPELL_DEFAULT_MESSAGE, 'info');
     if (typeof window !== 'undefined') {
       if (window.history?.replaceState) {
         window.history.replaceState(null, '', '#admin-panel');
@@ -684,9 +462,6 @@
     adminPanel.hidden = true;
     authSection.hidden = false;
     resetPhotoVaultState();
-    dreamspellState.activeDays = {};
-    dreamspellState.mode = DREAMSPELL_DEFAULT_MODE;
-    setDreamspellSyncMessage('', 'info');
     if (message) {
       setAuthMessage(message, 'info');
     }
@@ -759,26 +534,6 @@
         fallback: safeGet(getLegacyDashboard(), 'commandCentralEnabled'),
         onValue: updateCommandCentralPreview
       });
-    }
-
-    if (dreamspellCard) {
-      bindField({
-        primary: safeGet(getSharedDreamspell(), 'activeDays'),
-        fallback: safeGet(getLegacyDreamspell(), 'activeDays'),
-        onValue: setDreamspellDays
-      });
-
-      bindField({
-        primary: safeGet(getSharedDreamspell(), 'mode'),
-        fallback: safeGet(getLegacyDreamspell(), 'mode'),
-        onValue: (value) => setDreamspellMode(value || DREAMSPELL_DEFAULT_MODE)
-      });
-
-      if (!dreamspellState.mode) {
-        setDreamspellMode(DREAMSPELL_DEFAULT_MODE);
-      }
-
-      renderDreamspellCalendar();
     }
 
     attachPhotoLibraryListeners();
@@ -903,37 +658,6 @@
           }
         }
       );
-    });
-  }
-
-  if (dreamspellModeButtons && dreamspellModeButtons.length) {
-    dreamspellModeButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        const nextMode = button.dataset.calendarMode;
-        setDreamspellMode(nextMode, true);
-      });
-    });
-  }
-
-  if (dreamspellCalendar) {
-    dreamspellCalendar.addEventListener('click', (event) => {
-      const target = event.target.closest('.dreamspell-day');
-      if (!target || !target.dataset.date) {
-        return;
-      }
-      const dateKey = target.dataset.date;
-      if (!dateKey) {
-        return;
-      }
-      const nextDays = { ...dreamspellState.activeDays };
-      if (nextDays[dateKey]) {
-        delete nextDays[dateKey];
-      } else {
-        nextDays[dateKey] = true;
-      }
-      dreamspellState.activeDays = nextDays;
-      renderDreamspellCalendar();
-      saveDreamspellDays(nextDays);
     });
   }
 
