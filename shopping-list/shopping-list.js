@@ -1,6 +1,7 @@
 const RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
 const LIST_ID_STORAGE_KEY = 'shoppingListId';
 const LIST_QUERY_PARAM = 'list';
+const DEFAULT_LIST_ID = 'household';
 
 const safeStorage = (storage) => {
   if (!storage) {
@@ -16,16 +17,8 @@ const safeStorage = (storage) => {
   }
 };
 
-const buildListId = (windowRef) => {
-  if (windowRef?.crypto?.randomUUID) {
-    return windowRef.crypto.randomUUID();
-  }
-  return `list-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-};
-
-const resolveListContext = (windowRef) => {
+const resolveListContext = (windowRef, storage) => {
   const url = new URL(windowRef.location.href);
-  const storage = safeStorage(windowRef.localStorage);
   const listFromUrl = url.searchParams.get(LIST_QUERY_PARAM);
 
   if (listFromUrl) {
@@ -34,17 +27,11 @@ const resolveListContext = (windowRef) => {
   }
 
   const storedList = storage?.getItem(LIST_ID_STORAGE_KEY);
-  if (storedList) {
-    url.searchParams.set(LIST_QUERY_PARAM, storedList);
-    windowRef.history.replaceState({}, '', url);
-    return { listId: storedList, url };
-  }
-
-  const newListId = buildListId(windowRef);
-  storage?.setItem(LIST_ID_STORAGE_KEY, newListId);
-  url.searchParams.set(LIST_QUERY_PARAM, newListId);
+  const resolvedListId = storedList || DEFAULT_LIST_ID;
+  storage?.setItem(LIST_ID_STORAGE_KEY, resolvedListId);
+  url.searchParams.set(LIST_QUERY_PARAM, resolvedListId);
   windowRef.history.replaceState({}, '', url);
-  return { listId: newListId, url };
+  return { listId: resolvedListId, url };
 };
 
 const formatDate = (value) => {
@@ -72,8 +59,12 @@ export const initShoppingList = ({
     return null;
   }
 
-  const gun = GunLib({ peers: [RELAY_URL], localStorage: true });
-  const { listId } = resolveListContext(windowRef);
+  const storage = safeStorage(windowRef.localStorage);
+  const gun = GunLib({
+    peers: [RELAY_URL],
+    localStorage: Boolean(storage),
+  });
+  const { listId } = resolveListContext(windowRef, storage);
 
   const form = documentRef.getElementById('shopping-form');
   const nameInput = documentRef.getElementById('item-name');
