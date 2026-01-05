@@ -45,6 +45,9 @@ export const initShoppingList = ({
   const renderItems = () => {
     const items = Array.from(cache.values()).filter((entry) => entry && entry.name);
     items.sort((a, b) => {
+      if (a.purchased !== b.purchased) {
+        return a.purchased ? 1 : -1;
+      }
       if (a.neededBy && b.neededBy) {
         return a.neededBy.localeCompare(b.neededBy);
       }
@@ -69,6 +72,9 @@ export const initShoppingList = ({
     for (const item of items) {
       const li = documentRef.createElement('li');
       li.className = 'meal-card';
+      if (item.purchased) {
+        li.classList.add('shopping-item--purchased');
+      }
 
       const header = documentRef.createElement('div');
       header.className = 'meal-card__header';
@@ -90,6 +96,13 @@ export const initShoppingList = ({
         dateTag.className = 'meal-date';
         dateTag.textContent = `Needed ${formatDate(item.neededBy)}`;
         meta.appendChild(dateTag);
+      }
+
+      if (item.purchased) {
+        const purchasedTag = documentRef.createElement('span');
+        purchasedTag.className = 'meal-tag';
+        purchasedTag.textContent = 'Purchased';
+        meta.appendChild(purchasedTag);
       }
 
       header.append(title, meta);
@@ -114,6 +127,31 @@ export const initShoppingList = ({
         li.appendChild(details);
       }
 
+      const actions = documentRef.createElement('div');
+      actions.className = 'shopping-actions';
+
+      const toggleButton = documentRef.createElement('button');
+      toggleButton.type = 'button';
+      toggleButton.className = 'shopping-action-btn';
+      toggleButton.textContent = item.purchased ? 'Mark unpurchased' : 'Mark purchased';
+      toggleButton.addEventListener('click', () => {
+        entries.get(item.id).put({
+          purchased: !item.purchased,
+          purchasedAt: !item.purchased ? Date.now() : null,
+        });
+      });
+
+      const deleteButton = documentRef.createElement('button');
+      deleteButton.type = 'button';
+      deleteButton.className = 'shopping-action-btn shopping-action-btn--ghost';
+      deleteButton.textContent = 'Delete';
+      deleteButton.addEventListener('click', () => {
+        entries.get(item.id).put(null);
+      });
+
+      actions.append(toggleButton, deleteButton);
+      li.appendChild(actions);
+
       list.appendChild(li);
     }
   };
@@ -134,6 +172,8 @@ export const initShoppingList = ({
       store: data.store,
       notes: data.notes,
       createdAt: data.createdAt,
+      purchased: Boolean(data.purchased),
+      purchasedAt: data.purchasedAt,
     });
 
     renderItems();
