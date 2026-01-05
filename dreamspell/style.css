@@ -1,0 +1,127 @@
+/* ===========================
+   DREAMSPELL CALENDAR
+=========================== */
+.dreamspell-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.dreamspell-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.dreamspell-toggle-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dreamspell-toggle-btn[aria-pressed="true"] {
+  background: rgba(255, 215, 0, 0.9);
+  color: #0b1d39;
+}
+
+.dreamspell-toggle-btn:focus-visible {
+  outline: 2px solid rgba(255, 215, 0, 0.8);
+  outline-offset: 2px;
+}
+
+.dreamspell-today {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #fff1b6;
+}
+
+.dreamspell-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.dreamspell-month {
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(6, 12, 24, 0.65);
+}
+
+.dreamspell-month h4 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.dreamspell-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.dreamspell-day {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 0.55rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.dreamspell-day:hover,
+.dreamspell-day:focus-visible {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+}
+
+.dreamspell-day[data-active="true"] {
+  background: rgba(255, 77, 109, 0.9);
+  color: #0b1d39;
+}
+
+.dreamspell-day[data-today="true"] {
+  border-color: rgba(0, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.35);
+}
+
+.form-helper[data-state="success"] {
+  color: #9cffb0;
+}
+
+.form-helper[data-state="warning"] {
+  color: #ffd27f;
+}
+
+.form-helper[data-state="error"] {
+  color: #ff9b9b;
+}
+
+@media (max-width: 720px) {
+  .dreamspell-toggle {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dreamspell-toggle-btn {
+    flex: 1;
+    text-align: center;
+  }
+}

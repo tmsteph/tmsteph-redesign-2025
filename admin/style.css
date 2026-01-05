@@ -188,6 +188,18 @@ textarea {
   margin-top: -0.4rem;
 }
 
+.form-helper[data-state="success"] {
+  color: #9cffb0;
+}
+
+.form-helper[data-state="warning"] {
+  color: #ffd27f;
+}
+
+.form-helper[data-state="error"] {
+  color: #ff9b9b;
+}
+
 .checkbox-label {
   display: inline-flex;
   align-items: center;
@@ -302,6 +314,7 @@ textarea {
   margin: 0;
 }
 
+
 @media (max-width: 720px) {
   .panel-header {
     flex-direction: column;
@@ -323,4 +336,5 @@ textarea {
     width: 100%;
     height: auto;
   }
+
 }

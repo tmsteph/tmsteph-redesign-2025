@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1d39" />
+  <title>Dreamspell Calendar - tmsteph</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../admin/style.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+  <script src="../pwa.js" defer></script>
+  <script defer src="/_vercel/analytics/script.js"></script>
+</head>
+<body class="admin-body">
+  <header class="hero hero-compact">
+    <div class="container">
+      <h1 class="handwritten">Dreamspell Calendar</h1>
+      <p class="tagline">Private 13 Moon + Solar tracking, synced with your admin login.</p>
+      <a href="../admin/index.html" class="btn-secondary">⬅ Back to Admin</a>
+    </div>
+  </header>
+
+  <main class="container admin-container">
+    <section id="auth-section" class="section card form-card">
+      <h2 id="auth-heading">Log In</h2>
+      <p class="form-subtitle">Sign in to sync your Dreamspell calendar across devices.</p>
+      <form id="auth-form" autocomplete="off">
+        <div class="input-group">
+          <label for="alias">Alias</label>
+          <input type="text" id="alias" name="alias" required placeholder="Your username" />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="password-field">
+            <input type="password" id="password" name="password" required placeholder="Enter your password" />
+            <button type="button" id="password-toggle" class="password-toggle" aria-pressed="false" aria-label="Show password">
+              Show
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary" id="auth-submit">Log In</button>
+      </form>
+      <p class="form-toggle"> <span id="auth-toggle-text">Need an account?</span> <button type="button" id="toggle-auth" class="link-button">Create one</button></p>
+      <p id="auth-message" class="form-message" role="status"></p>
+    </section>
+
+    <section id="dreamspell-panel" class="section card form-card" hidden>
+      <div class="panel-header">
+        <div>
+          <h2>Dreamspell Calendar</h2>
+          <p class="form-subtitle">Switch between 13 Moon and Solar views and sync every selection.</p>
+        </div>
+        <button id="logout-btn" class="btn-secondary">Log out</button>
+      </div>
+
+      <div class="dreamspell-header">
+        <p id="dreamspell-today" class="dreamspell-today" aria-live="polite"></p>
+        <div class="dreamspell-toggle" role="tablist" aria-label="Calendar mode">
+          <button type="button" class="dreamspell-toggle-btn" data-calendar-mode="moon" aria-pressed="true">
+            13 Moon
+          </button>
+          <button type="button" class="dreamspell-toggle-btn" data-calendar-mode="sun" aria-pressed="false">
+            Sun
+          </button>
+        </div>
+      </div>
+
+      <div id="dreamspell-calendar" class="dreamspell-calendar" aria-live="polite"></div>
+      <p id="dreamspell-sync" class="form-helper" role="status" aria-live="polite">
+        Sync status will appear here after your calendar is saved.
+      </p>
+      <p id="panel-message" class="form-message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Dreamspell Calendar</p>
+    </div>
+  </footer>
+
+  <script src="./dreamspell.js"></script>
+</body>
+</html>
