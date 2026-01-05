@@ -1,38 +1,4 @@
 const RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
-const LIST_ID_STORAGE_KEY = 'shoppingListId';
-const LIST_QUERY_PARAM = 'list';
-const DEFAULT_LIST_ID = 'household';
-
-const safeStorage = (storage) => {
-  if (!storage) {
-    return null;
-  }
-  try {
-    const testKey = '__storage_test__';
-    storage.setItem(testKey, testKey);
-    storage.removeItem(testKey);
-    return storage;
-  } catch (error) {
-    return null;
-  }
-};
-
-const resolveListContext = (windowRef, storage) => {
-  const url = new URL(windowRef.location.href);
-  const listFromUrl = url.searchParams.get(LIST_QUERY_PARAM);
-
-  if (listFromUrl) {
-    storage?.setItem(LIST_ID_STORAGE_KEY, listFromUrl);
-    return { listId: listFromUrl, url };
-  }
-
-  const storedList = storage?.getItem(LIST_ID_STORAGE_KEY);
-  const resolvedListId = storedList || DEFAULT_LIST_ID;
-  storage?.setItem(LIST_ID_STORAGE_KEY, resolvedListId);
-  url.searchParams.set(LIST_QUERY_PARAM, resolvedListId);
-  windowRef.history.replaceState({}, '', url);
-  return { listId: resolvedListId, url };
-};
 
 const formatDate = (value) => {
   if (!value) {
@@ -53,23 +19,15 @@ const formatDate = (value) => {
 export const initShoppingList = ({
   Gun: GunLib = globalThis.Gun,
   document: documentRef = globalThis.document,
-  window: windowRef = globalThis.window,
 } = {}) => {
-  if (!GunLib || !documentRef || !windowRef) {
+  if (!GunLib || !documentRef) {
     return null;
   }
 
-  let storage = null;
-  try {
-    storage = safeStorage(windowRef.localStorage);
-  } catch (error) {
-    storage = null;
-  }
   const gun = GunLib({
     peers: [RELAY_URL],
-    localStorage: Boolean(storage),
+    localStorage: true,
   });
-  const { listId } = resolveListContext(windowRef, storage);
 
   const form = documentRef.getElementById('shopping-form');
   const nameInput = documentRef.getElementById('item-name');
@@ -81,7 +39,7 @@ export const initShoppingList = ({
   const list = documentRef.getElementById('shopping-list');
   const emptyState = documentRef.getElementById('shopping-empty');
 
-  const entries = gun.get('shopping-list').get(listId).get('items');
+  const entries = gun.get('shopping-list').get('items');
   const cache = new Map();
 
   const renderItems = () => {
@@ -217,7 +175,7 @@ export const initShoppingList = ({
     dateInput.value = today;
   }
 
-  return { listId };
+  return {};
 };
 
 if (typeof window !== 'undefined') {
