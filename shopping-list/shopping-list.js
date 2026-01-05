@@ -36,11 +36,40 @@ export const initShoppingList = ({
   const dateInput = documentRef.getElementById('item-date');
   const storeInput = documentRef.getElementById('item-store');
   const notesInput = documentRef.getElementById('item-notes');
+  const formTitle = documentRef.getElementById('shopping-form-title');
+  const submitButton = documentRef.getElementById('shopping-submit');
+  const cancelButton = documentRef.getElementById('shopping-cancel');
   const list = documentRef.getElementById('shopping-list');
   const emptyState = documentRef.getElementById('shopping-empty');
 
   const entries = gun.get('shopping-list').get('items');
   const cache = new Map();
+  let editingId = null;
+
+  const resetForm = () => {
+    form.reset();
+    nameInput.value = '';
+    quantityInput.value = '';
+    storeInput.value = '';
+    notesInput.value = '';
+    if (!dateInput.value) {
+      dateInput.value = new Date().toISOString().split('T')[0];
+    }
+  };
+
+  const setEditState = (item) => {
+    editingId = item?.id ?? null;
+    if (editingId) {
+      formTitle.textContent = 'Edit item';
+      submitButton.textContent = 'Save changes';
+      cancelButton.hidden = false;
+    } else {
+      formTitle.textContent = 'New item';
+      submitButton.textContent = 'Add to list';
+      cancelButton.hidden = true;
+      resetForm();
+    }
+  };
 
   const renderItems = () => {
     const items = Array.from(cache.values()).filter((entry) => entry && entry.name);
@@ -141,15 +170,33 @@ export const initShoppingList = ({
         });
       });
 
+      const editButton = documentRef.createElement('button');
+      editButton.type = 'button';
+      editButton.className = 'shopping-action-btn';
+      editButton.textContent = 'Edit';
+      editButton.addEventListener('click', () => {
+        nameInput.value = item.name ?? '';
+        quantityInput.value = item.quantity ?? '';
+        categoryInput.value = item.category ?? 'Other';
+        dateInput.value = item.neededBy ?? '';
+        storeInput.value = item.store ?? '';
+        notesInput.value = item.notes ?? '';
+        setEditState(item);
+        nameInput.focus();
+      });
+
       const deleteButton = documentRef.createElement('button');
       deleteButton.type = 'button';
       deleteButton.className = 'shopping-action-btn shopping-action-btn--ghost';
       deleteButton.textContent = 'Delete';
       deleteButton.addEventListener('click', () => {
         entries.get(item.id).put(null);
+        if (editingId === item.id) {
+          setEditState(null);
+        }
       });
 
-      actions.append(toggleButton, deleteButton);
+      actions.append(toggleButton, editButton, deleteButton);
       li.appendChild(actions);
 
       list.appendChild(li);
@@ -193,6 +240,23 @@ export const initShoppingList = ({
       return;
     }
 
+    if (editingId) {
+      const existing = cache.get(editingId) ?? {};
+      entries.get(editingId).put({
+        name,
+        quantity,
+        category,
+        neededBy,
+        store,
+        notes,
+        createdAt: existing.createdAt ?? Date.now(),
+        purchased: existing.purchased ?? false,
+        purchasedAt: existing.purchasedAt ?? null,
+      });
+      setEditState(null);
+      return;
+    }
+
     const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
     entries.get(id).put({
       name,
@@ -203,11 +267,11 @@ export const initShoppingList = ({
       notes,
       createdAt: Date.now(),
     });
+    resetForm();
+  });
 
-    nameInput.value = '';
-    quantityInput.value = '';
-    storeInput.value = '';
-    notesInput.value = '';
+  cancelButton.addEventListener('click', () => {
+    setEditState(null);
   });
 
   const today = new Date().toISOString().split('T')[0];

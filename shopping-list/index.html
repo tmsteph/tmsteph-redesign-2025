@@ -33,7 +33,7 @@
 
       <div class="tracker-grid">
         <form class="tracker-form" id="shopping-form">
-          <h3>New item</h3>
+          <h3 id="shopping-form-title">New item</h3>
           <label for="item-name">Item</label>
           <input type="text" id="item-name" name="item-name" placeholder="Organic bananas" required>
 
@@ -60,7 +60,8 @@
           <label for="item-notes">Notes</label>
           <textarea id="item-notes" name="item-notes" rows="4" placeholder="Brand, size, or substitutions"></textarea>
 
-          <button class="btn-primary" type="submit">Add to list</button>
+          <button class="btn-primary" type="submit" id="shopping-submit">Add to list</button>
+          <button class="btn-secondary" type="button" id="shopping-cancel" hidden>Cancel edit</button>
         </form>
 
         <div class="tracker-results">
