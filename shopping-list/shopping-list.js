@@ -59,7 +59,12 @@ export const initShoppingList = ({
     return null;
   }
 
-  const storage = safeStorage(windowRef.localStorage);
+  let storage = null;
+  try {
+    storage = safeStorage(windowRef.localStorage);
+  } catch (error) {
+    storage = null;
+  }
   const gun = GunLib({
     peers: [RELAY_URL],
     localStorage: Boolean(storage),
