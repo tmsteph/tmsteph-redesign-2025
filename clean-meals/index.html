@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clean & Nourishing Meals</title>
+
+  <style>
+    :root {
+      --bg: #f7f9f6;
+      --card: #ffffff;
+      --text: #2c2c2c;
+      --muted: #6b6b6b;
+      --accent: #7fa88d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    .card h3 {
+      margin: 0.2rem 0 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Clean, Fresh & Nourishing Meals</h1>
+  <p>
+    Simple, organic, and picky-friendly meals that feel good to eat
+    and easy to love.
+  </p>
+</header>
+
+<section>
+  <h2>🌞 Breakfast</h2>
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141" alt="Avocado toast">
+      <div class="card-content">
+        <h3>Avocado Toast</h3>
+        <p>
+          Sourdough or sprouted grain toast with avocado, lemon,
+          olive oil, and optional egg or microgreens.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1506086679525-9d58f68f6b48" alt="Chia pudding">
+      <div class="card-content">
+        <h3>Coconut Chia Pudding</h3>
+        <p>
+          Coconut milk, chia seeds, fresh berries,
+          and a drizzle of raw honey.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1505253216365-0d77d2d0c0b1" alt="Yogurt bowl">
+      <div class="card-content">
+        <h3>Yogurt Bowl</h3>
+        <p>
+          Organic yogurt with berries and granola served on the side
+          for full control.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>🌿 Lunch</h2>
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe" alt="Chicken bowl">
+      <div class="card-content">
+        <h3>Build-Your-Own Chicken Bowl</h3>
+        <p>
+          Grilled organic chicken, greens, sweet potato,
+          and dressing on the side.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288" alt="Salmon salad">
+      <div class="card-content">
+        <h3>Salmon & Greens</h3>
+        <p>
+          Wild-caught salmon with lemon and olive oil
+          over simple greens.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd" alt="Vegetable soup">
+      <div class="card-content">
+        <h3>Light Veggie Soup</h3>
+        <p>
+          Carrot, celery, onion, garlic, and broth —
+          warm, nourishing, and gentle.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>🌙 Dinner</h2>
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1604908177225-6c6b0c39bfb5" alt="Roast chicken">
+      <div class="card-content">
+        <h3>Herb Roasted Chicken</h3>
+        <p>
+          Organic chicken roasted with rosemary, garlic,
+          olive oil, and vegetables.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd" alt="Zucchini noodles">
+      <div class="card-content">
+        <h3>Zucchini Noodles</h3>
+        <p>
+          Zoodles with olive oil, garlic, parmesan,
+          and optional protein.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1604908177522-432c5a38b4d5" alt="Steak dinner">
+      <div class="card-content">
+        <h3>Grass-Fed Steak</h3>
+        <p>
+          High-quality steak, salt and pepper,
+          with roasted vegetables or salad.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>🍓 Snacks & Treats</h2>
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea" alt="Fruit plate">
+      <div class="card-content">
+        <h3>Fresh Fruit Plate</h3>
+        <p>
+          Berries, citrus, melon — simple, sweet,
+          and naturally satisfying.
+        </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1511381939415-e44015466834" alt="Dark chocolate">
+      <div class="card-content">
+        <h3>Dark Chocolate</h3>
+        <p>
+          Organic, high-cacao chocolate —
+          just enough indulgence.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  Made with care 🥗 — simple food, simple joy
+</footer>
+
+</body>
+</html>
