@@ -73,7 +73,28 @@ const renderMeals = () => {
     meta.append(typeTag, dateTag);
     header.append(title, meta);
 
+    const actions = document.createElement('div');
+    actions.className = 'meal-actions';
+
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'meal-action-btn meal-action-btn--danger';
+    deleteButton.textContent = 'Delete';
+    deleteButton.setAttribute('aria-label', `Delete ${entry.menu}`);
+    deleteButton.addEventListener('click', () => {
+      const shouldDelete = window.confirm(`Delete "${entry.menu}" from the meal log?`);
+      if (!shouldDelete) {
+        return;
+      }
+      cache.delete(entry.id);
+      entries.get(entry.id).put(null);
+      renderMeals();
+    });
+
+    actions.appendChild(deleteButton);
+
     li.appendChild(header);
+    li.appendChild(actions);
     list.appendChild(li);
   }
 };
