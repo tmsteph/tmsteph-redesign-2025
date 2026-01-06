@@ -1147,6 +1147,41 @@ footer {
   background: rgba(255, 255, 255, 0.08);
 }
 
+.recipe-details {
+  margin-top: 0.85rem;
+  display: grid;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.recipe-section h5 {
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.recipe-list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.recipe-source {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.recipe-source a {
+  color: #bff5ff;
+  word-break: break-word;
+}
+
 .shopping-actions {
   display: flex;
   flex-wrap: wrap;

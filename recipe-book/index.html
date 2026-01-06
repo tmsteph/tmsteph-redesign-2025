@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d39">
+  <title>Recipe Book - Thomas Stephens</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="shortcut icon" href="../favicon-16x16.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <script src="../pwa.js" defer></script>
+  <script defer src="/_vercel/analytics/script.js"></script>
+</head>
+<body>
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Recipe Book</h1>
+      <p class="tagline">Collect favorite recipes, prep notes, and kitchen inspiration in one shared space.</p>
+      <a href="../index.html" class="btn-primary">← Back to Home</a>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Add a recipe</h2>
+        <p>Capture the ingredients, steps, and serving notes so the whole family can cook from the same playbook.</p>
+      </div>
+
+      <div class="tracker-grid">
+        <form class="tracker-form" id="recipe-form">
+          <h3 id="recipe-form-title">New recipe</h3>
+          <label for="recipe-name">Recipe name</label>
+          <input type="text" id="recipe-name" name="recipe-name" placeholder="Lemon herb salmon" required>
+
+          <label for="recipe-category">Category</label>
+          <select id="recipe-category" name="recipe-category" required>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Lunch">Lunch</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Snack">Snack</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Drink">Drink</option>
+            <option value="Side">Side</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="recipe-servings">Servings</label>
+          <input type="text" id="recipe-servings" name="recipe-servings" placeholder="4">
+
+          <label for="recipe-time">Total time</label>
+          <input type="text" id="recipe-time" name="recipe-time" placeholder="35 minutes">
+
+          <label for="recipe-ingredients">Ingredients</label>
+          <textarea id="recipe-ingredients" name="recipe-ingredients" rows="5" placeholder="One item per line" required></textarea>
+
+          <label for="recipe-steps">Instructions</label>
+          <textarea id="recipe-steps" name="recipe-steps" rows="6" placeholder="Step-by-step notes" required></textarea>
+
+          <label for="recipe-source">Source link (optional)</label>
+          <input type="url" id="recipe-source" name="recipe-source" placeholder="https://example.com">
+
+          <button class="btn-primary" type="submit" id="recipe-submit">Save recipe</button>
+          <button class="btn-secondary" type="button" id="recipe-cancel" hidden>Cancel edit</button>
+        </form>
+
+        <div class="tracker-results">
+          <h3>Family recipe collection</h3>
+          <p class="tracker-note" id="recipe-empty">No recipes yet. Add your first favorite on the left.</p>
+          <ul class="meal-list" id="recipe-list" aria-live="polite"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2025 Thomas Stephens | Cook, share, and savor together.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js" defer></script>
+  <script src="recipe-book.js" defer></script>
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      starField.appendChild(star);
+    }
+  </script>
+</body>
+</html>
