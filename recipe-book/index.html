@@ -31,6 +31,18 @@
         <p>Capture the ingredients, steps, and serving notes so the whole family can cook from the same playbook.</p>
       </div>
 
+      <div class="share-panel">
+        <div>
+          <h3>Share this recipe book</h3>
+          <p class="tracker-note">Use this link on other devices, especially if Brave blocks local storage.</p>
+        </div>
+        <div class="share-panel__controls">
+          <input type="text" id="recipe-share-link" readonly aria-label="Shareable recipe book link">
+          <button class="btn-secondary" type="button" id="recipe-share-copy">Copy link</button>
+        </div>
+        <p class="tracker-note" id="recipe-share-status" aria-live="polite"></p>
+      </div>
+
       <div class="tracker-grid">
         <form class="tracker-form" id="recipe-form">
           <h3 id="recipe-form-title">New recipe</h3>
