@@ -4,6 +4,7 @@ import { initShoppingList } from '../shopping-list/shopping-list.js';
 
 const baseMarkup = `
   <form id="shopping-form">
+    <h3 id="shopping-form-title"></h3>
     <input id="item-name" />
     <input id="item-quantity" />
     <select id="item-category">
@@ -13,8 +14,13 @@ const baseMarkup = `
     <input id="item-date" />
     <input id="item-store" />
     <textarea id="item-notes"></textarea>
-    <button type="submit">Submit</button>
+    <button id="shopping-submit" type="submit">Submit</button>
+    <button id="shopping-cancel" type="button">Cancel</button>
   </form>
+  <select id="shopping-sort">
+    <option value="recent">Recently added</option>
+    <option value="alpha">Alphabetical</option>
+  </select>
   <div id="shopping-empty"></div>
   <ul id="shopping-list"></ul>
 `;
