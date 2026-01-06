@@ -1,6 +1,6 @@
 const RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
 
-export const initRecipeBook = ({
+const initRecipeBook = ({
   Gun: GunLib = globalThis.Gun,
   document: documentRef = globalThis.document,
   window: windowRef = globalThis.window,
