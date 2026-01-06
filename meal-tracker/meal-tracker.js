@@ -7,6 +7,7 @@ const dateInput = document.getElementById('meal-date');
 const menuInput = document.getElementById('meal-menu');
 const list = document.getElementById('meal-list');
 const emptyState = document.getElementById('meal-empty');
+const today = new Date().toISOString().split('T')[0];
 
 const entries = gun.get('meal-tracker').get('entries');
 const cache = new Map();
@@ -48,6 +49,9 @@ const renderMeals = () => {
   for (const entry of items) {
     const li = document.createElement('li');
     li.className = 'meal-card';
+    if (entry.date === today) {
+      li.classList.add('meal-card--today');
+    }
 
     const header = document.createElement('div');
     header.className = 'meal-card__header';
@@ -114,7 +118,6 @@ form.addEventListener('submit', (event) => {
   menuInput.value = '';
 });
 
-const today = new Date().toISOString().split('T')[0];
 if (!dateInput.value) {
   dateInput.value = today;
 }

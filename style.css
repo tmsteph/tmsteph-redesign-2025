@@ -1052,6 +1052,18 @@ footer {
   box-shadow: 0 16px 36px -24px rgba(0, 0, 0, 0.65);
 }
 
+.meal-card--today {
+  border-color: rgba(127, 255, 225, 0.6);
+  background: rgba(15, 55, 90, 0.6);
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.7);
+}
+
+.meal-card--today .meal-date {
+  border-color: rgba(127, 255, 225, 0.65);
+  background: rgba(127, 255, 225, 0.18);
+  color: rgba(240, 255, 251, 0.95);
+}
+
 .shopping-item--purchased {
   background: rgba(11, 29, 57, 0.25);
   border-color: rgba(255, 255, 255, 0.05);
