@@ -33,7 +33,7 @@
 
       <div class="tracker-grid">
         <form class="tracker-form" id="meal-form">
-          <h3>New entry</h3>
+          <h3 id="meal-form-title">New entry</h3>
           <label for="meal-type">Meal type</label>
           <select id="meal-type" name="meal-type" required>
             <option value="Breakfast">Breakfast</option>
@@ -48,7 +48,8 @@
           <label for="meal-menu">Menu</label>
           <textarea id="meal-menu" name="meal-menu" rows="4" placeholder="What was or will be served?" required></textarea>
 
-          <button class="btn-primary" type="submit">Save meal</button>
+          <button class="btn-primary" type="submit" id="meal-submit">Save meal</button>
+          <button class="btn-secondary" type="button" id="meal-cancel" hidden>Cancel edit</button>
         </form>
 
         <div class="tracker-results">

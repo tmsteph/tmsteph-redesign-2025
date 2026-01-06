@@ -1112,6 +1112,18 @@ footer {
   transform: translateY(-1px);
 }
 
+.meal-action-btn--edit {
+  border-color: rgba(132, 214, 255, 0.55);
+  background: rgba(132, 214, 255, 0.16);
+  color: #ddf3ff;
+}
+
+.meal-action-btn--edit:hover,
+.meal-action-btn--edit:focus-visible {
+  background: rgba(132, 214, 255, 0.3);
+  box-shadow: 0 10px 18px -16px rgba(132, 214, 255, 0.8);
+}
+
 .meal-action-btn--danger {
   border-color: rgba(255, 120, 120, 0.6);
   background: rgba(255, 120, 120, 0.14);
