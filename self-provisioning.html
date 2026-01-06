@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Self-Provisioning: Food • Water • Shelter</title>
+  <meta name="description" content="A simple, grounded manifesto and starter plan for building the basics: food, water, shelter — with repairability and resilience." />
+
+  <style>
+    :root{
+      --bg0:#070A0F;
+      --bg1:#0B1220;
+      --card:#0F1B2E;
+      --text:#E9F0FF;
+      --muted:#B6C4E3;
+      --faint:rgba(233,240,255,.08);
+      --line:rgba(233,240,255,.12);
+      --accent:#00ffc8;
+      --accent2:#7c4dff;
+      --warn:#ffd166;
+      --ok:#06d6a0;
+      --bad:#ff5c7a;
+      --radius:18px;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1100px 600px at 15% 0%, rgba(0,255,200,.16), transparent 55%),
+        radial-gradient(900px 500px at 85% 10%, rgba(124,77,255,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      line-height:1.55;
+    }
+
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:24px 18px 80px}
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(7,10,15,.82), rgba(7,10,15,.35));
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      max-width:1100px;margin:0 auto;
+      padding:14px 18px;
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; text-decoration:none;
+      letter-spacing:.5px;
+    }
+    .logo{
+      width:34px;height:34px;border-radius:12px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(0,255,200,.9), rgba(0,255,200,.05) 55%, transparent 60%),
+        radial-gradient(circle at 70% 65%, rgba(124,77,255,.9), rgba(124,77,255,.05) 55%, transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .brand strong{font-weight:800}
+    .links{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .links a{
+      text-decoration:none; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+    }
+    .links a:hover{
+      color:var(--text);
+      border-color:var(--line);
+      background:rgba(255,255,255,.03);
+    }
+
+    .hero{
+      padding:48px 0 26px;
+      display:grid; grid-template-columns: 1.15fr .85fr; gap:18px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr; padding-top:28px}
+    }
+    .h-card{
+      background: linear-gradient(180deg, rgba(15,27,46,.86), rgba(15,27,46,.55));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .h-card:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(700px 300px at 20% 0%, rgba(0,255,200,.18), transparent 55%),
+        radial-gradient(600px 260px at 80% 10%, rgba(124,77,255,.16), transparent 55%);
+      pointer-events:none;
+    }
+    .h-card > *{position:relative}
+    h1{
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.12;
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: 1.05rem;
+      max-width: 60ch;
+    }
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin: 0 0 18px}
+    .chip{
+      font-family: var(--mono);
+      font-size: .88rem;
+      border:1px solid var(--line);
+      color: rgba(233,240,255,.92);
+      padding:8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+    }
+    .cta-row{display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      text-decoration:none;
+      color: var(--text);
+      background: rgba(255,255,255,.03);
+      transition: transform .06s ease, background .2s ease;
+    }
+    .btn:hover{background: rgba(255,255,255,.06)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      border-color: rgba(0,255,200,.25);
+      background: linear-gradient(180deg, rgba(0,255,200,.18), rgba(0,255,200,.06));
+    }
+    .btn.primary b{color: var(--accent)}
+    .tiny{
+      font-size:.9rem; color:var(--muted);
+      margin: 10px 0 0;
+    }
+
+    .side{
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .panel{
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+    }
+    .panel h3{margin:0 0 10px; font-size:1.05rem}
+    .panel p{margin:0; color:var(--muted)}
+    .quote{
+      border-left: 3px solid rgba(0,255,200,.35);
+      padding-left: 12px;
+      color: rgba(233,240,255,.88);
+      font-style: italic;
+    }
+
+    main{margin-top: 22px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      grid-column: span 4;
+      background: rgba(15,27,46,.52);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 14px 35px rgba(0,0,0,.28);
+      min-height: 210px;
+    }
+    @media (max-width: 950px){ .card{grid-column: span 6} }
+    @media (max-width: 640px){ .card{grid-column: span 12} }
+
+    .kicker{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-bottom: 10px;
+    }
+    .tag{
+      font-family: var(--mono);
+      font-size:.82rem;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: rgba(233,240,255,.85);
+      white-space:nowrap;
+    }
+    .tag.ok{border-color: rgba(6,214,160,.35); color: rgba(6,214,160,.95)}
+    .tag.warn{border-color: rgba(255,209,102,.35); color: rgba(255,209,102,.95)}
+    .tag.bad{border-color: rgba(255,92,122,.35); color: rgba(255,92,122,.95)}
+    .card h2{margin:0 0 6px; font-size:1.18rem}
+    .card p{margin:0 0 12px; color:var(--muted)}
+    ul{margin:0; padding-left: 18px; color: rgba(233,240,255,.86)}
+    li{margin:6px 0}
+    li span{color: var(--muted)}
+    .mini{
+      font-family: var(--mono);
+      font-size:.9rem;
+      padding:10px 12px;
+      background: rgba(0,0,0,.18);
+      border:1px solid var(--line);
+      border-radius: 14px;
+      color: rgba(233,240,255,.88);
+      overflow:auto;
+      margin-top: 12px;
+    }
+
+    .section{
+      margin-top: 22px;
+      padding: 18px;
+      background: rgba(15,27,46,.38);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    .section h2{margin:0 0 8px}
+    .section p{margin:0 0 12px; color:var(--muted)}
+    .checklist{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:10px;
+    }
+    .item{
+      grid-column: span 4;
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding:12px;
+    }
+    @media (max-width: 900px){ .item{grid-column: span 6} }
+    @media (max-width: 640px){ .item{grid-column: span 12} }
+    .item label{display:flex; gap:10px; align-items:flex-start; cursor:pointer}
+    .item input{margin-top: 3px}
+    .item b{display:block}
+    .item small{display:block; color:var(--muted); margin-top: 2px}
+
+    footer{
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px;
+    }
+    .muted{color:var(--muted)}
+    .mono{font-family:var(--mono)}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Self-Provisioning</strong>
+          <div class="muted" style="font-size:.85rem">Food • Water • Shelter • Repair</div>
+        </div>
+      </a>
+
+      <nav class="links" aria-label="Primary">
+        <a href="#manifesto">Manifesto</a>
+        <a href="#stack">Starter Stack</a>
+        <a href="#plan">30-Day Plan</a>
+        <a href="#notes">Notes</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap" id="top">
+    <section class="hero">
+      <div class="h-card">
+        <h1>There comes a time when you realize you must provide for yourself.</h1>
+        <p class="sub">
+          Not as isolation — as <b>agency</b>. The basics of life should be understandable,
+          buildable, and repairable by you: <b>food</b>, <b>water</b>, and <b>shelter</b>.
+        </p>
+
+        <div class="chips" aria-label="Principles">
+          <div class="chip">learn-by-building</div>
+          <div class="chip">repair &gt; replace</div>
+          <div class="chip">simple systems</div>
+          <div class="chip">resilience</div>
+          <div class="chip">calm competence</div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#stack"><b>Start Here</b> → the Starter Stack</a>
+          <a class="btn" href="#plan">30-Day Plan</a>
+          <a class="btn" href="#notes">Printable Notes</a>
+        </div>
+
+        <p class="tiny">
+          This page is intentionally practical: the goal is progress, not perfection.
+        </p>
+      </div>
+
+      <aside class="side">
+        <div class="panel">
+          <h3>Core idea</h3>
+          <p class="quote">
+            “If I can feed myself, hydrate myself, and keep myself sheltered —
+            then the rest becomes choice.”
+          </p>
+        </div>
+        <div class="panel">
+          <h3>How to use this</h3>
+          <p>
+            Pick <b>one</b> small upgrade in each category. Build it. Test it.
+            Improve it. Repeat. That’s the whole method.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <section class="grid" id="manifesto" aria-label="Manifesto Cards">
+        <article class="card">
+          <div class="kicker">
+            <div class="tag ok">FOOD</div>
+            <div class="tag">calories • nutrients • storage</div>
+          </div>
+          <h2>Food is a system, not a store.</h2>
+          <p>
+            The first win is producing <b>any</b> food — even imperfectly.
+            Soil + seed + time = sovereignty.
+          </p>
+          <ul>
+            <li><b>Grow something</b> <span>(herbs, greens, tomatoes)</span></li>
+            <li><b>Learn one preservation method</b> <span>(drying, pickling, freezing)</span></li>
+            <li><b>Build a pantry baseline</b> <span>(rice/beans/oats/salt/oil)</span></li>
+          </ul>
+          <div class="mini">Minimum: 1 container + 1 plant + weekly harvest habit.</div>
+        </article>
+
+        <article class="card">
+          <div class="kicker">
+            <div class="tag ok">WATER</div>
+            <div class="tag">collection • filtration • storage</div>
+          </div>
+          <h2>Water literacy is survival literacy.</h2>
+          <p>
+            Clean water is the quiet foundation under everything.
+            Learn the basics of safety and redundancy.
+          </p>
+          <ul>
+            <li><b>Store enough</b> <span>(a few days per person)</span></li>
+            <li><b>Filter + disinfect</b> <span>(two methods if possible)</span></li>
+            <li><b>Know your source</b> <span>(municipal, well, rain)</span></li>
+          </ul>
+          <div class="mini">Minimum: store + filter + backup plan.</div>
+        </article>
+
+        <article class="card">
+          <div class="kicker">
+            <div class="tag ok">SHELTER</div>
+            <div class="tag">weather • insulation • repair</div>
+          </div>
+          <h2>Shelter is applied physics.</h2>
+          <p>
+            Comfort and safety come from understanding airflow, moisture,
+            insulation, shade, and structural basics.
+          </p>
+          <ul>
+            <li><b>Weatherproof the weak points</b> <span>(seals, roof, drafts)</span></li>
+            <li><b>Improve thermal control</b> <span>(shade + insulation + airflow)</span></li>
+            <li><b>Own a repair kit</b> <span>(fasteners, tape, tools)</span></li>
+          </ul>
+          <div class="mini">Minimum: stop leaks + control temperature swings.</div>
+        </article>
+      </section>
+
+      <section class="section" id="stack">
+        <h2>The Starter Stack</h2>
+        <p>
+          A simple stack is a set of <b>small, reliable</b> pieces you can actually maintain.
+          This is meant to be cheap-ish, realistic, and upgradeable.
+        </p>
+
+        <div class="checklist" aria-label="Starter Stack Checklist">
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Food: 3 staple meals</b>
+                <small>Pick 3 meals you can make weekly with simple ingredients.</small>
+              </div>
+            </label>
+          </div>
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Food: 1 grow setup</b>
+                <small>Container + soil + seeds. Start tiny. Learn by doing.</small>
+              </div>
+            </label>
+          </div>
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Food: pantry baseline</b>
+                <small>2–4 weeks of shelf-stable staples you actually eat.</small>
+              </div>
+            </label>
+          </div>
+
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Water: storage</b>
+                <small>Jugs or containers you rotate and keep clean.</small>
+              </div>
+            </label>
+          </div>
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Water: filtration</b>
+                <small>One good filter + learn its limits and maintenance.</small>
+              </div>
+            </label>
+          </div>
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Water: backup disinfection</b>
+                <small>Boiling or tablets as redundancy.</small>
+              </div>
+            </label>
+          </div>
+
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Shelter: leak + draft audit</b>
+                <small>Walk your home: roof, windows, doors, seams.</small>
+              </div>
+            </label>
+          </div>
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Shelter: repair kit</b>
+                <small>Tape, screws, cord, sealant, multi-tool basics.</small>
+              </div>
+            </label>
+          </div>
+          <div class="item">
+            <label>
+              <input type="checkbox" />
+              <div>
+                <b>Shelter: temperature strategy</b>
+                <small>Shade + airflow + insulation &gt; fighting weather with brute force.</small>
+              </div>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="plan">
+        <h2>A simple 30-Day Plan</h2>
+        <p>
+          This is intentionally modest. The goal is to create a <b>new baseline</b>,
+          not a perfect homestead overnight.
+        </p>
+
+        <div class="grid" aria-label="30-Day Plan">
+          <article class="card" style="grid-column: span 6;">
+            <div class="kicker">
+              <div class="tag warn">WEEK 1</div>
+              <div class="tag">inventory</div>
+            </div>
+            <h2>Stabilize</h2>
+            <ul>
+              <li>Write your 3 staple meals.</li>
+              <li>Buy/store water for a few days and label dates.</li>
+              <li>Do a shelter walk: leaks, drafts, weak points.</li>
+            </ul>
+            <div class="mini">Output: lists + baseline supplies + known weak points.</div>
+          </article>
+
+          <article class="card" style="grid-column: span 6;">
+            <div class="kicker">
+              <div class="tag warn">WEEK 2</div>
+              <div class="tag">build</div>
+            </div>
+            <h2>Build one thing</h2>
+            <ul>
+              <li>Start 1 container plant (herb/greens).</li>
+              <li>Get a filter and learn maintenance.</li>
+              <li>Patch the #1 shelter issue (seal, tarp, caulk, etc.).</li>
+            </ul>
+            <div class="mini">Output: working grow + working filter + one repair.</div>
+          </article>
+
+          <article class="card" style="grid-column: span 6;">
+            <div class="kicker">
+              <div class="tag warn">WEEK 3</div>
+              <div class="tag">redundancy</div>
+            </div>
+            <h2>Add redundancy</h2>
+            <ul>
+              <li>Add pantry staples you actually eat.</li>
+              <li>Add a backup water disinfection method.</li>
+              <li>Assemble a repair kit in one container.</li>
+            </ul>
+            <div class="mini">Output: “two ways” for water + a real repair kit.</div>
+          </article>
+
+          <article class="card" style="grid-column: span 6;">
+            <div class="kicker">
+              <div class="tag warn">WEEK 4</div>
+              <div class="tag">practice</div>
+            </div>
+            <h2>Practice & document</h2>
+            <ul>
+              <li>Cook all 3 staple meals.</li>
+              <li>Test water process end-to-end.</li>
+              <li>Do a “storm drill” mindset check: calm, tools, plan.</li>
+            </ul>
+            <div class="mini">Output: confidence + notes + what to improve next.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="notes">
+        <h2>Printable Notes</h2>
+        <p>
+          Keep it short. Keep it real. Update it as you learn.
+        </p>
+
+        <div class="mini" role="note" aria-label="Notes Template">
+FOOD
+- My 3 staple meals:
+  1)
+  2)
+  3)
+- What I can grow right now:
+- Next upgrade:
+
+WATER
+- Stored amount:
+- Filter type + replacement schedule:
+- Backup method:
+- Next upgrade:
+
+SHELTER
+- Weak points:
+- Repair kit location:
+- Temperature strategy:
+- Next upgrade:
+        </div>
+
+        <p class="muted" style="margin-top:12px">
+          Tip: Print this section. Tape it inside a cabinet. Keep it visible.
+        </p>
+      </section>
+
+      <footer>
+        <div>Made to be simple, calm, and buildable.</div>
+        <div class="mono">v1 • Food / Water / Shelter</div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Save checklist state locally (optional convenience)
+    (function () {
+      const key = "self_provisioning_checklist_v1";
+      const boxes = Array.from(document.querySelectorAll('.item input[type="checkbox"]'));
+      try {
+        const saved = JSON.parse(localStorage.getItem(key) || "[]");
+        boxes.forEach((b, i) => b.checked = !!saved[i]);
+      } catch(e) {}
+      boxes.forEach((b) => {
+        b.addEventListener("change", () => {
+          const state = boxes.map(x => x.checked);
+          try { localStorage.setItem(key, JSON.stringify(state)); } catch(e) {}
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
