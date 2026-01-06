@@ -41,6 +41,7 @@ export const initShoppingList = ({
   const cancelButton = documentRef.getElementById('shopping-cancel');
   const list = documentRef.getElementById('shopping-list');
   const emptyState = documentRef.getElementById('shopping-empty');
+  const sortSelect = documentRef.getElementById('shopping-sort');
 
   const entries = gun.get('shopping-list').get('items');
   const cache = new Map();
@@ -73,18 +74,18 @@ export const initShoppingList = ({
 
   const renderItems = () => {
     const items = Array.from(cache.values()).filter((entry) => entry && entry.name);
+    const sortMode = sortSelect?.value ?? 'recent';
     items.sort((a, b) => {
       if (a.purchased !== b.purchased) {
         return a.purchased ? 1 : -1;
       }
-      if (a.neededBy && b.neededBy) {
-        return a.neededBy.localeCompare(b.neededBy);
-      }
-      if (a.neededBy) {
-        return -1;
-      }
-      if (b.neededBy) {
-        return 1;
+      if (sortMode === 'alpha') {
+        const nameCompare = (a.name ?? '').localeCompare(b.name ?? '', undefined, {
+          sensitivity: 'base',
+        });
+        if (nameCompare !== 0) {
+          return nameCompare;
+        }
       }
       return (b.createdAt ?? 0) - (a.createdAt ?? 0);
     });
@@ -223,6 +224,10 @@ export const initShoppingList = ({
       purchasedAt: data.purchasedAt,
     });
 
+    renderItems();
+  });
+
+  sortSelect?.addEventListener('change', () => {
     renderItems();
   });
 

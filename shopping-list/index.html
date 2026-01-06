@@ -65,7 +65,17 @@
         </form>
 
         <div class="tracker-results">
-          <h3>Household shopping list</h3>
+          <div class="section-header">
+            <h3>Household shopping list</h3>
+            <p class="tracker-note">Organize your list as you shop.</p>
+          </div>
+          <div class="tracker-filter">
+            <label for="shopping-sort">Sort list by</label>
+            <select id="shopping-sort" name="shopping-sort">
+              <option value="recent">Recently added</option>
+              <option value="alpha">Alphabetical (A–Z)</option>
+            </select>
+          </div>
           <p class="tracker-note" id="shopping-empty">No items yet. Add your first grocery or household need above.</p>
           <ul class="meal-list" id="shopping-list" aria-live="polite"></ul>
         </div>
