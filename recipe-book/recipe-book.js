@@ -346,7 +346,17 @@ export const initRecipeBook = ({
 };
 
 if (typeof window !== 'undefined') {
-  window.addEventListener('DOMContentLoaded', () => {
-    initRecipeBook();
+  const startRecipeBook = (attempt = 0) => {
+    const started = initRecipeBook();
+    if (started) {
+      return;
+    }
+    if (attempt < 20) {
+      window.setTimeout(() => startRecipeBook(attempt + 1), 250);
+    }
+  };
+
+  window.addEventListener('load', () => {
+    startRecipeBook();
   });
 }
