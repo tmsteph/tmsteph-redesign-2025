@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reality, Gently</title>
+  <meta name="description" content="A calm place to remember: becoming, satisfaction, and small aligned steps." />
+
+  <style>
+    :root{
+      --bg0: #070915;
+      --bg1: #0a0f2a;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.10);
+      --line: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.88);
+      --muted: rgba(255,255,255,.64);
+      --soft: rgba(255,255,255,.38);
+
+      --a: #00ffc8;
+      --b: #7c5cff;
+      --c: #ffcc66;
+
+      --radius: 22px;
+      --shadow: 0 24px 70px rgba(0,0,0,.55);
+      --shadow2: 0 12px 30px rgba(0,0,0,.35);
+
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+      --glow: drop-shadow(0 0 18px rgba(0,255,200,.22)) drop-shadow(0 0 48px rgba(124,92,255,.16));
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; margin:0; }
+    body{
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(124,92,255,.18), transparent 55%),
+        radial-gradient(900px 700px at 90% 35%, rgba(0,255,200,.14), transparent 50%),
+        radial-gradient(900px 700px at 55% 95%, rgba(255,204,102,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x: hidden;
+      letter-spacing: .2px;
+    }
+
+    /* Subtle moving aurora (respects reduce motion) */
+    .aurora{
+      position: fixed;
+      inset: -15vmax;
+      pointer-events: none;
+      opacity: .9;
+      filter: blur(40px) saturate(110%);
+      transform: translateZ(0);
+      z-index: 0;
+    }
+    .aurora::before,
+    .aurora::after{
+      content:"";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(closest-side at 25% 30%, rgba(0,255,200,.18), transparent 60%),
+        radial-gradient(closest-side at 70% 35%, rgba(124,92,255,.20), transparent 62%),
+        radial-gradient(closest-side at 55% 70%, rgba(255,204,102,.12), transparent 65%);
+      mix-blend-mode: screen;
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+    .aurora::after{
+      opacity: .65;
+      animation-duration: 22s;
+      animation-delay: -6s;
+      transform: scale(1.06);
+    }
+    @keyframes drift{
+      0%   { transform: translate(-2%, -1%) rotate(-1deg) scale(1.02); }
+      50%  { transform: translate(2%,  1%) rotate( 1deg) scale(1.06); }
+      100% { transform: translate(1%, -2%) rotate( 0deg) scale(1.03); }
+    }
+
+    /* Star dust */
+    .stars{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: .55;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.55) 50%, transparent 52%),
+        radial-gradient(1px 1px at 28% 74%, rgba(255,255,255,.42) 50%, transparent 52%),
+        radial-gradient(1px 1px at 44% 33%, rgba(255,255,255,.35) 50%, transparent 52%),
+        radial-gradient(1px 1px at 63% 58%, rgba(255,255,255,.40) 50%, transparent 52%),
+        radial-gradient(1px 1px at 78% 22%, rgba(255,255,255,.48) 50%, transparent 52%),
+        radial-gradient(1px 1px at 87% 81%, rgba(255,255,255,.33) 50%, transparent 52%),
+        radial-gradient(1px 1px at 9%  88%, rgba(255,255,255,.28) 50%, transparent 52%),
+        radial-gradient(1px 1px at 91% 47%, rgba(255,255,255,.26) 50%, transparent 52%);
+    }
+
+    .wrap{
+      position: relative;
+      z-index: 1;
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: clamp(18px, 4vw, 44px);
+    }
+
+    .frame{
+      width: min(1040px, 100%);
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: clamp(18px, 2vw, 28px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), transparent);
+    }
+
+    .brand{
+      display: flex; align-items: center; gap: 12px;
+      min-width: 220px;
+    }
+    .sigil{
+      width: 38px; height: 38px;
+      filter: var(--glow);
+    }
+    .brand h1{
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.78);
+      font-weight: 650;
+    }
+    .brand small{
+      display:block;
+      color: rgba(255,255,255,.52);
+      margin-top: 2px;
+      letter-spacing: .06em;
+      font-size: 12px;
+    }
+
+    .controls{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    button, .pill{
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      padding: 10px 12px;
+      border-radius: 999px;
+      box-shadow: var(--shadow2);
+      cursor: pointer;
+      font-size: 13px;
+      letter-spacing: .02em;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    button:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+    button:active{ transform: translateY(0px) scale(.99); }
+    button:focus-visible{ outline: 2px solid rgba(0,255,200,.35); outline-offset: 2px; }
+
+    .toggle{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow2);
+      font-size: 13px;
+      color: rgba(255,255,255,.78);
+    }
+    .toggle input{
+      width: 40px; height: 22px;
+      appearance: none;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+    }
+    .toggle input::after{
+      content:"";
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+      transition: transform .14s ease, background .14s ease;
+    }
+    .toggle input:checked{
+      background: rgba(0,255,200,.18);
+      border-color: rgba(0,255,200,.30);
+    }
+    .toggle input:checked::after{
+      transform: translateX(18px);
+      background: rgba(255,255,255,.90);
+    }
+
+    main{
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      grid-template-columns: 1.35fr .85fr;
+      gap: clamp(14px, 2.4vw, 22px);
+    }
+    @media (max-width: 860px){
+      main{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+    }
+
+    .hero{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 420px at 20% 10%, rgba(0,255,200,.12), transparent 60%),
+        radial-gradient(700px 380px at 90% 35%, rgba(124,92,255,.14), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow2);
+      padding: clamp(18px, 3.2vw, 26px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .title{
+      margin: 0 0 8px;
+      font-size: clamp(22px, 2.8vw, 34px);
+      line-height: 1.15;
+      letter-spacing: .01em;
+    }
+    .subtitle{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 70ch;
+    }
+
+    .mantra{
+      margin-top: 16px;
+      padding: 16px 16px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.14);
+      position: relative;
+      overflow: hidden;
+    }
+    .mantra::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(closest-side at 30% 40%, rgba(0,255,200,.16), transparent 65%),
+        radial-gradient(closest-side at 70% 55%, rgba(124,92,255,.16), transparent 65%);
+      filter: blur(26px);
+      opacity: .9;
+      transform: translateZ(0);
+    }
+    .mantra > *{ position: relative; z-index: 1; }
+    .mantra .label{
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+    }
+    .mantra .text{
+      margin: 10px 0 0;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.35;
+      letter-spacing: .01em;
+      color: rgba(255,255,255,.92);
+    }
+    .mantra .hint{
+      margin: 10px 0 0;
+      color: rgba(255,255,255,.60);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .grid{
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+    @media (max-width: 520px){ .grid{ grid-template-columns: 1fr; } }
+
+    .card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow2);
+      padding: 14px 14px 13px;
+    }
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 13px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.72);
+      font-weight: 700;
+    }
+    .card p{
+      margin: 0;
+      color: rgba(255,255,255,.68);
+      line-height: 1.55;
+      font-size: 13px;
+    }
+    .card .big{
+      margin-top: 10px;
+      color: rgba(255,255,255,.92);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .side{
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .pad{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+    }
+    .pad h2{
+      margin: 0 0 10px;
+      font-size: 13px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.70);
+      font-weight: 750;
+    }
+    .pad .row{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    textarea, input[type="text"]{
+      width: 100%;
+      resize: vertical;
+      min-height: 120px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.88);
+      font: 13px/1.55 var(--font);
+      outline: none;
+    }
+    textarea:focus, input[type="text"]:focus{
+      border-color: rgba(0,255,200,.32);
+      box-shadow: 0 0 0 3px rgba(0,255,200,.10);
+    }
+    .meta{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      color: rgba(255,255,255,.52);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .06em;
+    }
+
+    footer{
+      padding: 14px 18px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.50);
+      font-size: 12px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,.04));
+    }
+    footer code{
+      font-family: var(--mono);
+      color: rgba(255,255,255,.66);
+      background: rgba(0,0,0,.20);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* Reduce Motion */
+    .reduced .aurora::before,
+    .reduced .aurora::after{ animation: none !important; }
+    .reduced button{ transition: none; }
+    .reduced .toggle input::after{ transition: none; }
+
+    /* Print */
+    @media print{
+      .aurora,.stars,.controls,.toggle{ display:none !important; }
+      body{ background: #fff; color:#111; }
+      .frame{ box-shadow:none; border-color:#ccc; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="frame">
+      <header>
+        <div class="brand">
+          <!-- Simple sigil -->
+          <svg class="sigil" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="g" x1="10" y1="12" x2="54" y2="52" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00ffc8" stop-opacity=".95"/>
+                <stop offset=".55" stop-color="#7c5cff" stop-opacity=".9"/>
+                <stop offset="1" stop-color="#ffcc66" stop-opacity=".85"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 6c7.2 9 16.8 13.6 26 15.2-2.4 14.4-12.6 26.6-26 36C18.6 47.8 8.4 35.6 6 21.2 15.2 19.6 24.8 15 32 6Z"
+              stroke="url(#g)" stroke-width="2.6" opacity=".92"/>
+            <path d="M32 18c3.8 4.6 8.8 7 13.6 7.8-1.2 7.8-6.8 14.2-13.6 19.2-6.8-5-12.4-11.4-13.6-19.2 4.8-.8 9.8-3.2 13.6-7.8Z"
+              stroke="url(#g)" stroke-width="2.2" opacity=".75"/>
+            <circle cx="32" cy="32" r="2.2" fill="url(#g)" opacity=".9"/>
+          </svg>
+          <div>
+            <h1>Reality, Gently</h1>
+            <small>Becoming • Satisfaction • The next honest step</small>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="btnNext" title="New reminder (N)">
+            ✨ New
+          </button>
+          <button id="btnBreathe" title="Soft breath cue (B)">
+            🌬️ Breathe
+          </button>
+          <button id="btnNow" title="Return to now (R)">
+            🫶 Now
+          </button>
+          <label class="toggle" title="Reduce motion">
+            Reduce motion
+            <input id="reduceMotion" type="checkbox" />
+          </label>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <h2 class="title">You don’t become someone else.</h2>
+          <p class="subtitle">
+            You remove what isn’t you — and reality shifts because your attention, posture, and actions shift.
+            Satisfaction is not giving up. It’s becoming a stable platform for change.
+          </p>
+
+          <div class="mantra" role="status" aria-live="polite">
+            <div class="label">Reminder</div>
+            <div class="text" id="mantraText">If I were already becoming who I want to be… how would I stand right now?</div>
+            <div class="hint" id="mantraHint">Let the body answer first. Then take one honest step — small is perfect.</div>
+          </div>
+
+          <div class="grid">
+            <div class="card">
+              <h3>Reality Hopping</h3>
+              <p>Not magic. Not denial.</p>
+              <p class="big"><strong>Shift constraints:</strong> attention → story → posture → next action.</p>
+            </div>
+            <div class="card">
+              <h3>Satisfaction</h3>
+              <p>Not stagnation. Not settling.</p>
+              <p class="big"><strong>Stop leaking energy</strong> into resistance — use it for alignment.</p>
+            </div>
+            <div class="card">
+              <h3>Becoming</h3>
+              <p>Quieter than expected.</p>
+              <p class="big"><strong>Fewer explanations.</strong> More pauses. Less proving. More presence.</p>
+            </div>
+            <div class="card">
+              <h3>One Step</h3>
+              <p>Not a overhaul.</p>
+              <p class="big"><strong>One clean move</strong> from peace, not pressure.</p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="side">
+          <section class="pad">
+            <h2>2–Minute Alignment</h2>
+            <div class="card" style="margin-bottom:12px;">
+              <p class="big" id="practiceLine" style="margin:0;">
+                1) What am I already allowed to stop striving for?
+              </p>
+              <p style="margin-top:10px;">
+                2) Let one thing drop.<br/>
+                3) Breathe once, slowly.<br/>
+                4) From this calmer state, choose one honest step.
+              </p>
+            </div>
+
+            <div class="row">
+              <button id="btnStep">🟢 Choose my one step</button>
+              <button id="btnGrat">🍃 Find my satisfaction</button>
+            </div>
+          </section>
+
+          <section class="pad">
+            <h2>Today’s Note</h2>
+            <textarea id="note" placeholder="What timeline am I choosing? What can I accept right now? What is my one honest step?"></textarea>
+            <div class="meta">
+              <span id="savedStatus">Not saved yet</span>
+              <span><span id="wordCount">0</span> words</span>
+            </div>
+            <div class="row" style="margin-top:12px;">
+              <button id="btnClear" title="Clear note (Shift+C)">🧼 Clear</button>
+              <button id="btnCopy" title="Copy note">📋 Copy</button>
+            </div>
+          </section>
+        </aside>
+      </main>
+
+      <footer>
+        <div>
+          Hotkeys: <code>N</code> new reminder • <code>B</code> breathe • <code>R</code> now • <code>Shift+C</code> clear
+        </div>
+        <div id="clock">—</div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const $ = (id) => document.getElementById(id);
+
+      const mantraText = $("mantraText");
+      const mantraHint = $("mantraHint");
+      const practiceLine = $("practiceLine");
+      const note = $("note");
+      const savedStatus = $("savedStatus");
+      const wordCount = $("wordCount");
+      const clock = $("clock");
+      const reduceMotion = $("reduceMotion");
+
+      const KEY_NOTE = "reality_gently_note_v1";
+      const KEY_MOTION = "reality_gently_reduce_motion_v1";
+
+      const reminders = [
+        {
+          text: "If I were already becoming who I want to be… how would I stand right now?",
+          hint: "Let the body answer first. Then take one honest step — small is perfect."
+        },
+        {
+          text: "Acceptance is not the end. It’s the platform.",
+          hint: "Stop fighting what is. Use that energy to move kindly."
+        },
+        {
+          text: "I don’t need to prove. I need to align.",
+          hint: "One calm choice can change the whole day’s trajectory."
+        },
+        {
+          text: "What can I stop striving for — right now?",
+          hint: "Let one thing drop. Notice the relief. Act from that."
+        },
+        {
+          text: "Reality shifts when I shift: attention → story → posture → action.",
+          hint: "Pick the smallest shift available to you in this moment."
+        },
+        {
+          text: "Becoming is quiet: fewer explanations, more presence.",
+          hint: "Pause. Breathe. Do the next clean thing."
+        },
+        {
+          text: "Satisfaction means I’m no longer at war with now.",
+          hint: "From peace, the next step becomes obvious."
+        }
+      ];
+
+      const practicePrompts = [
+        "1) What am I already allowed to stop striving for?",
+        "1) What am I resisting that I could soften by 5%?",
+        "1) What would the version of me I respect do next—now?",
+        "1) What is the smallest honest step I can take from calm?",
+        "1) What’s already good enough to relax about today?"
+      ];
+
+      function setReminder(index){
+        const r = reminders[index % reminders.length];
+        mantraText.textContent = r.text;
+        mantraHint.textContent = r.hint;
+      }
+
+      function randomInt(n){ return Math.floor(Math.random() * n); }
+
+      function newReminder(){
+        setReminder(randomInt(reminders.length));
+        practiceLine.textContent = practicePrompts[randomInt(practicePrompts.length)];
+      }
+
+      // Breath cue (gentle, non-intrusive)
+      let breathing = false;
+      let breatheTimer = null;
+      function breathe(){
+        if (breathing) return;
+        breathing = true;
+
+        const original = mantraText.textContent;
+        const originalHint = mantraHint.textContent;
+
+        const steps = [
+          ["Inhale…", "4 seconds, soft."],
+          ["Hold…", "2 seconds, gentle."],
+          ["Exhale…", "6 seconds, slow."],
+          ["Now.", "Notice: shoulders, jaw, belly."]
+        ];
+
+        let i = 0;
+        const tick = () => {
+          const [t, h] = steps[i];
+          mantraText.textContent = t;
+          mantraHint.textContent = h;
+          i++;
+          if (i < steps.length){
+            breatheTimer = setTimeout(tick, (i===1?4000:i===2?2000:i===3?6000:1200));
+          } else {
+            setTimeout(() => {
+              mantraText.textContent = original;
+              mantraHint.textContent = originalHint;
+              breathing = false;
+            }, 900);
+          }
+        };
+        tick();
+      }
+
+      function now(){
+        // A simple "return to now" reset: new reminder + focus the note area.
+        newReminder();
+        note.focus();
+        note.selectionStart = note.selectionEnd = note.value.length;
+      }
+
+      // Note persistence
+      function updateWordCount(){
+        const words = note.value.trim().split(/\s+/).filter(Boolean);
+        wordCount.textContent = words.length.toString();
+      }
+
+      let saveDebounce = null;
+      function setSaved(msg){
+        savedStatus.textContent = msg;
+      }
+
+      function saveNote(){
+        localStorage.setItem(KEY_NOTE, note.value);
+        const d = new Date();
+        setSaved("Saved • " + d.toLocaleString());
+      }
+
+      function scheduleSave(){
+        setSaved("Saving…");
+        clearTimeout(saveDebounce);
+        saveDebounce = setTimeout(() => {
+          saveNote();
+        }, 350);
+      }
+
+      function loadNote(){
+        const v = localStorage.getItem(KEY_NOTE);
+        if (v != null) {
+          note.value = v;
+          setSaved("Loaded • " + new Date().toLocaleString());
+        } else {
+          setSaved("Not saved yet");
+        }
+        updateWordCount();
+      }
+
+      async function copyNote(){
+        try{
+          await navigator.clipboard.writeText(note.value);
+          setSaved("Copied ✓");
+          setTimeout(() => setSaved("Saved locally"), 1200);
+        }catch{
+          // Fallback
+          note.select();
+          document.execCommand("copy");
+          setSaved("Copied ✓");
+          setTimeout(() => setSaved("Saved locally"), 1200);
+        }
+      }
+
+      function clearNote(){
+        note.value = "";
+        updateWordCount();
+        localStorage.removeItem(KEY_NOTE);
+        setSaved("Cleared");
+      }
+
+      // Buttons
+      $("btnNext").addEventListener("click", newReminder);
+      $("btnBreathe").addEventListener("click", breathe);
+      $("btnNow").addEventListener("click", now);
+
+      $("btnCopy").addEventListener("click", copyNote);
+      $("btnClear").addEventListener("click", clearNote);
+
+      $("btnStep").addEventListener("click", () => {
+        const line = "My one honest step is: ";
+        if (!note.value.includes(line)) {
+          note.value = (note.value.trim() ? note.value.trim() + "\n\n" : "") + line;
+        }
+        note.focus();
+        note.selectionStart = note.selectionEnd = note.value.length;
+        updateWordCount();
+        scheduleSave();
+      });
+
+      $("btnGrat").addEventListener("click", () => {
+        const line = "What I can be satisfied with right now is: ";
+        if (!note.value.includes(line)) {
+          note.value = (note.value.trim() ? note.value.trim() + "\n\n" : "") + line;
+        }
+        note.focus();
+        note.selectionStart = note.selectionEnd = note.value.length;
+        updateWordCount();
+        scheduleSave();
+      });
+
+      // Motion toggle
+      function applyMotionSetting(on){
+        document.body.classList.toggle("reduced", on);
+        localStorage.setItem(KEY_MOTION, on ? "1" : "0");
+      }
+      const savedMotion = localStorage.getItem(KEY_MOTION);
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const initialReduced = (savedMotion ? savedMotion === "1" : prefersReduced);
+      reduceMotion.checked = initialReduced;
+      applyMotionSetting(initialReduced);
+      reduceMotion.addEventListener("change", () => applyMotionSetting(reduceMotion.checked));
+
+      // Note events
+      note.addEventListener("input", () => {
+        updateWordCount();
+        scheduleSave();
+      });
+
+      // Clock
+      function tickClock(){
+        const d = new Date();
+        clock.textContent = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) +
+          " • " + d.toLocaleDateString([], { weekday:"long", month:"short", day:"numeric" });
+      }
+      setInterval(tickClock, 1000);
+      tickClock();
+
+      // Hotkeys
+      window.addEventListener("keydown", (e) => {
+        const activeTag = (document.activeElement && document.activeElement.tagName) ? document.activeElement.tagName.toLowerCase() : "";
+        const typing = activeTag === "textarea" || activeTag === "input";
+
+        if (!e.shiftKey && !e.ctrlKey && !e.metaKey){
+          if (e.key.toLowerCase() === "n" && !typing){ e.preventDefault(); newReminder(); }
+          if (e.key.toLowerCase() === "b" && !typing){ e.preventDefault(); breathe(); }
+          if (e.key.toLowerCase() === "r" && !typing){ e.preventDefault(); now(); }
+        }
+        if (e.shiftKey && e.key.toLowerCase() === "c" && !e.ctrlKey && !e.metaKey){
+          e.preventDefault();
+          clearNote();
+        }
+      });
+
+      // Init
+      loadNote();
+      newReminder();
+
+    })();
+  </script>
+</body>
+</html>
