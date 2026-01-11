@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Great Year & Civilization — Earth • Culture • Calendars</title>
+  <meta name="description" content="A visual, interactive index.html exploring Earth cycles, cultural calendars, and the idea of age transitions (Aries↔Pisces, Pisces↔Aquarius) across geology and civilization." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070a12'/%3E%3Cpath d='M32 10c9.9 0 18 8.1 18 18S41.9 46 32 46 14 37.9 14 28 22.1 10 32 10Z' fill='none' stroke='%23a7f3d0' stroke-width='4'/%3E%3Cpath d='M16 52c5 3.2 10.7 4.8 16 4.8S43 55.2 48 52' stroke='%2384b7ff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <style>
+    :root{
+      --bg:#070a12;
+      --panel:#0b1020;
+      --panel2:#0e1630;
+      --text:#e8eefc;
+      --muted:#b8c2df;
+      --faint:#7e8bb3;
+      --line:rgba(255,255,255,.12);
+      --accent:#9ef3d2;
+      --accent2:#84b7ff;
+      --gold:#ffd28a;
+      --danger:#ff8aa0;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1180px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1400px 700px at 20% -10%, rgba(132,183,255,.20), transparent 55%),
+        radial-gradient(1100px 650px at 85% 0%, rgba(158,243,210,.16), transparent 55%),
+        radial-gradient(900px 600px at 50% 110%, rgba(255,210,138,.12), transparent 55%),
+        linear-gradient(180deg, #050713 0%, #070a12 55%, #060816 100%);
+      overflow-x:hidden;
+      line-height:1.45;
+    }
+    a{color:var(--accent2); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:26px 18px 64px}
+
+    /* Header */
+    header{
+      display:flex; gap:16px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      padding:18px 18px 12px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      position:sticky; top:10px; backdrop-filter: blur(10px);
+      z-index:10;
+    }
+    .brand{display:flex; gap:14px; align-items:center; min-width:min(720px, 100%)}
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background:linear-gradient(180deg, rgba(158,243,210,.18), rgba(132,183,255,.14));
+      border:1px solid rgba(255,255,255,.14);
+      display:grid; place-items:center;
+      flex:0 0 auto;
+    }
+    h1{margin:0; font-size:17px; letter-spacing:.2px}
+    .sub{margin:4px 0 0; color:var(--muted); font-size:13px; max-width:76ch}
+    .controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      background:linear-gradient(180deg, rgba(158,243,210,.16), rgba(158,243,210,.08));
+      border:1px solid rgba(158,243,210,.22);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-size:13px;
+      display:inline-flex; gap:8px; align-items:center;
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+    }
+    .btn.secondary{background:linear-gradient(180deg, rgba(132,183,255,.14), rgba(132,183,255,.06)); border-color:rgba(132,183,255,.22)}
+    .btn.gold{background:linear-gradient(180deg, rgba(255,210,138,.16), rgba(255,210,138,.08)); border-color:rgba(255,210,138,.22)}
+    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,.16); color:var(--muted); box-shadow:none}
+    .pill{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .pill input{accent-color: var(--accent)}
+
+    main{margin-top:16px; display:grid; gap:16px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:16px;
+      align-items:start;
+    }
+    @media (max-width: 980px){
+      header{position:relative; top:auto}
+      .grid{grid-template-columns:1fr}
+      .controls{justify-content:flex-start}
+      .brand{min-width:100%}
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .card h2{margin:0 0 10px; font-size:15px; letter-spacing:.2px}
+    .muted{color:var(--muted)}
+    .tiny{font-size:12px; color:var(--faint)}
+    .divider{height:1px; background:var(--line); margin:14px 0}
+    .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:10px;
+    }
+    @media (max-width: 560px){ .kpi{grid-template-columns:1fr} }
+    .box{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      padding:12px;
+    }
+    .box .label{font-size:12px; color:var(--muted)}
+    .box .value{font-size:16px; margin-top:3px}
+    .box .hint{font-size:12px; color:var(--faint); margin-top:4px}
+
+    /* Controls */
+    .slider{width:100%; accent-color: var(--accent2)}
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.2);
+      font-size:13px;
+      color:var(--muted);
+      user-select:none;
+    }
+    .chip input{accent-color: var(--accent)}
+
+    /* Timeline */
+    .timeline{position:relative; padding-left:16px; display:grid; gap:10px}
+    .timeline:before{
+      content:""; position:absolute; left:7px; top:4px; bottom:4px;
+      width:2px; background:rgba(255,255,255,.14); border-radius:2px;
+    }
+    .event{
+      position:relative;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+    }
+    .event:before{
+      content:""; position:absolute; left:-16px; top:16px;
+      width:10px; height:10px; border-radius:10px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(158,243,210,.16);
+    }
+    .event .t{font-family:var(--mono); font-size:12px; color:var(--muted)}
+    .event .name{margin-top:4px; font-weight:650}
+    .event .desc{margin-top:4px; font-size:13px; color:var(--muted)}
+    .tag{
+      display:inline-block; margin-top:8px;
+      font-size:12px; padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--faint);
+    }
+    .tag.hot{border-color: rgba(255,138,160,.30); color: rgba(255,138,160,.95)}
+    .tag.cool{border-color: rgba(132,183,255,.30); color: rgba(132,183,255,.95)}
+    .tag.gold{border-color: rgba(255,210,138,.30); color: rgba(255,210,138,.95)}
+
+    /* Visuals */
+    .viz{
+      display:grid;
+      place-items:center;
+      padding:12px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(650px 340px at 50% 10%, rgba(132,183,255,.14), transparent 60%),
+        radial-gradient(650px 340px at 50% 110%, rgba(158,243,210,.10), transparent 60%),
+        rgba(0,0,0,.16);
+      overflow:hidden;
+    }
+    svg{max-width:100%; height:auto}
+    .legend{display:grid; gap:8px; margin-top:12px; font-size:13px; color:var(--muted)}
+    .legend .item{display:flex; gap:10px; align-items:center}
+    .swatch{width:12px; height:12px; border-radius:4px; background:var(--accent)}
+    .swatch.b{background:var(--accent2)}
+    .swatch.g{background:var(--gold)}
+    .swatch.d{background:var(--danger)}
+
+    /* Story cards */
+    .stack{display:grid; gap:10px}
+    .story{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      padding:12px;
+    }
+    .story .top{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .story .title{font-weight:650}
+    .story .meta{font-family:var(--mono); font-size:12px; color:var(--faint)}
+    .story .body{margin-top:6px; font-size:13px; color:var(--muted)}
+    .badge{
+      font-size:12px; padding:6px 8px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--faint);
+      white-space:nowrap;
+    }
+
+    /* Motion */
+    .spin{transform-origin: 50% 50%; animation: spin 14s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .reduce-motion .spin{animation:none}
+    .reduce-motion *{scroll-behavior:auto !important}
+
+    footer{margin-top:16px; color:var(--faint); font-size:12px; padding:0 6px}
+    .mono{font-family:var(--mono)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8c13.255 0 24 10.745 24 24S45.255 56 32 56 8 45.255 8 32 18.745 8 32 8Z" stroke="rgba(255,255,255,.24)" stroke-width="3"/>
+            <path d="M32 16c8.837 0 16 7.163 16 16S40.837 48 32 48 16 40.837 16 32s7.163-16 16-16Z" stroke="rgba(158,243,210,.72)" stroke-width="3"/>
+            <path d="M16 52c5 3.2 10.7 4.8 16 4.8S43 55.2 48 52" stroke="rgba(132,183,255,.8)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Great Year & Civilization</h1>
+          <p class="sub">
+            A visual “Earth → Culture → Calendars → Now” dashboard. This is an <b>exploration tool</b>: it overlays
+            geological anchors, civilization milestones, and symbolic “age” motifs onto a ~26,000-year precession wheel.
+            The goal is orientation, not prediction.
+          </p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn secondary" id="btnFocusNow" title="Jump to a symbolic 'Now' (Pisces↔Aquarius transition lens).">
+          ⟲ Focus: Now
+        </button>
+        <button class="btn gold" id="btnFocusAriesPisces" title="Jump near the Aries↔Pisces cultural transition (~2k years ago).">
+          🐏→🐟 Aries↔Pisces
+        </button>
+        <button class="btn" id="btnRandom" title="Pick a random phase.">
+          🎲 Random
+        </button>
+        <label class="pill" title="Disable continuous motion / spinning visuals.">
+          <input type="checkbox" id="reduceMotion" />
+          Reduce motion
+        </label>
+        <button class="btn ghost" id="btnShare" title="Copy a link with your current settings.">
+          🔗 Copy Link
+        </button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- LEFT: controls + narrative timeline -->
+      <section class="card">
+        <h2>Where are we in the cycle?</h2>
+
+        <div class="kpi" aria-label="Key cycle numbers">
+          <div class="box">
+            <div class="label">Precession “Great Year”</div>
+            <div class="value"><span id="kPrecession">25,772</span> yrs</div>
+            <div class="hint">Axial wobble shifts equinoxes vs star background.</div>
+          </div>
+          <div class="box">
+            <div class="label">Obliquity</div>
+            <div class="value"><span id="kObliquity">41,000</span> yrs</div>
+            <div class="hint">Tilt affects polar summer melt strength.</div>
+          </div>
+          <div class="box">
+            <div class="label">Eccentricity</div>
+            <div class="value"><span id="kEccentricity">100,000</span> yrs</div>
+            <div class="hint">Orbit shape modulates seasonal contrasts.</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <div style="flex:1; min-width: 260px">
+            <div class="muted" style="font-size:13px; margin-bottom:6px;">
+              Phase dial (symbolic): 0% → 100% through a ~26k cycle
+            </div>
+            <input class="slider" type="range" id="pos" min="0" max="1000" value="930" />
+            <div class="row" style="justify-content:space-between; margin-top:8px;">
+              <div class="tiny"><span id="posPct">93.0</span>%</div>
+              <div class="tiny">≈ <span id="posYears">23,968</span> years into the cycle</div>
+            </div>
+          </div>
+
+          <div class="box" style="min-width:240px">
+            <div class="label">“Stacking score” (toy overlap)</div>
+            <div class="value" style="font-size:20px;"><span id="score">0.00</span></div>
+            <div class="hint">Higher when multiple waves peak together (illustrative).</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row" style="justify-content:space-between; gap:10px">
+          <div class="chips" aria-label="Overlay toggles">
+            <label class="chip"><input type="checkbox" id="layerPrecession" checked /> Precession</label>
+            <label class="chip"><input type="checkbox" id="layerObliquity" checked /> Obliquity</label>
+            <label class="chip"><input type="checkbox" id="layerEccentricity" checked /> Eccentricity</label>
+            <label class="chip"><input type="checkbox" id="layerGeology" checked /> Geology anchors</label>
+            <label class="chip"><input type="checkbox" id="layerCulture" checked /> Culture & calendars</label>
+            <label class="chip"><input type="checkbox" id="layerAges" checked /> Age motifs (🐂🐏🐟🏺🧠)</label>
+          </div>
+        </div>
+
+        <p class="tiny" style="margin-top:10px;">
+          This page uses <b>symbolic anchoring</b>. If you want an astronomy-tight version later, we can add an epoch picker
+          (e.g., “equinox in Aries / Pisces boundary definitions”) and show uncertainty bands.
+        </p>
+
+        <div class="divider"></div>
+
+        <h2>Earth → Culture → Calendars (selected anchors)</h2>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <!-- RIGHT: visuals -->
+      <aside class="card">
+        <h2>Visual: Great Year wheel</h2>
+
+        <div class="viz">
+          <svg id="wheel" viewBox="0 0 560 560" role="img" aria-label="Precession wheel with geology and culture markers">
+            <defs>
+              <radialGradient id="bgGlow" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="rgba(255,255,255,.10)"/>
+                <stop offset="55%" stop-color="rgba(255,255,255,.05)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+              </radialGradient>
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.0" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Outer ring -->
+            <circle cx="280" cy="280" r="248" fill="url(#bgGlow)" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
+            <circle cx="280" cy="280" r="210" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+            <circle cx="280" cy="280" r="170" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+            <circle cx="280" cy="280" r="130" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+
+            <!-- Subtle sacred-geometry seed -->
+            <g opacity=".18">
+              <circle cx="280" cy="280" r="105" fill="none" stroke="rgba(158,243,210,.55)" stroke-width="2"/>
+              <circle cx="280" cy="175" r="105" fill="none" stroke="rgba(158,243,210,.22)" stroke-width="2"/>
+              <circle cx="371" cy="227" r="105" fill="none" stroke="rgba(158,243,210,.16)" stroke-width="2"/>
+              <circle cx="371" cy="333" r="105" fill="none" stroke="rgba(158,243,210,.16)" stroke-width="2"/>
+              <circle cx="280" cy="385" r="105" fill="none" stroke="rgba(158,243,210,.22)" stroke-width="2"/>
+              <circle cx="189" cy="333" r="105" fill="none" stroke="rgba(158,243,210,.16)" stroke-width="2"/>
+              <circle cx="189" cy="227" r="105" fill="none" stroke="rgba(158,243,210,.16)" stroke-width="2"/>
+            </g>
+
+            <!-- Slow spin aura (optional) -->
+            <g class="spin" opacity=".25">
+              <path d="M280 32c137 0 248 111 248 248S417 528 280 528 32 417 32 280 143 32 280 32Z"
+                    fill="none" stroke="rgba(132,183,255,.25)" stroke-width="2" stroke-dasharray="10 10"/>
+            </g>
+
+            <!-- Layer arcs -->
+            <g id="layer-precession" filter="url(#softGlow)">
+              <path id="arc-precession" d="" fill="none" stroke="rgba(158,243,210,.95)" stroke-width="9" stroke-linecap="round"/>
+            </g>
+            <g id="layer-obliquity" filter="url(#softGlow)">
+              <path id="arc-obliquity" d="" fill="none" stroke="rgba(132,183,255,.95)" stroke-width="9" stroke-linecap="round"/>
+            </g>
+            <g id="layer-eccentricity" filter="url(#softGlow)">
+              <path id="arc-eccentricity" d="" fill="none" stroke="rgba(255,210,138,.95)" stroke-width="9" stroke-linecap="round"/>
+            </g>
+
+            <!-- Tick marks -->
+            <g id="ticks" opacity=".35"></g>
+
+            <!-- Markers -->
+            <g id="markers-geo"></g>
+            <g id="markers-culture"></g>
+
+            <!-- Pointer -->
+            <g id="pointer">
+              <circle cx="280" cy="280" r="10" fill="rgba(255,255,255,.92)" opacity=".92"/>
+              <path id="needle" d="" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"/>
+              <circle id="tip" cx="280" cy="32" r="7" fill="rgba(255,138,160,.95)"/>
+            </g>
+
+            <!-- Center label -->
+            <g opacity=".9">
+              <text x="280" y="272" text-anchor="middle" fill="rgba(255,255,255,.86)" font-size="13" font-family="ui-monospace, Menlo, Consolas, monospace">
+                Phase: <tspan id="centerPct">93.0</tspan>%
+              </text>
+              <text x="280" y="292" text-anchor="middle" fill="rgba(184,194,223,.92)" font-size="12" font-family="ui-monospace, Menlo, Consolas, monospace">
+                Lens: <tspan id="centerLens">Pisces↔Aquarius</tspan>
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="legend">
+          <div class="item"><span class="swatch"></span> Precession highlight</div>
+          <div class="item"><span class="swatch b"></span> Obliquity highlight</div>
+          <div class="item"><span class="swatch g"></span> Eccentricity highlight</div>
+          <div class="item"><span class="swatch d"></span> Pointer = your selected “now”</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>Interpretive panel</h2>
+        <div class="stack" id="story"></div>
+
+        <div class="divider"></div>
+
+        <div class="box">
+          <div class="label">What this page is saying (in one line)</div>
+          <div class="hint">
+            If you treat civilization as a <b>Holocene arc</b> rising out of a post-catastrophe reset,
+            then the present era can feel like a <b>threshold</b>: the world shifts from faith/empires (late Pisces)
+            into networks/systems (Aquarian traits), and the Earth system itself is not guaranteed to stay calm.
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Single-file <span class="mono">index.html</span>. Everything here is offline-friendly and intentionally avoids claiming
+      precise astronomical “start dates” for ages. It’s a visual thinking tool.
+    </footer>
+  </div>
+
+<script>
+(() => {
+  // ======= Core numbers (approx) =======
+  const PRECESSION_YEARS = 25772;
+  const OBLIQUITY_YEARS  = 41000;
+  const ECCENT_YEARS     = 100000;
+
+  // ======= Symbolic lenses =======
+  // Lens is just UI framing: it changes labels + the story panel, not the underlying phase math.
+  const LENSES = {
+    NOW: { name: "Pisces↔Aquarius", pct: 93.0, note: "Cultural transition lens (network era intensifies)" },
+    ARIES_PISCES: { name: "Aries↔Pisces", pct: 7.8, note: "Cultural transition lens (~2k years ago)" },
+    HOLOCENE_START: { name: "Holocene start", pct: 45.4, note: "Stability window begins (~11.7k BP)" }
+  };
+
+  // ======= Anchors (approx / illustrative) =======
+  // "bp" is years before present (BP). "era" is human-friendly label.
+  const GEO_EVENTS = [
+    { id:"lGM",   bp: 20000,  name:"Last Glacial Maximum", desc:"Ice near maximum; sea level much lower.", kind:"geo", tag:"ice" },
+    { id:"mwp1a", bp: 14600,  name:"Meltwater Pulse 1A", desc:"Rapid sea-level rise episode.", kind:"geo", tag:"sea" },
+    { id:"yd",    bp: 12900,  name:"Younger Dryas onset", desc:"Abrupt return to cold conditions.", kind:"geo", tag:"abrupt" },
+    { id:"hol",   bp: 11700,  name:"Holocene begins", desc:"Warm/stable epoch enabling agriculture & cities.", kind:"geo", tag:"stability" }
+  ];
+
+  const CULTURE_EVENTS = [
+    { id:"sumer",   year:-3300, name:"Sumer (writing, math, sky)", desc:"Early state systems; time/angle division traditions.", kind:"culture", tag:"calendar" },
+    { id:"egypt",   year:-2600, name:"Old Kingdom Egypt", desc:"Monumental architecture; stellar religion; long continuity.", kind:"culture", tag:"monument" },
+    { id:"mayan",   year:  250, name:"Classic Maya", desc:"Deep-time calendar thinking; nested cycles; world-era myths.", kind:"culture", tag:"cycles" },
+    { id:"rome2",   year:   0,  name:"Classical → Late Antique pivot", desc:"Old world transforms; new religious & social order rises.", kind:"culture", tag:"age-turn" },
+    { id:"med",     year: 1200, name:"Medieval & early science", desc:"Timekeeping, star tables, cathedrals, calendars.", kind:"culture", tag:"time" },
+    { id:"modern",  year: 1900, name:"Electric/network age", desc:"Information, global systems, decentralization pressures.", kind:"culture", tag:"networks" }
+  ];
+
+  // "Age motifs" are intentionally symbolic: bull/ram/fish/water-bearer-ish
+  // We'll map them around the wheel as 12 slices (not claiming exact boundaries).
+  const AGE_MOTIFS = [
+    { slice:0,  label:"♒︎", name:"Aquarius motif", hint:"systems • networks • knowledge" },
+    { slice:1,  label:"♓︎", name:"Pisces motif",   hint:"faith • salvation • empires" },
+    { slice:2,  label:"♈︎", name:"Aries motif",    hint:"law • war • sacrifice" },
+    { slice:3,  label:"🐂", name:"Taurus motif",   hint:"agriculture • stability" },
+    { slice:4,  label:"♊︎", name:"Gemini motif",   hint:"trade • duality" },
+    { slice:5,  label:"♋︎", name:"Cancer motif",   hint:"home • lineage" },
+    { slice:6,  label:"♌︎", name:"Leo motif",      hint:"kingship • sun" },
+    { slice:7,  label:"♍︎", name:"Virgo motif",    hint:"harvest • craft" },
+    { slice:8,  label:"♎︎", name:"Libra motif",    hint:"balance • law" },
+    { slice:9,  label:"♏︎", name:"Scorpio motif",  hint:"transformation" },
+    { slice:10, label:"♐︎", name:"Sagittarius",    hint:"journeys • horizons" },
+    { slice:11, label:"♑︎", name:"Capricorn",      hint:"institutions • structure" }
+  ];
+
+  // ======= DOM =======
+  const elPos = document.getElementById("pos");
+  const elPosPct = document.getElementById("posPct");
+  const elPosYears = document.getElementById("posYears");
+  const elScore = document.getElementById("score");
+
+  const chkRM = document.getElementById("reduceMotion");
+  const btnFocusNow = document.getElementById("btnFocusNow");
+  const btnFocusAriesPisces = document.getElementById("btnFocusAriesPisces");
+  const btnRandom = document.getElementById("btnRandom");
+  const btnShare = document.getElementById("btnShare");
+
+  const layerPrecession = document.getElementById("layerPrecession");
+  const layerObliquity = document.getElementById("layerObliquity");
+  const layerEccentricity = document.getElementById("layerEccentricity");
+  const layerGeology = document.getElementById("layerGeology");
+  const layerCulture = document.getElementById("layerCulture");
+  const layerAges = document.getElementById("layerAges");
+
+  const gPrecession = document.getElementById("layer-precession");
+  const gObliquity  = document.getElementById("layer-obliquity");
+  const gEccentricity = document.getElementById("layer-eccentricity");
+
+  const arcPrecession = document.getElementById("arc-precession");
+  const arcObliquity  = document.getElementById("arc-obliquity");
+  const arcEccentricity = document.getElementById("arc-eccentricity");
+
+  const ticks = document.getElementById("ticks");
+  const markersGeo = document.getElementById("markers-geo");
+  const markersCulture = document.getElementById("markers-culture");
+
+  const needle = document.getElementById("needle");
+  const tip = document.getElementById("tip");
+
+  const elCenterPct = document.getElementById("centerPct");
+  const elCenterLens = document.getElementById("centerLens");
+
+  const timeline = document.getElementById("timeline");
+  const story = document.getElementById("story");
+
+  // ======= Helpers =======
+  const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
+  const lerp = (a,b,t)=>a+(b-a)*t;
+
+  function polar(cx, cy, r, angDeg){
+    const a = (angDeg - 90) * Math.PI/180;
+    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+  }
+  function arcPath(cx, cy, r, a0, a1){
+    const start = polar(cx,cy,r,a0);
+    const end = polar(cx,cy,r,a1);
+    const large = Math.abs(a1 - a0) > 180 ? 1 : 0;
+    const sweep = a1 > a0 ? 1 : 0;
+    return `M ${start.x.toFixed(2)} ${start.y.toFixed(2)} A ${r} ${r} 0 ${large} ${sweep} ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
+  }
+  function bell(t){
+    const x = Math.sin(Math.PI * t);
+    return x*x;
+  }
+  function phaseForCycle(precessionPhase, cycleYears){
+    const timeYears = precessionPhase * PRECESSION_YEARS;
+    return (timeYears % cycleYears) / cycleYears;
+  }
+  function overlapScore(prePhase){
+    const pP = prePhase;
+    const pO = phaseForCycle(prePhase, OBLIQUITY_YEARS);
+    const pE = phaseForCycle(prePhase, ECCENT_YEARS);
+
+    const sP = layerPrecession.checked ? bell(pP) : 0;
+    const sO = layerObliquity.checked  ? bell(pO) : 0;
+    const sE = layerEccentricity.checked ? bell(pE) : 0;
+
+    // overlap intuition (bounded)
+    const base = 0.22*sP + 0.26*sO + 0.30*sE;
+    const mult = 0.55*(sP*sO + sO*sE + sP*sE) + 0.70*(sP*sO*sE);
+    return clamp(base + mult, 0, 1);
+  }
+
+  function fmtComma(n){
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  function fmtBP(bp){ return fmtComma(bp) + " BP"; }
+  function fmtYear(y){
+    if(y < 0) return fmtComma(Math.abs(y)) + " BCE";
+    if(y === 0) return "0 CE";
+    return fmtComma(y) + " CE";
+  }
+
+  // ======= Rendering: Timeline =======
+  function renderTimeline(){
+    timeline.innerHTML = "";
+
+    // Merge geo + culture as one narrative list (descending deep time to now)
+    const merged = [
+      ...GEO_EVENTS.map(e => ({...e, sortKey: 1000000 + e.bp})), // big
+      ...CULTURE_EVENTS.map(e => {
+        // convert year to pseudo-BP-ish for sorting (not exact): assume "present" ~ 2000
+        const pseudoBP = (2000 - e.year);
+        return {...e, pseudoBP, sortKey: 500000 + pseudoBP};
+      })
+    ].sort((a,b)=> b.sortKey - a.sortKey);
+
+    for(const e of merged){
+      const div = document.createElement("div");
+      div.className = "event";
+      const timeLabel = e.kind === "geo" ? fmtBP(e.bp) : fmtYear(e.year);
+      const badge = e.kind === "geo"
+        ? `<span class="tag cool">Earth</span>`
+        : `<span class="tag gold">Culture</span>`;
+
+      const extra =
+        e.tag === "age-turn" ? `<span class="tag hot">transition</span>` :
+        e.tag === "networks" ? `<span class="tag cool">systems</span>` :
+        e.tag === "calendar" ? `<span class="tag gold">calendar</span>` : "";
+
+      div.innerHTML = `
+        <div class="t">${timeLabel}</div>
+        <div class="name">${e.name}</div>
+        <div class="desc">${e.desc}</div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+          ${badge}
+          ${extra}
+          <span class="tag">${e.tag}</span>
+        </div>
+      `;
+      timeline.appendChild(div);
+    }
+  }
+
+  // ======= Rendering: Ticks =======
+  function renderTicks(){
+    ticks.innerHTML = "";
+    const cx=280, cy=280, r0=235, r1=248;
+    for(let i=0;i<48;i++){
+      const ang = (i/48)*360;
+      const a = polar(cx,cy,r0,ang);
+      const b = polar(cx,cy,r1,ang);
+      const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+      line.setAttribute("x1", a.x); line.setAttribute("y1", a.y);
+      line.setAttribute("x2", b.x); line.setAttribute("y2", b.y);
+      line.setAttribute("stroke", "rgba(255,255,255,.35)");
+      line.setAttribute("stroke-width", i%4===0 ? "2" : "1");
+      ticks.appendChild(line);
+    }
+  }
+
+  // ======= Mapping anchors to the wheel =======
+  // We need a "phase" for each anchor. We'll do this by mapping BP and years onto the 26k span.
+  // This is intentionally symbolic: we compress deep time into a single cycle for visualization.
+  // - Holocene anchors: map BP within [0..26k]
+  // - Culture anchors: map year into a recent segment of the cycle (last ~12k) to make them readable
+  const PRESENT_YEAR = 2026;
+
+  function bpToPhase(bp){
+    // clamp bp into the [0..26k] window for this view
+    const b = clamp(bp, 0, PRECESSION_YEARS);
+    // phase goes from old->new clockwise; choose that "older" is earlier in cycle
+    // We'll map bp=PRECESSION to phase=0, bp=0 to phase=1
+    return 1 - (b / PRECESSION_YEARS);
+  }
+
+  function yearToPhase(year){
+    // put history in a "Holocene arc": map year range [-12000..PRESENT] into [0.35..1.0]
+    // so ancient items sit back on the wheel without vanishing at phase 0.
+    const minY = -12000;
+    const maxY = PRESENT_YEAR;
+    const t = clamp((year - minY) / (maxY - minY), 0, 1);
+    return lerp(0.35, 1.0, t);
+  }
+
+  function marker(el, x, y, color, label, tooltip){
+    const g = document.createElementNS("http://www.w3.org/2000/svg","g");
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y);
+    c.setAttribute("r", "6");
+    c.setAttribute("fill", color);
+    c.setAttribute("opacity","0.95");
+    c.setAttribute("stroke","rgba(255,255,255,.35)");
+    c.setAttribute("stroke-width","1");
+    const t = document.createElementNS("http://www.w3.org/2000/svg","text");
+    t.setAttribute("x", x + 10);
+    t.setAttribute("y", y + 4);
+    t.setAttribute("fill","rgba(255,255,255,.82)");
+    t.setAttribute("font-size","12");
+    t.setAttribute("font-family","ui-monospace, Menlo, Consolas, monospace");
+    t.textContent = label;
+    const title = document.createElementNS("http://www.w3.org/2000/svg","title");
+    title.textContent = tooltip;
+    g.appendChild(title);
+    g.appendChild(c);
+    g.appendChild(t);
+    el.appendChild(g);
+  }
+
+  function renderMarkers(){
+    markersGeo.innerHTML = "";
+    markersCulture.innerHTML = "";
+
+    const cx=280, cy=280;
+
+    if(layerGeology.checked){
+      for(const e of GEO_EVENTS){
+        const ph = bpToPhase(e.bp);
+        const ang = ph * 360;
+        const p = polar(cx,cy,205, ang);
+        marker(markersGeo, p.x, p.y, "rgba(132,183,255,.95)", "⛰", `${e.name} • ${fmtBP(e.bp)} • ${e.desc}`);
+      }
+    }
+
+    if(layerCulture.checked){
+      for(const e of CULTURE_EVENTS){
+        const ph = yearToPhase(e.year);
+        const ang = ph * 360;
+        const p = polar(cx,cy,165, ang);
+        marker(markersCulture, p.x, p.y, "rgba(255,210,138,.95)", "🏺", `${e.name} • ${fmtYear(e.year)} • ${e.desc}`);
+      }
+    }
+
+    if(layerAges.checked){
+      // render age motifs around the outer ring (12 slices)
+      // We'll draw as text on radius ~235
+      const r = 235;
+      for(const m of AGE_MOTIFS){
+        const ang = (m.slice/12)*360;
+        const p = polar(cx,cy,r, ang);
+        const tx = document.createElementNS("http://www.w3.org/2000/svg","text");
+        tx.setAttribute("x", p.x);
+        tx.setAttribute("y", p.y);
+        tx.setAttribute("text-anchor","middle");
+        tx.setAttribute("dominant-baseline","middle");
+        tx.setAttribute("fill","rgba(158,243,210,.78)");
+        tx.setAttribute("font-size","14");
+        tx.setAttribute("font-family","ui-sans-serif, system-ui, -apple-system, Segoe UI");
+        tx.textContent = m.label;
+
+        const title = document.createElementNS("http://www.w3.org/2000/svg","title");
+        title.textContent = `${m.name} — ${m.hint} (symbolic)`;
+        tx.appendChild(title);
+        markersGeo.appendChild(tx);
+      }
+    }
+  }
+
+  // ======= Visual update (wheel) =======
+  function setNeedle(angleDeg){
+    const cx=280, cy=280;
+    const inner = polar(cx,cy,18, angleDeg);
+    const outer = polar(cx,cy,228, angleDeg);
+    needle.setAttribute("d", `M ${inner.x.toFixed(2)} ${inner.y.toFixed(2)} L ${outer.x.toFixed(2)} ${outer.y.toFixed(2)}`);
+    tip.setAttribute("cx", outer.x.toFixed(2));
+    tip.setAttribute("cy", outer.y.toFixed(2));
+  }
+
+  function setArc(el, radius, phase, spanDeg){
+    const ang = phase * 360;
+    const a0 = ang - spanDeg/2;
+    const a1 = ang + spanDeg/2;
+    el.setAttribute("d", arcPath(280,280,radius,a0,a1));
+  }
+
+  // ======= Interpretive story panel =======
+  function storyCardsForPhase(phase){
+    // We'll compute a simple "late Pisces → Aquarius" indicator based on phase being near 1.0.
+    const late = phase > 0.85;
+    const mid  = phase > 0.55 && phase <= 0.85;
+    const early= phase <= 0.55;
+
+    const cards = [];
+
+    cards.push({
+      title: "Earth system context",
+      meta: "cycles • thresholds",
+      badge: late ? "threshold lens" : (mid ? "stability lens" : "recovery lens"),
+      body:
+        late
+          ? "Late-cycle framing: focus on system fragility, rapid reorganization, and the value of redundancy. Consider how abrupt shifts (ice, sea level, climate regimes) appear in the geological record."
+          : mid
+          ? "Mid-cycle framing: stability supports compounding complexity—cities, writing, institutions, specialization. The Holocene is unusually calm compared to the wider Pleistocene."
+          : "Early-cycle framing: recovery and rebuilding dominate—memory, myth, and tech fragments may persist, but durable systems are still forming."
+    });
+
+    cards.push({
+      title: "Culture & calendar signal",
+      meta: "Sumer • Egypt • Maya • Europe • Americas",
+      badge: "memory tech",
+      body:
+        "Calendars are compressed survival knowledge: seasons, celestial cycles, “world ages,” and reset myths. The consistent motif across civilizations is: time is layered, and history can turn—sometimes abruptly."
+    });
+
+    cards.push({
+      title: "Age-transition emphasis",
+      meta: "symbolic (not a precise date)",
+      badge: late ? "Pisces↔Aquarius" : "Aries↔Pisces echo",
+      body:
+        late
+          ? "This view highlights a present-tense shift from faith/empire narratives toward networks, systems, decentralization, and information primacy—an ‘Aquarian trait’ surge. Treat it as a cultural pattern lens."
+          : "This view makes it easier to reflect on how major civilizational pivots align with symbolic motifs (ram → fish), without claiming a single start year that everyone agrees on."
+    });
+
+    cards.push({
+      title: "Practical takeaway",
+      meta: "resilience • decentralization",
+      badge: "high leverage",
+      body:
+        late
+          ? "If you assume the ‘turn’ is near: design for shocks. Distributed power, local water/food, repairability, and open knowledge reduce cascade risk."
+          : "If you assume the ‘turn’ is not near: the same resilience principles still win—because complexity always benefits from redundancy."
+    });
+
+    return cards;
+  }
+
+  function renderStory(phase, lensName){
+    story.innerHTML = "";
+    const cards = storyCardsForPhase(phase);
+    for(const c of cards){
+      const div = document.createElement("div");
+      div.className = "story";
+      div.innerHTML = `
+        <div class="top">
+          <div class="title">${c.title}</div>
+          <div class="badge">${c.badge}</div>
+        </div>
+        <div class="meta">${c.meta}</div>
+        <div class="body">${c.body}</div>
+      `;
+      story.appendChild(div);
+    }
+
+    // subtle lens note
+    const note = document.createElement("div");
+    note.className = "tiny";
+    note.style.marginTop = "6px";
+    note.innerHTML = `Lens active: <b>${lensName}</b>. (This changes labels + interpretation, not hard astronomy.)`;
+    story.appendChild(note);
+  }
+
+  // ======= URL state =======
+  function saveURL(){
+    const u = new URL(location.href);
+    u.searchParams.set("p", elPos.value);
+    u.searchParams.set("rm", chkRM.checked ? "1" : "0");
+    u.searchParams.set("lp", layerPrecession.checked ? "1" : "0");
+    u.searchParams.set("lo", layerObliquity.checked ? "1" : "0");
+    u.searchParams.set("le", layerEccentricity.checked ? "1" : "0");
+    u.searchParams.set("lg", layerGeology.checked ? "1" : "0");
+    u.searchParams.set("lc", layerCulture.checked ? "1" : "0");
+    u.searchParams.set("la", layerAges.checked ? "1" : "0");
+    u.searchParams.set("lens", currentLensKey);
+    history.replaceState(null, "", u.toString());
+  }
+
+  function loadFromURL(){
+    const sp = new URLSearchParams(location.search);
+    const p = sp.get("p");
+    if(p !== null) elPos.value = clamp(Number(p), 0, 1000);
+
+    const rm = sp.get("rm"); if(rm !== null) chkRM.checked = rm === "1";
+    const lp = sp.get("lp"); if(lp !== null) layerPrecession.checked = lp === "1";
+    const lo = sp.get("lo"); if(lo !== null) layerObliquity.checked = lo === "1";
+    const le = sp.get("le"); if(le !== null) layerEccentricity.checked = le === "1";
+    const lg = sp.get("lg"); if(lg !== null) layerGeology.checked = lg === "1";
+    const lc = sp.get("lc"); if(lc !== null) layerCulture.checked = lc === "1";
+    const la = sp.get("la"); if(la !== null) layerAges.checked = la === "1";
+
+    const lens = sp.get("lens");
+    if(lens && LENSES[lens]) currentLensKey = lens;
+  }
+
+  // ======= Main update =======
+  let currentLensKey = "NOW";
+
+  function applyReduceMotion(on){
+    document.body.classList.toggle("reduce-motion", on);
+  }
+
+  function update(){
+    const t = Number(elPos.value) / 1000; // 0..1
+    const pct = (t*100).toFixed(1);
+    const yrs = Math.round(t * PRECESSION_YEARS);
+
+    elPosPct.textContent = pct;
+    elPosYears.textContent = fmtComma(yrs);
+    elCenterPct.textContent = pct;
+    elCenterLens.textContent = LENSES[currentLensKey].name;
+
+    // needle uses precession phase directly
+    setNeedle(t * 360);
+
+    // layer phases derived from precession-time mapping (toy)
+    const pP = t;
+    const pO = phaseForCycle(t, OBLIQUITY_YEARS);
+    const pE = phaseForCycle(t, ECCENT_YEARS);
+
+    const spanP = lerp(18, 78, bell(pP));
+    const spanO = lerp(18, 78, bell(pO));
+    const spanE = lerp(18, 78, bell(pE));
+
+    setArc(arcPrecession, 228, pP, spanP);
+    setArc(arcObliquity,  188, pO, spanO);
+    setArc(arcEccentricity, 148, pE, spanE);
+
+    gPrecession.style.display = layerPrecession.checked ? "" : "none";
+    gObliquity.style.display  = layerObliquity.checked  ? "" : "none";
+    gEccentricity.style.display = layerEccentricity.checked ? "" : "none";
+
+    // markers
+    renderMarkers();
+
+    // score
+    elScore.textContent = overlapScore(t).toFixed(2);
+
+    // story panel
+    renderStory(t, LENSES[currentLensKey].name);
+
+    // persist
+    saveURL();
+  }
+
+  // ======= Lens controls =======
+  function setLens(key){
+    currentLensKey = key;
+    const pct = LENSES[key].pct;
+    elPos.value = Math.round((pct/100) * 1000);
+    update();
+  }
+
+  function randomize(){
+    currentLensKey = "NOW";
+    elPos.value = Math.floor(Math.random()*1001);
+    update();
+  }
+
+  async function copyLink(){
+    try{
+      await navigator.clipboard.writeText(location.href);
+      btnShare.textContent = "✅ Link Copied";
+      setTimeout(()=>btnShare.textContent="🔗 Copy Link", 1200);
+    }catch(e){
+      prompt("Copy this link:", location.href);
+    }
+  }
+
+  // ======= Init =======
+  renderTimeline();
+  renderTicks();
+  loadFromURL();
+  applyReduceMotion(chkRM.checked);
+  update();
+
+  // ======= Events =======
+  elPos.addEventListener("input", () => {
+    currentLensKey = "NOW"; // moving slider = custom
+    update();
+  });
+
+  [layerPrecession, layerObliquity, layerEccentricity, layerGeology, layerCulture, layerAges]
+    .forEach(el => el.addEventListener("change", update));
+
+  chkRM.addEventListener("change", () => applyReduceMotion(chkRM.checked));
+
+  btnFocusNow.addEventListener("click", () => setLens("NOW"));
+  btnFocusAriesPisces.addEventListener("click", () => setLens("ARIES_PISCES"));
+  btnRandom.addEventListener("click", randomize);
+  btnShare.addEventListener("click", copyLink);
+
+  // Keyboard niceties
+  window.addEventListener("keydown", (e)=>{
+    if(e.key === "ArrowLeft"){ elPos.value = clamp(Number(elPos.value)-5, 0, 1000); currentLensKey="NOW"; update(); }
+    if(e.key === "ArrowRight"){ elPos.value = clamp(Number(elPos.value)+5, 0, 1000); currentLensKey="NOW"; update(); }
+    if(e.key.toLowerCase() === "r"){ randomize(); }
+  });
+})();
+</script>
+</body>
+</html>
