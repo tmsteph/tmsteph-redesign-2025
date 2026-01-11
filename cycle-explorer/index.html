@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>26,000-Year Cycle Explorer — Carlson-style Layering</title>
+  <meta name="description" content="Interactive, dark-mode-first explorer for the ~26,000-year precession cycle + other major cycles, with a simple timeline, sacred geometry visuals, and practical resilience notes." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs/%3E%3Crect width='64' height='64' rx='14' fill='%230b1020'/%3E%3Cpath d='M32 10c9.9 0 18 8.1 18 18S41.9 46 32 46 14 37.9 14 28 22.1 10 32 10Zm0 4c-7.7 0-14 6.3-14 14s6.3 14 14 14 14-6.3 14-14-6.3-14-14-14Z' fill='%23a7f3d0'/%3E%3Cpath d='M20 50c4 2.7 8.4 4 12 4s8-1.3 12-4' stroke='%23a7f3d0' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+  <style>
+    :root{
+      --bg:#070a12;
+      --panel:#0b1020;
+      --panel2:#0e1630;
+      --text:#e8eefc;
+      --muted:#b8c2df;
+      --faint:#7e8bb3;
+      --line:rgba(255,255,255,.12);
+      --accent:#9ef3d2;
+      --accent2:#84b7ff;
+      --warn:#ffd28a;
+      --danger:#ff8aa0;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1400px 700px at 25% -10%, rgba(132,183,255,.22), transparent 55%),
+        radial-gradient(900px 600px at 80% 0%, rgba(158,243,210,.18), transparent 55%),
+        radial-gradient(700px 500px at 50% 110%, rgba(255,210,138,.12), transparent 55%),
+        linear-gradient(180deg, #050713 0%, #070a12 55%, #060816 100%);
+      overflow-x:hidden;
+      line-height:1.45;
+    }
+    a{color:var(--accent2); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 60px}
+    header{
+      display:flex; gap:18px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;
+      padding:18px 18px 8px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      position:sticky; top:10px; backdrop-filter: blur(10px);
+      z-index:10;
+    }
+    .brand{display:flex; gap:14px; align-items:center}
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background:linear-gradient(180deg, rgba(158,243,210,.18), rgba(132,183,255,.14));
+      border:1px solid rgba(255,255,255,.14);
+      display:grid; place-items:center;
+    }
+    .logo svg{opacity:.92}
+    h1{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:4px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      max-width:62ch;
+    }
+    .controls{
+      display:flex; gap:10px; align-items:center; flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      background:linear-gradient(180deg, rgba(158,243,210,.16), rgba(158,243,210,.08));
+      border:1px solid rgba(158,243,210,.22);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-size:13px;
+      display:inline-flex; gap:8px; align-items:center;
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+    }
+    .btn:hover{filter:brightness(1.05)}
+    .btn.secondary{
+      background:linear-gradient(180deg, rgba(132,183,255,.14), rgba(132,183,255,.06));
+      border-color: rgba(132,183,255,.22);
+    }
+    .btn.ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.16);
+      color:var(--muted);
+      box-shadow:none;
+    }
+    .pill{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .pill input{accent-color: var(--accent)}
+    main{margin-top:18px; display:grid; gap:16px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+      header{position:relative; top:auto}
+    }
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      padding:16px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:15px;
+      letter-spacing:.2px;
+      color:var(--text);
+    }
+    .muted{color:var(--muted)}
+    .tiny{font-size:12px; color:var(--faint)}
+    .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+    .spacer{height:6px}
+    .divider{height:1px; background:var(--line); margin:14px 0}
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:10px;
+    }
+    @media (max-width: 560px){
+      .kpi{grid-template-columns:1fr}
+    }
+    .kpi .box{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+      padding:12px;
+    }
+    .box .label{font-size:12px; color:var(--muted)}
+    .box .value{font-size:16px; margin-top:3px}
+    .box .hint{font-size:12px; color:var(--faint); margin-top:4px}
+    .slider{
+      width:100%;
+      accent-color: var(--accent2);
+    }
+    .chips{
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.2);
+      font-size:13px;
+      color:var(--muted);
+      user-select:none;
+    }
+    .chip input{accent-color: var(--accent)}
+    .timeline{
+      position:relative;
+      padding-left:16px;
+      display:grid;
+      gap:10px;
+    }
+    .timeline:before{
+      content:"";
+      position:absolute; left:7px; top:4px; bottom:4px;
+      width:2px; background:rgba(255,255,255,.14);
+      border-radius:2px;
+    }
+    .event{
+      position:relative;
+      padding:10px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);
+    }
+    .event:before{
+      content:"";
+      position:absolute; left:-16px; top:16px;
+      width:10px; height:10px; border-radius:10px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(158,243,210,.16);
+    }
+    .event .t{font-family:var(--mono); font-size:12px; color:var(--muted)}
+    .event .name{margin-top:4px; font-weight:600}
+    .event .desc{margin-top:4px; font-size:13px; color:var(--muted)}
+    .tag{
+      display:inline-block; margin-top:8px;
+      font-size:12px; padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--faint);
+    }
+
+    /* Visuals */
+    .viz{
+      display:grid;
+      place-items:center;
+      padding:12px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+      background: radial-gradient(600px 300px at 50% 10%, rgba(132,183,255,.14), transparent 60%),
+                  radial-gradient(600px 300px at 50% 110%, rgba(158,243,210,.10), transparent 60%),
+                  rgba(0,0,0,.16);
+      overflow:hidden;
+    }
+    svg{max-width:100%; height:auto}
+    .legend{
+      display:grid; gap:8px; margin-top:12px;
+      font-size:13px; color:var(--muted);
+    }
+    .legend .item{display:flex; gap:10px; align-items:center}
+    .swatch{width:12px; height:12px; border-radius:4px; background:var(--accent)}
+    .swatch.b{background:var(--accent2)}
+    .swatch.w{background:var(--warn)}
+    .swatch.d{background:var(--danger)}
+    footer{
+      margin-top:16px;
+      color:var(--faint);
+      font-size:12px;
+      padding:0 6px;
+    }
+
+    /* Motion control */
+    .spin{
+      transform-origin: 50% 50%;
+      animation: spin 10s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .reduce-motion .spin{animation:none}
+    .reduce-motion *{scroll-behavior:auto !important}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8c13.255 0 24 10.745 24 24S45.255 56 32 56 8 45.255 8 32 18.745 8 32 8Z" stroke="rgba(255,255,255,.24)" stroke-width="3"/>
+            <path d="M32 16c8.837 0 16 7.163 16 16S40.837 48 32 48 16 40.837 16 32s7.163-16 16-16Z" stroke="rgba(158,243,210,.72)" stroke-width="3"/>
+            <path d="M16 52c5 3.2 10.7 4.8 16 4.8S43 55.2 48 52" stroke="rgba(132,183,255,.8)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>26,000-Year Cycle Explorer</h1>
+          <p class="sub">
+            A Carlson-style “cycle stacking” dashboard: <b>precession</b> (~26k) + <b>obliquity</b> (41k) + <b>eccentricity</b> (~100k)
+            + optional “wildcards”. Includes a simple timeline, sacred geometry visuals, and practical resilience notes.
+          </p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn secondary" id="btnNow" title="Jump to 'today' within the cycle (arbitrary reference).">
+          ⟲ Jump to Now
+        </button>
+        <button class="btn" id="btnRandom" title="Spin to a random date in the Great Year.">
+          🎲 Random
+        </button>
+        <label class="pill" title="Disable rotation animations and smooth motion.">
+          <input type="checkbox" id="reduceMotion" />
+          Reduce motion
+        </label>
+        <button class="btn ghost" id="btnShare" title="Copy a shareable link with your current settings.">
+          🔗 Copy Link
+        </button>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- LEFT -->
+      <section class="card">
+        <h2>Cycle Controls</h2>
+
+        <div class="kpi" aria-label="Key numbers">
+          <div class="box">
+            <div class="label">Precession (Great Year)</div>
+            <div class="value"><span id="kPrecession">25,772</span> yrs</div>
+            <div class="hint">Axial wobble shifts equinoxes vs stars.</div>
+          </div>
+          <div class="box">
+            <div class="label">Obliquity</div>
+            <div class="value"><span id="kObliquity">41,000</span> yrs</div>
+            <div class="hint">Tilt changes polar summer strength.</div>
+          </div>
+          <div class="box">
+            <div class="label">Eccentricity</div>
+            <div class="value"><span id="kEccentricity">100,000</span> yrs</div>
+            <div class="hint">Orbit shape amplifies/dampens precession.</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <div style="flex:1; min-width: 240px">
+            <div class="muted" style="font-size:13px; margin-bottom:6px;">
+              Position in the ~26k cycle (0–100%)
+            </div>
+            <input class="slider" type="range" id="pos" min="0" max="1000" value="275" />
+            <div class="row" style="justify-content:space-between; margin-top:8px;">
+              <div class="tiny"><span id="posPct">27.5</span>%</div>
+              <div class="tiny">≈ <span id="posYears">7,089</span> years into the cycle</div>
+            </div>
+          </div>
+
+          <div class="box" style="min-width:220px">
+            <div class="label">“Instability score” (toy model)</div>
+            <div class="value" style="font-size:20px;">
+              <span id="score">0.42</span>
+            </div>
+            <div class="hint">Higher when multiple cycles “peak” together.</div>
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="chips" aria-label="Cycle layer toggles">
+          <label class="chip"><input type="checkbox" id="layerPrecession" checked /> Precession</label>
+          <label class="chip"><input type="checkbox" id="layerObliquity" checked /> Obliquity</label>
+          <label class="chip"><input type="checkbox" id="layerEccentricity" checked /> Eccentricity</label>
+          <label class="chip"><input type="checkbox" id="layerSolar" /> Solar variability (wildcard)</label>
+          <label class="chip"><input type="checkbox" id="layerImpact" /> Impact/comet (wildcard)</label>
+          <label class="chip"><input type="checkbox" id="layerVolcanic" /> Volcanism (wildcard)</label>
+        </div>
+
+        <p class="tiny" style="margin-top:10px;">
+          Note: the “instability score” here is just a <b>visual intuition tool</b>, not a scientific prediction.
+          It’s meant to illustrate Carlson’s idea that timing can be shaped by <i>cycle overlap</i>.
+        </p>
+
+        <div class="divider"></div>
+
+        <h2>Timeline anchors (approx.)</h2>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <!-- RIGHT -->
+      <aside class="card">
+        <h2>Geometry & Visualization</h2>
+
+        <div class="viz">
+          <svg id="wheel" viewBox="0 0 520 520" role="img" aria-label="Precession wheel with layered cycles">
+            <defs>
+              <radialGradient id="g1" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="rgba(255,255,255,.10)"/>
+                <stop offset="55%" stop-color="rgba(255,255,255,.05)"/>
+                <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+              </radialGradient>
+              <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2.2" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- background -->
+            <circle cx="260" cy="260" r="230" fill="url(#g1)" stroke="rgba(255,255,255,.16)" stroke-width="2"/>
+            <circle cx="260" cy="260" r="190" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+            <circle cx="260" cy="260" r="140" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+            <circle cx="260" cy="260" r="90"  fill="none" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+
+            <!-- Flower-of-life-ish seed -->
+            <g opacity=".18">
+              <circle cx="260" cy="260" r="90" fill="none" stroke="rgba(158,243,210,.55)" stroke-width="2"/>
+              <circle cx="260" cy="170" r="90" fill="none" stroke="rgba(158,243,210,.25)" stroke-width="2"/>
+              <circle cx="338" cy="215" r="90" fill="none" stroke="rgba(158,243,210,.18)" stroke-width="2"/>
+              <circle cx="338" cy="305" r="90" fill="none" stroke="rgba(158,243,210,.18)" stroke-width="2"/>
+              <circle cx="260" cy="350" r="90" fill="none" stroke="rgba(158,243,210,.25)" stroke-width="2"/>
+              <circle cx="182" cy="305" r="90" fill="none" stroke="rgba(158,243,210,.18)" stroke-width="2"/>
+              <circle cx="182" cy="215" r="90" fill="none" stroke="rgba(158,243,210,.18)" stroke-width="2"/>
+            </g>
+
+            <!-- layers -->
+            <g id="layer-precession" filter="url(#softGlow)">
+              <path id="arc-precession" d="" fill="none" stroke="rgba(158,243,210,.9)" stroke-width="8" stroke-linecap="round"/>
+            </g>
+            <g id="layer-obliquity" filter="url(#softGlow)">
+              <path id="arc-obliquity" d="" fill="none" stroke="rgba(132,183,255,.9)" stroke-width="8" stroke-linecap="round"/>
+            </g>
+            <g id="layer-eccentricity" filter="url(#softGlow)">
+              <path id="arc-eccentricity" d="" fill="none" stroke="rgba(255,210,138,.9)" stroke-width="8" stroke-linecap="round"/>
+            </g>
+
+            <!-- pointer -->
+            <g id="pointer">
+              <circle cx="260" cy="260" r="10" fill="rgba(255,255,255,.9)" opacity=".9"/>
+              <path id="needle" d="" stroke="rgba(255,255,255,.85)" stroke-width="3" stroke-linecap="round"/>
+              <circle id="tip" cx="260" cy="30" r="7" fill="rgba(255,138,160,.95)"/>
+            </g>
+
+            <!-- tick marks -->
+            <g opacity=".35">
+              <g id="ticks"></g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="legend">
+          <div class="item"><span class="swatch"></span> Precession (~26k)</div>
+          <div class="item"><span class="swatch b"></span> Obliquity (41k)</div>
+          <div class="item"><span class="swatch w"></span> Eccentricity (~100k)</div>
+          <div class="item"><span class="swatch d"></span> Pointer = your selected phase</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>Practical takeaways (non-doom, high leverage)</h2>
+        <ul class="muted" style="margin:0; padding-left:18px; font-size:13.5px;">
+          <li><b>Resilience beats optimization:</b> build slack into systems (food, water, power, logistics).</li>
+          <li><b>Distributed > centralized:</b> local redundancy reduces cascading failure.</li>
+          <li><b>Memory matters:</b> myths / records can be “compressed survival lessons.”</li>
+          <li><b>Think in thresholds:</b> abrupt flips happen when conditions are primed.</li>
+          <li><b>Measure & adapt:</b> treat cycles as context, not destiny.</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <div class="box">
+          <div class="label">Notes</div>
+          <div class="hint">
+            This page is for exploration. If you want, we can add:
+            a proper “precession age” label, more events, citations, export to PNG, or a mini-essay section.
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      Built as a single-file <span style="font-family:var(--mono)">index.html</span> (offline-friendly). Toy model scoring is illustrative only.
+    </footer>
+  </div>
+
+<script>
+(function(){
+  // ----- Constants (approx.)
+  const PRECESSION_YEARS = 25772;   // "Great Year" ~25,772 (often rounded to 26k)
+  const OBLIQUITY_YEARS  = 41000;   // tilt cycle
+  const ECCENT_YEARS     = 100000;  // eccentricity band (varies)
+
+  // Timeline anchors (approximate, "BP" = years before present)
+  const events = [
+    { bp: 20000, name: "Last Glacial Maximum", desc: "Ice sheets near peak extent; global sea level lower.", tags:["ice","thresholds"] },
+    { bp: 14600, name: "Meltwater Pulse 1A", desc: "Rapid sea-level rise episode (abrupt change).", tags:["sea level","abrupt"] },
+    { bp: 12900, name: "Younger Dryas onset", desc: "Sudden return to cold conditions; impact hypothesis debated.", tags:["abrupt","debated"] },
+    { bp: 11700, name: "Younger Dryas end", desc: "Rapid warming into Holocene; major system flip.", tags:["abrupt","warming"] }
+  ];
+
+  // ----- DOM
+  const elPos = document.getElementById("pos");
+  const elPosPct = document.getElementById("posPct");
+  const elPosYears = document.getElementById("posYears");
+  const elScore = document.getElementById("score");
+
+  const chkRM = document.getElementById("reduceMotion");
+  const btnNow = document.getElementById("btnNow");
+  const btnRandom = document.getElementById("btnRandom");
+  const btnShare = document.getElementById("btnShare");
+
+  const layerPrecession = document.getElementById("layerPrecession");
+  const layerObliquity  = document.getElementById("layerObliquity");
+  const layerEccentricity = document.getElementById("layerEccentricity");
+  const layerSolar = document.getElementById("layerSolar");
+  const layerImpact = document.getElementById("layerImpact");
+  const layerVolcanic = document.getElementById("layerVolcanic");
+
+  const gPrecession = document.getElementById("layer-precession");
+  const gObliquity  = document.getElementById("layer-obliquity");
+  const gEccentricity = document.getElementById("layer-eccentricity");
+
+  const arcPrecession = document.getElementById("arc-precession");
+  const arcObliquity  = document.getElementById("arc-obliquity");
+  const arcEccentricity = document.getElementById("arc-eccentricity");
+
+  const needle = document.getElementById("needle");
+  const tip = document.getElementById("tip");
+
+  const timeline = document.getElementById("timeline");
+  const ticks = document.getElementById("ticks");
+
+  // ----- Helpers
+  const clamp = (n,min,max)=>Math.max(min,Math.min(max,n));
+  const lerp = (a,b,t)=>a+(b-a)*t;
+
+  function polar(cx, cy, r, angDeg){
+    const a = (angDeg - 90) * Math.PI/180;
+    return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+  }
+  function arcPath(cx, cy, r, a0, a1){
+    const start = polar(cx,cy,r,a0);
+    const end = polar(cx,cy,r,a1);
+    const large = Math.abs(a1 - a0) > 180 ? 1 : 0;
+    const sweep = a1 > a0 ? 1 : 0;
+    return `M ${start.x.toFixed(2)} ${start.y.toFixed(2)} A ${r} ${r} 0 ${large} ${sweep} ${end.x.toFixed(2)} ${end.y.toFixed(2)}`;
+  }
+
+  // A smooth "peak" function: 0 at edges, 1 at center
+  function bell(t){
+    // t in [0,1]
+    const x = Math.sin(Math.PI * t);
+    return x*x;
+  }
+
+  // Convert "phase position" (0..1 within precession) into each cycle phase.
+  // This is a toy mapping so the viewer can see overlaps.
+  function phaseForCycle(precessionPhase, cycleYears){
+    // We treat the precession slider as "time" within one precession cycle.
+    // Then the phase of another cycle depends on that "time" modulo its period.
+    const timeYears = precessionPhase * PRECESSION_YEARS;
+    const p = (timeYears % cycleYears) / cycleYears;
+    return p;
+  }
+
+  function overlapScore(prePhase, useWildcards){
+    // Compose a toy "instability score"
+    const pP = prePhase;
+    const pO = phaseForCycle(prePhase, OBLIQUITY_YEARS);
+    const pE = phaseForCycle(prePhase, ECCENT_YEARS);
+
+    // Give each cycle a bell-shaped "peak influence" at mid-phase for visual simplicity.
+    // (Not a physical model; just overlap intuition.)
+    const sP = layerPrecession.checked ? bell(pP) : 0;
+    const sO = layerObliquity.checked  ? bell(pO) : 0;
+    const sE = layerEccentricity.checked ? bell(pE) : 0;
+
+    // Wildcards: add small stochastic-ish bumps controlled by toggles
+    let w = 0;
+    if(useWildcards){
+      if(layerSolar.checked)    w += 0.08 * (0.5 + 0.5*Math.sin(2*Math.PI*(pP*3.2 + 0.13)));
+      if(layerVolcanic.checked) w += 0.06 * (0.5 + 0.5*Math.sin(2*Math.PI*(pP*5.1 + 0.41)));
+      if(layerImpact.checked)   w += 0.10 * (0.5 + 0.5*Math.sin(2*Math.PI*(pP*7.7 + 0.77)));
+    }
+
+    // Combine: emphasize overlap (multiplicative) but keep bounded
+    const base = 0.22*sP + 0.26*sO + 0.30*sE;
+    const mult = 0.55*(sP*sO + sO*sE + sP*sE) + 0.70*(sP*sO*sE);
+    const score = clamp(base + mult + w, 0, 1);
+
+    return score;
+  }
+
+  // ----- Build timeline
+  function fmtBP(bp){
+    // show commas
+    return bp.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " BP";
+  }
+  function renderTimeline(){
+    timeline.innerHTML = "";
+    for(const e of events){
+      const div = document.createElement("div");
+      div.className = "event";
+      div.innerHTML = `
+        <div class="t">${fmtBP(e.bp)}</div>
+        <div class="name">${e.name}</div>
+        <div class="desc">${e.desc}</div>
+        <div class="tag">${e.tags.join(" · ")}</div>
+      `;
+      timeline.appendChild(div);
+    }
+  }
+
+  // ----- Build ticks
+  function renderTicks(){
+    ticks.innerHTML = "";
+    const cx=260, cy=260, r0=220, r1=230;
+    for(let i=0;i<36;i++){
+      const ang = (i/36)*360;
+      const a = polar(cx,cy,r0,ang);
+      const b = polar(cx,cy,r1,ang);
+      const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+      line.setAttribute("x1", a.x); line.setAttribute("y1", a.y);
+      line.setAttribute("x2", b.x); line.setAttribute("y2", b.y);
+      line.setAttribute("stroke", "rgba(255,255,255,.35)");
+      line.setAttribute("stroke-width", i%3===0 ? "2" : "1");
+      ticks.appendChild(line);
+    }
+  }
+
+  // ----- Visual update
+  function setNeedle(angleDeg){
+    const cx=260, cy=260;
+    const inner = polar(cx,cy,18, angleDeg);
+    const outer = polar(cx,cy,200, angleDeg);
+    needle.setAttribute("d", `M ${inner.x.toFixed(2)} ${inner.y.toFixed(2)} L ${outer.x.toFixed(2)} ${outer.y.toFixed(2)}`);
+    tip.setAttribute("cx", outer.x.toFixed(2));
+    tip.setAttribute("cy", outer.y.toFixed(2));
+  }
+
+  function setArc(el, radius, phase, spanDeg){
+    // Center a highlighted arc around the needle angle
+    const ang = phase * 360;
+    const a0 = ang - spanDeg/2;
+    const a1 = ang + spanDeg/2;
+    el.setAttribute("d", arcPath(260,260,radius,a0,a1));
+  }
+
+  function update(){
+    const t = Number(elPos.value) / 1000; // 0..1
+    const pct = (t*100).toFixed(1);
+    const yrs = Math.round(t * PRECESSION_YEARS);
+
+    elPosPct.textContent = pct;
+    elPosYears.textContent = yrs.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Needle corresponds to precession phase
+    setNeedle(t*360);
+
+    // Visual arc spans vary by "cycle strength" in toy model
+    // Show each layer's own phase (mapped from precession time)
+    const pP = t;
+    const pO = phaseForCycle(t, OBLIQUITY_YEARS);
+    const pE = phaseForCycle(t, ECCENT_YEARS);
+
+    // Arc spans: more "impact" when near peak
+    const spanP = lerp(18, 70, bell(pP));
+    const spanO = lerp(18, 70, bell(pO));
+    const spanE = lerp(18, 70, bell(pE));
+
+    setArc(arcPrecession, 210, pP, spanP);
+    setArc(arcObliquity,  170, pO, spanO);
+    setArc(arcEccentricity, 130, pE, spanE);
+
+    gPrecession.style.display = layerPrecession.checked ? "" : "none";
+    gObliquity.style.display  = layerObliquity.checked  ? "" : "none";
+    gEccentricity.style.display = layerEccentricity.checked ? "" : "none";
+
+    const score = overlapScore(t, true);
+    elScore.textContent = score.toFixed(2);
+
+    // Update URL state (without spamming history)
+    const u = new URL(location.href);
+    u.searchParams.set("p", elPos.value);
+    u.searchParams.set("rm", chkRM.checked ? "1" : "0");
+    u.searchParams.set("lp", layerPrecession.checked ? "1" : "0");
+    u.searchParams.set("lo", layerObliquity.checked ? "1" : "0");
+    u.searchParams.set("le", layerEccentricity.checked ? "1" : "0");
+    u.searchParams.set("ls", layerSolar.checked ? "1" : "0");
+    u.searchParams.set("li", layerImpact.checked ? "1" : "0");
+    u.searchParams.set("lv", layerVolcanic.checked ? "1" : "0");
+    history.replaceState(null, "", u.toString());
+  }
+
+  // ----- Actions
+  function applyReduceMotion(on){
+    document.body.classList.toggle("reduce-motion", on);
+  }
+
+  function jumpToNow(){
+    // "Now" is just an arbitrary reference point. We'll map it to a visually interesting spot.
+    // You can replace this with a real astronomical reference later.
+    elPos.value = 275; // 27.5%
+    update();
+  }
+
+  function randomize(){
+    elPos.value = Math.floor(Math.random()*1001);
+    update();
+  }
+
+  async function copyLink(){
+    try{
+      await navigator.clipboard.writeText(location.href);
+      btnShare.textContent = "✅ Link Copied";
+      setTimeout(()=>btnShare.textContent="🔗 Copy Link", 1200);
+    }catch(e){
+      // fallback
+      prompt("Copy this link:", location.href);
+    }
+  }
+
+  function loadFromURL(){
+    const sp = new URLSearchParams(location.search);
+    const p = sp.get("p");
+    if(p !== null) elPos.value = clamp(Number(p), 0, 1000);
+
+    const rm = sp.get("rm"); if(rm !== null) chkRM.checked = rm === "1";
+    const lp = sp.get("lp"); if(lp !== null) layerPrecession.checked = lp === "1";
+    const lo = sp.get("lo"); if(lo !== null) layerObliquity.checked = lo === "1";
+    const le = sp.get("le"); if(le !== null) layerEccentricity.checked = le === "1";
+    const ls = sp.get("ls"); if(ls !== null) layerSolar.checked = ls === "1";
+    const li = sp.get("li"); if(li !== null) layerImpact.checked = li === "1";
+    const lv = sp.get("lv"); if(lv !== null) layerVolcanic.checked = lv === "1";
+  }
+
+  // ----- Wire up
+  renderTimeline();
+  renderTicks();
+  loadFromURL();
+  applyReduceMotion(chkRM.checked);
+  update();
+
+  elPos.addEventListener("input", update);
+
+  [layerPrecession, layerObliquity, layerEccentricity, layerSolar, layerImpact, layerVolcanic]
+    .forEach(el => el.addEventListener("change", update));
+
+  chkRM.addEventListener("change", ()=>applyReduceMotion(chkRM.checked));
+
+  btnNow.addEventListener("click", jumpToNow);
+  btnRandom.addEventListener("click", randomize);
+  btnShare.addEventListener("click", copyLink);
+
+  // Keyboard niceties
+  window.addEventListener("keydown", (e)=>{
+    if(e.key === "ArrowLeft"){ elPos.value = clamp(Number(elPos.value)-5, 0, 1000); update(); }
+    if(e.key === "ArrowRight"){ elPos.value = clamp(Number(elPos.value)+5, 0, 1000); update(); }
+    if(e.key.toLowerCase() === "r"){ randomize(); }
+  });
+})();
+</script>
+</body>
+</html>
