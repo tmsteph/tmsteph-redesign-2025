@@ -356,7 +356,11 @@ if (typeof window !== 'undefined') {
     }
   };
 
-  window.addEventListener('load', () => {
+  if (document.readyState === 'complete') {
     startRecipeBook();
-  });
+  } else {
+    window.addEventListener('load', () => {
+      startRecipeBook();
+    });
+  }
 }
