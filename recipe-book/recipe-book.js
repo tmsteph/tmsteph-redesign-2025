@@ -65,6 +65,22 @@ export const initRecipeBook = ({
   const cache = new Map();
   let editingId = null;
 
+  const applyCacheUpdate = (id, payload) => {
+    cache.set(id, {
+      id,
+      name: payload.name,
+      category: payload.category,
+      servings: payload.servings,
+      totalTime: payload.totalTime,
+      ingredients: Array.isArray(payload.ingredients) ? payload.ingredients : [],
+      steps: Array.isArray(payload.steps) ? payload.steps : [],
+      source: payload.source,
+      createdAt: payload.createdAt,
+      updatedAt: payload.updatedAt,
+    });
+    renderRecipes();
+  };
+
   const splitLines = (value) =>
     value
       .split('\n')
@@ -299,19 +315,23 @@ export const initRecipeBook = ({
 
     if (editingId) {
       const existing = cache.get(editingId);
-      recipes.get(editingId).put({
+      const updated = {
         ...payload,
         createdAt: existing?.createdAt ?? Date.now(),
-      });
+      };
+      recipes.get(editingId).put(updated);
+      applyCacheUpdate(editingId, updated);
       resetForm();
       return;
     }
 
     const id = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    recipes.get(id).put({
+    const created = {
       ...payload,
       createdAt: Date.now(),
-    });
+    };
+    recipes.get(id).put(created);
+    applyCacheUpdate(id, created);
 
     form.reset();
     categoryInput.value = 'Dinner';
