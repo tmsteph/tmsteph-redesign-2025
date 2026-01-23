@@ -156,6 +156,14 @@
       });
     };
 
+    const persistAlias = (aliasValue) => {
+      aliasNodes.forEach((node) => {
+        if (typeof node?.put === 'function') {
+          node.put(aliasValue);
+        }
+      });
+    };
+
     const updateCommandCentralVisibility = (value) => {
       if (!commandCentralElement) {
         return;
@@ -277,6 +285,11 @@
     };
 
     const handleAuth = () => {
+      const aliasCandidate = normalizeAliasValue(user.is?.alias);
+      if (aliasCandidate && aliasCandidate !== cachedAlias) {
+        cachedAlias = aliasCandidate;
+        persistAlias(aliasCandidate);
+      }
       applyLoginState();
       fetchAliasOnce();
     };
