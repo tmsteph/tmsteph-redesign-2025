@@ -6,14 +6,6 @@
   const user = gun.user();
   const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
 
-  if (typeof user.recall === 'function') {
-    try {
-      user.recall(RECALL_OPTIONS);
-    } catch (err) {
-      // Ignore recall errors. We'll rely on manual login if automatic recall fails.
-    }
-  }
-
   const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
   const sanitizeAlias = (alias) => {
     if (typeof alias !== 'string') {
@@ -74,6 +66,8 @@
   let hasConnectedPeer = false;
   let connectionNoticeTimeout = null;
   let photoMessageTimeout = null;
+  let recallAttempted = false;
+  let cachedAlias = '';
 
   const photoCache = new Map();
   let photoListenersAttached = false;
@@ -134,6 +128,73 @@
       return Gun.text.random(18);
     }
     return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  };
+
+  const recallUser = () => {
+    if (recallAttempted) {
+      return;
+    }
+    recallAttempted = true;
+    if (typeof user.recall === 'function') {
+      try {
+        user.recall(RECALL_OPTIONS);
+      } catch (err) {
+        // Ignore recall errors. We'll rely on manual login if automatic recall fails.
+      }
+    }
+  };
+
+  const isPubKeyAlias = (alias) => {
+    if (typeof alias !== 'string') {
+      return false;
+    }
+    const trimmed = alias.trim();
+    if (!trimmed) {
+      return false;
+    }
+    const pubKey = user.is?.pub || user._?.pub || user._?.sea?.pub;
+    return Boolean(pubKey && trimmed === pubKey);
+  };
+
+  const normalizeAliasValue = (alias) => {
+    const cleaned = sanitizeAlias(alias);
+    if (!cleaned || isPubKeyAlias(cleaned)) {
+      return '';
+    }
+    return cleaned;
+  };
+
+  const getAliasNodes = () => [
+    safeGet(user, 'alias'),
+    safeGet(getSharedProfile(), 'alias'),
+    safeGet(getLegacyProfile(), 'alias')
+  ];
+
+  const aliasNodes = getAliasNodes();
+  const aliasValues = new Array(aliasNodes.length).fill('');
+
+  const updateAliasCache = () => {
+    cachedAlias = aliasValues.find((value) => value) || '';
+    if (!adminPanel.hidden) {
+      const aliasCandidate = cachedAlias || normalizeAliasValue(user.is?.alias);
+      aliasDisplay.textContent = aliasCandidate || 'Admin';
+    }
+  };
+
+  const fetchAliasOnce = () => {
+    aliasNodes.forEach((node, index) => {
+      if (typeof node?.once !== 'function') {
+        return;
+      }
+      node.once((value) => {
+        const normalized = normalizeAliasValue(value);
+        if (normalized === aliasValues[index]) {
+          return;
+        }
+        aliasValues[index] = normalized;
+        updateAliasCache();
+      });
+    });
   };
 
   const readFileAsDataUrl = (file) =>
@@ -427,25 +488,53 @@
 
   scheduleConnectionWarning();
 
+  const putToMultipleNodes = (value, nodes, onSuccess) => {
+    const filteredNodes = nodes.filter((node) => typeof node?.put === 'function');
+    if (!filteredNodes.length) {
+      if (typeof onSuccess === 'function') {
+        onSuccess();
+      }
+      return;
+    }
+
+    let pending = filteredNodes.length;
+    let errorMessage = null;
+
+    filteredNodes.forEach((node) => {
+      node.put(value, (ack) => {
+        if (ack.err && !errorMessage) {
+          errorMessage = ack.err;
+        }
+
+        pending -= 1;
+        if (pending === 0) {
+          if (errorMessage) {
+            setPanelMessage(errorMessage, 'error');
+          } else if (typeof onSuccess === 'function') {
+            onSuccess();
+          }
+        }
+      });
+    });
+  };
+
   const persistAlias = (aliasCandidate) => {
-    const aliasValue = sanitizeAlias(aliasCandidate);
+    const aliasValue = normalizeAliasValue(aliasCandidate);
     if (!aliasValue) {
       return;
     }
-    const aliasNode = safeGet(user, 'alias');
-    if (typeof aliasNode?.put === 'function') {
-      aliasNode.put(aliasValue);
-    }
+    putToMultipleNodes(aliasValue, getAliasNodes());
   };
 
   const showAdminPanel = () => {
     authSection.hidden = true;
     adminPanel.hidden = false;
-    const aliasCandidate = sanitizeAlias(user.is?.alias) || sanitizeAlias(aliasInput.value);
+    const aliasCandidate = cachedAlias || normalizeAliasValue(user.is?.alias) || normalizeAliasValue(aliasInput.value);
     aliasDisplay.textContent = aliasCandidate || 'Admin';
     if (aliasCandidate) {
       persistAlias(aliasCandidate);
     }
+    fetchAliasOnce();
     if (typeof window !== 'undefined') {
       if (window.history?.replaceState) {
         window.history.replaceState(null, '', '#admin-panel');
@@ -500,6 +589,19 @@
       }
     };
 
+    aliasNodes.forEach((node, index) => {
+      if (typeof node?.on === 'function') {
+        node.on((value) => {
+          const normalized = normalizeAliasValue(value);
+          if (normalized === aliasValues[index]) {
+            return;
+          }
+          aliasValues[index] = normalized;
+          updateAliasCache();
+        });
+      }
+    });
+
     bindField({
       primary: safeGet(getSharedProfile(), 'status'),
       fallback: safeGet(getLegacyProfile(), 'status'),
@@ -537,36 +639,6 @@
     }
 
     attachPhotoLibraryListeners();
-  };
-
-  const putToMultipleNodes = (value, nodes, onSuccess) => {
-    const filteredNodes = nodes.filter((node) => typeof node?.put === 'function');
-    if (!filteredNodes.length) {
-      if (typeof onSuccess === 'function') {
-        onSuccess();
-      }
-      return;
-    }
-
-    let pending = filteredNodes.length;
-    let errorMessage = null;
-
-    filteredNodes.forEach((node) => {
-      node.put(value, (ack) => {
-        if (ack.err && !errorMessage) {
-          errorMessage = ack.err;
-        }
-
-        pending -= 1;
-        if (pending === 0) {
-          if (errorMessage) {
-            setPanelMessage(errorMessage, 'error');
-          } else if (typeof onSuccess === 'function') {
-            onSuccess();
-          }
-        }
-      });
-    });
   };
 
   authForm.addEventListener('submit', (event) => {
@@ -750,6 +822,7 @@
     showAdminPanel();
     setAuthMessage('');
   });
+  recallUser();
 
   window.addEventListener('load', () => {
     if (user.is) {

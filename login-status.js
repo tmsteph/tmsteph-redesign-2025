@@ -69,14 +69,7 @@
       return createNoopController();
     }
 
-    if (typeof user.recall === 'function') {
-      try {
-        user.recall(recallOptions);
-      } catch (err) {
-        // Swallow recall failures; we'll fall back to manual refresh attempts.
-      }
-    }
-
+    const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
     const commandCentralElement =
       options.commandCentralElement ??
       (options.commandCentralSelector && doc?.querySelector
@@ -90,6 +83,78 @@
     let commandCentralAttached = false;
     let commandCentralPrimaryNode = null;
     let commandCentralFallbackNode = null;
+    let recallAttempted = false;
+
+    const recallUser = () => {
+      if (recallAttempted) {
+        return;
+      }
+      recallAttempted = true;
+      if (typeof user.recall === 'function') {
+        try {
+          user.recall(recallOptions);
+        } catch (err) {
+          // Swallow recall failures; we'll fall back to manual refresh attempts.
+        }
+      }
+    };
+
+    const isPubKeyAlias = (value) => {
+      if (typeof value !== 'string') {
+        return false;
+      }
+      const trimmed = value.trim();
+      if (!trimmed) {
+        return false;
+      }
+      const pubKey = user.is?.pub || user._?.pub || user._?.sea?.pub;
+      return Boolean(pubKey && trimmed === pubKey);
+    };
+
+    const normalizeAliasValue = (value) => {
+      if (typeof value !== 'string') {
+        return null;
+      }
+      const trimmed = value.trim();
+      if (!trimmed || isPubKeyAlias(trimmed)) {
+        return null;
+      }
+      return trimmed;
+    };
+
+    const getSharedApp = () => safeGet(safeGet(user, 'apps'), sharedAppKey);
+    const getSharedProfile = () => safeGet(getSharedApp(), 'profile');
+    const getLegacyProfile = () => safeGet(user, 'profile');
+
+    const aliasNodes = [
+      safeGet(user, 'alias'),
+      safeGet(getSharedProfile(), 'alias'),
+      safeGet(getLegacyProfile(), 'alias')
+    ];
+    const aliasValues = new Array(aliasNodes.length).fill(null);
+
+    const updateAliasCache = () => {
+      cachedAlias = aliasValues.find((value) => value) ?? null;
+      if (user.is) {
+        updateLoginLink();
+      }
+    };
+
+    const fetchAliasOnce = () => {
+      aliasNodes.forEach((node, index) => {
+        if (typeof node?.once !== 'function') {
+          return;
+        }
+        node.once((value) => {
+          const normalized = normalizeAliasValue(value);
+          if (normalized === aliasValues[index]) {
+            return;
+          }
+          aliasValues[index] = normalized;
+          updateAliasCache();
+        });
+      });
+    };
 
     const updateCommandCentralVisibility = (value) => {
       if (!commandCentralElement) {
@@ -156,8 +221,9 @@
 
     const updateLoginLink = () => {
       if (user.is) {
-        const aliasCandidate = cachedAlias ?? user.is.alias ?? user._?.alias;
-        const alias = formatAlias(aliasCandidate);
+        const aliasCandidate =
+          cachedAlias ?? normalizeAliasValue(user.is.alias) ?? normalizeAliasValue(user._?.alias);
+        const alias = formatAlias(aliasCandidate || '');
         loginLink.textContent = alias;
         loginLink.setAttribute('aria-label', `Open admin panel for ${alias}`);
         loginLink.setAttribute('href', `${adminUrl}#admin-panel`);
@@ -182,14 +248,9 @@
 
     const refreshState = () => {
       if (!user.is) {
-        if (typeof user.recall === 'function') {
-          try {
-            user.recall(recallOptions);
-          } catch (err) {
-            // Ignore recall errors; we'll continue using the current state.
-          }
-        }
+        recallUser();
       }
+      fetchAliasOnce();
       applyLoginState();
     };
 
@@ -198,17 +259,18 @@
         return;
       }
       try {
-        const aliasNode = user.get('alias');
-        if (aliasNode?.on) {
-          aliasNode.on((value) => {
-            if (typeof value === 'string' && value.trim()) {
-              cachedAlias = value;
-              if (user.is) {
-                updateLoginLink();
+        aliasNodes.forEach((node, index) => {
+          if (node?.on) {
+            node.on((value) => {
+              const normalized = normalizeAliasValue(value);
+              if (normalized === aliasValues[index]) {
+                return;
               }
-            }
-          });
-        }
+              aliasValues[index] = normalized;
+              updateAliasCache();
+            });
+          }
+        });
       } catch (err) {
         // Swallow errors from optional alias binding.
       }
@@ -216,6 +278,7 @@
 
     const handleAuth = () => {
       applyLoginState();
+      fetchAliasOnce();
     };
 
     const init = () => {
@@ -229,6 +292,8 @@
       if (typeof gun.on === 'function') {
         gun.on('auth', handleAuth);
       }
+      recallUser();
+      fetchAliasOnce();
 
       const globalTarget = options.globalTarget ?? root;
       if (globalTarget?.addEventListener) {
@@ -261,9 +326,11 @@
       updateLoginLink,
       formatAlias,
       get state() {
+        const aliasCandidate =
+          cachedAlias ?? normalizeAliasValue(user.is?.alias) ?? normalizeAliasValue(user._?.alias);
         return {
           isLoggedIn: Boolean(user.is),
-          alias: user.is?.alias ?? cachedAlias ?? null,
+          alias: aliasCandidate ?? null,
           commandCentralVisible: Boolean(commandCentralElement && !commandCentralElement.hidden)
         };
       }
