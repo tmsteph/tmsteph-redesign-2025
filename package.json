@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "python3 -m http.server 5173",
+    "start": "python3 -m http.server 8000",
     "test": "vitest run"
   },
   "devDependencies": {
