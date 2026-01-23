@@ -15,12 +15,20 @@
   const DEFAULT_SHARED_APP_KEY = 'portal.3dvr.tech';
   const DEFAULT_RECALL_OPTIONS = Object.freeze({ sessionStorage: true, localStorage: true });
 
+  const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
+
+  const looksLikePub = (value) =>
+    typeof value === 'string' && value.length > 40 && value.includes('.') && !value.includes(' ');
+
   const sanitizeAlias = (alias) => {
     if (typeof alias !== 'string') {
       return 'Account';
     }
     const trimmed = alias.trim();
-    return trimmed.length ? trimmed : 'Account';
+    if (!trimmed.length || looksLikePub(trimmed)) {
+      return 'Account';
+    }
+    return trimmed;
   };
 
   const toBoolean = (value) => value === true || value === 'true';
@@ -69,14 +77,6 @@
       return createNoopController();
     }
 
-    if (typeof user.recall === 'function') {
-      try {
-        user.recall(recallOptions);
-      } catch (err) {
-        // Swallow recall failures; we'll fall back to manual refresh attempts.
-      }
-    }
-
     const commandCentralElement =
       options.commandCentralElement ??
       (options.commandCentralSelector && doc?.querySelector
@@ -86,10 +86,23 @@
     const sharedAppKey = options.sharedAppKey || DEFAULT_SHARED_APP_KEY;
 
     let hasInitialized = false;
+    let hasRecalled = false;
     let cachedAlias = null;
     let commandCentralAttached = false;
     let commandCentralPrimaryNode = null;
     let commandCentralFallbackNode = null;
+
+    const recallUser = () => {
+      if (hasRecalled || typeof user.recall !== 'function') {
+        return;
+      }
+      hasRecalled = true;
+      try {
+        user.recall(recallOptions);
+      } catch (err) {
+        // Swallow recall failures; we'll fall back to manual refresh attempts.
+      }
+    };
 
     const updateCommandCentralVisibility = (value) => {
       if (!commandCentralElement) {
@@ -120,10 +133,10 @@
 
       commandCentralAttached = true;
 
-      const appsNode = user.get('apps');
-      const sharedApp = typeof appsNode?.get === 'function' ? appsNode.get(sharedAppKey) : null;
-      const sharedDashboard = typeof sharedApp?.get === 'function' ? sharedApp.get('dashboard') : null;
-      const legacyDashboard = typeof user.get === 'function' ? user.get('dashboard') : null;
+      const appsNode = safeGet(user, 'apps');
+      const sharedApp = safeGet(appsNode, sharedAppKey);
+      const sharedDashboard = safeGet(sharedApp, 'dashboard');
+      const legacyDashboard = safeGet(user, 'dashboard');
 
       commandCentralPrimaryNode =
         typeof sharedDashboard?.get === 'function' ? sharedDashboard.get('commandCentralEnabled') : null;
@@ -189,8 +202,38 @@
             // Ignore recall errors; we'll continue using the current state.
           }
         }
+      } else {
+        fetchAliasOnce();
       }
       applyLoginState();
+    };
+
+    const getAliasNodes = () => {
+      const appsNode = safeGet(user, 'apps');
+      const sharedApp = safeGet(appsNode, sharedAppKey);
+      const sharedProfile = safeGet(sharedApp, 'profile');
+      const legacyProfile = safeGet(user, 'profile');
+      return [safeGet(user, 'alias'), safeGet(sharedProfile, 'alias'), safeGet(legacyProfile, 'alias')];
+    };
+
+    const updateCachedAlias = (value) => {
+      if (typeof value === 'string' && value.trim()) {
+        cachedAlias = value;
+        if (user.is) {
+          updateLoginLink();
+        }
+      }
+    };
+
+    const fetchAliasOnce = () => {
+      getAliasNodes().forEach((aliasNode) => {
+        if (!aliasNode?.once) {
+          return;
+        }
+        aliasNode.once((value) => {
+          updateCachedAlias(value);
+        });
+      });
     };
 
     const initAliasBinding = () => {
@@ -198,23 +241,21 @@
         return;
       }
       try {
-        const aliasNode = user.get('alias');
-        if (aliasNode?.on) {
+        getAliasNodes().forEach((aliasNode) => {
+          if (!aliasNode?.on) {
+            return;
+          }
           aliasNode.on((value) => {
-            if (typeof value === 'string' && value.trim()) {
-              cachedAlias = value;
-              if (user.is) {
-                updateLoginLink();
-              }
-            }
+            updateCachedAlias(value);
           });
-        }
+        });
       } catch (err) {
         // Swallow errors from optional alias binding.
       }
     };
 
     const handleAuth = () => {
+      fetchAliasOnce();
       applyLoginState();
     };
 
@@ -229,6 +270,8 @@
       if (typeof gun.on === 'function') {
         gun.on('auth', handleAuth);
       }
+
+      recallUser();
 
       const globalTarget = options.globalTarget ?? root;
       if (globalTarget?.addEventListener) {

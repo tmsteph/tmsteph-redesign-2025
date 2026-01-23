@@ -6,21 +6,18 @@
   const user = gun.user();
   const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
 
-  if (typeof user.recall === 'function') {
-    try {
-      user.recall(RECALL_OPTIONS);
-    } catch (err) {
-      // Ignore recall errors. We'll rely on manual login if automatic recall fails.
-    }
-  }
-
   const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
+  const looksLikePub = (value) =>
+    typeof value === 'string' && value.length > 40 && value.includes('.') && !value.includes(' ');
   const sanitizeAlias = (alias) => {
     if (typeof alias !== 'string') {
       return '';
     }
     const trimmed = alias.trim();
-    return trimmed.length ? trimmed : '';
+    if (!trimmed.length || looksLikePub(trimmed)) {
+      return '';
+    }
+    return trimmed;
   };
 
   const authSection = document.getElementById('auth-section');
@@ -74,11 +71,32 @@
   let hasConnectedPeer = false;
   let connectionNoticeTimeout = null;
   let photoMessageTimeout = null;
+  let hasRecalled = false;
+  let cachedAlias = '';
 
   const photoCache = new Map();
   let photoListenersAttached = false;
 
   const toBoolean = (value) => value === true || value === 'true';
+
+  const getAliasNodes = () =>
+    [
+      safeGet(user, 'alias'),
+      safeGet(getSharedProfile(), 'alias'),
+      safeGet(getLegacyProfile(), 'alias')
+    ].filter(Boolean);
+
+  const recallUser = () => {
+    if (hasRecalled || typeof user.recall !== 'function') {
+      return;
+    }
+    hasRecalled = true;
+    try {
+      user.recall(RECALL_OPTIONS);
+    } catch (err) {
+      // Ignore recall errors. We'll rely on manual login if automatic recall fails.
+    }
+  };
 
   const setAuthMessage = (message, type = 'info') => {
     authMessage.textContent = message;
@@ -432,20 +450,70 @@
     if (!aliasValue) {
       return;
     }
-    const aliasNode = safeGet(user, 'alias');
-    if (typeof aliasNode?.put === 'function') {
-      aliasNode.put(aliasValue);
+    getAliasNodes().forEach((node) => {
+      if (typeof node?.put === 'function') {
+        node.put(aliasValue);
+      }
+    });
+  };
+
+  const updateAliasDisplay = (aliasValue) => {
+    if (!aliasDisplay) {
+      return;
     }
+    const aliasCandidate =
+      sanitizeAlias(aliasValue) ||
+      sanitizeAlias(cachedAlias) ||
+      (looksLikePub(user.is?.alias) ? '' : sanitizeAlias(user.is?.alias)) ||
+      (looksLikePub(user._?.alias) ? '' : sanitizeAlias(user._?.alias)) ||
+      sanitizeAlias(aliasInput?.value);
+    const finalAlias = aliasCandidate || 'Admin';
+    aliasDisplay.textContent = finalAlias;
+    if (aliasCandidate) {
+      persistAlias(aliasCandidate);
+    }
+  };
+
+  const initAliasBinding = () => {
+    const aliasNodes = getAliasNodes().filter((node) => typeof node?.on === 'function');
+    if (!aliasNodes.length) {
+      return;
+    }
+    aliasNodes.forEach((aliasNode) => {
+      aliasNode.on((value) => {
+        const sanitized = sanitizeAlias(value);
+        if (sanitized) {
+          cachedAlias = sanitized;
+          if (user.is) {
+            updateAliasDisplay(sanitized);
+          }
+        }
+      });
+    });
+  };
+
+  const fetchAliasOnce = () => {
+    getAliasNodes().forEach((aliasNode) => {
+      if (typeof aliasNode?.once !== 'function') {
+        return;
+      }
+      aliasNode.once((value) => {
+        const sanitized = sanitizeAlias(value);
+        if (sanitized) {
+          cachedAlias = sanitized;
+          if (user.is) {
+            updateAliasDisplay(sanitized);
+          }
+        }
+      });
+    });
   };
 
   const showAdminPanel = () => {
     authSection.hidden = true;
     adminPanel.hidden = false;
-    const aliasCandidate = sanitizeAlias(user.is?.alias) || sanitizeAlias(aliasInput.value);
-    aliasDisplay.textContent = aliasCandidate || 'Admin';
-    if (aliasCandidate) {
-      persistAlias(aliasCandidate);
-    }
+    updateAliasDisplay();
+    fetchAliasOnce();
     if (typeof window !== 'undefined') {
       if (window.history?.replaceState) {
         window.history.replaceState(null, '', '#admin-panel');
@@ -750,6 +818,9 @@
     showAdminPanel();
     setAuthMessage('');
   });
+
+  initAliasBinding();
+  recallUser();
 
   window.addEventListener('load', () => {
     if (user.is) {

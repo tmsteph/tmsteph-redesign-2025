@@ -6,14 +6,6 @@
   const user = gun.user();
   const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
 
-  if (typeof user.recall === 'function') {
-    try {
-      user.recall(RECALL_OPTIONS);
-    } catch (err) {
-      // Ignore recall errors. We'll rely on manual login if automatic recall fails.
-    }
-  }
-
   const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
 
   const authSection = document.getElementById('auth-section');
@@ -48,6 +40,7 @@
   let listenersAttached = false;
   let hasConnectedPeer = false;
   let connectionNoticeTimeout = null;
+  let hasRecalled = false;
 
   const dreamspellState = {
     mode: DREAMSPELL_DEFAULT_MODE,
@@ -84,6 +77,18 @@
   };
 
   const sanitizeDreamspellMode = (value) => (value === 'sun' ? 'sun' : 'moon');
+
+  const recallUser = () => {
+    if (hasRecalled || typeof user.recall !== 'function') {
+      return;
+    }
+    hasRecalled = true;
+    try {
+      user.recall(RECALL_OPTIONS);
+    } catch (err) {
+      // Ignore recall errors. We'll rely on manual login if automatic recall fails.
+    }
+  };
 
   const normalizeDreamspellDays = (value) => {
     if (!value || typeof value !== 'object') {
@@ -550,6 +555,8 @@
     showDreamspellPanel();
     setAuthMessage('');
   });
+
+  recallUser();
 
   window.addEventListener('load', () => {
     if (user.is) {
