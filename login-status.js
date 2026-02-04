@@ -91,6 +91,8 @@
     let commandCentralAttached = false;
     let commandCentralPrimaryNode = null;
     let commandCentralFallbackNode = null;
+    let hydrationTimer = null;
+    let hydrationAttempts = 0;
 
     const recallUser = () => {
       if (hasRecalled || typeof user.recall !== 'function') {
@@ -208,6 +210,43 @@
       applyLoginState();
     };
 
+    const clearHydrationTimer = () => {
+      if (hydrationTimer && typeof root?.clearTimeout === 'function') {
+        root.clearTimeout(hydrationTimer);
+      }
+      hydrationTimer = null;
+    };
+
+    const scheduleHydrationCheck = () => {
+      if (typeof root?.setTimeout !== 'function') {
+        return;
+      }
+      const maxAttempts = options.maxHydrationAttempts ?? 20;
+      const intervalMs = options.hydrationInterval ?? 250;
+
+      const attemptHydration = () => {
+        if (user.is) {
+          clearHydrationTimer();
+          fetchAliasOnce();
+          applyLoginState();
+          return;
+        }
+
+        hydrationAttempts += 1;
+        refreshState();
+
+        if (hydrationAttempts < maxAttempts) {
+          hydrationTimer = root.setTimeout(attemptHydration, intervalMs);
+        } else {
+          clearHydrationTimer();
+        }
+      };
+
+      hydrationAttempts = 0;
+      clearHydrationTimer();
+      hydrationTimer = root.setTimeout(attemptHydration, 0);
+    };
+
     const getAliasNodes = () => {
       const appsNode = safeGet(user, 'apps');
       const sharedApp = safeGet(appsNode, sharedAppKey);
@@ -259,6 +298,12 @@
       applyLoginState();
     };
 
+    const handleVisibilityChange = () => {
+      if (doc.visibilityState === 'visible') {
+        refreshState();
+      }
+    };
+
     const init = () => {
       if (hasInitialized) {
         return;
@@ -272,11 +317,17 @@
       }
 
       recallUser();
+      scheduleHydrationCheck();
 
       const globalTarget = options.globalTarget ?? root;
       if (globalTarget?.addEventListener) {
         globalTarget.addEventListener('focus', refreshState);
         globalTarget.addEventListener('storage', refreshState);
+        globalTarget.addEventListener('pageshow', refreshState);
+      }
+
+      if (doc?.addEventListener) {
+        doc.addEventListener('visibilitychange', handleVisibilityChange);
       }
 
       applyLoginState();
@@ -292,8 +343,14 @@
       if (globalTarget?.removeEventListener) {
         globalTarget.removeEventListener('focus', refreshState);
         globalTarget.removeEventListener('storage', refreshState);
+        globalTarget.removeEventListener('pageshow', refreshState);
       }
 
+      if (doc?.removeEventListener) {
+        doc.removeEventListener('visibilitychange', handleVisibilityChange);
+      }
+
+      clearHydrationTimer();
       detachCommandCentral();
     };
 
