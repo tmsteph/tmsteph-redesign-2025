@@ -183,4 +183,31 @@ describe('login status controller', () => {
     expect(commandCentral.hidden).toBe(false);
     expect(commandCentral.dataset.commandCentral).toBe('enabled');
   });
+
+  it('refreshes login state after delayed recall without auth events', () => {
+    vi.useFakeTimers();
+    const { loginLink, commandCentral } = setupDom();
+    const { user } = createUserStub();
+    const gun = createGunStub(user);
+
+    const controller = createLoginStatusController({
+      root: window,
+      doc: document,
+      gun,
+      user,
+      loginLink,
+      commandCentralElement: commandCentral,
+      hydrationInterval: 10,
+      maxHydrationAttempts: 2
+    });
+
+    controller.init();
+    expect(loginLink.textContent).toBe('Log In');
+
+    user.is = { alias: 'Thomas' };
+    vi.runAllTimers();
+
+    expect(loginLink.textContent).toBe('Thomas');
+    vi.useRealTimers();
+  });
 });
