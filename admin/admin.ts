@@ -7,10 +7,11 @@
     off?: () => void;
     put?: (data: any, callback?: (ack: GunAck) => void) => void;
   };
+  type GunAuthOptions = { remember?: boolean; sessionStorage?: boolean; localStorage?: boolean };
   type GunUser = GunNode & {
     recall?: (options?: { sessionStorage?: boolean; localStorage?: boolean }) => void;
     create?: (alias: string, password: string, callback: (ack: GunAck) => void) => void;
-    auth?: (alias: string, password: string, callback: (ack: GunAck) => void) => void;
+    auth?: (alias: string, password: string, callback: (ack: GunAck) => void, options?: GunAuthOptions) => void;
     leave?: () => void;
     is?: { alias?: string } | null;
     _?: { sea?: unknown; alias?: string };
@@ -37,6 +38,7 @@
   const gun = Gun({ peers, localStorage: true });
   const user = gun.user();
   const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
+  const AUTH_OPTIONS = { remember: true, sessionStorage: false, localStorage: true };
 
   const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
   const looksLikePub = (value) =>
@@ -700,7 +702,7 @@
           }
           persistAlias(alias);
           showAdminPanel();
-        });
+        }, AUTH_OPTIONS);
       });
     } else {
       user.auth(alias, password, (ack) => {
@@ -715,7 +717,7 @@
       setAuthMessage('Login successful! Redirecting...', 'success');
       persistAlias(alias);
       showAdminPanel();
-    });
+    }, AUTH_OPTIONS);
   }
   });
 
