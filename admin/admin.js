@@ -581,7 +581,7 @@
                     }
                     persistAlias(alias);
                     showAdminPanel();
-                });
+                }, { remember: true });
             });
         }
         else {
@@ -596,7 +596,7 @@
                 setAuthMessage('Login successful! Redirecting...', 'success');
                 persistAlias(alias);
                 showAdminPanel();
-            });
+            }, { remember: true });
         }
     });
     logoutBtn.addEventListener('click', () => {

@@ -467,7 +467,7 @@
             return;
           }
           showDreamspellPanel();
-        });
+        }, { remember: true });
       });
     } else {
       user.auth(alias, password, (ack) => {
@@ -481,7 +481,7 @@
         }
         setAuthMessage('Login successful! Redirecting...', 'success');
         showDreamspellPanel();
-      });
+      }, { remember: true });
     }
   });
 

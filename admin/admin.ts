@@ -700,7 +700,7 @@
           }
           persistAlias(alias);
           showAdminPanel();
-        });
+        }, { remember: true });
       });
     } else {
       user.auth(alias, password, (ack) => {
@@ -715,7 +715,7 @@
       setAuthMessage('Login successful! Redirecting...', 'success');
       persistAlias(alias);
       showAdminPanel();
-    });
+    }, { remember: true });
   }
   });
 
