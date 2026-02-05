@@ -19,10 +19,40 @@ const formatDate = (value) => {
 export const initShoppingList = ({
   Gun: GunLib = globalThis.Gun,
   document: documentRef = globalThis.document,
+  window: windowRef = globalThis.window,
 } = {}) => {
-  if (!GunLib || !documentRef) {
+  if (!GunLib || !documentRef || !windowRef) {
     return null;
   }
+
+  const getStorage = () => {
+    try {
+      return windowRef.localStorage;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const params = new URLSearchParams(windowRef.location.search);
+  let listId = params.get('list');
+  const storage = getStorage();
+
+  if (!listId && storage) {
+    listId = storage.getItem('shoppingListId');
+  }
+
+  if (!listId) {
+    listId = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  }
+
+  if (storage) {
+    storage.setItem('shoppingListId', listId);
+  }
+
+  params.set('list', listId);
+  const shareUrl = new URL(windowRef.location.href);
+  shareUrl.search = params.toString();
+  windowRef.history.replaceState({}, '', shareUrl);
 
   const gun = GunLib({
     peers: [RELAY_URL],
@@ -43,7 +73,7 @@ export const initShoppingList = ({
   const emptyState = documentRef.getElementById('shopping-empty');
   const sortSelect = documentRef.getElementById('shopping-sort');
 
-  const entries = gun.get('shopping-list').get('items');
+  const entries = gun.get('shopping-list').get(listId).get('items');
   const cache = new Map();
   let editingId = null;
 
