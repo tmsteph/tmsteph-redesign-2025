@@ -36,7 +36,7 @@
 
   const gun = Gun({ peers, localStorage: true });
   const user = gun.user();
-  const RECALL_OPTIONS = { sessionStorage: false, localStorage: true };
+  const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
 
   const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
   const looksLikePub = (value) =>

@@ -5,7 +5,7 @@
     const peers = Object.freeze([RELAY_URL]);
     const gun = Gun({ peers, localStorage: true });
     const user = gun.user();
-    const RECALL_OPTIONS = { sessionStorage: false, localStorage: true };
+    const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
     const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
     const looksLikePub = (value) => typeof value === 'string' && value.length > 40 && value.includes('.') && !value.includes(' ');
     const sanitizeAlias = (alias) => {
