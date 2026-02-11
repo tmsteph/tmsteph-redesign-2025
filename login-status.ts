@@ -54,6 +54,7 @@ const nodeModule =
   const DEFAULT_RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
   const DEFAULT_SHARED_APP_KEY = 'portal.3dvr.tech';
   const DEFAULT_RECALL_OPTIONS = Object.freeze({ sessionStorage: true, localStorage: true });
+  const CROSS_TAB_PAIR_KEY = 'gun:cross-tab:pair';
 
   const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
 
@@ -134,12 +135,59 @@ const nodeModule =
     let commandCentralPrimaryNode = null;
     let commandCentralFallbackNode = null;
 
+    const getSessionStorage = () => {
+      try {
+        return root?.sessionStorage ?? null;
+      } catch (err) {
+        return null;
+      }
+    };
+
+    const getLocalStorage = () => {
+      try {
+        return root?.localStorage ?? null;
+      } catch (err) {
+        return null;
+      }
+    };
+
+    const persistCrossTabPair = () => {
+      const sS = getSessionStorage();
+      const lS = getLocalStorage();
+      if (!sS || !lS) {
+        return;
+      }
+      const pair = sS.getItem('pair');
+      if (!pair) {
+        return;
+      }
+      lS.setItem(CROSS_TAB_PAIR_KEY, pair);
+    };
+
+    const hydrateSessionPairFromLocal = () => {
+      const sS = getSessionStorage();
+      const lS = getLocalStorage();
+      if (!sS || !lS) {
+        return;
+      }
+      if (sS.getItem('pair')) {
+        return;
+      }
+      const pair = lS.getItem(CROSS_TAB_PAIR_KEY);
+      if (!pair) {
+        return;
+      }
+      sS.setItem('recall', 'true');
+      sS.setItem('pair', pair);
+    };
+
     const recallUser = () => {
       if (hasRecalled || typeof user.recall !== 'function') {
         return;
       }
       hasRecalled = true;
       try {
+        hydrateSessionPairFromLocal();
         user.recall(recallOptions);
       } catch (err) {
         // Swallow recall failures; we'll fall back to manual refresh attempts.
@@ -239,6 +287,7 @@ const nodeModule =
       if (!user.is) {
         if (typeof user.recall === 'function') {
           try {
+            hydrateSessionPairFromLocal();
             user.recall(recallOptions);
           } catch (err) {
             // Ignore recall errors; we'll continue using the current state.
@@ -297,6 +346,7 @@ const nodeModule =
     };
 
     const handleAuth = () => {
+      persistCrossTabPair();
       fetchAliasOnce();
       applyLoginState();
     };

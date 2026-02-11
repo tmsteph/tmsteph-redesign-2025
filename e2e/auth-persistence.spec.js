@@ -13,6 +13,15 @@ const mockGunScripts = async (page) => {
   await page.route('**/_vercel/analytics/script.js*', (route) => route.fulfill(emptyJsResponse));
 
   await page.addInitScript(() => {
+    const pairForAlias = (alias) =>
+      JSON.stringify({
+        pub: `pub-${alias}`,
+        epub: `epub-${alias}`,
+        priv: `priv-${alias}`,
+        epriv: `epriv-${alias}`,
+        alias
+      });
+
     const makeNode = () => ({
       get: () => makeNode(),
       on: () => {},
@@ -39,9 +48,19 @@ const mockGunScripts = async (page) => {
       _: { sea: {}, alias: '' },
       get: () => makeNode(),
       recall: (options = {}) => {
-        const sessionAlias = options.sessionStorage ? sessionStorage.getItem('mock-gun-auth-alias') : null;
-        const localAlias = options.localStorage ? localStorage.getItem('mock-gun-auth-alias') : null;
-        const alias = sessionAlias || localAlias;
+        if (!options.sessionStorage) {
+          return;
+        }
+        const pair = sessionStorage.getItem('pair');
+        if (!pair) {
+          return;
+        }
+        let alias = '';
+        try {
+          alias = JSON.parse(pair)?.alias || '';
+        } catch (err) {
+          alias = '';
+        }
         if (!alias) {
           return;
         }
@@ -53,11 +72,14 @@ const mockGunScripts = async (page) => {
           callback({});
         }
       },
-      auth: (alias, _password, callback) => {
+      auth: (alias, _password, callback, options = {}) => {
         user.is = { alias };
         user._.alias = alias;
-        // Mirror current behavior expectation: auth survives refresh in a tab.
-        sessionStorage.setItem('mock-gun-auth-alias', alias);
+        if (options.remember === true) {
+          sessionStorage.setItem('recall', 'true');
+          sessionStorage.setItem('pair', pairForAlias(alias));
+        }
+
         if (typeof callback === 'function') {
           callback({});
         }
@@ -66,8 +88,8 @@ const mockGunScripts = async (page) => {
       leave: () => {
         user.is = null;
         user._.alias = '';
-        sessionStorage.removeItem('mock-gun-auth-alias');
-        localStorage.removeItem('mock-gun-auth-alias');
+        sessionStorage.removeItem('recall');
+        sessionStorage.removeItem('pair');
       }
     };
 
@@ -119,16 +141,42 @@ test('admin login survives a page refresh in the same tab', async ({ page }) => 
   await expect(page.locator('#auth-section')).toBeHidden();
 });
 
-test('homepage login link survives a page refresh in the same tab', async ({ page }) => {
+test('admin login carries over to a new tab', async ({ context, page }) => {
   await mockGunScripts(page);
 
-  await page.addInitScript(() => {
-    sessionStorage.setItem('mock-gun-auth-alias', 'tmsteph');
-  });
+  await page.goto('/admin/index.html');
+  await page.fill('#alias', 'tmsteph');
+  await page.fill('#password', 'test-password');
+  await page.click('#auth-submit');
+
+  await expect(page.locator('#admin-panel')).toBeVisible();
+  const crossTabPairExists = await page.evaluate(() => Boolean(localStorage.getItem('gun:cross-tab:pair')));
+  expect(crossTabPairExists).toBe(true);
+
+  const newTab = await context.newPage();
+  await mockGunScripts(newTab);
+  await newTab.goto('/admin/index.html');
+
+  await expect(newTab.locator('#admin-panel')).toBeVisible();
+  await expect(newTab.locator('#auth-section')).toBeHidden();
+});
+
+test('homepage login link survives refresh and carries over to a new tab', async ({ context, page }) => {
+  await mockGunScripts(page);
+
+  await page.goto('/admin/index.html');
+  await page.fill('#alias', 'tmsteph');
+  await page.fill('#password', 'test-password');
+  await page.click('#auth-submit');
 
   await page.goto('/index.html');
   await expect(page.locator('#login-link')).toHaveText('tmsteph');
 
   await page.reload();
   await expect(page.locator('#login-link')).toHaveText('tmsteph');
+
+  const newTab = await context.newPage();
+  await mockGunScripts(newTab);
+  await newTab.goto('/index.html');
+  await expect(newTab.locator('#login-link')).toHaveText('tmsteph');
 });

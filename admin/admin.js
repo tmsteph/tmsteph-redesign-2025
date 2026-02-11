@@ -6,6 +6,8 @@
     const gun = Gun({ peers, localStorage: true });
     const user = gun.user();
     const RECALL_OPTIONS = { sessionStorage: true, localStorage: true };
+    const AUTH_OPTIONS = { remember: true, sessionStorage: false, localStorage: true };
+    const CROSS_TAB_PAIR_KEY = 'gun:cross-tab:pair';
     const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
     const looksLikePub = (value) => typeof value === 'string' && value.length > 40 && value.includes('.') && !value.includes(' ');
     const sanitizeAlias = (alias) => {
@@ -66,6 +68,56 @@
     const photoCache = new Map();
     let photoListenersAttached = false;
     const toBoolean = (value) => value === true || value === 'true';
+    const getSessionStorage = () => {
+        try {
+            return window.sessionStorage;
+        }
+        catch (err) {
+            return null;
+        }
+    };
+    const getLocalStorage = () => {
+        try {
+            return window.localStorage;
+        }
+        catch (err) {
+            return null;
+        }
+    };
+    const persistCrossTabPair = () => {
+        const sS = getSessionStorage();
+        const lS = getLocalStorage();
+        if (!sS || !lS) {
+            return;
+        }
+        const pair = sS.getItem('pair');
+        if (!pair) {
+            return;
+        }
+        lS.setItem(CROSS_TAB_PAIR_KEY, pair);
+    };
+    const hydrateSessionPairFromLocal = () => {
+        const sS = getSessionStorage();
+        const lS = getLocalStorage();
+        if (!sS || !lS) {
+            return;
+        }
+        if (sS.getItem('pair')) {
+            return;
+        }
+        const pair = lS.getItem(CROSS_TAB_PAIR_KEY);
+        if (!pair) {
+            return;
+        }
+        sS.setItem('recall', 'true');
+        sS.setItem('pair', pair);
+    };
+    const clearCrossTabPair = () => {
+        const lS = getLocalStorage();
+        if (lS) {
+            lS.removeItem(CROSS_TAB_PAIR_KEY);
+        }
+    };
     const getAliasNodes = () => [
         safeGet(user, 'alias'),
         safeGet(getSharedProfile(), 'alias'),
@@ -77,6 +129,7 @@
         }
         hasRecalled = true;
         try {
+            hydrateSessionPairFromLocal();
             user.recall(RECALL_OPTIONS);
         }
         catch (err) {
@@ -460,6 +513,7 @@
     };
     const showAuthPanel = (message = '') => {
         user.leave();
+        clearCrossTabPair();
         adminPanel.hidden = true;
         authSection.hidden = false;
         resetPhotoVaultState();
@@ -581,7 +635,7 @@
                     }
                     persistAlias(alias);
                     showAdminPanel();
-                });
+                }, AUTH_OPTIONS);
             });
         }
         else {
@@ -596,7 +650,7 @@
                 setAuthMessage('Login successful! Redirecting...', 'success');
                 persistAlias(alias);
                 showAdminPanel();
-            });
+            }, AUTH_OPTIONS);
         }
     });
     logoutBtn.addEventListener('click', () => {
@@ -717,6 +771,7 @@
         });
     }
     gun.on('auth', () => {
+        persistCrossTabPair();
         persistAlias(user.is?.alias);
         showAdminPanel();
         setAuthMessage('');
