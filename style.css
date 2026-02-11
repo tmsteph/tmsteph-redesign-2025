@@ -500,6 +500,38 @@ footer {
   background: linear-gradient(135deg, #d16ba5, #c777b9, #ba83ca);
 }
 
+
+.app-search {
+  margin: 0 auto 1rem;
+  max-width: 520px;
+  text-align: left;
+}
+
+.app-search-label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.app-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(9, 23, 44, 0.55);
+  color: #ffe066;
+  font-size: 1rem;
+}
+
+.app-search-input::placeholder {
+  color: rgba(255, 224, 102, 0.8);
+}
+
+.app-search-empty {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+}
+
 /* ===========================
    PROJECT GRID
 =========================== */

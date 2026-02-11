@@ -128,26 +128,38 @@
 <section class="section card">
   <div class="container">
     <h2>Explore More</h2>
+    <div class="app-search" role="search">
+      <label class="app-search-label" for="app-search-input">Search apps</label>
+      <input
+        id="app-search-input"
+        class="app-search-input"
+        type="search"
+        placeholder="Find an app or section"
+        autocomplete="off"
+        data-app-search-input
+      />
+    </div>
+    <p class="app-search-empty" hidden data-app-search-empty>No apps matched your search.</p>
     <div class="project-grid">
-      <a class="project-card" href="spirituality.html">Spirituality</a>
-      <a class="project-card" href="health.html">Health & Wellness</a>
-      <a class="project-card" href="finance.html">Finance & Freedom</a>
-      <a class="project-card" href="money.html">Money Re-Permissioning</a>
-      <a class="project-card" href="politics/index.html">Political Beliefs</a>
-      <a class="project-card" href="shared-human-values/index.html">Shared Human Values</a>
-      <a class="project-card" href="consciousness/">Consciousness</a>
-      <a class="project-card" href="journal.html">Journal & Content Lab</a>
-      <a class="project-card" href="stagehand.html">Stagehand Life</a>
-      <a class="project-card" href="meal-tracker/index.html">Meal Tracker</a>
-      <a class="project-card" href="clean-meals/index.html">Clean & Nourishing Meals</a>
-      <a class="project-card" href="shopping-list/index.html">Shopping List</a>
-      <a class="project-card" href="self-provisioning.html">Self-Provisioning</a>
-      <a class="project-card" href="opensource.html">Open Source Projects</a>
-      <a class="project-card" href="job-applier/index.html">Job Applier</a>
-      <a class="project-card" href="reality-gently/index.html">Reality, Gently</a>
-      <a class="project-card" href="solar-system.html">Live Solar System</a>
-      <a class="project-card" href="cycle-explorer/index.html">26,000-Year Cycle Explorer</a>
-      <a class="project-card" href="great-year/index.html">Great Year &amp; Civilization</a>
+      <a class="project-card" href="spirituality.html" data-app-search-card>Spirituality</a>
+      <a class="project-card" href="health.html" data-app-search-card>Health & Wellness</a>
+      <a class="project-card" href="finance.html" data-app-search-card>Finance & Freedom</a>
+      <a class="project-card" href="money.html" data-app-search-card>Money Re-Permissioning</a>
+      <a class="project-card" href="politics/index.html" data-app-search-card>Political Beliefs</a>
+      <a class="project-card" href="shared-human-values/index.html" data-app-search-card>Shared Human Values</a>
+      <a class="project-card" href="consciousness/" data-app-search-card>Consciousness</a>
+      <a class="project-card" href="journal.html" data-app-search-card>Journal & Content Lab</a>
+      <a class="project-card" href="stagehand.html" data-app-search-card>Stagehand Life</a>
+      <a class="project-card" href="meal-tracker/index.html" data-app-search-card>Meal Tracker</a>
+      <a class="project-card" href="clean-meals/index.html" data-app-search-card>Clean & Nourishing Meals</a>
+      <a class="project-card" href="shopping-list/index.html" data-app-search-card>Shopping List</a>
+      <a class="project-card" href="self-provisioning.html" data-app-search-card>Self-Provisioning</a>
+      <a class="project-card" href="opensource.html" data-app-search-card>Open Source Projects</a>
+      <a class="project-card" href="job-applier/index.html" data-app-search-card>Job Applier</a>
+      <a class="project-card" href="reality-gently/index.html" data-app-search-card>Reality, Gently</a>
+      <a class="project-card" href="solar-system.html" data-app-search-card>Live Solar System</a>
+      <a class="project-card" href="cycle-explorer/index.html" data-app-search-card>26,000-Year Cycle Explorer</a>
+      <a class="project-card" href="great-year/index.html" data-app-search-card>Great Year &amp; Civilization</a>
     </div>
   </div>
 </section>
@@ -192,5 +204,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gun/gun.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gun/sea.js" defer></script>
 <script src="login-status.js" defer></script>
+<script type="module" src="app-search.js"></script>
 </body>
 </html>
