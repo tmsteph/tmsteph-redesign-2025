@@ -53,11 +53,22 @@ const mockGunScripts = async (page) => {
           callback({});
         }
       },
-      auth: (alias, _password, callback) => {
+      auth: (alias, _password, callback, options = {}) => {
         user.is = { alias };
         user._.alias = alias;
-        // Mirror current behavior expectation: auth survives refresh in a tab.
-        sessionStorage.setItem('mock-gun-auth-alias', alias);
+        const shouldUseSession = options.sessionStorage !== false;
+        const shouldUseLocal = options.remember === true || options.localStorage === true;
+
+        if (shouldUseSession) {
+          sessionStorage.setItem('mock-gun-auth-alias', alias);
+        } else {
+          sessionStorage.removeItem('mock-gun-auth-alias');
+        }
+
+        if (shouldUseLocal) {
+          localStorage.setItem('mock-gun-auth-alias', alias);
+        }
+
         if (typeof callback === 'function') {
           callback({});
         }
@@ -119,16 +130,40 @@ test('admin login survives a page refresh in the same tab', async ({ page }) => 
   await expect(page.locator('#auth-section')).toBeHidden();
 });
 
-test('homepage login link survives a page refresh in the same tab', async ({ page }) => {
+test('admin login carries over to a new tab', async ({ context, page }) => {
   await mockGunScripts(page);
 
-  await page.addInitScript(() => {
-    sessionStorage.setItem('mock-gun-auth-alias', 'tmsteph');
-  });
+  await page.goto('/admin/index.html');
+  await page.fill('#alias', 'tmsteph');
+  await page.fill('#password', 'test-password');
+  await page.click('#auth-submit');
+
+  await expect(page.locator('#admin-panel')).toBeVisible();
+
+  const newTab = await context.newPage();
+  await mockGunScripts(newTab);
+  await newTab.goto('/admin/index.html');
+
+  await expect(newTab.locator('#admin-panel')).toBeVisible();
+  await expect(newTab.locator('#auth-section')).toBeHidden();
+});
+
+test('homepage login link survives refresh and carries over to a new tab', async ({ context, page }) => {
+  await mockGunScripts(page);
+
+  await page.goto('/admin/index.html');
+  await page.fill('#alias', 'tmsteph');
+  await page.fill('#password', 'test-password');
+  await page.click('#auth-submit');
 
   await page.goto('/index.html');
   await expect(page.locator('#login-link')).toHaveText('tmsteph');
 
   await page.reload();
   await expect(page.locator('#login-link')).toHaveText('tmsteph');
+
+  const newTab = await context.newPage();
+  await mockGunScripts(newTab);
+  await newTab.goto('/index.html');
+  await expect(newTab.locator('#login-link')).toHaveText('tmsteph');
 });
