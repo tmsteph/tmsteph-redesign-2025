@@ -128,7 +128,18 @@
 <section class="section card">
   <div class="container">
     <h2>Explore More</h2>
-    <div class="project-grid">
+    <div class="explore-search" role="search" aria-label="Search apps">
+      <label class="sr-only" for="explore-search-input">Search apps</label>
+      <input
+        id="explore-search-input"
+        class="explore-search-input"
+        type="search"
+        placeholder="Search apps"
+        autocomplete="off"
+      />
+      <p id="explore-search-status" class="explore-search-status" aria-live="polite">Showing all apps.</p>
+    </div>
+    <div class="project-grid" id="explore-project-grid">
       <a class="project-card" href="spirituality.html">Spirituality</a>
       <a class="project-card" href="health.html">Health & Wellness</a>
       <a class="project-card" href="finance.html">Finance & Freedom</a>
@@ -143,12 +154,14 @@
       <a class="project-card" href="shopping-list/index.html">Shopping List</a>
       <a class="project-card" href="self-provisioning.html">Self-Provisioning</a>
       <a class="project-card" href="opensource.html">Open Source Projects</a>
+      <a class="project-card" href="watch/index.html">Multi-View Theater</a>
       <a class="project-card" href="job-applier/index.html">Job Applier</a>
       <a class="project-card" href="reality-gently/index.html">Reality, Gently</a>
       <a class="project-card" href="solar-system.html">Live Solar System</a>
       <a class="project-card" href="cycle-explorer/index.html">26,000-Year Cycle Explorer</a>
       <a class="project-card" href="great-year/index.html">Great Year &amp; Civilization</a>
     </div>
+    <p id="explore-search-empty" class="explore-search-empty" hidden>No apps match your search yet.</p>
   </div>
 </section>
 
@@ -158,18 +171,6 @@
     <h2>My Vision</h2>
     <p>To create a bridge between ancient wisdom and futuristic technology.
        To empower people everywhere to live freely, create openly, and thrive naturally.</p>
-  </div>
-</section>
-
-<!-- Multi-View Theater CTA -->
-<section class="section card">
-  <div class="container">
-    <h2>Multi-View Theater</h2>
-    <p>
-      Need to compare multiple tutorials, monitor several live streams, or host an impromptu watch party? The Multi-View Theater
-      now lives on its own page with new diagnostics and Brave-friendly helpers.
-    </p>
-    <a class="btn-primary" href="watch/index.html">Launch the theater</a>
   </div>
 </section>
 
@@ -192,5 +193,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gun/gun.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gun/sea.js" defer></script>
 <script src="login-status.js" defer></script>
+<script src="index.js" defer></script>
 </body>
 </html>
