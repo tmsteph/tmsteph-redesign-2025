@@ -15,7 +15,7 @@ const nodeModule = typeof globalThis !== 'undefined' ? globalThis.module : undef
     const DEFAULT_ADMIN_URL = 'admin/index.html';
     const DEFAULT_RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
     const DEFAULT_SHARED_APP_KEY = 'portal.3dvr.tech';
-    const DEFAULT_RECALL_OPTIONS = Object.freeze({ sessionStorage: false, localStorage: true });
+    const DEFAULT_RECALL_OPTIONS = Object.freeze({ sessionStorage: true, localStorage: true });
     const safeGet = (node, key) => (typeof node?.get === 'function' ? node.get(key) : null);
     const looksLikePub = (value) => typeof value === 'string' && value.length > 40 && value.includes('.') && !value.includes(' ');
     const sanitizeAlias = (alias) => {
