@@ -1,6 +1,7 @@
 import { describe, expect, it, beforeEach, vi } from 'vitest';
-import loginStatus from '../login-status.js';
+import '../login-status.js';
 
+const loginStatus = globalThis.loginStatus || window.loginStatus;
 const { createLoginStatusController } = loginStatus;
 
 const createNodeStub = () => {
