@@ -1,4 +1,6 @@
 const RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
+const LIST_PARAM = 'list';
+const STORAGE_KEY = 'shoppingListId';
 
 const formatDate = (value) => {
   if (!value) {
@@ -19,10 +21,46 @@ const formatDate = (value) => {
 export const initShoppingList = ({
   Gun: GunLib = globalThis.Gun,
   document: documentRef = globalThis.document,
+  window: windowRef = documentRef?.defaultView ?? globalThis.window,
 } = {}) => {
   if (!GunLib || !documentRef) {
     return null;
   }
+
+  const getListId = () => {
+    const url = new URL(windowRef?.location?.href || 'https://example.com');
+    const fromUrl = url.searchParams.get(LIST_PARAM);
+    if (fromUrl) {
+      try {
+        windowRef?.localStorage?.setItem(STORAGE_KEY, fromUrl);
+      } catch (err) {
+        // ignore storage errors
+      }
+      return fromUrl;
+    }
+
+    let stored = null;
+    try {
+      stored = windowRef?.localStorage?.getItem(STORAGE_KEY);
+    } catch (err) {
+      // ignore storage errors
+    }
+
+    const nextId =
+      stored || `list-${Date.now().toString(36)}-${Math.random().toString(16).slice(2, 8)}`;
+    url.searchParams.set(LIST_PARAM, nextId);
+    if (windowRef?.history?.replaceState) {
+      windowRef.history.replaceState({}, '', url.toString());
+    }
+
+    try {
+      windowRef?.localStorage?.setItem(STORAGE_KEY, nextId);
+    } catch (err) {
+      // ignore storage errors
+    }
+
+    return nextId;
+  };
 
   const gun = GunLib({
     peers: [RELAY_URL],
@@ -43,7 +81,8 @@ export const initShoppingList = ({
   const emptyState = documentRef.getElementById('shopping-empty');
   const sortSelect = documentRef.getElementById('shopping-sort');
 
-  const entries = gun.get('shopping-list').get('items');
+  const listId = getListId();
+  const entries = gun.get('shopping-list').get(listId).get('items');
   const cache = new Map();
   let editingId = null;
 
@@ -275,7 +314,7 @@ export const initShoppingList = ({
     resetForm();
   });
 
-  cancelButton.addEventListener('click', () => {
+  cancelButton?.addEventListener('click', () => {
     setEditState(null);
   });
 

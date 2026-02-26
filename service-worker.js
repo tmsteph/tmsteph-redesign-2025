@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tmsteph-pwa-v1';
+const CACHE_NAME = 'tmsteph-pwa-v2';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -18,6 +18,8 @@ const STATIC_ASSETS = [
   '/manifest.webmanifest',
   '/icons/pwa-icon-192.png',
   '/icons/pwa-icon-512.png',
+  '/journal/index.html',
+  '/journal/journal.js',
   '/admin/index.html',
   '/admin/style.css',
   '/admin/admin.js'
