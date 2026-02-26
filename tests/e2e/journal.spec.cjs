@@ -70,10 +70,10 @@ test('journal guest entry can be created and displayed', async ({ page }) => {
     });
   });
 
-  await page.route('https://cdn.jsdelivr.net/npm/gun/gun.js', (route) => {
+  await page.route('**/vendor/gun.min.js', (route) => {
     route.fulfill({ status: 200, contentType: 'application/javascript', body: '' });
   });
-  await page.route('https://cdn.jsdelivr.net/npm/gun/sea.js', (route) => {
+  await page.route('**/vendor/sea.min.js', (route) => {
     route.fulfill({ status: 200, contentType: 'application/javascript', body: '' });
   });
 

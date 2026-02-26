@@ -18,6 +18,8 @@ const STATIC_ASSETS = [
   '/manifest.webmanifest',
   '/icons/pwa-icon-192.png',
   '/icons/pwa-icon-512.png',
+  '/vendor/gun.min.js',
+  '/vendor/sea.min.js',
   '/journal/index.html',
   '/journal/journal.js',
   '/admin/index.html',
