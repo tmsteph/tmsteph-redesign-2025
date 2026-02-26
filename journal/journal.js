@@ -1,5 +1,6 @@
 const RELAY_URL = 'https://gun-relay-3dvr.fly.dev/gun';
 const GUEST_PARAM = 'journal';
+const GUEST_STORAGE_KEY = 'journalGuestId';
 
 const formatDate = (value) => {
   if (!value) {
@@ -24,11 +25,29 @@ const getGuestIdFromUrl = () => {
   const url = new URL(window.location.href);
   const existing = url.searchParams.get(GUEST_PARAM);
   if (existing) {
+    try {
+      window.localStorage.setItem(GUEST_STORAGE_KEY, existing);
+    } catch (err) {
+      // ignore storage errors
+    }
     return existing;
   }
-  const nextId = buildGuestId();
+
+  let stored = null;
+  try {
+    stored = window.localStorage.getItem(GUEST_STORAGE_KEY);
+  } catch (err) {
+    // ignore storage errors
+  }
+
+  const nextId = stored || buildGuestId();
   url.searchParams.set(GUEST_PARAM, nextId);
   window.history.replaceState({}, '', url.toString());
+  try {
+    window.localStorage.setItem(GUEST_STORAGE_KEY, nextId);
+  } catch (err) {
+    // ignore storage errors
+  }
   return nextId;
 };
 
@@ -36,6 +55,11 @@ const setGuestIdInUrl = (guestId) => {
   const url = new URL(window.location.href);
   url.searchParams.set(GUEST_PARAM, guestId);
   window.history.replaceState({}, '', url.toString());
+  try {
+    window.localStorage.setItem(GUEST_STORAGE_KEY, guestId);
+  } catch (err) {
+    // ignore storage errors
+  }
 };
 
 const normalizeTags = (value) =>
