@@ -1,0 +1,62 @@
+const { test, expect } = require('@playwright/test');
+
+const emptyJsResponse = {
+  status: 200,
+  contentType: 'application/javascript',
+  body: '',
+};
+
+test('YouTube Video Watcher loads defaults, adds a video, and disables sliders in proxy mode', async ({ page }) => {
+  await page.route('**/_vercel/analytics/script.js*', (route) => route.fulfill(emptyJsResponse));
+  await page.route('**/iframe_api*', (route) => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/javascript',
+      body: `
+        window.YT = {
+          Player: function Player(element, options) {
+            var mount = typeof element === 'string' ? document.getElementById(element) : element;
+            var frame = document.createElement('iframe');
+            frame.className = 'playwright-stub-frame';
+            frame.src = 'about:blank';
+            mount.appendChild(frame);
+            var player = {
+              getIframe: function () { return frame; },
+              getVideoData: function () { return { title: 'Stub ' + options.videoId }; },
+              setVolume: function () {},
+              mute: function () {},
+              unMute: function () {},
+              destroy: function () { frame.remove(); }
+            };
+            setTimeout(function () {
+              if (options.events && options.events.onReady) {
+                options.events.onReady({ target: player });
+              }
+            }, 0);
+            return player;
+          }
+        };
+        if (window.onYouTubeIframeAPIReady) {
+          window.onYouTubeIframeAPIReady();
+        }
+      `,
+    });
+  });
+
+  await page.goto('/watch/index.html');
+
+  await expect(page.getByRole('heading', { name: 'YouTube Video Watcher' })).toBeVisible();
+  await expect(page.locator('[data-video-count]')).toHaveText('2');
+  await expect(page.locator('.multiview-frame-wrapper')).toHaveCount(2);
+
+  await page.fill('#multiview-input', 'https://www.youtube.com/watch?v=ScMzIvxBSi4');
+  await page.getByRole('button', { name: 'Load videos' }).click();
+
+  await expect(page.locator('[data-video-count]')).toHaveText('3');
+  await expect(page.locator('.multiview-frame-wrapper')).toHaveCount(3);
+  await expect(page).toHaveURL(/video=/);
+
+  await page.locator('.multiview-player-option', { hasText: 'Proxy mode' }).click();
+  await expect(page.locator('.multiview-volume input[type="range"]').first()).toBeDisabled();
+  await expect(page.locator('[data-state-summary]')).toContainText('Proxy mode is on');
+});

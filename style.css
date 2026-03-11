@@ -149,14 +149,29 @@ footer {
 }
 
 .watch-hero {
-  background: linear-gradient(135deg, rgba(12, 33, 71, 0.95), rgba(33, 65, 122, 0.9));
-  padding: 4rem 1.5rem 3rem;
-  text-align: center;
+  background:
+    radial-gradient(circle at top left, rgba(255, 224, 102, 0.18), transparent 32%),
+    radial-gradient(circle at top right, rgba(127, 255, 225, 0.2), transparent 34%),
+    linear-gradient(135deg, rgba(10, 24, 49, 0.97), rgba(28, 59, 108, 0.92));
+  padding: 4rem 1.5rem 3.5rem;
+  text-align: left;
 }
 
 .watch-hero-content {
-  max-width: 720px;
+  max-width: 1180px;
   margin: 0 auto;
+}
+
+.watch-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.95fr);
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.watch-hero-copy p {
+  max-width: 42rem;
+  margin-bottom: 0;
 }
 
 .watch-back-link {
@@ -174,12 +189,66 @@ footer {
   text-decoration: underline;
 }
 
+.watch-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.watch-stat-card {
+  background: rgba(5, 14, 28, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  padding: 1rem 1.1rem;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+}
+
+.watch-stat-card span {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #b7d6ff;
+}
+
+.watch-stat-card strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.4rem;
+  line-height: 1.15;
+}
+
 .watch-main {
-  padding: 3rem 1rem 4rem;
+  padding: 2.5rem 1rem 4rem;
+}
+
+.watch-container,
+.watch-grid-container {
+  max-width: 1180px;
+  text-align: left;
 }
 
 .watch-heading {
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
+}
+
+.watch-heading p {
+  max-width: 44rem;
+  margin-bottom: 0;
+}
+
+.watch-builder-grid,
+.watch-diagnostics-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.95fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.watch-builder-panel,
+.watch-mode-panel,
+.watch-diagnostics-layout {
+  min-width: 0;
 }
 
 .solar-main {
@@ -583,26 +652,41 @@ footer {
 }
 
 /* ===========================
-   MULTI-VIEW THEATER
+   YOUTUBE VIDEO WATCHER
 =========================== */
+.multiview-label {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff4b0;
+}
+
 .multiview-controls {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
-  justify-content: center;
-  margin: 2rem 0 1rem;
+  justify-content: flex-start;
+  margin: 1.25rem 0 1rem;
 }
 
 .multiview-input {
-  flex: 1 1 260px;
+  width: 100%;
   min-width: 220px;
-  padding: 0.75rem 1rem;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(255, 255, 255, 0.1);
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(3, 10, 20, 0.7);
   color: #ffe066;
   font-size: 1rem;
+  font-family: inherit;
+}
+
+.multiview-textarea {
+  min-height: 8rem;
+  resize: vertical;
 }
 
 .multiview-input::placeholder {
@@ -613,25 +697,24 @@ footer {
   font-size: 0.95rem;
   opacity: 0.85;
   margin-top: 0.25rem;
+  margin-bottom: 0;
 }
 
 .multiview-search-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;
-  align-items: center;
-  margin-bottom: 1.25rem;
+  display: grid;
+  gap: 0.65rem;
 }
 
 .multiview-search-input {
-  flex: 1 1 220px;
+  width: 100%;
   min-width: 200px;
-  padding: 0.6rem 0.9rem;
+  padding: 0.8rem 0.95rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.08);
   color: #ffe066;
   font-size: 0.95rem;
+  font-family: inherit;
 }
 
 .multiview-search-input::placeholder {
@@ -639,26 +722,24 @@ footer {
 }
 
 .multiview-search-hint {
-  flex: 1 1 180px;
   font-size: 0.85rem;
   opacity: 0.8;
   margin: 0;
 }
 
 .multiview-player-toggle {
-  margin: 1rem 0 1.5rem;
+  margin: 0;
   padding: 1rem 1.25rem;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(11, 29, 57, 0.65);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
-  align-items: center;
+  display: grid;
+  gap: 1rem;
+  align-items: start;
 }
 
 .multiview-player-copy {
-  flex: 1 1 220px;
+  min-width: 0;
 }
 
 .multiview-player-copy p {
@@ -668,21 +749,21 @@ footer {
 .multiview-player-help {
   font-size: 0.9rem;
   opacity: 0.85;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
+  line-height: 1.55;
 }
 
 .multiview-player-options {
-  display: inline-flex;
+  display: grid;
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
 .multiview-player-option {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.9rem;
-  border-radius: 999px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   background: rgba(255, 255, 255, 0.05);
@@ -697,7 +778,7 @@ footer {
 .multiview-player-option span {
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 .multiview-player-option strong {
@@ -715,30 +796,39 @@ footer {
   color: #fffef0;
 }
 
+.multiview-statusbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding: 1rem 1.15rem;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(9, 24, 46, 0.58);
+}
+
 .multiview-status {
   min-height: 1.5rem;
   font-size: 0.95rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   color: #7fffe1;
 }
 
-.multiview-diagnostics {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  background: rgba(11, 29, 57, 0.55);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem 2rem;
+.multiview-state-summary {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.84);
 }
 
 .multiview-diagnostics-copy {
-  flex: 2 1 260px;
+  min-width: 0;
 }
 
 .multiview-diagnostics-copy p {
   margin: 0 0 0.35rem;
+  line-height: 1.6;
 }
 
 .multiview-diagnostics-note {
@@ -794,57 +884,135 @@ footer {
 
 .multiview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1rem;
 }
 
 .multiview-frame-wrapper {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: grid;
+  gap: 0.9rem;
+  padding: 0.85rem;
+  border-radius: 22px;
+  background: rgba(8, 21, 44, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+}
+
+.multiview-media-shell {
+  padding: 0.1rem;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255, 224, 102, 0.14), rgba(127, 255, 225, 0.16));
+}
+
+.multiview-player-mount {
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 
 .multiview-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
   background: #0b1d39;
+  overflow: hidden;
+}
+
+.multiview-meta {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.multiview-frame-tag {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #7fffe1;
+}
+
+.multiview-frame-title {
+  margin: 0;
+  font-size: 1.28rem;
+  line-height: 1.2;
+}
+
+.multiview-frame-id {
+  margin: 0;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.78);
+  word-break: break-all;
+}
+
+.multiview-frame-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.multiview-volume {
+  display: grid;
+  grid-template-columns: auto minmax(140px, 1fr) auto;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1 1 100%;
+  padding: 0.8rem 0.9rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.multiview-volume span,
+.multiview-volume strong {
+  font-size: 0.92rem;
+}
+
+.multiview-volume input[type="range"] {
+  width: 100%;
+  accent-color: #ffe066;
+}
+
+.multiview-action-button,
+.multiview-remove-button,
+.multiview-open-link {
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.multiview-action-button {
+  border: 1px solid rgba(127, 255, 225, 0.32);
+  color: #d7fff7;
+  background: rgba(127, 255, 225, 0.08);
+  cursor: pointer;
+}
+
+.multiview-action-button:hover,
+.multiview-action-button:focus-visible,
+.multiview-remove-button:hover,
+.multiview-remove-button:focus-visible,
+.multiview-open-link:hover,
+.multiview-open-link:focus-visible {
+  transform: translateY(-1px);
 }
 
 .multiview-open-link {
-  align-self: flex-end;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.multiview-open-link:hover,
-.multiview-open-link:focus-visible {
-  color: #ffe066;
-  text-decoration: underline;
-}
-
-.multiview-frame-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .multiview-remove-button {
   border: 1px solid rgba(255, 158, 158, 0.9);
   color: #ff9e9e;
   background: transparent;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.3rem 0.85rem;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .multiview-remove-button:hover,
@@ -853,63 +1021,58 @@ footer {
   color: #ffe6e6;
 }
 
-.multiview-fallback-note {
-  border: 1px dashed rgba(255, 255, 255, 0.35);
-  border-radius: 14px;
-  padding: 0.85rem 1rem;
-  background: rgba(11, 29, 57, 0.75);
-  color: rgba(255, 255, 255, 0.85);
+.multiview-frame-note,
+.multiview-frame-error,
+.multiview-empty {
+  margin: 0;
   font-size: 0.85rem;
   line-height: 1.4;
 }
 
-.multiview-fallback-button {
-  margin-top: 0.5rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  border-radius: 999px;
-  border: 1px solid #ffe066;
-  background: transparent;
-  color: #ffe066;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.4rem 0.9rem;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+.multiview-frame-note,
+.multiview-empty {
+  color: rgba(255, 255, 255, 0.78);
 }
 
-.multiview-fallback-button:hover,
-.multiview-fallback-button:focus-visible {
-  background: rgba(255, 224, 102, 0.15);
-  color: #fff6c2;
+.multiview-frame-error {
+  color: #ff9e9e;
+}
+
+.multiview-empty {
+  padding: 3rem 1.5rem;
+  border-radius: 22px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  text-align: center;
 }
 
 @media (max-width: 640px) {
+  .watch-hero-grid,
+  .watch-builder-grid,
+  .watch-diagnostics-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .watch-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
   .multiview-controls {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .multiview-input {
-    width: 100%;
-  }
-
-  .multiview-search-controls {
+  .multiview-statusbar,
+  .multiview-frame-controls {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .multiview-player-toggle {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .multiview-diagnostics {
-    flex-direction: column;
-  }
-
   .multiview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .multiview-volume {
     grid-template-columns: 1fr;
   }
 }

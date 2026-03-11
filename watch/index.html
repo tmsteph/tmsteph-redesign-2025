@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b1d39" />
-    <title>Multi-View Theater | tmsteph</title>
+    <title>YouTube Video Watcher | tmsteph</title>
+    <meta
+      name="description"
+      content="Load multiple YouTube videos side by side, tune each feed with its own volume slider, and share the full watch layout with one link."
+    />
     <link rel="stylesheet" href="../style.css" />
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png" />
@@ -14,110 +18,144 @@
       rel="stylesheet"
     />
     <script src="../pwa.js" defer></script>
-    <script src="../multi-watch.js" defer></script>
+    <script type="module" src="../multi-watch.js"></script>
     <script defer src="/_vercel/analytics/script.js"></script>
-</head>
+  </head>
   <body class="watch-page">
     <header class="watch-hero">
       <div class="watch-hero-content">
         <a class="watch-back-link" href="../index.html">← Back to tmsteph.com</a>
-        <p class="tagline">Dream. Build. Share.</p>
-        <h1 class="handwritten">Multi-View Theater</h1>
-        <p>
-          Load several videos at once, compare tutorials, or keep tabs on multiple live streams without juggling tabs. The
-          Multi-View Theater now lives on its own page so it can grow independently.
-        </p>
+        <div class="watch-hero-grid">
+          <div class="watch-hero-copy">
+            <p class="tagline">Dream. Build. Share.</p>
+            <h1 class="handwritten">YouTube Video Watcher</h1>
+            <p>
+              Build a shared watch room for tutorials, live streams, reaction feeds, or side-by-side comparisons. The refresh
+              keeps the quick multi-video flow but adds shareable layouts and per-player volume sliders where YouTube allows them.
+            </p>
+          </div>
+          <div class="watch-stat-grid">
+            <div class="watch-stat-card">
+              <span>Loaded videos</span>
+              <strong data-video-count>0</strong>
+            </div>
+            <div class="watch-stat-card">
+              <span>Playback mode</span>
+              <strong data-mode-summary>Standard mode</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
+
     <main class="watch-main">
-      <section class="section card">
-        <div class="container">
+      <section class="section card watch-builder-card" data-theater-root data-default-videos="dQw4w9WgXcQ, Zi_XLOBDo_Y">
+        <div class="container watch-container">
           <div class="watch-heading">
-            <h2>Video control room</h2>
-            <p>Paste up to a handful of YouTube links or IDs and the grid below will build side-by-side players.</p>
+            <h2>YouTube control room</h2>
+            <p>Paste several links at once, mix each player independently, and share the exact watch setup with one URL.</p>
           </div>
 
-          <div class="multiview-controls">
-            <label class="sr-only" for="multiview-input">Paste a YouTube link or video ID</label>
-            <input
-              id="multiview-input"
-              class="multiview-input"
-              type="text"
-              placeholder="Paste a YouTube link or video ID"
-              autocomplete="off"
-            />
-            <button class="btn-primary" data-add-video type="button">Add Video</button>
-            <button class="btn-secondary" data-clear-videos type="button">Clear All</button>
-          </div>
-          <p class="multiview-hint">Tip: Use full URLs (youtu.be or youtube.com) or just the 11-character video ID.</p>
+          <div class="watch-builder-grid">
+            <div class="watch-builder-panel">
+              <label class="multiview-label" for="multiview-input">Video links or IDs</label>
+              <textarea
+                id="multiview-input"
+                class="multiview-input multiview-textarea"
+                placeholder="https://youtu.be/dQw4w9WgXcQ&#10;https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+                autocomplete="off"
+              ></textarea>
 
-          <div class="multiview-search-controls">
-            <label class="sr-only" for="multiview-search">Search added videos</label>
-            <input
-              id="multiview-search"
-              class="multiview-search-input"
-              type="search"
-              placeholder="Search your added videos"
-              data-multiview-search
-              autocomplete="off"
-            />
-            <p class="multiview-search-hint">Filter the grid by video ID to quickly jump to a stream.</p>
-          </div>
-
-          <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
-            <div class="multiview-player-copy">
-              <p id="multiview-player-label">Player preference</p>
-              <p class="multiview-player-help" data-player-help>
-                Standard mode loads youtube.com so you can sign in, comment, or pull in playlists tied to your account. Switch
-                to ad-free mode if you need the privacy-enhanced player or proxy mode for an open-source alternative.
+              <div class="multiview-controls">
+                <button class="btn-primary" data-add-video type="button">Load videos</button>
+                <button class="btn-secondary" data-clear-videos type="button">Clear theater</button>
+                <button class="btn-secondary" data-reset-videos type="button">Reset demo</button>
+                <button class="btn-secondary" data-copy-share-link type="button">Copy share link</button>
+              </div>
+              <p class="multiview-hint">
+                Tip: paste full URLs, `youtu.be` links, or 11-character IDs. Use multiple lines, then hit
+                <strong>Ctrl/Command + Enter</strong> to load them fast.
               </p>
             </div>
-            <div class="multiview-player-options">
-              <label class="multiview-player-option">
-                <input type="radio" name="multiview-player" value="privacy" data-player-option />
-                <span>
-                  <strong>Ad-free mode</strong>
-                  <small>Uses privacy-enhanced embeds.</small>
-                </span>
-              </label>
-              <label class="multiview-player-option">
-                <input type="radio" name="multiview-player" value="standard" data-player-option checked />
-                <span>
-                  <strong>Standard mode</strong>
-                  <small>Allows sign-in & community features.</small>
-                </span>
-              </label>
-              <label class="multiview-player-option">
-                <input type="radio" name="multiview-player" value="proxy" data-player-option />
-                <span>
-                  <strong>Proxy mode</strong>
-                  <small>Loads piped.video, an open-source frontend.</small>
-                </span>
-              </label>
-            </div>
+
+            <aside class="watch-mode-panel">
+              <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
+                <div class="multiview-player-copy">
+                  <p id="multiview-player-label">Player preference</p>
+                  <p class="multiview-player-help" data-player-help>
+                    Full youtube.com embeds with sign-in, comments, playlists, and working volume sliders.
+                  </p>
+                </div>
+                <div class="multiview-player-options">
+                  <label class="multiview-player-option">
+                    <input type="radio" name="multiview-player" value="privacy" data-player-option />
+                    <span>
+                      <strong>Ad-free mode</strong>
+                      <small>youtube-nocookie embeds with slider support.</small>
+                    </span>
+                  </label>
+                  <label class="multiview-player-option">
+                    <input type="radio" name="multiview-player" value="standard" data-player-option checked />
+                    <span>
+                      <strong>Standard mode</strong>
+                      <small>Best compatibility for sign-in and live streams.</small>
+                    </span>
+                  </label>
+                  <label class="multiview-player-option">
+                    <input type="radio" name="multiview-player" value="proxy" data-player-option />
+                    <span>
+                      <strong>Proxy mode</strong>
+                      <small>Fallback when YouTube is blocked. No slider control.</small>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="multiview-search-controls">
+                <label class="multiview-label" for="multiview-search">Search current videos</label>
+                <input
+                  id="multiview-search"
+                  class="multiview-search-input"
+                  type="search"
+                  placeholder="Filter by title or video ID"
+                  data-multiview-search
+                  autocomplete="off"
+                />
+                <p class="multiview-search-hint">The share link preserves the active mode, videos, and individual volume settings.</p>
+              </div>
+            </aside>
           </div>
 
-          <div class="multiview-status" aria-live="polite" data-multiview-status></div>
-
-          <div class="multiview-diagnostics">
-            <div class="multiview-diagnostics-copy">
-              <p>
-                Still hitting errors? Run diagnostics to test which hosts load inside your browser and learn why the sign-in
-                prompt might be blocked.
-              </p>
-              <p class="multiview-diagnostics-note">
-                Brave, Firefox strict mode, and content blockers often deny third-party cookies that YouTube relies on for
-                embedded sign-ins. The proxy player uses piped.video, which blocks ads on its own but does not offer account-based
-                features.
-              </p>
-            </div>
-            <div class="multiview-diagnostics-actions">
-              <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
-              <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
-            </div>
+          <div class="multiview-statusbar">
+            <p class="multiview-status" aria-live="polite" data-multiview-status></p>
+            <p class="multiview-state-summary" data-state-summary>Per-video volume sliders are ready.</p>
           </div>
+        </div>
+      </section>
 
-          <div class="multiview-grid" data-multiview-grid data-default-videos="dQw4w9WgXcQ, Zi_XLOBDo_Y"></div>
+      <section class="section card">
+        <div class="container watch-container watch-diagnostics-layout">
+          <div class="multiview-diagnostics-copy">
+            <h2>Connection check</h2>
+            <p>
+              Still hitting errors? Run diagnostics to test which hosts load inside your browser and learn whether the issue is
+              YouTube itself, privacy blocking, or the proxy fallback.
+            </p>
+            <p class="multiview-diagnostics-note">
+              Brave, Firefox strict mode, and content blockers often deny third-party cookies that YouTube relies on for embedded
+              sign-ins. Proxy mode keeps a fallback path open when that happens.
+            </p>
+          </div>
+          <div class="multiview-diagnostics-actions">
+            <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
+            <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section card">
+        <div class="container watch-grid-container">
+          <div class="multiview-grid" data-multiview-grid></div>
         </div>
       </section>
     </main>
