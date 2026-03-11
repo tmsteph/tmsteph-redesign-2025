@@ -111,6 +111,47 @@ export function extractVideoIds(value) {
   return uniqueIds;
 }
 
+export function formatDuration(seconds) {
+  const totalSeconds = Number(seconds);
+  if (!Number.isFinite(totalSeconds) || totalSeconds < 0) {
+    return '';
+  }
+
+  const roundedSeconds = Math.round(totalSeconds);
+  const hours = Math.floor(roundedSeconds / 3600);
+  const minutes = Math.floor((roundedSeconds % 3600) / 60);
+  const remainder = roundedSeconds % 60;
+
+  if (hours > 0) {
+    return `${hours}:${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`;
+  }
+
+  return `${minutes}:${String(remainder).padStart(2, '0')}`;
+}
+
+export function normalizeSearchResults(payload) {
+  const items = Array.isArray(payload?.items) ? payload.items : Array.isArray(payload) ? payload : [];
+
+  return items
+    .map((item) => {
+      const url = item?.url ? new URL(item.url, 'https://www.youtube.com').toString() : '';
+      const videoId = extractVideoId(url);
+
+      if (!videoId) {
+        return null;
+      }
+
+      return {
+        videoId,
+        title: typeof item?.title === 'string' ? item.title.trim() : videoId,
+        uploaderName: typeof item?.uploaderName === 'string' ? item.uploaderName.trim() : '',
+        thumbnail: typeof item?.thumbnail === 'string' ? item.thumbnail : '',
+        durationLabel: formatDuration(item?.duration),
+      };
+    })
+    .filter(Boolean);
+}
+
 export function createVideoEntries(videoIds, overrides = []) {
   const overrideMap = new Map(
     overrides

@@ -42,6 +42,23 @@ test('YouTube Video Watcher loads defaults, adds a video, and disables sliders i
       `,
     });
   });
+  await page.route('https://api.piped.private.coffee/search?**', (route) => {
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({
+        items: [
+          {
+            url: '/watch?v=ScMzIvxBSi4',
+            title: 'Search result video',
+            uploaderName: 'Playwright DJ',
+            thumbnail: 'https://example.com/thumb.jpg',
+            duration: 95,
+          },
+        ],
+      }),
+    });
+  });
 
   await page.goto('/watch/index.html');
 
@@ -49,13 +66,18 @@ test('YouTube Video Watcher loads defaults, adds a video, and disables sliders i
   await expect(page.locator('[data-video-count]')).toHaveText('2');
   await expect(page.locator('.multiview-frame-wrapper')).toHaveCount(2);
 
-  await page.fill('#multiview-input', 'https://www.youtube.com/watch?v=ScMzIvxBSi4');
-  await page.getByRole('button', { name: 'Load videos' }).click();
+  await expect(page.locator('[data-advanced-player-settings]')).not.toHaveAttribute('open', '');
+  await page.fill('#video-search-query', 'lofi');
+  await page.getByRole('button', { name: 'Search videos' }).click();
+  await expect(page.locator('.video-search-card')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Add video' }).click();
 
   await expect(page.locator('[data-video-count]')).toHaveText('3');
   await expect(page.locator('.multiview-frame-wrapper')).toHaveCount(3);
   await expect(page).toHaveURL(/video=/);
 
+  await page.locator('[data-advanced-player-settings] summary').click();
+  await expect(page.locator('[data-advanced-player-settings]')).toHaveAttribute('open', '');
   await page.locator('.multiview-player-option', { hasText: 'Proxy mode' }).click();
   await expect(page.locator('.multiview-volume input[type="range"]').first()).toBeDisabled();
   await expect(page.locator('[data-state-summary]')).toContainText('Proxy mode is on');

@@ -5,6 +5,7 @@ import {
   DEFAULT_VIDEO_IDS,
   extractVideoId,
   extractVideoIds,
+  normalizeSearchResults,
   parseTheaterState,
 } from '../multi-watch-core.js';
 import { createMultiWatchController } from '../multi-watch.js';
@@ -57,6 +58,28 @@ describe('multi-watch core helpers', () => {
       ],
     })).toBe('?mode=privacy&video=dQw4w9WgXcQ%3A45%3A1&video=Zi_XLOBDo_Y%3A80%3A0');
   });
+
+  it('normalizes piped search results into addable video cards', () => {
+    expect(normalizeSearchResults({
+      items: [
+        {
+          url: '/watch?v=ScMzIvxBSi4',
+          title: 'Lo-fi set',
+          uploaderName: 'DJ Test',
+          thumbnail: 'https://example.com/thumb.jpg',
+          duration: 605,
+        },
+      ],
+    })).toEqual([
+      {
+        videoId: 'ScMzIvxBSi4',
+        title: 'Lo-fi set',
+        uploaderName: 'DJ Test',
+        thumbnail: 'https://example.com/thumb.jpg',
+        durationLabel: '10:05',
+      },
+    ]);
+  });
 });
 
 describe('multi-watch controller', () => {
@@ -69,11 +92,16 @@ describe('multi-watch controller', () => {
         <button data-reset-videos type="button">Reset</button>
         <button data-copy-share-link type="button">Share</button>
         <input data-multiview-search type="search" />
+        <input data-video-search-query type="search" />
+        <button data-video-search-button type="button">Search</button>
+        <p data-video-search-status></p>
+        <div data-video-search-results></div>
         <p data-multiview-status></p>
         <p data-player-help></p>
         <p data-state-summary></p>
         <strong data-video-count></strong>
         <strong data-mode-summary></strong>
+        <details data-advanced-player-settings></details>
         <button data-run-diagnostics type="button">Diagnostics</button>
         <ul data-diagnostics-output></ul>
         <label><input data-player-option type="radio" name="mode" value="standard" checked /></label>
@@ -176,5 +204,43 @@ describe('multi-watch controller', () => {
 
     expect(slider.disabled).toBe(true);
     expect(summary.textContent).toContain('Proxy mode is on');
+  });
+
+  it('searches for a video to add and marks advanced settings open for proxy mode', async () => {
+    const controller = createMultiWatchController({
+      root: window,
+      doc: document,
+      loadYouTubeApi: () => Promise.resolve(createYouTubeStub()),
+      searchFetch: vi.fn().mockResolvedValue({
+        ok: true,
+        async json() {
+          return {
+            items: [
+              {
+                url: '/watch?v=ScMzIvxBSi4',
+                title: 'Search hit',
+                uploaderName: 'Tester',
+                thumbnail: 'https://example.com/thumb.jpg',
+                duration: 90,
+              },
+            ],
+          };
+        },
+      }),
+    });
+
+    controller.init();
+    document.querySelector('[data-video-search-query]').value = 'lofi';
+    await controller.runVideoSearch();
+
+    expect(document.querySelectorAll('.video-search-card')).toHaveLength(1);
+
+    document.querySelector('[data-search-result-id="ScMzIvxBSi4"]').click();
+    await Promise.resolve();
+
+    expect(controller.getState().videos.map((entry) => entry.videoId)).toContain('ScMzIvxBSi4');
+
+    controller.setMode('proxy');
+    expect(document.querySelector('[data-advanced-player-settings]').open).toBe(true);
   });
 });

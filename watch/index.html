@@ -58,6 +58,27 @@
 
           <div class="watch-builder-grid">
             <div class="watch-builder-panel">
+              <div class="video-search-panel">
+                <div class="video-search-header">
+                  <label class="multiview-label" for="video-search-query">Search YouTube to add</label>
+                  <p class="video-search-copy">Find something first, then add it straight into the watcher without copying URLs.</p>
+                </div>
+
+                <div class="video-search-form">
+                  <input
+                    id="video-search-query"
+                    class="multiview-search-input video-search-input"
+                    type="search"
+                    placeholder="Search tutorials, streams, playlists..."
+                    data-video-search-query
+                    autocomplete="off"
+                  />
+                  <button class="btn-secondary" data-video-search-button type="button">Search videos</button>
+                </div>
+                <p class="video-search-status" data-video-search-status aria-live="polite"></p>
+                <div class="video-search-results" data-video-search-results></div>
+              </div>
+
               <label class="multiview-label" for="multiview-input">Video links or IDs</label>
               <textarea
                 id="multiview-input"
@@ -101,13 +122,6 @@
                       <small>Best compatibility for sign-in and live streams.</small>
                     </span>
                   </label>
-                  <label class="multiview-player-option">
-                    <input type="radio" name="multiview-player" value="proxy" data-player-option />
-                    <span>
-                      <strong>Proxy mode</strong>
-                      <small>Fallback when YouTube is blocked. No slider control.</small>
-                    </span>
-                  </label>
                 </div>
               </div>
 
@@ -123,6 +137,22 @@
                 />
                 <p class="multiview-search-hint">The share link preserves the active mode, videos, and individual volume settings.</p>
               </div>
+
+              <details class="watch-advanced-settings" data-advanced-player-settings>
+                <summary>Advanced playback and proxy settings</summary>
+                <div class="watch-advanced-settings__body">
+                  <label class="multiview-player-option multiview-player-option--advanced">
+                    <input type="radio" name="multiview-player" value="proxy" data-player-option />
+                    <span>
+                      <strong>Proxy mode</strong>
+                      <small>Fallback when YouTube is blocked. No slider control.</small>
+                    </span>
+                  </label>
+                  <p class="watch-advanced-settings__note">
+                    Keep this closed unless a network block forces you off the normal YouTube players.
+                  </p>
+                </div>
+              </details>
             </aside>
           </div>
 

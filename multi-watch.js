@@ -4,6 +4,7 @@ import {
   DEFAULT_MODE,
   extractVideoIds,
   normalizeMode,
+  normalizeSearchResults,
   normalizeVolume,
   parseTheaterState,
 } from './multi-watch-core.js';
@@ -53,6 +54,8 @@ const DIAGNOSTIC_TARGETS = [
   },
 ];
 
+const SEARCH_API_BASES = ['https://api.piped.private.coffee'];
+
 function createYouTubeApiLoader(root) {
   let pendingPromise = null;
 
@@ -87,6 +90,30 @@ function createYouTubeApiLoader(root) {
 
     return pendingPromise;
   };
+}
+
+async function searchYouTubeVideos(query, fetchImpl) {
+  const params = new URLSearchParams({
+    q: query,
+    filter: 'videos',
+  });
+
+  let lastError = null;
+  for (const apiBase of SEARCH_API_BASES) {
+    try {
+      const response = await fetchImpl(`${apiBase}/search?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error(`Search failed with ${response.status}.`);
+      }
+
+      const payload = await response.json();
+      return normalizeSearchResults(payload);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError || new Error('Search is unavailable right now.');
 }
 
 function testImage(root, url, timeout = 5000) {
@@ -156,7 +183,13 @@ export function createMultiWatchController(options = {}) {
   const modeSummary = options.modeSummary || doc.querySelector('[data-mode-summary]');
   const stateSummary = options.stateSummary || doc.querySelector('[data-state-summary]');
   const theaterRoot = options.theaterRoot || doc.querySelector('[data-theater-root]');
+  const searchQueryInput = options.searchQueryInput || doc.querySelector('[data-video-search-query]');
+  const searchQueryButton = options.searchQueryButton || doc.querySelector('[data-video-search-button]');
+  const searchResults = options.searchResults || doc.querySelector('[data-video-search-results]');
+  const searchStatus = options.searchStatus || doc.querySelector('[data-video-search-status]');
+  const advancedSettings = options.advancedSettings || doc.querySelector('[data-advanced-player-settings]');
   const loadYouTubeApi = options.loadYouTubeApi || createYouTubeApiLoader(root);
+  const searchFetch = options.searchFetch || root.fetch?.bind(root);
 
   const requiredNodes = [grid, input, addButton, clearButton, status];
   if (requiredNodes.some((node) => !node)) {
@@ -164,6 +197,15 @@ export function createMultiWatchController(options = {}) {
       init() {},
       getState() {
         return { mode: DEFAULT_MODE, videos: [] };
+      },
+      addVideos() {
+        return 0;
+      },
+      clearVideos() {},
+      resetDemoVideos() {},
+      setMode() {},
+      runVideoSearch() {
+        return Promise.resolve([]);
       },
     };
   }
@@ -175,6 +217,7 @@ export function createMultiWatchController(options = {}) {
   const hasExplicitQuery = Boolean(root.location?.search);
   const playerRegistry = new Map();
   const elementRegistry = new Map();
+  let addSearchResults = [];
 
   function getHostConfig(mode = state.mode) {
     return HOSTS[normalizeMode(mode)] || HOSTS[DEFAULT_MODE];
@@ -192,6 +235,15 @@ export function createMultiWatchController(options = {}) {
   function updateStatus(message, tone = 'info') {
     status.textContent = message;
     status.dataset.tone = tone;
+  }
+
+  function updateSearchStatus(message, tone = 'info') {
+    if (!searchStatus) {
+      return;
+    }
+
+    searchStatus.textContent = message;
+    searchStatus.dataset.tone = tone;
   }
 
   function updateModeUI() {
@@ -215,6 +267,10 @@ export function createMultiWatchController(options = {}) {
         ? 'Per-video volume sliders are ready.'
         : 'Proxy mode is on. Volume sliders are disabled here.';
     }
+
+    if (advancedSettings && config.id === 'proxy') {
+      advancedSettings.open = true;
+    }
   }
 
   function getFilteredVideos() {
@@ -235,7 +291,7 @@ export function createMultiWatchController(options = {}) {
     }
 
     if (!state.videos.length) {
-      updateStatus('Paste one or more YouTube links to build your theater.', 'info');
+      updateStatus('Paste one or more YouTube links or search for a video to build your watcher.', 'info');
       return;
     }
 
@@ -312,6 +368,19 @@ export function createMultiWatchController(options = {}) {
     }
   }
 
+  function refreshSearchResultButtons() {
+    if (!searchResults) {
+      return;
+    }
+
+    const loadedIds = new Set(state.videos.map((entry) => entry.videoId));
+    searchResults.querySelectorAll('[data-search-result-id]').forEach((button) => {
+      const isLoaded = loadedIds.has(button.dataset.searchResultId || '');
+      button.disabled = isLoaded;
+      button.textContent = isLoaded ? 'Added' : 'Add video';
+    });
+  }
+
   function setVideoVolume(videoId, nextVolume) {
     const entry = state.videos.find((video) => video.videoId === videoId);
     if (!entry) {
@@ -336,10 +405,37 @@ export function createMultiWatchController(options = {}) {
     syncUrl();
   }
 
+  function addVideoIds(videoIds, { source = 'links' } = {}) {
+    if (!Array.isArray(videoIds) || !videoIds.length) {
+      updateStatus(`Please provide a valid YouTube ${source === 'search' ? 'result' : 'link or video ID'}.`, 'error');
+      return 0;
+    }
+
+    const existingIds = new Set(state.videos.map((entry) => entry.videoId));
+    const additions = videoIds.filter((videoId) => !existingIds.has(videoId));
+
+    if (!additions.length) {
+      updateStatus('Those videos are already in your watcher.', 'warning');
+      refreshSearchResultButtons();
+      return 0;
+    }
+
+    state.videos = createVideoEntries(
+      [...state.videos.map((entry) => entry.videoId), ...additions],
+      state.videos,
+    );
+
+    syncUrl();
+    renderGrid();
+    refreshSearchResultButtons();
+    return additions.length;
+  }
+
   function removeVideo(videoId) {
     state.videos = state.videos.filter((entry) => entry.videoId !== videoId);
     syncUrl();
     renderGrid();
+    refreshSearchResultButtons();
   }
 
   async function copyShareLink() {
@@ -349,8 +445,8 @@ export function createMultiWatchController(options = {}) {
       await root.navigator?.clipboard?.writeText(targetUrl);
       updateStatus('Share link copied. It preserves mode, loaded videos, and volume settings.', 'success');
     } catch (error) {
-      root.prompt?.('Copy this theater link:', targetUrl);
-      updateStatus('Copy the share link from the prompt to reuse this exact layout.', 'warning');
+      root.prompt?.('Copy this watcher link:', targetUrl);
+      updateStatus('Copy the watcher link from the prompt to reuse this exact layout.', 'warning');
     }
   }
 
@@ -565,6 +661,75 @@ export function createMultiWatchController(options = {}) {
     return wrapper;
   }
 
+  function renderSearchResults() {
+    if (!searchResults) {
+      return;
+    }
+
+    searchResults.innerHTML = '';
+    if (!addSearchResults.length) {
+      const empty = doc.createElement('p');
+      empty.className = 'video-search-empty';
+      empty.textContent = 'Search YouTube here to add videos without leaving the watcher.';
+      searchResults.appendChild(empty);
+      return;
+    }
+
+    const loadedIds = new Set(state.videos.map((entry) => entry.videoId));
+    addSearchResults.forEach((result) => {
+      const card = doc.createElement('article');
+      card.className = 'video-search-card';
+
+      if (result.thumbnail) {
+        const thumbnail = doc.createElement('img');
+        thumbnail.className = 'video-search-card__thumb';
+        thumbnail.src = result.thumbnail;
+        thumbnail.alt = '';
+        thumbnail.loading = 'lazy';
+        card.appendChild(thumbnail);
+      }
+
+      const body = doc.createElement('div');
+      body.className = 'video-search-card__body';
+
+      const title = doc.createElement('h3');
+      title.className = 'video-search-card__title';
+      title.textContent = result.title;
+
+      const meta = doc.createElement('p');
+      meta.className = 'video-search-card__meta';
+      meta.textContent = [result.uploaderName, result.durationLabel].filter(Boolean).join(' • ') || result.videoId;
+
+      const actions = doc.createElement('div');
+      actions.className = 'video-search-card__actions';
+
+      const addResultButton = doc.createElement('button');
+      addResultButton.type = 'button';
+      addResultButton.className = 'multiview-action-button';
+      addResultButton.dataset.searchResultId = result.videoId;
+      addResultButton.disabled = loadedIds.has(result.videoId);
+      addResultButton.textContent = loadedIds.has(result.videoId) ? 'Added' : 'Add video';
+      addResultButton.addEventListener('click', () => {
+        const addedCount = addVideoIds([result.videoId], { source: 'search' });
+        if (addedCount) {
+          updateStatus(`Added "${result.title}" to your watcher.`, 'success');
+        }
+      });
+
+      const open = doc.createElement('a');
+      open.className = 'multiview-open-link';
+      open.href = `https://youtu.be/${result.videoId}`;
+      open.target = '_blank';
+      open.rel = 'noopener';
+      open.textContent = 'Open';
+
+      actions.append(addResultButton, open);
+      body.append(title, meta, actions);
+      card.appendChild(body);
+      searchResults.appendChild(card);
+    });
+  }
+
   function renderGrid() {
     renderVersion += 1;
     destroyPlayers();
@@ -574,7 +739,7 @@ export function createMultiWatchController(options = {}) {
     if (!state.videos.length) {
       const empty = doc.createElement('p');
       empty.className = 'multiview-empty';
-      empty.textContent = 'Load a few YouTube links and the theater will build itself here.';
+      empty.textContent = 'Load a few YouTube links or add a search result and the watcher will build itself here.';
       grid.appendChild(empty);
       updateSummary();
       return;
@@ -598,35 +763,21 @@ export function createMultiWatchController(options = {}) {
   }
 
   function addVideos() {
-    const nextIds = extractVideoIds(input.value);
-    if (!nextIds.length) {
-      updateStatus('Please provide a valid YouTube link or video ID.', 'error');
-      return;
+    const addedCount = addVideoIds(extractVideoIds(input.value), { source: 'links' });
+    if (!addedCount) {
+      return 0;
     }
 
-    const existingIds = new Set(state.videos.map((entry) => entry.videoId));
-    const additions = nextIds.filter((videoId) => !existingIds.has(videoId));
-
-    if (!additions.length) {
-      updateStatus('Those videos are already in your theater.', 'warning');
-      input.select();
-      return;
-    }
-
-    state.videos = createVideoEntries(
-      [...state.videos.map((entry) => entry.videoId), ...additions],
-      state.videos,
-    );
     input.value = '';
-    syncUrl();
-    renderGrid();
     input.focus();
+    return addedCount;
   }
 
   function clearVideos() {
     state.videos = [];
     syncUrl();
     renderGrid();
+    refreshSearchResultButtons();
     input.focus();
   }
 
@@ -634,6 +785,7 @@ export function createMultiWatchController(options = {}) {
     state.videos = createVideoEntries(defaultVideoIds.length ? defaultVideoIds : []);
     syncUrl();
     renderGrid();
+    refreshSearchResultButtons();
   }
 
   function setMode(nextMode) {
@@ -648,18 +800,61 @@ export function createMultiWatchController(options = {}) {
     renderGrid();
   }
 
+  async function runVideoSearch() {
+    if (!searchQueryInput || !searchQueryButton || !searchFetch) {
+      return [];
+    }
+
+    const query = searchQueryInput.value.trim();
+    if (!query) {
+      addSearchResults = [];
+      renderSearchResults();
+      updateSearchStatus('Enter a search phrase to find videos to add.', 'warning');
+      return [];
+    }
+
+    searchQueryButton.disabled = true;
+    const originalLabel = searchQueryButton.textContent;
+    searchQueryButton.textContent = 'Searching...';
+    updateSearchStatus(`Searching YouTube for "${query}"...`, 'info');
+
+    try {
+      addSearchResults = await searchYouTubeVideos(query, searchFetch);
+      renderSearchResults();
+      if (addSearchResults.length) {
+        updateSearchStatus(`Found ${addSearchResults.length} videos. Add any of them directly to the watcher.`, 'success');
+      } else {
+        updateSearchStatus('No videos matched that search. Try a broader phrase.', 'warning');
+      }
+      return addSearchResults;
+    } catch (error) {
+      addSearchResults = [];
+      renderSearchResults();
+      updateSearchStatus('Search is unavailable right now. Paste a YouTube link above as a fallback.', 'error');
+      return [];
+    } finally {
+      searchQueryButton.disabled = false;
+      searchQueryButton.textContent = originalLabel;
+    }
+  }
+
   function init() {
     updateModeUI();
     if (hasExplicitQuery) {
       syncUrl();
     }
     renderGrid();
+    renderSearchResults();
+    if (searchStatus) {
+      updateSearchStatus('Search YouTube here to add videos without leaving the watcher.', 'info');
+    }
 
     addButton.addEventListener('click', addVideos);
     clearButton.addEventListener('click', clearVideos);
     demoButton?.addEventListener('click', resetDemoVideos);
     shareButton?.addEventListener('click', copyShareLink);
     diagnosticsButton?.addEventListener('click', runDiagnostics);
+    searchQueryButton?.addEventListener('click', runVideoSearch);
 
     input.addEventListener('keydown', (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
@@ -671,6 +866,13 @@ export function createMultiWatchController(options = {}) {
     searchInput?.addEventListener('input', (event) => {
       searchQuery = event.currentTarget.value || '';
       renderGrid();
+    });
+
+    searchQueryInput?.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        runVideoSearch();
+      }
     });
 
     playerOptions.forEach((option) => {
@@ -695,6 +897,7 @@ export function createMultiWatchController(options = {}) {
     clearVideos,
     resetDemoVideos,
     setMode,
+    runVideoSearch,
   };
 }
 
