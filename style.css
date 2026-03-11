@@ -153,7 +153,7 @@ footer {
     radial-gradient(circle at top left, rgba(255, 224, 102, 0.18), transparent 32%),
     radial-gradient(circle at top right, rgba(127, 255, 225, 0.2), transparent 34%),
     linear-gradient(135deg, rgba(10, 24, 49, 0.97), rgba(28, 59, 108, 0.92));
-  padding: 4rem 1.5rem 3.5rem;
+  padding: 3.5rem 1.5rem 2.75rem;
   text-align: left;
 }
 
@@ -164,14 +164,69 @@ footer {
 
 .watch-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.95fr);
-  gap: 1.5rem;
-  align-items: end;
+  grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.9fr);
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.watch-page h1,
+.watch-page h2,
+.watch-page p {
+  text-shadow: none;
+}
+
+.watch-page h1 {
+  font-size: clamp(2.9rem, 6vw, 4.7rem);
+  line-height: 0.95;
+  margin-bottom: 0;
+}
+
+.watch-page h2 {
+  font-size: clamp(1.8rem, 3.1vw, 2.5rem);
+  line-height: 1.08;
+  margin-bottom: 0;
+}
+
+.watch-page h3 {
+  font-size: 1.15rem;
+}
+
+.watch-page p {
+  font-size: 1rem;
+  line-height: 1.65;
+  margin-bottom: 0;
 }
 
 .watch-hero-copy p {
-  max-width: 42rem;
-  margin-bottom: 0;
+  max-width: 44rem;
+}
+
+.watch-hero-copy {
+  display: grid;
+  gap: 1rem;
+}
+
+.watch-hero-lede {
+  max-width: 44rem;
+  color: rgba(255, 250, 224, 0.9);
+}
+
+.watch-hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.watch-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(5, 14, 28, 0.34);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.84rem;
+  font-weight: 700;
 }
 
 .watch-back-link {
@@ -191,16 +246,18 @@ footer {
 
 .watch-stat-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.8rem;
+  justify-self: end;
+  width: min(100%, 260px);
 }
 
 .watch-stat-card {
-  background: rgba(5, 14, 28, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 18px;
+  background: rgba(5, 14, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
   padding: 1rem 1.1rem;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
 }
 
 .watch-stat-card span {
@@ -219,7 +276,13 @@ footer {
 }
 
 .watch-main {
-  padding: 2.5rem 1rem 4rem;
+  padding: 2rem 1rem 4rem;
+}
+
+.watch-page .card {
+  max-width: 1180px;
+  border-radius: 28px;
+  box-shadow: 0 28px 60px -36px rgba(0, 0, 0, 0.72);
 }
 
 .watch-container,
@@ -229,31 +292,186 @@ footer {
 }
 
 .watch-heading {
-  margin-bottom: 1.8rem;
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
 }
 
 .watch-heading p {
   max-width: 44rem;
-  margin-bottom: 0;
 }
 
-.watch-builder-grid,
-.watch-diagnostics-layout {
+.watch-heading--builder {
+  max-width: 58rem;
+}
+
+.watch-eyebrow,
+.watch-side-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9ed3ff;
+}
+
+.watch-builder-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.95fr);
-  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.95fr);
+  gap: 1.1rem;
   align-items: start;
 }
 
 .watch-builder-panel,
 .watch-mode-panel,
-.watch-diagnostics-layout {
+.watch-side-rail,
+.watch-grid-heading {
   min-width: 0;
+}
+
+.watch-builder-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.watch-builder-panel--primary {
+  padding: 1.2rem;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(10, 24, 49, 0.72), rgba(8, 20, 40, 0.5));
+  box-shadow: 0 22px 48px -28px rgba(0, 0, 0, 0.6);
+}
+
+.watch-side-rail {
+  display: grid;
+  gap: 1rem;
+}
+
+.watch-room-panel {
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.15rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(7, 19, 38, 0.7);
+  box-shadow: 0 18px 42px -30px rgba(0, 0, 0, 0.7);
+}
+
+.watch-room-panel__header {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.watch-room-panel__header h3,
+.watch-room-mode {
+  margin: 0;
+}
+
+.watch-room-mode {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.watch-quick-actions {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.watch-secondary-panel {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+.watch-secondary-panel summary {
+  cursor: pointer;
+  padding: 0.95rem 1.05rem;
+  list-style: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff4b0;
+}
+
+.watch-secondary-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.watch-secondary-panel__body {
+  display: grid;
+  gap: 0.9rem;
+  padding: 0 1.05rem 1.05rem;
+}
+
+.watch-secondary-panel--warning {
+  border-color: rgba(255, 224, 102, 0.18);
+  background: rgba(255, 224, 102, 0.04);
+}
+
+.watch-grid-heading {
+  display: grid;
+  gap: 0.45rem;
+  margin-bottom: 1.35rem;
 }
 
 .watch-page .btn-primary,
 .watch-page .btn-secondary {
   margin: 0;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 0.78rem 1.15rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.watch-page .btn-primary {
+  background: #ffd700;
+  color: #1e2430;
+  box-shadow: 0 14px 28px -18px rgba(255, 215, 0, 0.75);
+}
+
+.watch-page .btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff7d0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.watch-page .btn-primary:hover,
+.watch-page .btn-primary:focus-visible,
+.watch-page .btn-secondary:hover,
+.watch-page .btn-secondary:focus-visible {
+  transform: translateY(-1px);
+}
+
+.watch-page .btn-primary:hover,
+.watch-page .btn-primary:focus-visible {
+  background: #ffe24d;
+}
+
+.watch-page .btn-secondary:hover,
+.watch-page .btn-secondary:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.watch-page button:disabled,
+.watch-page .multiview-action-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.watch-page .btn-primary,
+.watch-page .btn-secondary,
+.watch-page .multiview-open-link,
+.watch-page .multiview-action-button,
+.watch-page .multiview-remove-button {
+  min-height: 44px;
 }
 
 .solar-main {
@@ -670,23 +888,25 @@ footer {
 
 .video-search-panel {
   display: grid;
-  gap: 0.9rem;
-  margin-bottom: 1.35rem;
-  padding: 1rem 1.05rem;
-  border-radius: 20px;
+  gap: 1rem;
+  padding: 1.15rem 1.15rem 1.25rem;
+  border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.05);
+  background:
+    radial-gradient(circle at top right, rgba(255, 224, 102, 0.08), transparent 34%),
+    rgba(255, 255, 255, 0.05);
 }
 
 .video-search-header {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.45rem;
 }
 
 .video-search-copy {
   margin: 0;
+  max-width: 36rem;
   font-size: 0.95rem;
-  line-height: 1.55;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.82);
 }
 
@@ -704,7 +924,7 @@ footer {
 .video-search-status {
   margin: 0;
   min-height: 1.3rem;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: #7fffe1;
 }
 
@@ -722,16 +942,17 @@ footer {
 
 .video-search-results {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.9rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .video-search-card {
   display: grid;
   gap: 0.75rem;
-  border-radius: 18px;
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(5, 14, 28, 0.58);
+  background: rgba(5, 14, 28, 0.72);
+  box-shadow: 0 18px 38px -28px rgba(0, 0, 0, 0.7);
   overflow: hidden;
 }
 
@@ -770,7 +991,7 @@ footer {
 
 .video-search-empty {
   margin: 0;
-  padding: 0.9rem 1rem;
+  padding: 1rem 1.05rem;
   border-radius: 16px;
   border: 1px dashed rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.76);
@@ -784,7 +1005,7 @@ footer {
   gap: 0.75rem;
   align-items: center;
   justify-content: flex-start;
-  margin: 1.25rem 0 1rem;
+  margin: 0;
 }
 
 .multiview-input {
@@ -809,10 +1030,9 @@ footer {
 }
 
 .multiview-hint {
-  font-size: 0.95rem;
-  opacity: 0.85;
-  margin-top: 0.25rem;
-  margin-bottom: 0;
+  font-size: 0.88rem;
+  opacity: 0.82;
+  margin: 0;
 }
 
 .multiview-search-controls {
@@ -842,33 +1062,8 @@ footer {
   margin: 0;
 }
 
-.watch-advanced-settings {
-  margin-top: 1rem;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.watch-advanced-settings summary {
-  cursor: pointer;
-  padding: 0.9rem 1rem;
-  font-weight: 700;
-  color: #fff4b0;
-  list-style: none;
-}
-
-.watch-advanced-settings summary::-webkit-details-marker {
-  display: none;
-}
-
-.watch-advanced-settings__body {
-  display: grid;
-  gap: 0.85rem;
-  padding: 0 1rem 1rem;
-}
-
 .multiview-player-option--advanced {
-  margin-top: 0.15rem;
+  margin-top: 0;
 }
 
 .watch-advanced-settings__note {
@@ -880,13 +1075,14 @@ footer {
 
 .multiview-player-toggle {
   margin: 0;
-  padding: 1rem 1.25rem;
-  border-radius: 20px;
+  padding: 1.05rem 1.15rem;
+  border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(11, 29, 57, 0.65);
+  background: rgba(11, 29, 57, 0.72);
   display: grid;
   gap: 1rem;
   align-items: start;
+  box-shadow: 0 18px 42px -30px rgba(0, 0, 0, 0.7);
 }
 
 .multiview-player-copy {
@@ -898,26 +1094,26 @@ footer {
 }
 
 .multiview-player-help {
-  font-size: 0.9rem;
-  opacity: 0.85;
-  margin-top: 0.35rem;
+  font-size: 0.92rem;
+  opacity: 0.88;
+  margin-top: 0.45rem;
   line-height: 1.55;
 }
 
 .multiview-player-options {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.65rem;
 }
 
 .multiview-player-option {
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
-  padding: 0.75rem 0.9rem;
+  padding: 0.8rem 0.95rem;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.04);
   transition: border 0.2s ease, background 0.2s ease;
   font-size: 0.9rem;
 }
@@ -963,7 +1159,7 @@ footer {
 .multiview-status {
   min-height: 1.5rem;
   font-size: 0.95rem;
-  margin-bottom: 0;
+  margin: 0;
   color: #7fffe1;
 }
 
@@ -988,9 +1184,7 @@ footer {
 }
 
 .multiview-diagnostics-actions {
-  flex: 1 1 220px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 0.75rem;
 }
 
@@ -1129,6 +1323,9 @@ footer {
 .multiview-action-button,
 .multiview-remove-button,
 .multiview-open-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 999px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -1199,45 +1396,87 @@ footer {
 
 @media (max-width: 900px) {
   .watch-hero-grid,
-  .watch-builder-grid,
-  .watch-diagnostics-layout {
+  .watch-builder-grid {
     grid-template-columns: 1fr;
   }
 
   .watch-stat-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-self: start;
+    width: 100%;
+  }
+
+  .watch-quick-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
   .watch-hero {
-    padding: 3rem 1rem 2.5rem;
+    padding: 2.5rem 1rem 2.1rem;
   }
 
   .watch-main {
-    padding: 1.25rem 0.2rem 2.5rem;
+    padding: 1.1rem 0.3rem 2.5rem;
   }
 
   .watch-container,
   .watch-grid-container {
-    padding: 1.25rem;
+    padding: 1.1rem;
   }
+
+  .watch-page h1 {
+    font-size: 2.45rem;
+  }
+
+  .watch-page h2 {
+    font-size: 1.55rem;
+  }
+
   .watch-stat-grid {
     grid-template-columns: 1fr;
   }
 
+  .watch-hero-pills {
+    gap: 0.5rem;
+  }
+
   .video-search-form,
-  .multiview-controls {
+  .multiview-controls,
+  .watch-quick-actions {
     grid-template-columns: 1fr;
     flex-direction: column;
     align-items: stretch;
   }
 
+  .watch-builder-panel--primary,
+  .multiview-player-toggle,
+  .watch-room-panel {
+    padding: 1rem;
+    border-radius: 22px;
+  }
+
   .video-search-card__actions,
-  .multiview-statusbar,
   .multiview-frame-controls {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .multiview-frame-controls {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .multiview-frame-controls > * {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .multiview-action-button,
+  .multiview-remove-button,
+  .multiview-open-link {
+    justify-content: center;
+    text-align: center;
   }
 
   .multiview-grid {

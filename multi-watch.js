@@ -180,7 +180,7 @@ export function createMultiWatchController(options = {}) {
   const diagnosticsButton = options.diagnosticsButton || doc.querySelector('[data-run-diagnostics]');
   const diagnosticsOutput = options.diagnosticsOutput || doc.querySelector('[data-diagnostics-output]');
   const loadedCount = options.loadedCount || doc.querySelector('[data-video-count]');
-  const modeSummary = options.modeSummary || doc.querySelector('[data-mode-summary]');
+  const modeSummaries = options.modeSummaries || Array.from(doc.querySelectorAll('[data-mode-summary]'));
   const stateSummary = options.stateSummary || doc.querySelector('[data-state-summary]');
   const theaterRoot = options.theaterRoot || doc.querySelector('[data-theater-root]');
   const searchQueryInput = options.searchQueryInput || doc.querySelector('[data-video-search-query]');
@@ -258,9 +258,9 @@ export function createMultiWatchController(options = {}) {
       playerHelp.textContent = config.help;
     }
 
-    if (modeSummary) {
-      modeSummary.textContent = config.title;
-    }
+    modeSummaries.forEach((summary) => {
+      summary.textContent = config.title;
+    });
 
     if (stateSummary) {
       stateSummary.textContent = config.supportsMixing
@@ -284,14 +284,32 @@ export function createMultiWatchController(options = {}) {
     });
   }
 
+  function updateActionStates() {
+    const hasVideos = state.videos.length > 0;
+    if (shareButton) {
+      shareButton.disabled = !hasVideos;
+    }
+    clearButton.disabled = !hasVideos;
+
+    if (searchInput) {
+      searchInput.disabled = !hasVideos;
+      if (!hasVideos) {
+        searchInput.value = '';
+        searchQuery = '';
+      }
+    }
+  }
+
   function updateSummary() {
     const visibleVideos = getFilteredVideos();
     if (loadedCount) {
       loadedCount.textContent = String(state.videos.length);
     }
 
+    updateActionStates();
+
     if (!state.videos.length) {
-      updateStatus('Paste one or more YouTube links or search for a video to build your watcher.', 'info');
+      updateStatus('Search for a video, or open "Paste links or IDs instead" to start building the room.', 'info');
       return;
     }
 

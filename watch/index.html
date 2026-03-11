@@ -27,14 +27,19 @@
         <a class="watch-back-link" href="../index.html">← Back to tmsteph.com</a>
         <div class="watch-hero-grid">
           <div class="watch-hero-copy">
-            <p class="tagline">Dream. Build. Share.</p>
+            <p class="tagline">Search. Add. Watch together.</p>
             <h1 class="handwritten">YouTube Video Watcher</h1>
-            <p>
-              Build a shared watch room for tutorials, live streams, reaction feeds, or side-by-side comparisons. The refresh
-              keeps the quick multi-video flow but adds shareable layouts and per-player volume sliders where YouTube allows them.
+            <p class="watch-hero-lede">
+              Build a side-by-side room for tutorials, live streams, or reaction feeds. Search first, drop videos straight into
+              the room, and share the exact setup with one link.
             </p>
+            <div class="watch-hero-pills" aria-label="Key features">
+              <span class="watch-hero-pill">Add videos without leaving the page</span>
+              <span class="watch-hero-pill">Per-video volume on supported players</span>
+              <span class="watch-hero-pill">One link saves the full room</span>
+            </div>
           </div>
-          <div class="watch-stat-grid">
+          <div class="watch-stat-grid" aria-label="Room summary">
             <div class="watch-stat-card">
               <span>Loaded videos</span>
               <strong data-video-count>0</strong>
@@ -51,17 +56,18 @@
     <main class="watch-main">
       <section class="section card watch-builder-card" data-theater-root data-default-videos="dQw4w9WgXcQ, Zi_XLOBDo_Y">
         <div class="container watch-container">
-          <div class="watch-heading">
-            <h2>YouTube control room</h2>
-            <p>Paste several links at once, mix each player independently, and share the exact watch setup with one URL.</p>
+          <div class="watch-heading watch-heading--builder">
+            <p class="watch-eyebrow">Build the room</p>
+            <h2>Start with search. Use the extra controls only when you need them.</h2>
+            <p>Search is the default path. Manual paste, filtering, proxy mode, and diagnostics are tucked away to keep the UI focused.</p>
           </div>
 
           <div class="watch-builder-grid">
-            <div class="watch-builder-panel">
+            <div class="watch-builder-panel watch-builder-panel--primary">
               <div class="video-search-panel">
                 <div class="video-search-header">
                   <label class="multiview-label" for="video-search-query">Search YouTube to add</label>
-                  <p class="video-search-copy">Find something first, then add it straight into the watcher without copying URLs.</p>
+                  <p class="video-search-copy">Search first, preview the results, and drop videos directly into the room.</p>
                 </div>
 
                 <div class="video-search-form">
@@ -79,30 +85,48 @@
                 <div class="video-search-results" data-video-search-results></div>
               </div>
 
-              <label class="multiview-label" for="multiview-input">Video links or IDs</label>
-              <textarea
-                id="multiview-input"
-                class="multiview-input multiview-textarea"
-                placeholder="https://youtu.be/dQw4w9WgXcQ&#10;https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
-                autocomplete="off"
-              ></textarea>
-
-              <div class="multiview-controls">
-                <button class="btn-primary" data-add-video type="button">Load videos</button>
-                <button class="btn-secondary" data-clear-videos type="button">Clear theater</button>
-                <button class="btn-secondary" data-reset-videos type="button">Reset demo</button>
-                <button class="btn-secondary" data-copy-share-link type="button">Copy share link</button>
-              </div>
-              <p class="multiview-hint">
-                Tip: paste full URLs, `youtu.be` links, or 11-character IDs. Use multiple lines, then hit
-                <strong>Ctrl/Command + Enter</strong> to load them fast.
-              </p>
+              <details class="watch-secondary-panel" data-manual-entry-panel>
+                <summary>Paste links or IDs instead</summary>
+                <div class="watch-secondary-panel__body">
+                  <label class="multiview-label" for="multiview-input">Video links or IDs</label>
+                  <textarea
+                    id="multiview-input"
+                    class="multiview-input multiview-textarea"
+                    placeholder="https://youtu.be/dQw4w9WgXcQ&#10;https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+                    autocomplete="off"
+                  ></textarea>
+                  <div class="multiview-controls">
+                    <button class="btn-primary" data-add-video type="button">Load pasted videos</button>
+                  </div>
+                  <p class="multiview-hint">
+                    Paste full URLs, `youtu.be` links, or 11-character IDs. Use multiple lines, then hit
+                    <strong>Ctrl/Command + Enter</strong> to load them fast.
+                  </p>
+                </div>
+              </details>
             </div>
 
-            <aside class="watch-mode-panel">
+            <aside class="watch-side-rail">
+              <section class="watch-room-panel">
+                <div class="watch-room-panel__header">
+                  <div>
+                    <p class="watch-side-eyebrow">Room controls</p>
+                    <h3>Keep the main actions close.</h3>
+                  </div>
+                  <p class="watch-room-mode">Mode: <strong data-mode-summary>Standard mode</strong></p>
+                </div>
+                <p class="multiview-status" aria-live="polite" data-multiview-status></p>
+                <p class="multiview-state-summary" data-state-summary>Per-video volume sliders are ready.</p>
+                <div class="watch-quick-actions">
+                  <button class="btn-secondary" data-copy-share-link type="button">Copy share link</button>
+                  <button class="btn-secondary" data-reset-videos type="button">Load example room</button>
+                  <button class="btn-secondary" data-clear-videos type="button">Clear room</button>
+                </div>
+              </section>
+
               <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
                 <div class="multiview-player-copy">
-                  <p id="multiview-player-label">Player preference</p>
+                  <p class="watch-side-eyebrow" id="multiview-player-label">Playback</p>
                   <p class="multiview-player-help" data-player-help>
                     Full youtube.com embeds with sign-in, comments, playlists, and working volume sliders.
                   </p>
@@ -125,22 +149,27 @@
                 </div>
               </div>
 
-              <div class="multiview-search-controls">
-                <label class="multiview-label" for="multiview-search">Search current videos</label>
-                <input
-                  id="multiview-search"
-                  class="multiview-search-input"
-                  type="search"
-                  placeholder="Filter by title or video ID"
-                  data-multiview-search
-                  autocomplete="off"
-                />
-                <p class="multiview-search-hint">The share link preserves the active mode, videos, and individual volume settings.</p>
-              </div>
+              <details class="watch-secondary-panel">
+                <summary>Filter loaded videos</summary>
+                <div class="watch-secondary-panel__body">
+                  <div class="multiview-search-controls">
+                    <label class="multiview-label" for="multiview-search">Search current videos</label>
+                    <input
+                      id="multiview-search"
+                      class="multiview-search-input"
+                      type="search"
+                      placeholder="Filter by title or video ID"
+                      data-multiview-search
+                      autocomplete="off"
+                    />
+                    <p class="multiview-search-hint">The share link preserves the active mode, videos, and individual volume settings.</p>
+                  </div>
+                </div>
+              </details>
 
-              <details class="watch-advanced-settings" data-advanced-player-settings>
-                <summary>Advanced playback and proxy settings</summary>
-                <div class="watch-advanced-settings__body">
+              <details class="watch-secondary-panel watch-secondary-panel--warning" data-advanced-player-settings>
+                <summary>Proxy mode and troubleshooting</summary>
+                <div class="watch-secondary-panel__body">
                   <label class="multiview-player-option multiview-player-option--advanced">
                     <input type="radio" name="multiview-player" value="proxy" data-player-option />
                     <span>
@@ -149,42 +178,25 @@
                     </span>
                   </label>
                   <p class="watch-advanced-settings__note">
-                    Keep this closed unless a network block forces you off the normal YouTube players.
+                    Use this only when the normal players are blocked or a browser privacy setting breaks embeds.
                   </p>
+                  <div class="multiview-diagnostics-actions">
+                    <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
+                    <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
+                  </div>
                 </div>
               </details>
             </aside>
-          </div>
-
-          <div class="multiview-statusbar">
-            <p class="multiview-status" aria-live="polite" data-multiview-status></p>
-            <p class="multiview-state-summary" data-state-summary>Per-video volume sliders are ready.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section card">
-        <div class="container watch-container watch-diagnostics-layout">
-          <div class="multiview-diagnostics-copy">
-            <h2>Connection check</h2>
-            <p>
-              Still hitting errors? Run diagnostics to test which hosts load inside your browser and learn whether the issue is
-              YouTube itself, privacy blocking, or the proxy fallback.
-            </p>
-            <p class="multiview-diagnostics-note">
-              Brave, Firefox strict mode, and content blockers often deny third-party cookies that YouTube relies on for embedded
-              sign-ins. Proxy mode keeps a fallback path open when that happens.
-            </p>
-          </div>
-          <div class="multiview-diagnostics-actions">
-            <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
-            <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
           </div>
         </div>
       </section>
 
       <section class="section card">
         <div class="container watch-grid-container">
+          <div class="watch-grid-heading">
+            <p class="watch-eyebrow">Watch room</p>
+            <h2>Your videos show up here.</h2>
+          </div>
           <div class="multiview-grid" data-multiview-grid></div>
         </div>
       </section>
