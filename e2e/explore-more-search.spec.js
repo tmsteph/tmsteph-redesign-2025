@@ -22,12 +22,12 @@ test('explore more includes the multi-view theater card', async ({ page }) => {
   });
 
   const theaterCard = exploreSection.locator('#explore-project-grid .project-card', {
-    hasText: 'Multi-View Theater'
+    hasText: 'YouTube Video Watcher'
   });
 
   await expect(theaterCard).toBeVisible();
   await expect(theaterCard).toHaveAttribute('href', 'watch/index.html');
-  await expect(page.getByRole('heading', { name: 'Multi-View Theater', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'YouTube Video Watcher', exact: true })).toHaveCount(0);
 });
 
 test('explore more search filters app cards', async ({ page }) => {
@@ -40,7 +40,7 @@ test('explore more search filters app cards', async ({ page }) => {
   const allCards = page.locator('#explore-project-grid .project-card');
   const visibleCards = page.locator('#explore-project-grid .project-card:not([hidden])');
   const theaterCard = page.locator('#explore-project-grid .project-card', {
-    hasText: 'Multi-View Theater'
+    hasText: 'YouTube Video Watcher'
   });
   const spiritualityCard = page.locator('#explore-project-grid .project-card', {
     hasText: 'Spirituality'
