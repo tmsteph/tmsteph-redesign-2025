@@ -116,16 +116,23 @@ describe('multi-watch controller', () => {
   });
 
   function createYouTubeStub() {
+    const players = [];
+
     return {
+      players,
       Player: class {
         constructor(element, options) {
           this.element = element;
           this.options = options;
           this.volume = 70;
           this.muted = false;
+          this.destroy = vi.fn(() => {
+            this.iframe.remove();
+          });
           this.iframe = document.createElement('iframe');
           this.iframe.className = 'stub-frame';
           element.appendChild(this.iframe);
+          players.push(this);
           options.events?.onReady?.({
             target: this,
           });
@@ -151,9 +158,6 @@ describe('multi-watch controller', () => {
           this.muted = false;
         }
 
-        destroy() {
-          this.iframe.remove();
-        }
       }
     };
   }
@@ -243,6 +247,42 @@ describe('multi-watch controller', () => {
 
     controller.setMode('proxy');
     expect(document.querySelector('[data-advanced-player-settings]').open).toBe(true);
+  });
+
+  it('preserves existing players when adding or removing a different video', async () => {
+    const youtubeStub = createYouTubeStub();
+    const controller = createMultiWatchController({
+      root: window,
+      doc: document,
+      loadYouTubeApi: () => Promise.resolve(youtubeStub),
+    });
+
+    controller.init();
+    await Promise.resolve();
+
+    const initialPlayers = [...youtubeStub.players];
+    expect(initialPlayers).toHaveLength(2);
+
+    document.getElementById('multiview-input').value = 'https://youtu.be/ScMzIvxBSi4';
+    controller.addVideos();
+    await Promise.resolve();
+
+    expect(youtubeStub.players).toHaveLength(3);
+    expect(initialPlayers[0].destroy).not.toHaveBeenCalled();
+    expect(initialPlayers[1].destroy).not.toHaveBeenCalled();
+
+    const removeButtons = Array.from(document.querySelectorAll('.multiview-remove-button'));
+    const thirdCardButton = removeButtons.find((button) => {
+      return button.closest('.multiview-frame-wrapper')?.dataset.videoId === 'ScMzIvxBSi4';
+    });
+
+    thirdCardButton.click();
+    await Promise.resolve();
+
+    expect(youtubeStub.players[2].destroy).toHaveBeenCalledTimes(1);
+    expect(initialPlayers[0].destroy).not.toHaveBeenCalled();
+    expect(initialPlayers[1].destroy).not.toHaveBeenCalled();
+    expect(document.querySelectorAll('.multiview-frame-wrapper')).toHaveLength(2);
   });
 
   it('restores a saved watcher room when the page loads without a share query', async () => {
