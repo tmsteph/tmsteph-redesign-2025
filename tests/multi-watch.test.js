@@ -285,6 +285,39 @@ describe('multi-watch controller', () => {
     expect(document.querySelectorAll('.multiview-frame-wrapper')).toHaveLength(2);
   });
 
+  it('does not move existing wrappers when appending a new video', async () => {
+    const controller = createMultiWatchController({
+      root: window,
+      doc: document,
+      loadYouTubeApi: () => Promise.resolve(createYouTubeStub()),
+    });
+
+    controller.init();
+    await Promise.resolve();
+
+    const grid = document.querySelector('[data-multiview-grid]');
+    const movedExistingIds = [];
+    const originalInsertBefore = grid.insertBefore.bind(grid);
+
+    grid.insertBefore = (node, child) => {
+      if (node.parentNode === grid) {
+        movedExistingIds.push(node.dataset.videoId || '');
+      }
+      return originalInsertBefore(node, child);
+    };
+
+    document.getElementById('multiview-input').value = 'https://youtu.be/ScMzIvxBSi4';
+    controller.addVideos();
+    await Promise.resolve();
+
+    expect(movedExistingIds).toEqual([]);
+    expect(Array.from(document.querySelectorAll('.multiview-frame-wrapper')).map((node) => node.dataset.videoId)).toEqual([
+      'dQw4w9WgXcQ',
+      'Zi_XLOBDo_Y',
+      'ScMzIvxBSi4',
+    ]);
+  });
+
   it('restores a saved watcher room when the page loads without a share query', async () => {
     window.localStorage.setItem('tmsteph-video-watcher-state', JSON.stringify({
       mode: 'privacy',
