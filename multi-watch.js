@@ -55,6 +55,7 @@ const DIAGNOSTIC_TARGETS = [
 ];
 
 const SEARCH_API_BASES = ['https://api.piped.private.coffee'];
+const WATCHER_STORAGE_KEY = 'tmsteph-video-watcher-state';
 
 function createYouTubeApiLoader(root) {
   let pendingPromise = null;
@@ -190,6 +191,7 @@ export function createMultiWatchController(options = {}) {
   const advancedSettings = options.advancedSettings || doc.querySelector('[data-advanced-player-settings]');
   const loadYouTubeApi = options.loadYouTubeApi || createYouTubeApiLoader(root);
   const searchFetch = options.searchFetch || root.fetch?.bind(root);
+  const storage = options.storage || root.localStorage;
 
   const requiredNodes = [grid, input, addButton, clearButton, status];
   if (requiredNodes.some((node) => !node)) {
@@ -211,10 +213,11 @@ export function createMultiWatchController(options = {}) {
   }
 
   const defaultVideoIds = extractVideoIds(theaterRoot?.dataset.defaultVideos || grid.dataset.defaultVideos || '');
-  let state = parseTheaterState(root.location?.search || '', { defaultVideoIds });
+  const hasExplicitQuery = Boolean(root.location?.search);
+  const persistedState = hasExplicitQuery ? null : readPersistedState();
+  let state = persistedState || parseTheaterState(root.location?.search || '', { defaultVideoIds });
   let searchQuery = '';
   let mountTokenSequence = 0;
-  const hasExplicitQuery = Boolean(root.location?.search);
   const playerRegistry = new Map();
   const elementRegistry = new Map();
   let addSearchResults = [];
@@ -230,6 +233,66 @@ export function createMultiWatchController(options = {}) {
 
     const query = buildTheaterSearch(state);
     root.history.replaceState({}, '', `${root.location.pathname}${query}`);
+  }
+
+  function normalizeStoredState(rawState) {
+    if (!rawState || typeof rawState !== 'object') {
+      return null;
+    }
+
+    const storedVideos = Array.isArray(rawState.videos) ? rawState.videos : [];
+    return {
+      mode: normalizeMode(rawState.mode),
+      videos: createVideoEntries(
+        storedVideos.map((entry) => entry?.videoId),
+        storedVideos,
+      ),
+    };
+  }
+
+  function readPersistedState() {
+    if (!storage || typeof storage.getItem !== 'function') {
+      return null;
+    }
+
+    try {
+      const rawValue = storage.getItem(WATCHER_STORAGE_KEY);
+      if (!rawValue) {
+        return null;
+      }
+
+      return normalizeStoredState(JSON.parse(rawValue));
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function persistState() {
+    if (!storage || typeof storage.setItem !== 'function') {
+      return;
+    }
+
+    try {
+      storage.setItem(
+        WATCHER_STORAGE_KEY,
+        JSON.stringify({
+          mode: normalizeMode(state.mode),
+          videos: state.videos.map((entry) => ({
+            videoId: entry.videoId,
+            volume: normalizeVolume(entry.volume),
+            muted: Boolean(entry.muted),
+            title: typeof entry.title === 'string' ? entry.title : '',
+          })),
+        }),
+      );
+    } catch (error) {
+      // Ignore storage failures so blocked localStorage does not break the watcher.
+    }
+  }
+
+  function syncState() {
+    syncUrl();
+    persistState();
   }
 
   function updateStatus(message, tone = 'info') {
@@ -416,7 +479,7 @@ export function createMultiWatchController(options = {}) {
     entry.volume = normalizeVolume(nextVolume);
     updateVolumeUI(entry, elementRegistry.get(videoId));
     updatePlayerAudio(entry);
-    syncUrl();
+    syncState();
   }
 
   function toggleMute(videoId) {
@@ -428,7 +491,7 @@ export function createMultiWatchController(options = {}) {
     entry.muted = !entry.muted;
     updateVolumeUI(entry, elementRegistry.get(videoId));
     updatePlayerAudio(entry);
-    syncUrl();
+    syncState();
   }
 
   function addVideoIds(videoIds, { source = 'links' } = {}) {
@@ -451,7 +514,7 @@ export function createMultiWatchController(options = {}) {
       state.videos,
     );
 
-    syncUrl();
+    syncState();
     renderGrid();
     refreshSearchResultButtons();
     return additions.length;
@@ -459,7 +522,7 @@ export function createMultiWatchController(options = {}) {
 
   function removeVideo(videoId) {
     state.videos = state.videos.filter((entry) => entry.videoId !== videoId);
-    syncUrl();
+    syncState();
     renderGrid();
     refreshSearchResultButtons();
   }
@@ -855,7 +918,7 @@ export function createMultiWatchController(options = {}) {
 
   function clearVideos() {
     state.videos = [];
-    syncUrl();
+    syncState();
     renderGrid();
     refreshSearchResultButtons();
     input.focus();
@@ -863,7 +926,7 @@ export function createMultiWatchController(options = {}) {
 
   function resetDemoVideos() {
     state.videos = createVideoEntries(defaultVideoIds.length ? defaultVideoIds : []);
-    syncUrl();
+    syncState();
     renderGrid();
     refreshSearchResultButtons();
   }
@@ -876,7 +939,7 @@ export function createMultiWatchController(options = {}) {
 
     state.mode = normalizedMode;
     updateModeUI();
-    syncUrl();
+    syncState();
     renderGrid({ forceRemount: true });
   }
 
@@ -923,6 +986,7 @@ export function createMultiWatchController(options = {}) {
     if (hasExplicitQuery) {
       syncUrl();
     }
+    persistState();
     renderGrid();
     renderSearchResults();
     if (searchStatus) {
