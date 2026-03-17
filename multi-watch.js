@@ -863,6 +863,28 @@ export function createMultiWatchController(options = {}) {
       });
     }
 
+    let insertionCursor = grid.firstElementChild;
+    state.videos.forEach((entry, index) => {
+      if (!elementRegistry.has(entry.videoId)) {
+        createFrame(entry, index);
+      }
+
+      const elements = elementRegistry.get(entry.videoId);
+      if (!elements) {
+        return;
+      }
+
+      elements.eyebrow.textContent = `Feed ${index + 1}`;
+      elements.title.textContent = entry.title || `YouTube video ${entry.videoId}`;
+      updateVolumeUI(entry, elements);
+
+      if (elements.wrapper !== insertionCursor) {
+        grid.insertBefore(elements.wrapper, insertionCursor);
+      }
+
+      insertionCursor = elements.wrapper.nextElementSibling;
+    });
+
     const filteredVideos = getFilteredVideos();
     if (!filteredVideos.length) {
       const empty = doc.createElement('p');
@@ -879,27 +901,8 @@ export function createMultiWatchController(options = {}) {
     }
 
     const visibleIds = new Set(filteredVideos.map((entry) => entry.videoId));
-    filteredVideos.forEach((entry, index) => {
-      if (!elementRegistry.has(entry.videoId)) {
-        createFrame(entry, index);
-      }
-
-      const elements = elementRegistry.get(entry.videoId);
-      if (!elements) {
-        return;
-      }
-
-      elements.wrapper.hidden = false;
-      elements.eyebrow.textContent = `Feed ${index + 1}`;
-      elements.title.textContent = entry.title || `YouTube video ${entry.videoId}`;
-      updateVolumeUI(entry, elements);
-      grid.appendChild(elements.wrapper);
-    });
-
     elementRegistry.forEach((elements, videoId) => {
-      if (!visibleIds.has(videoId)) {
-        elements.wrapper.hidden = true;
-      }
+      elements.wrapper.hidden = !visibleIds.has(videoId);
     });
 
     updateSummary();
