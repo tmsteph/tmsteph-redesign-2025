@@ -213,7 +213,7 @@ export function createMultiWatchController(options = {}) {
   const defaultVideoIds = extractVideoIds(theaterRoot?.dataset.defaultVideos || grid.dataset.defaultVideos || '');
   let state = parseTheaterState(root.location?.search || '', { defaultVideoIds });
   let searchQuery = '';
-  let renderVersion = 0;
+  let mountTokenSequence = 0;
   const hasExplicitQuery = Boolean(root.location?.search);
   const playerRegistry = new Map();
   const elementRegistry = new Map();
@@ -356,6 +356,14 @@ export function createMultiWatchController(options = {}) {
       }
     });
     playerRegistry.clear();
+  }
+
+  function destroyPlayer(videoId) {
+    const record = playerRegistry.get(videoId);
+    if (record?.player?.destroy) {
+      record.player.destroy();
+    }
+    playerRegistry.delete(videoId);
   }
 
   function updateVolumeUI(entry, elements) {
@@ -526,10 +534,10 @@ export function createMultiWatchController(options = {}) {
     return frame;
   }
 
-  function mountYouTubePlayer(entry, elements, version) {
+  function mountYouTubePlayer(entry, elements, mountToken) {
     return loadYouTubeApi()
       .then((YT) => {
-        if (version !== renderVersion || !elements?.mount?.isConnected) {
+        if (!elements?.mount?.isConnected || elements.mountToken !== mountToken) {
           return;
         }
 
@@ -568,7 +576,7 @@ export function createMultiWatchController(options = {}) {
         playerRegistry.set(entry.videoId, { player });
       })
       .catch(() => {
-        if (version !== renderVersion) {
+        if (elements?.mountToken !== mountToken) {
           return;
         }
 
@@ -580,6 +588,7 @@ export function createMultiWatchController(options = {}) {
   function createFrame(entry, index) {
     const wrapper = doc.createElement('article');
     wrapper.className = 'multiview-frame-wrapper';
+    wrapper.dataset.videoId = entry.videoId;
 
     const media = doc.createElement('div');
     media.className = 'multiview-media-shell';
@@ -659,7 +668,11 @@ export function createMultiWatchController(options = {}) {
     meta.append(eyebrow, title, id, controls, proxyNote, error);
     wrapper.appendChild(meta);
 
+    const mountToken = ++mountTokenSequence;
+
     elementRegistry.set(entry.videoId, {
+      wrapper,
+      eyebrow,
       mount,
       title,
       slider,
@@ -667,11 +680,12 @@ export function createMultiWatchController(options = {}) {
       mute,
       proxyNote,
       error,
+      mountToken,
     });
     updateVolumeUI(entry, elementRegistry.get(entry.videoId));
 
     if (getHostConfig().supportsMixing) {
-      mountYouTubePlayer(entry, elementRegistry.get(entry.videoId), renderVersion);
+      mountYouTubePlayer(entry, elementRegistry.get(entry.videoId), mountToken);
     } else {
       mount.replaceWith(createProxyFrame(entry.videoId));
     }
@@ -748,13 +762,19 @@ export function createMultiWatchController(options = {}) {
     });
   }
 
-  function renderGrid() {
-    renderVersion += 1;
-    destroyPlayers();
-    elementRegistry.clear();
-    grid.innerHTML = '';
+  function renderGrid({ forceRemount = false } = {}) {
+    const emptyState = grid.querySelector('.multiview-empty');
+    if (emptyState) {
+      emptyState.remove();
+    }
 
     if (!state.videos.length) {
+      destroyPlayers();
+      elementRegistry.forEach((elements) => {
+        elements.wrapper?.remove();
+      });
+      elementRegistry.clear();
+      grid.innerHTML = '';
       const empty = doc.createElement('p');
       empty.className = 'multiview-empty';
       empty.textContent = 'Load a few YouTube links or add a search result and the watcher will build itself here.';
@@ -763,18 +783,60 @@ export function createMultiWatchController(options = {}) {
       return;
     }
 
+    if (forceRemount) {
+      destroyPlayers();
+      elementRegistry.clear();
+      grid.innerHTML = '';
+    } else {
+      const activeIds = new Set(state.videos.map((entry) => entry.videoId));
+      elementRegistry.forEach((elements, videoId) => {
+        if (activeIds.has(videoId)) {
+          return;
+        }
+
+        destroyPlayer(videoId);
+        elements.wrapper?.remove();
+        elementRegistry.delete(videoId);
+      });
+    }
+
     const filteredVideos = getFilteredVideos();
     if (!filteredVideos.length) {
       const empty = doc.createElement('p');
       empty.className = 'multiview-empty';
       empty.textContent = 'No videos match that search yet.';
       grid.appendChild(empty);
+
+      elementRegistry.forEach((elements) => {
+        elements.wrapper.hidden = true;
+      });
+
       updateSummary();
       return;
     }
 
+    const visibleIds = new Set(filteredVideos.map((entry) => entry.videoId));
     filteredVideos.forEach((entry, index) => {
-      grid.appendChild(createFrame(entry, index));
+      if (!elementRegistry.has(entry.videoId)) {
+        createFrame(entry, index);
+      }
+
+      const elements = elementRegistry.get(entry.videoId);
+      if (!elements) {
+        return;
+      }
+
+      elements.wrapper.hidden = false;
+      elements.eyebrow.textContent = `Feed ${index + 1}`;
+      elements.title.textContent = entry.title || `YouTube video ${entry.videoId}`;
+      updateVolumeUI(entry, elements);
+      grid.appendChild(elements.wrapper);
+    });
+
+    elementRegistry.forEach((elements, videoId) => {
+      if (!visibleIds.has(videoId)) {
+        elements.wrapper.hidden = true;
+      }
     });
 
     updateSummary();
@@ -815,7 +877,7 @@ export function createMultiWatchController(options = {}) {
     state.mode = normalizedMode;
     updateModeUI();
     syncUrl();
-    renderGrid();
+    renderGrid({ forceRemount: true });
   }
 
   async function runVideoSearch() {
