@@ -84,6 +84,7 @@ describe('multi-watch core helpers', () => {
 
 describe('multi-watch controller', () => {
   beforeEach(() => {
+    window.localStorage.clear();
     document.body.innerHTML = `
       <div data-theater-root data-default-videos="dQw4w9WgXcQ,Zi_XLOBDo_Y">
         <textarea id="multiview-input"></textarea>
@@ -242,5 +243,95 @@ describe('multi-watch controller', () => {
 
     controller.setMode('proxy');
     expect(document.querySelector('[data-advanced-player-settings]').open).toBe(true);
+  });
+
+  it('restores a saved watcher room when the page loads without a share query', async () => {
+    window.localStorage.setItem('tmsteph-video-watcher-state', JSON.stringify({
+      mode: 'privacy',
+      videos: [
+        {
+          videoId: 'ScMzIvxBSi4',
+          volume: 35,
+          muted: true,
+          title: 'Saved video',
+        },
+      ],
+    }));
+
+    const controller = createMultiWatchController({
+      root: window,
+      doc: document,
+      loadYouTubeApi: () => Promise.resolve(createYouTubeStub()),
+    });
+
+    controller.init();
+    await Promise.resolve();
+
+    expect(controller.getState()).toMatchObject({
+      mode: 'privacy',
+      videos: [
+        {
+          videoId: 'ScMzIvxBSi4',
+          volume: 35,
+          muted: true,
+        },
+      ],
+    });
+    expect(document.querySelector('[data-video-count]').textContent).toBe('1');
+  });
+
+  it('persists an empty room so defaults do not come back on the next load', async () => {
+    const controller = createMultiWatchController({
+      root: window,
+      doc: document,
+      loadYouTubeApi: () => Promise.resolve(createYouTubeStub()),
+    });
+
+    controller.init();
+    controller.clearVideos();
+
+    expect(window.localStorage.getItem('tmsteph-video-watcher-state')).toContain('"videos":[]');
+
+    document.body.innerHTML = `
+      <div data-theater-root data-default-videos="dQw4w9WgXcQ,Zi_XLOBDo_Y">
+        <textarea id="multiview-input"></textarea>
+        <button data-add-video type="button">Add</button>
+        <button data-clear-videos type="button">Clear</button>
+        <button data-reset-videos type="button">Reset</button>
+        <button data-copy-share-link type="button">Share</button>
+        <input data-multiview-search type="search" />
+        <input data-video-search-query type="search" />
+        <button data-video-search-button type="button">Search</button>
+        <p data-video-search-status></p>
+        <div data-video-search-results></div>
+        <p data-multiview-status></p>
+        <p data-player-help></p>
+        <p data-state-summary></p>
+        <strong data-video-count></strong>
+        <strong data-mode-summary></strong>
+        <details data-advanced-player-settings></details>
+        <button data-run-diagnostics type="button">Diagnostics</button>
+        <ul data-diagnostics-output></ul>
+        <label><input data-player-option type="radio" name="mode" value="standard" checked /></label>
+        <label><input data-player-option type="radio" name="mode" value="privacy" /></label>
+        <label><input data-player-option type="radio" name="mode" value="proxy" /></label>
+        <div data-multiview-grid></div>
+      </div>
+    `;
+    window.history.replaceState({}, '', '/watch/index.html');
+
+    const reloadedController = createMultiWatchController({
+      root: window,
+      doc: document,
+      loadYouTubeApi: () => Promise.resolve(createYouTubeStub()),
+    });
+
+    reloadedController.init();
+
+    expect(reloadedController.getState()).toEqual({
+      mode: 'standard',
+      videos: [],
+    });
+    expect(document.querySelector('[data-video-count]').textContent).toBe('0');
   });
 });
