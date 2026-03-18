@@ -70,11 +70,25 @@ test('YouTube Video Watcher loads defaults, adds a video, and disables sliders i
   await page.fill('#video-search-query', 'lofi');
   await page.getByRole('button', { name: 'Search videos' }).click();
   await expect(page.locator('.video-search-card')).toHaveCount(1);
+  await page.evaluate(() => {
+    const grid = document.querySelector('[data-multiview-grid]');
+    const originalInsertBefore = grid.insertBefore.bind(grid);
+    window.__watcherMovedExisting = [];
+    grid.insertBefore = (node, child) => {
+      if (node.parentNode === grid) {
+        window.__watcherMovedExisting.push(node.dataset.videoId || '');
+      }
+      return originalInsertBefore(node, child);
+    };
+  });
   await page.getByRole('button', { name: 'Add video' }).click();
 
   await expect(page.locator('[data-video-count]')).toHaveText('3');
   await expect(page.locator('.multiview-frame-wrapper')).toHaveCount(3);
   await expect(page).toHaveURL(/video=/);
+  await expect.poll(async () => {
+    return page.evaluate(() => window.__watcherMovedExisting);
+  }).toEqual([]);
 
   await page.locator('[data-advanced-player-settings] summary').click();
   await expect(page.locator('[data-advanced-player-settings]')).toHaveAttribute('open', '');
