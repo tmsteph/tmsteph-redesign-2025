@@ -344,9 +344,20 @@ footer {
   box-shadow: 0 22px 48px -28px rgba(0, 0, 0, 0.6);
 }
 
+.watch-builder-panel--secondary {
+  align-self: stretch;
+}
+
 .watch-side-rail {
   display: grid;
   gap: 1rem;
+}
+
+.watch-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  align-items: start;
 }
 
 .watch-room-panel {
@@ -372,6 +383,11 @@ footer {
 .watch-room-mode {
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.76);
+}
+
+.watch-room-panel--filter {
+  height: 100%;
+  align-content: start;
 }
 
 .watch-quick-actions {
@@ -1408,6 +1424,10 @@ footer {
 
   .watch-quick-actions {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .watch-controls-grid {
+    grid-template-columns: 1fr;
   }
 }
 

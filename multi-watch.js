@@ -510,7 +510,7 @@ export function createMultiWatchController(options = {}) {
     }
 
     state.videos = createVideoEntries(
-      [...state.videos.map((entry) => entry.videoId), ...additions],
+      [...additions, ...state.videos.map((entry) => entry.videoId)],
       state.videos,
     );
 

@@ -184,9 +184,9 @@ describe('multi-watch controller', () => {
 
     const state = controller.getState();
     expect(state.videos.map((entry) => entry.videoId)).toEqual([
+      'ScMzIvxBSi4',
       'dQw4w9WgXcQ',
       'Zi_XLOBDo_Y',
-      'ScMzIvxBSi4',
     ]);
     expect(window.location.search).toContain('video=');
     expect(document.querySelectorAll('.multiview-frame-wrapper')).toHaveLength(3);
@@ -312,9 +312,9 @@ describe('multi-watch controller', () => {
 
     expect(movedExistingIds).toEqual([]);
     expect(Array.from(document.querySelectorAll('.multiview-frame-wrapper')).map((node) => node.dataset.videoId)).toEqual([
+      'ScMzIvxBSi4',
       'dQw4w9WgXcQ',
       'Zi_XLOBDo_Y',
-      'ScMzIvxBSi4',
     ]);
   });
 

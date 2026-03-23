@@ -58,8 +58,8 @@
         <div class="container watch-container">
           <div class="watch-heading watch-heading--builder">
             <p class="watch-eyebrow">Build the room</p>
-            <h2>Start with search. Use the extra controls only when you need them.</h2>
-            <p>Search is the default path. Manual paste, filtering, proxy mode, and diagnostics are tucked away to keep the UI focused.</p>
+            <h2>Add and search videos first. The room comes right after.</h2>
+            <p>Start at the top to search YouTube, paste links, or filter what is already loaded. The newest videos stay at the top of the room.</p>
           </div>
 
           <div class="watch-builder-grid">
@@ -106,87 +106,30 @@
               </details>
             </div>
 
-            <aside class="watch-side-rail">
-              <section class="watch-room-panel">
+            <section class="watch-builder-panel watch-builder-panel--secondary">
+              <div class="watch-room-panel watch-room-panel--filter">
                 <div class="watch-room-panel__header">
                   <div>
-                    <p class="watch-side-eyebrow">Room controls</p>
-                    <h3>Keep the main actions close.</h3>
+                    <p class="watch-side-eyebrow">Loaded videos</p>
+                    <h3>Filter the room before you scroll.</h3>
                   </div>
-                  <p class="watch-room-mode">Mode: <strong data-mode-summary>Standard mode</strong></p>
+                </div>
+                <div class="multiview-search-controls">
+                  <label class="multiview-label" for="multiview-search">Search current videos</label>
+                  <input
+                    id="multiview-search"
+                    class="multiview-search-input"
+                    type="search"
+                    placeholder="Filter by title or video ID"
+                    data-multiview-search
+                    autocomplete="off"
+                  />
+                  <p class="multiview-search-hint">The share link preserves mode, video order, and each saved volume setting.</p>
                 </div>
                 <p class="multiview-status" aria-live="polite" data-multiview-status></p>
                 <p class="multiview-state-summary" data-state-summary>Per-video volume sliders are ready.</p>
-                <div class="watch-quick-actions">
-                  <button class="btn-secondary" data-copy-share-link type="button">Copy share link</button>
-                  <button class="btn-secondary" data-reset-videos type="button">Load example room</button>
-                  <button class="btn-secondary" data-clear-videos type="button">Clear room</button>
-                </div>
-              </section>
-
-              <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
-                <div class="multiview-player-copy">
-                  <p class="watch-side-eyebrow" id="multiview-player-label">Playback</p>
-                  <p class="multiview-player-help" data-player-help>
-                    Full youtube.com embeds with sign-in, comments, playlists, and working volume sliders.
-                  </p>
-                </div>
-                <div class="multiview-player-options">
-                  <label class="multiview-player-option">
-                    <input type="radio" name="multiview-player" value="privacy" data-player-option />
-                    <span>
-                      <strong>Ad-free mode</strong>
-                      <small>youtube-nocookie embeds with slider support.</small>
-                    </span>
-                  </label>
-                  <label class="multiview-player-option">
-                    <input type="radio" name="multiview-player" value="standard" data-player-option checked />
-                    <span>
-                      <strong>Standard mode</strong>
-                      <small>Best compatibility for sign-in and live streams.</small>
-                    </span>
-                  </label>
-                </div>
               </div>
-
-              <details class="watch-secondary-panel">
-                <summary>Filter loaded videos</summary>
-                <div class="watch-secondary-panel__body">
-                  <div class="multiview-search-controls">
-                    <label class="multiview-label" for="multiview-search">Search current videos</label>
-                    <input
-                      id="multiview-search"
-                      class="multiview-search-input"
-                      type="search"
-                      placeholder="Filter by title or video ID"
-                      data-multiview-search
-                      autocomplete="off"
-                    />
-                    <p class="multiview-search-hint">The share link preserves the active mode, videos, and individual volume settings.</p>
-                  </div>
-                </div>
-              </details>
-
-              <details class="watch-secondary-panel watch-secondary-panel--warning" data-advanced-player-settings>
-                <summary>Proxy mode and troubleshooting</summary>
-                <div class="watch-secondary-panel__body">
-                  <label class="multiview-player-option multiview-player-option--advanced">
-                    <input type="radio" name="multiview-player" value="proxy" data-player-option />
-                    <span>
-                      <strong>Proxy mode</strong>
-                      <small>Fallback when YouTube is blocked. No slider control.</small>
-                    </span>
-                  </label>
-                  <p class="watch-advanced-settings__note">
-                    Use this only when the normal players are blocked or a browser privacy setting breaks embeds.
-                  </p>
-                  <div class="multiview-diagnostics-actions">
-                    <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
-                    <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
-                  </div>
-                </div>
-              </details>
-            </aside>
+            </section>
           </div>
         </div>
       </section>
@@ -195,9 +138,79 @@
         <div class="container watch-grid-container">
           <div class="watch-grid-heading">
             <p class="watch-eyebrow">Watch room</p>
-            <h2>Your videos show up here.</h2>
+            <h2>Your videos show up here, newest first.</h2>
           </div>
           <div class="multiview-grid" data-multiview-grid></div>
+        </div>
+      </section>
+
+      <section class="section card">
+        <div class="container watch-grid-container">
+          <div class="watch-grid-heading">
+            <p class="watch-eyebrow">Room controls</p>
+            <h2>Playback, sharing, and troubleshooting live here.</h2>
+          </div>
+          <div class="watch-controls-grid">
+            <section class="watch-room-panel">
+              <div class="watch-room-panel__header">
+                <div>
+                  <p class="watch-side-eyebrow">Share and reset</p>
+                  <h3>Keep the main actions close.</h3>
+                </div>
+                <p class="watch-room-mode">Mode: <strong data-mode-summary>Standard mode</strong></p>
+              </div>
+              <div class="watch-quick-actions">
+                <button class="btn-secondary" data-copy-share-link type="button">Copy share link</button>
+                <button class="btn-secondary" data-reset-videos type="button">Load example room</button>
+                <button class="btn-secondary" data-clear-videos type="button">Clear room</button>
+              </div>
+            </section>
+
+            <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
+              <div class="multiview-player-copy">
+                <p class="watch-side-eyebrow" id="multiview-player-label">Playback</p>
+                <p class="multiview-player-help" data-player-help>
+                  Full youtube.com embeds with sign-in, comments, playlists, and working volume sliders.
+                </p>
+              </div>
+              <div class="multiview-player-options">
+                <label class="multiview-player-option">
+                  <input type="radio" name="multiview-player" value="privacy" data-player-option />
+                  <span>
+                    <strong>Ad-free mode</strong>
+                    <small>youtube-nocookie embeds with slider support.</small>
+                  </span>
+                </label>
+                <label class="multiview-player-option">
+                  <input type="radio" name="multiview-player" value="standard" data-player-option checked />
+                  <span>
+                    <strong>Standard mode</strong>
+                    <small>Best compatibility for sign-in and live streams.</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <details class="watch-secondary-panel watch-secondary-panel--warning" data-advanced-player-settings>
+              <summary>Proxy mode and troubleshooting</summary>
+              <div class="watch-secondary-panel__body">
+                <label class="multiview-player-option multiview-player-option--advanced">
+                  <input type="radio" name="multiview-player" value="proxy" data-player-option />
+                  <span>
+                    <strong>Proxy mode</strong>
+                    <small>Fallback when YouTube is blocked. No slider control.</small>
+                  </span>
+                </label>
+                <p class="watch-advanced-settings__note">
+                  Use this only when the normal players are blocked or a browser privacy setting breaks embeds.
+                </p>
+                <div class="multiview-diagnostics-actions">
+                  <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
+                  <ul class="multiview-diagnostics-results" data-diagnostics-output></ul>
+                </div>
+              </div>
+            </details>
+          </div>
         </div>
       </section>
     </main>

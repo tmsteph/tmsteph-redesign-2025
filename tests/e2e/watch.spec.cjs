@@ -86,6 +86,7 @@ test('YouTube Video Watcher loads defaults, adds a video, and disables sliders i
   await expect(page.locator('[data-video-count]')).toHaveText('3');
   await expect(page.locator('.multiview-frame-wrapper')).toHaveCount(3);
   await expect(page).toHaveURL(/video=/);
+  await expect(page.locator('.multiview-frame-wrapper').first()).toHaveAttribute('data-video-id', 'ScMzIvxBSi4');
   await expect.poll(async () => {
     return page.evaluate(() => window.__watcherMovedExisting);
   }).toEqual([]);
