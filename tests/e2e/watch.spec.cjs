@@ -6,7 +6,7 @@ const emptyJsResponse = {
   body: '',
 };
 
-test('YouTube Video Watcher loads defaults, adds a video, and disables sliders in proxy mode', async ({ page }) => {
+async function stubWatcherDependencies(page) {
   await page.route('**/_vercel/analytics/script.js*', (route) => route.fulfill(emptyJsResponse));
   await page.route('**/iframe_api*', (route) => {
     route.fulfill({
@@ -59,6 +59,10 @@ test('YouTube Video Watcher loads defaults, adds a video, and disables sliders i
       }),
     });
   });
+}
+
+test('YouTube Video Watcher loads defaults, adds a video, and disables sliders in proxy mode', async ({ page }) => {
+  await stubWatcherDependencies(page);
 
   await page.goto('/watch/index.html');
 
@@ -96,4 +100,42 @@ test('YouTube Video Watcher loads defaults, adds a video, and disables sliders i
   await page.locator('.multiview-player-option', { hasText: 'Proxy mode' }).click();
   await expect(page.locator('.multiview-volume input[type="range"]').first()).toBeDisabled();
   await expect(page.locator('[data-state-summary]')).toContainText('Proxy mode is on');
+});
+
+test('YouTube Video Watcher stays stacked and inside the viewport on narrow screens', async ({ page }) => {
+  await stubWatcherDependencies(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/watch/index.html');
+
+  const layout = await page.evaluate(() => {
+    const viewportWidth = window.innerWidth;
+    const documentWidth = document.documentElement.scrollWidth;
+    const searchInput = document.getElementById('video-search-query').getBoundingClientRect();
+    const searchButton = document.querySelector('[data-video-search-button]').getBoundingClientRect();
+    const builderPanels = Array.from(document.querySelectorAll('.watch-builder-grid > *')).map((node) => {
+      const rect = node.getBoundingClientRect();
+      return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+    });
+    const actionButtons = Array.from(document.querySelectorAll('.watch-quick-actions > *')).map((node) => {
+      const rect = node.getBoundingClientRect();
+      return { top: rect.top, bottom: rect.bottom };
+    });
+
+    return {
+      viewportWidth,
+      documentWidth,
+      searchStacked: searchButton.top >= searchInput.bottom,
+      builderPanelsWithinViewport: builderPanels.every((panel) => panel.left >= 0 && panel.right <= viewportWidth + 1),
+      builderPanelsStacked:
+        builderPanels.length < 2 ||
+        (Math.abs(builderPanels[0].left - builderPanels[1].left) < 2 && builderPanels[1].top >= builderPanels[0].bottom - 1),
+      quickActionsStacked: actionButtons.every((button, index) => index === 0 || button.top >= actionButtons[index - 1].bottom - 1),
+    };
+  });
+
+  expect(layout.documentWidth).toBeLessThanOrEqual(layout.viewportWidth);
+  expect(layout.searchStacked).toBe(true);
+  expect(layout.builderPanelsWithinViewport).toBe(true);
+  expect(layout.builderPanelsStacked).toBe(true);
+  expect(layout.quickActionsStacked).toBe(true);
 });

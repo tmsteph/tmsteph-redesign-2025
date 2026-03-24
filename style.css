@@ -1431,6 +1431,67 @@ footer {
   }
 }
 
+@media (max-width: 780px) {
+  .watch-main {
+    padding: 1.4rem 0.55rem 3rem;
+  }
+
+  .watch-page .card {
+    border-radius: 24px;
+  }
+
+  .watch-container,
+  .watch-grid-container {
+    padding: 1rem;
+  }
+
+  .watch-back-link {
+    flex-wrap: wrap;
+    line-height: 1.35;
+  }
+
+  .watch-page h2 {
+    font-size: 1.7rem;
+  }
+
+  .watch-page h3 {
+    font-size: 1.05rem;
+  }
+
+  .watch-heading,
+  .watch-grid-heading,
+  .watch-room-panel__header,
+  .video-search-header {
+    gap: 0.4rem;
+  }
+
+  .watch-heading {
+    margin-bottom: 1.1rem;
+  }
+
+  .watch-builder-grid,
+  .watch-controls-grid,
+  .video-search-panel {
+    gap: 0.85rem;
+  }
+
+  .watch-stat-grid,
+  .video-search-form,
+  .watch-quick-actions,
+  .video-search-results {
+    grid-template-columns: 1fr;
+  }
+
+  .watch-secondary-panel summary {
+    padding: 0.85rem 0.95rem;
+  }
+
+  .watch-secondary-panel__body {
+    gap: 0.8rem;
+    padding: 0 0.95rem 0.95rem;
+  }
+}
+
 @media (max-width: 640px) {
   .watch-hero {
     padding: 2.5rem 1rem 2.1rem;
@@ -1453,12 +1514,26 @@ footer {
     font-size: 1.55rem;
   }
 
+  .watch-page h3 {
+    font-size: 1rem;
+  }
+
+  .watch-page p {
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
   .watch-stat-grid {
     grid-template-columns: 1fr;
   }
 
   .watch-hero-pills {
     gap: 0.5rem;
+  }
+
+  .watch-hero-pill {
+    width: 100%;
+    justify-content: center;
   }
 
   .video-search-form,
@@ -1471,7 +1546,8 @@ footer {
 
   .watch-builder-panel--primary,
   .multiview-player-toggle,
-  .watch-room-panel {
+  .watch-room-panel,
+  .watch-secondary-panel {
     padding: 1rem;
     border-radius: 22px;
   }
@@ -1490,6 +1566,19 @@ footer {
   .multiview-frame-controls > * {
     width: 100%;
     max-width: 100%;
+  }
+
+  .watch-page .btn-primary,
+  .watch-page .btn-secondary,
+  .watch-page .multiview-open-link,
+  .watch-page .multiview-action-button,
+  .watch-page .multiview-remove-button {
+    width: 100%;
+  }
+
+  .multiview-volume {
+    gap: 0.5rem;
+    padding: 0.75rem 0.8rem;
   }
 
   .multiview-action-button,
