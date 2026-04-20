@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Your Reality — tmsteph</title>
+  <meta
+    name="description"
+    content="A short tmsteph manifesto about building systems that let people express who they actually are and turn that into something real."
+  />
+  <style>
+    :root {
+      --bg-top: #08111f;
+      --bg-bottom: #122c4c;
+      --panel: rgba(8, 18, 34, 0.72);
+      --panel-strong: rgba(8, 18, 34, 0.88);
+      --line: rgba(127, 255, 225, 0.2);
+      --text: #fefae0;
+      --muted: rgba(254, 250, 224, 0.82);
+      --soft: rgba(254, 250, 224, 0.62);
+      --accent: #7fffe1;
+      --accent-warm: #ffe066;
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Quicksand", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 224, 102, 0.16), transparent 32%),
+        radial-gradient(circle at 82% 12%, rgba(127, 255, 225, 0.18), transparent 34%),
+        linear-gradient(160deg, var(--bg-top), var(--bg-bottom));
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .wrap {
+      width: min(980px, calc(100vw - 2rem));
+      margin: 0 auto;
+      padding: 1.25rem 0 4rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      text-decoration: underline;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(2rem, 5vw, 4rem);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -35% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(127, 255, 225, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.9rem;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      line-height: 0.94;
+      color: var(--accent-warm);
+      text-shadow: 0 0 18px rgba(255, 224, 102, 0.24);
+    }
+
+    .hero-copy {
+      max-width: 52rem;
+      margin-top: 1.25rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      line-height: 1.7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.95fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--panel);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .panel h2 {
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+      color: var(--accent-warm);
+    }
+
+    .manifesto {
+      display: grid;
+      gap: 1rem;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .manifesto p {
+      margin: 0;
+    }
+
+    .callout {
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.18rem;
+    }
+
+    .beliefs {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .beliefs li::marker {
+      color: var(--accent);
+    }
+
+    .rail {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .rail-card {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.15rem;
+      background: var(--panel-strong);
+    }
+
+    .rail-card h3 {
+      margin: 0 0 0.55rem;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .rail-card p {
+      margin: 0;
+      color: var(--soft);
+      line-height: 1.6;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--line);
+    }
+
+    .cta-primary {
+      color: #0b1d39;
+      background: linear-gradient(135deg, #ffe066, #7fffe1);
+    }
+
+    .cta-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .footer-note {
+      margin-top: 1.5rem;
+      color: var(--soft);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: min(100vw - 1rem, 980px);
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero,
+      .panel {
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back-link" href="../index.html">← Back to tmsteph</a>
+
+    <section class="hero">
+      <p class="eyebrow">tmsteph manifesto</p>
+      <h1>Build Your Reality</h1>
+      <p class="hero-copy">
+        Most people live inside systems they didn’t choose. This page is the simple counterpoint:
+        stop bending yourself to fit the system and start building the systems that fit who you are.
+      </p>
+
+      <div class="grid">
+        <div class="panel">
+          <h2>Build the thing</h2>
+          <div class="manifesto">
+            <p>Most people live inside systems they didn’t choose.</p>
+            <p>Jobs. Platforms. Rules. Expectations.</p>
+            <p>They adjust themselves to fit the system.</p>
+            <p class="callout">I’m not interested in that.</p>
+            <p>
+              I’m interested in building systems that let people express who they actually are and
+              turn that into something real.
+            </p>
+            <p>Not just ideas.</p>
+            <p>Not just talk.</p>
+            <p class="callout">Websites. Apps. Tools. Communities.</p>
+          </div>
+        </div>
+
+        <div class="rail">
+          <div class="rail-card">
+            <h3>I believe</h3>
+            <ul class="beliefs">
+              <li>You already know what you want to build.</li>
+              <li>You’re just holding back.</li>
+              <li>The world rewards people who act.</li>
+            </ul>
+          </div>
+
+          <div class="rail-card">
+            <h3>Why this exists</h3>
+            <p>
+              This is the core of what Thomas Stephens is trying to do: build real systems, help
+              other people build, and turn identity into action instead of delay.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a class="cta cta-primary" href="https://3dvr.tech">Visit 3dvr.tech</a>
+        <a class="cta cta-secondary" href="../opensource.html">See open-source work</a>
+      </div>
+
+      <p class="footer-note">So I build. And I help others build. That’s it.</p>
+    </section>
+  </div>
+</body>
+</html>
