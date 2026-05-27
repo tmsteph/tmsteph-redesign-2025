@@ -17,6 +17,13 @@
 ## Workspace Owner
 - Owner: Thomas Stephens.
 - Primary environment is Termux on Android under `/data/data/com.termux/files/home`.
+- Debian via `proot-distro` is an approved secondary workspace environment when Linux-native compatibility matters more than staying inside pure Termux.
+- If a tool is flaky under Termux, expects glibc/Desktop Linux behavior, or needs a more standard browser stack, prefer Debian `proot` over fighting the Android environment.
+- Standard Debian path when needed:
+  - `pkg install proot-distro`
+  - `proot-distro install debian`
+  - `proot-distro login debian`
+- If a repo already includes a wrapper for Debian or `proot`, use that wrapper instead of inventing one-off commands.
 - This workspace is ongoing and production-adjacent; preserve continuity across turns instead of treating each task like a fresh sandbox.
 - Current core working set: `3dvr-portal`, `3dvr-web`, and `tmsteph-redesign-2025`.
 - The main active product family is `3dvr`; if the user says `the portal`, `billing`, or `production` without more context, check `3dvr-portal` first.
@@ -86,6 +93,7 @@
 - If touching HTML entry points, prefer existing repo tests that assert page structure and portal registration.
 - If touching billing, auth, deployment, or environment-sensitive logic, verify with both code-level tests and a direct runtime check when feasible.
 - If browser automation is needed on Termux, prefer the repo's wrapper scripts or proot guidance over ad-hoc local Playwright runs.
+- When browser automation or Linux-only tooling is unreliable in Termux, switch to Debian `proot` early instead of burning time on Android-specific breakage.
 
 ## Frontend Expectations
 - Preserve existing visual language inside established products.
@@ -101,6 +109,12 @@
   - config changed remotely
   - production verified live
 - Mention tests run, and say plainly when something was not tested.
+
+## Contact Email Rule
+- The canonical 3DVR contact email is `3dvr.tech@gmail.com`.
+- There is no separate public `@3dvr.tech` mailbox set up right now.
+- Do not use `hello@3dvr.tech` in copy, CTAs, metadata, docs, or support instructions.
+- If a page or document needs a public contact email and the user has not specified another one, use `3dvr.tech@gmail.com`.
 
 ## Repo-Specific Reminder
 - Before editing inside any of these repos, check for a local `AGENTS.md` first:
