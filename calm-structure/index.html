@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calm Structure is a private household rhythm for meals, proactive tasks, repair, grounding, and safety.">
+  <title>Calm Structure - tmsteph</title>
+  <link rel="stylesheet" href="../assets/css/calm-shared.css">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Back to tmsteph">
+      <span class="brand-mark" aria-hidden="true">CS</span>
+      <span>
+        <strong>Calm Structure</strong>
+        <small>Awareness / structure / action / repair / trust</small>
+      </span>
+    </a>
+    <div class="topbar-actions">
+      <span class="status-pill" id="storage-status">Local-only MVP</span>
+      <a class="calm-button ghost" href="../index.html">Home</a>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Private household rhythm</p>
+        <h1>Before the day gets loud, handle one real thing.</h1>
+      </div>
+      <div class="intro-panel" aria-label="Daily questions">
+        <span>What needs to be handled before stress builds?</span>
+        <span>What can I take off someone&apos;s plate?</span>
+        <span>What is the next honest step?</span>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Calm Structure sections">
+      <button class="tab active" type="button" data-view-target="today">Today</button>
+      <button class="tab" type="button" data-view-target="meals">Meal Rhythm</button>
+      <button class="tab" type="button" data-view-target="tasks">Owned by Me</button>
+      <button class="tab" type="button" data-view-target="checkin">Check-In</button>
+      <button class="tab" type="button" data-view-target="repair">Repair</button>
+      <button class="tab" type="button" data-view-target="safety">Safety</button>
+      <button class="tab" type="button" data-view-target="settings">Settings</button>
+    </nav>
+
+    <section class="view active" id="view-today" aria-labelledby="today-title">
+      <div class="view-heading">
+        <div>
+          <p class="eyebrow">Today</p>
+          <h2 id="today-title">Today&apos;s Structure</h2>
+        </div>
+        <label class="date-control" for="selected-date">
+          Date
+          <input type="date" id="selected-date">
+        </label>
+      </div>
+
+      <div class="dashboard-grid">
+        <article class="panel span-2">
+          <div class="panel-heading">
+            <h3>Meals</h3>
+            <button type="button" class="ghost" data-view-target="meals">Plan meals</button>
+          </div>
+          <div class="compact-list" id="today-meals"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <h3>Owned by Me</h3>
+            <button type="button" class="ghost" data-view-target="tasks">Add task</button>
+          </div>
+          <div class="compact-list" id="today-tasks"></div>
+        </article>
+
+        <article class="panel">
+          <h3>Household Reset</h3>
+          <div class="check-grid" id="reset-checks"></div>
+        </article>
+
+        <article class="panel">
+          <h3>Latest Check-In</h3>
+          <div id="latest-checkin" class="quiet-block"></div>
+        </article>
+
+        <article class="panel">
+          <h3>One Repair</h3>
+          <div id="open-repair" class="quiet-block"></div>
+        </article>
+
+        <article class="panel span-2">
+          <form id="handled-form" class="inline-form">
+            <label for="handled-text">
+              I handled this
+              <input id="handled-text" name="handled-text" placeholder="Handled item...">
+            </label>
+            <button class="primary" type="submit">Log it</button>
+          </form>
+          <div class="handled-list" id="handled-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-meals" aria-labelledby="meals-title">
+      <div class="view-heading">
+        <div>
+          <p class="eyebrow">Meals</p>
+          <h2 id="meals-title">Meal Rhythm</h2>
+        </div>
+        <button type="button" class="primary" id="generate-groceries">Generate grocery list</button>
+      </div>
+
+      <div class="two-column">
+        <form class="panel form-grid" id="meal-form">
+          <h3>Plan a meal</h3>
+          <label for="meal-date">
+            Date
+            <input type="date" id="meal-date" required>
+          </label>
+          <label for="meal-slot">
+            Slot
+            <select id="meal-slot" required></select>
+          </label>
+          <label for="meal-choice">
+            Meal
+            <select id="meal-choice" required></select>
+          </label>
+          <label for="fallback-meal">
+            Fallback meal
+            <select id="fallback-meal"></select>
+          </label>
+          <label for="assigned-cook">
+            Assigned cook
+            <input id="assigned-cook" placeholder="Me">
+          </label>
+          <button class="primary" type="submit">Save meal</button>
+        </form>
+
+        <article class="panel">
+          <h3>This week</h3>
+          <div class="week-plan" id="week-plan"></div>
+        </article>
+      </div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h3>Generated groceries</h3>
+          <a class="calm-button ghost" href="../shopping-list/index.html">Open Shopping List</a>
+        </div>
+        <div class="grocery-grid" id="grocery-list"></div>
+      </section>
+    </section>
+
+    <section class="view" id="view-tasks" aria-labelledby="tasks-title">
+      <div class="view-heading">
+        <div>
+          <p class="eyebrow">Owned by Me</p>
+          <h2 id="tasks-title">Proactive Ownership</h2>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <form class="panel form-grid" id="task-form">
+          <h3>Own a reality</h3>
+          <label for="task-title">
+            Title
+            <input id="task-title" required placeholder="Plan dinners for Monday-Wednesday">
+          </label>
+          <label for="task-domain">
+            Domain
+            <select id="task-domain" required></select>
+          </label>
+          <label for="task-owner">
+            Owner
+            <input id="task-owner" placeholder="Me">
+          </label>
+          <label for="task-due">
+            Due date
+            <input type="date" id="task-due">
+          </label>
+          <label for="task-recurrence">
+            Recurrence
+            <select id="task-recurrence">
+              <option value="">None</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </label>
+          <label for="task-promise">
+            Visible promise
+            <textarea id="task-promise" rows="3" placeholder="I will handle this so it does not have to be held alone."></textarea>
+          </label>
+          <label for="task-notes">
+            Notes
+            <textarea id="task-notes" rows="3"></textarea>
+          </label>
+          <button class="primary" type="submit">Add task</button>
+        </form>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <h3>Board</h3>
+            <select id="task-filter" aria-label="Task view">
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="done">Done</option>
+              <option value="recurring">Recurring</option>
+            </select>
+          </div>
+          <div class="record-list" id="task-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-checkin" aria-labelledby="checkin-title">
+      <div class="view-heading">
+        <div>
+          <p class="eyebrow">Check-In</p>
+          <h2 id="checkin-title">Low-conflict check-in</h2>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <form class="panel form-grid" id="checkin-form">
+          <h3>Current state</h3>
+          <label for="mood-state">
+            State
+            <select id="mood-state" required></select>
+          </label>
+          <label for="request-type">
+            Request
+            <select id="request-type" required></select>
+          </label>
+          <label for="checkin-urgency">
+            Urgency
+            <select id="checkin-urgency">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </label>
+          <label for="checkin-message">
+            Message
+            <textarea id="checkin-message" rows="4" placeholder="I need listening, help, space, or a plan."></textarea>
+          </label>
+          <button class="primary" type="submit">Save check-in</button>
+        </form>
+
+        <article class="panel">
+          <h3>Recent check-ins</h3>
+          <div class="record-list" id="checkin-list"></div>
+        </article>
+      </div>
+
+      <div class="two-column">
+        <form class="panel form-grid" id="support-map-form">
+          <h3>Support map</h3>
+          <label for="support-situation">
+            Situation
+            <input id="support-situation" placeholder="When I feel criticized...">
+          </label>
+          <label for="support-helps">
+            What helps
+            <textarea id="support-helps" rows="3"></textarea>
+          </label>
+          <label for="support-worse">
+            What makes it worse
+            <textarea id="support-worse" rows="3"></textarea>
+          </label>
+          <label for="support-request">
+            Request phrase
+            <input id="support-request" placeholder="Can we pause and name the next action?">
+          </label>
+          <label for="support-boundary">
+            Boundary
+            <textarea id="support-boundary" rows="3"></textarea>
+          </label>
+          <button class="primary" type="submit">Save map</button>
+        </form>
+
+        <article class="panel">
+          <h3>Saved support maps</h3>
+          <div class="record-list" id="support-map-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-repair" aria-labelledby="repair-title">
+      <div class="view-heading">
+        <div>
+          <p class="eyebrow">Repair</p>
+          <h2 id="repair-title">Repair Log</h2>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <form class="panel form-grid" id="repair-form">
+          <h3>One concrete repair</h3>
+          <label for="repair-event">
+            Event label
+            <input id="repair-event" placeholder="Dinner plan missed" required>
+          </label>
+          <label for="repair-own">
+            What part is mine?
+            <textarea id="repair-own" rows="3" required></textarea>
+          </label>
+          <label for="repair-impact">
+            Impact
+            <textarea id="repair-impact" rows="3"></textarea>
+          </label>
+          <label for="repair-action">
+            What would rebuild trust?
+            <textarea id="repair-action" rows="3" required></textarea>
+          </label>
+          <label for="repair-next">
+            Next concrete action
+            <input id="repair-next" required>
+          </label>
+          <button class="primary" type="submit">Add repair</button>
+        </form>
+
+        <article class="panel">
+          <h3>Open repairs</h3>
+          <div class="record-list" id="repair-list"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-safety" aria-labelledby="safety-title">
+      <div class="safety-banner">
+        <div>
+          <p class="eyebrow">Safety</p>
+          <h2 id="safety-title">Planning, grounding, and support.</h2>
+        </div>
+        <button class="danger" type="button" id="quick-exit">Quick exit</button>
+      </div>
+
+      <div class="notice">
+        This tool is for planning, grounding, and repair. It is not therapy, legal advice, or emergency support.
+        If anyone is in immediate danger, call 911.
+      </div>
+
+      <div class="two-column">
+        <article class="panel">
+          <h3>Resources</h3>
+          <div class="resource-list" id="safety-resources"></div>
+        </article>
+
+        <article class="panel">
+          <h3>Local-only safety notes</h3>
+          <label for="safety-notes">
+            Personal notes on this device
+            <textarea id="safety-notes" rows="9" placeholder="Emergency contacts, go-bag location, child-safe exit plan..."></textarea>
+          </label>
+          <div class="button-row">
+            <button type="button" class="primary" id="save-safety-notes">Save locally</button>
+            <button type="button" class="danger" id="clear-safety-notes">Clear notes</button>
+          </div>
+          <p class="microcopy">These notes stay in this browser&apos;s local storage in phase one and are not shown anywhere else.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="view" id="view-settings" aria-labelledby="settings-title">
+      <div class="view-heading">
+        <div>
+          <p class="eyebrow">Settings</p>
+          <h2 id="settings-title">Local setup</h2>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <form class="panel form-grid" id="settings-form">
+          <h3>Household profile</h3>
+          <label for="self-name">
+            My display name
+            <input id="self-name" placeholder="Me">
+          </label>
+          <label for="household-name">
+            Household name
+            <input id="household-name" placeholder="Home">
+          </label>
+          <button class="primary" type="submit">Save settings</button>
+        </form>
+
+        <article class="panel">
+          <h3>Privacy status</h3>
+          <div class="settings-stack">
+            <p><strong>Current mode:</strong> local-only browser storage.</p>
+            <p><strong>Next phase:</strong> GunJS login plus encrypted household records before sync.</p>
+            <p><strong>Safety notes:</strong> local-only by default.</p>
+          </div>
+          <button class="danger" type="button" id="reset-demo">Reset local demo data</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
