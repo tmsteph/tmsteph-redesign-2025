@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="A reflective tmsteph page about listening externally, discerning internally, and building places where humans can belong."
+  />
+  <title>Internal Signal / External World - tmsteph</title>
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --bg-deep: #080a0f;
+      --panel: rgba(255, 255, 255, 0.07);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --text: #f4efe7;
+      --muted: #b9b1a5;
+      --line: rgba(255, 255, 255, 0.16);
+      --accent: #ffc46b;
+      --accent-2: #79e7d8;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        linear-gradient(135deg, rgba(121, 231, 216, 0.16), transparent 34rem),
+        linear-gradient(225deg, rgba(255, 196, 107, 0.16), transparent 30rem),
+        linear-gradient(180deg, #0d0f14 0%, #141118 55%, #080a0f 100%);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.14;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, #000 0%, transparent 80%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(18px);
+      background: rgba(13, 15, 20, 0.76);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand,
+    nav ul,
+    .hero-actions,
+    .footer {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand {
+      gap: 12px;
+      font-weight: 750;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background:
+        linear-gradient(135deg, var(--accent), transparent 52%),
+        linear-gradient(315deg, var(--accent-2), transparent 50%),
+        rgba(255, 255, 255, 0.08);
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      display: inline-flex;
+      padding: 9px 12px;
+    }
+
+    nav a:hover,
+    nav a:focus-visible,
+    .back-link:hover,
+    .back-link:focus-visible {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      outline: none;
+    }
+
+    .section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 96px 22px;
+    }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      align-items: center;
+      gap: 56px;
+      padding-top: 70px;
+    }
+
+    .eyebrow {
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    h1 {
+      font-size: 6.6rem;
+      max-width: 9ch;
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 3.7rem;
+      max-width: 12ch;
+      margin-bottom: 0;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      line-height: 1.15;
+      margin-bottom: 0;
+    }
+
+    .lede {
+      margin: 28px 0 0;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 1.24rem;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      font-weight: 760;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, var(--accent), #fff0ba);
+      color: #19130a;
+      border-color: transparent;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .signal-map {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.04);
+      box-shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .signal-map::before,
+    .signal-map::after {
+      content: "";
+      position: absolute;
+      inset: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background:
+        linear-gradient(90deg, transparent 49%, rgba(255, 255, 255, 0.16) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(255, 255, 255, 0.12) 50%, transparent 51%);
+    }
+
+    .signal-map::after {
+      inset: 118px;
+      transform: rotate(45deg);
+      border-color: rgba(121, 231, 216, 0.24);
+      background: none;
+    }
+
+    .signal-node {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 34px rgba(255, 196, 107, 0.38);
+    }
+
+    .signal-node.center {
+      left: calc(50% - 7px);
+      top: calc(50% - 7px);
+      background: var(--accent-2);
+      box-shadow: 0 0 34px rgba(121, 231, 216, 0.38);
+    }
+
+    .signal-node.north {
+      left: calc(50% - 7px);
+      top: 78px;
+    }
+
+    .signal-node.east {
+      right: 78px;
+      top: calc(50% - 7px);
+    }
+
+    .signal-node.south {
+      left: calc(50% - 7px);
+      bottom: 78px;
+    }
+
+    .signal-node.west {
+      left: 78px;
+      top: calc(50% - 7px);
+    }
+
+    .floating-note {
+      position: absolute;
+      z-index: 2;
+      width: min(82%, 310px);
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(13, 15, 20, 0.72);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
+    }
+
+    .floating-note strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .floating-note span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .note-a {
+      left: 28px;
+      top: 34px;
+    }
+
+    .note-b {
+      right: 28px;
+      bottom: 34px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 54px;
+      align-items: start;
+    }
+
+    .section-intro p,
+    .practice-main p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin: 22px 0 0;
+      max-width: 660px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card,
+    .reason,
+    .quote-panel,
+    .console,
+    .practice-main,
+    .practice-side {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .card {
+      min-height: 250px;
+      padding: 24px;
+    }
+
+    .card p,
+    .reason p {
+      color: var(--muted);
+      margin: 14px 0 0;
+    }
+
+    .number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 22px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--accent);
+      font-weight: 850;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .quote-panel {
+      margin-top: 30px;
+      padding: 48px;
+      background:
+        linear-gradient(135deg, rgba(121, 231, 216, 0.12), transparent 22rem),
+        var(--panel);
+    }
+
+    .quote-panel p {
+      margin: 0;
+      font-size: 2.55rem;
+      line-height: 1.08;
+    }
+
+    .quote-panel span {
+      display: block;
+      color: var(--muted);
+      margin-top: 22px;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 36px;
+    }
+
+    .reason {
+      padding: 24px;
+    }
+
+    .console {
+      padding: 22px;
+      background: #090b0f;
+      overflow: hidden;
+    }
+
+    .console-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 22px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .terminal-line {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92rem;
+    }
+
+    .terminal-line:last-child {
+      border-bottom: 0;
+    }
+
+    .key {
+      color: var(--accent-2);
+    }
+
+    .value {
+      color: var(--muted);
+    }
+
+    .practice {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.7fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .practice-main {
+      padding: 46px;
+    }
+
+    .practice-side {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 196, 107, 0.12), rgba(255, 255, 255, 0.05)),
+        var(--panel);
+    }
+
+    .meter-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      gap: 14px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent);
+    }
+
+    .meter-result {
+      margin-top: 22px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      min-height: 112px;
+    }
+
+    .footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 38px 22px 58px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer strong {
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      h1 {
+        font-size: 5rem;
+      }
+
+      h2 {
+        font-size: 3.05rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      nav ul {
+        display: none;
+      }
+
+      .hero,
+      .split,
+      .practice {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .signal-map {
+        min-height: 430px;
+      }
+
+      .cards,
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section {
+        padding: 70px 18px;
+      }
+
+      h1 {
+        font-size: 3.2rem;
+      }
+
+      h2 {
+        font-size: 2.35rem;
+      }
+
+      .hero-actions,
+      .footer {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .floating-note {
+        position: relative;
+        inset: auto;
+        width: calc(100% - 36px);
+        margin: 18px;
+      }
+
+      .terminal-line {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .quote-panel,
+      .practice-main {
+        padding: 28px;
+      }
+
+      .quote-panel p {
+        font-size: 1.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="../index.html" aria-label="Back to tmsteph">
+        <span class="mark" aria-hidden="true"></span>
+        <span>Internal / External</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul>
+          <li><a href="../index.html">tmsteph</a></li>
+          <li><a href="#discernment">Discernment</a></li>
+          <li><a href="#dislocation">Dislocation</a></li>
+          <li><a href="#build">Build</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow">Listen externally / Decide internally</div>
+        <h1 id="hero-title">Make a place for the signal.</h1>
+        <p class="lede">
+          We live in a world overflowing with information, yet many people still feel unseen,
+          unrooted, and out of place. This page is a small map for turning discomfort into direction.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#build">Start building</a>
+          <a class="button" href="#discernment">Explore the framework</a>
+        </div>
+      </div>
+
+      <aside class="signal-map" aria-label="Reflection diagram">
+        <span class="signal-node center" aria-hidden="true"></span>
+        <span class="signal-node north" aria-hidden="true"></span>
+        <span class="signal-node east" aria-hidden="true"></span>
+        <span class="signal-node south" aria-hidden="true"></span>
+        <span class="signal-node west" aria-hidden="true"></span>
+        <div class="floating-note note-a">
+          <strong>External input is evidence.</strong>
+          <span>Markets, traditions, science, friends, critics, and history can correct your blind spots.</span>
+        </div>
+        <div class="floating-note note-b">
+          <strong>Internal alignment is authority.</strong>
+          <span>Your conscience, body, values, and calling decide what becomes yours.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section split" id="discernment" aria-labelledby="discernment-title">
+      <div class="section-intro">
+        <div class="eyebrow">Discernment</div>
+        <h2 id="discernment-title">Not closed. Not consumed.</h2>
+        <p>
+          The move is not to reject the outside world or surrender to it. The move is to metabolize it:
+          receive information, test it, keep what is true, and let the rest pass through.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <span class="number">1</span>
+          <h3>Receive</h3>
+          <p>Let reality speak. Listen to data, stories, elders, competitors, users, nature, scripture, and silence.</p>
+        </article>
+        <article class="card">
+          <span class="number">2</span>
+          <h3>Discern</h3>
+          <p>Separate signal from pressure. Ask what is true, what is useful, and what is merely loud.</p>
+        </article>
+        <article class="card">
+          <span class="number">3</span>
+          <h3>Integrate</h3>
+          <p>Change the implementation without betraying the soul of the work.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="dislocation" aria-labelledby="dislocation-title">
+      <div class="section-intro">
+        <div class="eyebrow">Dislocation</div>
+        <h2 id="dislocation-title">Why so many feel out of place.</h2>
+        <p>
+          Feeling uncomfortable in the world does not always mean something is wrong with you.
+          Sometimes it means your human needs are colliding with systems that forgot the human scale.
+        </p>
+      </div>
+
+      <div class="quote-panel" role="note">
+        <p>
+          Some discomfort is not dysfunction. Some discomfort is perception.
+          <span>It may be the part of you that still remembers belonging, meaning, embodiment, craft, beauty, and sacredness.</span>
+        </p>
+      </div>
+
+      <div class="grid-two" aria-label="Reasons people feel out of place">
+        <article class="reason">
+          <h3>Networks without belonging</h3>
+          <p>We can be surrounded by contact and still lack the deep experience of being known.</p>
+        </article>
+        <article class="reason">
+          <h3>Information without wisdom</h3>
+          <p>The mind receives more than the body and spirit can metabolize.</p>
+        </article>
+        <article class="reason">
+          <h3>Freedom without initiation</h3>
+          <p>Modern life asks people to invent themselves without always welcoming them into meaningful roles.</p>
+        </article>
+        <article class="reason">
+          <h3>Productivity without purpose</h3>
+          <p>Systems often measure output while ignoring coherence, devotion, care, and fit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split" aria-labelledby="console-title">
+      <div class="console" aria-label="Internal operating model">
+        <div class="console-top" aria-hidden="true">
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div class="terminal-line">
+          <span class="key">input</span>
+          <span class="value">external information, criticism, evidence, tradition, market reality</span>
+        </div>
+        <div class="terminal-line">
+          <span class="key">filter</span>
+          <span class="value">conscience, values, body response, spiritual alignment, long-term truth</span>
+        </div>
+        <div class="terminal-line">
+          <span class="key">process</span>
+          <span class="value">reflection, conversation, prototyping, prayer, testing, rest</span>
+        </div>
+        <div class="terminal-line">
+          <span class="key">output</span>
+          <span class="value">a clearer decision, a better system, a more honest life</span>
+        </div>
+      </div>
+
+      <div class="section-intro">
+        <div class="eyebrow">Operating system</div>
+        <h2 id="console-title">Build an inner kernel.</h2>
+        <p>
+          When the world is noisy, you need a stable place inside yourself where information can be judged,
+          not merely absorbed. The point is not isolation. The point is sovereignty with permeability.
+        </p>
+      </div>
+    </section>
+
+    <section class="section practice" id="build" aria-labelledby="build-title">
+      <div class="practice-main">
+        <div class="eyebrow">Practice</div>
+        <h2 id="build-title">Turn exile into architecture.</h2>
+        <p>
+          The feeling of being out of place can become a design brief. Build the room, tool, language,
+          ritual, company, community, or codebase where your values have somewhere to live.
+        </p>
+        <p>
+          Start small: one honest page, one daily rhythm, one trusted collaborator, one working prototype,
+          one practice that makes your nervous system believe life can be coherent again.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#top">Return to the signal</a>
+          <a class="button" href="mailto:tmsteph1290@gmail.com?subject=I%20want%20to%20build%20a%20place">Open a conversation</a>
+        </div>
+      </div>
+
+      <aside class="practice-side" aria-label="Signal meter">
+        <div>
+          <h3>Signal meter</h3>
+          <p class="value">Balance outside evidence with inner authority.</p>
+        </div>
+        <div>
+          <div class="meter-labels">
+            <span>Too internal</span>
+            <span>Too external</span>
+          </div>
+          <input id="signalRange" type="range" min="0" max="100" value="50" aria-label="Balance between internal and external" />
+          <div class="meter-result" id="meterResult" aria-live="polite"></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span><strong>Internal / External</strong> - a starter page for discernment, belonging, and building.</span>
+    <span>Made with plain HTML, CSS, and JavaScript.</span>
+  </footer>
+
+  <script>
+    const range = document.querySelector('#signalRange');
+    const result = document.querySelector('#meterResult');
+
+    const states = [
+      {
+        max: 30,
+        title: 'Open the windows.',
+        text: 'Your internal signal matters, but it may need reality checks, collaborators, users, teachers, or evidence.'
+      },
+      {
+        max: 70,
+        title: 'Good integration zone.',
+        text: 'You are listening externally while still deciding from your own center. Keep testing without abandoning the core.'
+      },
+      {
+        max: 101,
+        title: 'Return to the center.',
+        text: 'The outside world is useful, but it is getting too loud. Step back, rest, and ask what still feels true.'
+      }
+    ];
+
+    function updateMeter() {
+      const value = Number(range.value);
+      const state = states.find((item) => value < item.max);
+      result.innerHTML = `<strong>${state.title}</strong><br><span>${state.text}</span>`;
+    }
+
+    range.addEventListener('input', updateMeter);
+    updateMeter();
+  </script>
+</body>
+</html>
