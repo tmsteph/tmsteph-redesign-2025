@@ -1,0 +1,34 @@
+[
+  {
+    "id": "emergency",
+    "label": "Emergency",
+    "phone": "911",
+    "description": "Call or text 911 if anyone is in immediate danger or needs urgent medical help.",
+    "url": "https://www.sandiego.gov/police/services/domestic-violence",
+    "priority": 1
+  },
+  {
+    "id": "your-safe-place",
+    "label": "Your Safe Place / San Diego Family Justice Center",
+    "phone": "619-533-6000",
+    "description": "Confidential San Diego services for domestic violence, family violence, sexual assault, trafficking, and gun violence.",
+    "url": "https://www.sandiego.gov/sdfjc",
+    "priority": 2
+  },
+  {
+    "id": "center-community-solutions",
+    "label": "Center for Community Solutions",
+    "phone": "888-385-4657",
+    "description": "San Diego domestic violence and sexual assault crisis support listed in the regional resource guide.",
+    "url": "https://www.sdcourt.ca.gov/sites/default/files/2021-08/San%20Diego%20Regional%20DOMESTIC%20VIOLENCE%20RESOURCES%20Phone%20Guide.pdf",
+    "priority": 3
+  },
+  {
+    "id": "national-dv-hotline",
+    "label": "National Domestic Violence Hotline",
+    "phone": "1-800-799-SAFE",
+    "description": "National confidential hotline: 1-800-799-7233.",
+    "url": "https://www.thehotline.org/",
+    "priority": 4
+  }
+]

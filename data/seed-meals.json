@@ -1,0 +1,167 @@
+[
+  {
+    "id": "avocado-toast",
+    "name": "Avocado Toast",
+    "slots": ["breakfast", "lunch"],
+    "description": "Sourdough or sprouted grain toast with avocado, lemon, olive oil, and optional egg or microgreens.",
+    "difficulty": "easy",
+    "pickyFriendly": true,
+    "fallback": false,
+    "ingredients": [
+      { "name": "Sourdough or sprouted grain bread", "category": "Bakery" },
+      { "name": "Avocado", "category": "Produce" },
+      { "name": "Lemon", "category": "Produce" },
+      { "name": "Olive oil", "category": "Pantry" },
+      { "name": "Eggs", "category": "Dairy" },
+      { "name": "Microgreens", "category": "Produce" }
+    ]
+  },
+  {
+    "id": "coconut-chia-pudding",
+    "name": "Coconut Chia Pudding",
+    "slots": ["breakfast", "snack"],
+    "description": "Coconut milk, chia seeds, fresh berries, and a drizzle of raw honey.",
+    "difficulty": "easy",
+    "pickyFriendly": true,
+    "fallback": true,
+    "ingredients": [
+      { "name": "Coconut milk", "category": "Pantry" },
+      { "name": "Chia seeds", "category": "Pantry" },
+      { "name": "Fresh berries", "category": "Produce" },
+      { "name": "Raw honey", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "yogurt-bowl",
+    "name": "Yogurt Bowl",
+    "slots": ["breakfast", "snack"],
+    "description": "Organic yogurt with berries and granola served on the side for full control.",
+    "difficulty": "easy",
+    "pickyFriendly": true,
+    "fallback": true,
+    "ingredients": [
+      { "name": "Organic yogurt", "category": "Dairy" },
+      { "name": "Berries", "category": "Produce" },
+      { "name": "Granola", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "chicken-bowl",
+    "name": "Build-Your-Own Chicken Bowl",
+    "slots": ["lunch", "dinner"],
+    "description": "Grilled organic chicken, greens, sweet potato, and dressing on the side.",
+    "difficulty": "medium",
+    "pickyFriendly": true,
+    "fallback": false,
+    "ingredients": [
+      { "name": "Organic chicken", "category": "Meat" },
+      { "name": "Greens", "category": "Produce" },
+      { "name": "Sweet potatoes", "category": "Produce" },
+      { "name": "Dressing", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "salmon-greens",
+    "name": "Salmon & Greens",
+    "slots": ["lunch", "dinner"],
+    "description": "Wild-caught salmon with lemon and olive oil over simple greens.",
+    "difficulty": "medium",
+    "pickyFriendly": false,
+    "fallback": false,
+    "ingredients": [
+      { "name": "Wild-caught salmon", "category": "Meat" },
+      { "name": "Lemon", "category": "Produce" },
+      { "name": "Olive oil", "category": "Pantry" },
+      { "name": "Simple greens", "category": "Produce" }
+    ]
+  },
+  {
+    "id": "veggie-soup",
+    "name": "Light Veggie Soup",
+    "slots": ["lunch", "dinner"],
+    "description": "Carrot, celery, onion, garlic, and broth. Warm, nourishing, and gentle.",
+    "difficulty": "medium",
+    "pickyFriendly": true,
+    "fallback": false,
+    "ingredients": [
+      { "name": "Carrots", "category": "Produce" },
+      { "name": "Celery", "category": "Produce" },
+      { "name": "Onion", "category": "Produce" },
+      { "name": "Garlic", "category": "Produce" },
+      { "name": "Broth", "category": "Pantry" }
+    ]
+  },
+  {
+    "id": "herb-roasted-chicken",
+    "name": "Herb Roasted Chicken",
+    "slots": ["dinner"],
+    "description": "Organic chicken roasted with rosemary, garlic, olive oil, and vegetables.",
+    "difficulty": "medium",
+    "pickyFriendly": true,
+    "fallback": false,
+    "ingredients": [
+      { "name": "Organic chicken", "category": "Meat" },
+      { "name": "Rosemary", "category": "Produce" },
+      { "name": "Garlic", "category": "Produce" },
+      { "name": "Olive oil", "category": "Pantry" },
+      { "name": "Roasting vegetables", "category": "Produce" }
+    ]
+  },
+  {
+    "id": "zucchini-noodles",
+    "name": "Zucchini Noodles",
+    "slots": ["dinner"],
+    "description": "Zoodles with olive oil, garlic, parmesan, and optional protein.",
+    "difficulty": "easy",
+    "pickyFriendly": false,
+    "fallback": false,
+    "ingredients": [
+      { "name": "Zucchini noodles", "category": "Produce" },
+      { "name": "Olive oil", "category": "Pantry" },
+      { "name": "Garlic", "category": "Produce" },
+      { "name": "Parmesan", "category": "Dairy" },
+      { "name": "Optional protein", "category": "Meat" }
+    ]
+  },
+  {
+    "id": "grass-fed-steak",
+    "name": "Grass-Fed Steak",
+    "slots": ["dinner"],
+    "description": "High-quality steak, salt and pepper, with roasted vegetables or salad.",
+    "difficulty": "medium",
+    "pickyFriendly": true,
+    "fallback": false,
+    "ingredients": [
+      { "name": "Grass-fed steak", "category": "Meat" },
+      { "name": "Salt and pepper", "category": "Pantry" },
+      { "name": "Roasted vegetables", "category": "Produce" },
+      { "name": "Salad greens", "category": "Produce" }
+    ]
+  },
+  {
+    "id": "fresh-fruit-plate",
+    "name": "Fresh Fruit Plate",
+    "slots": ["snack", "breakfast"],
+    "description": "Berries, citrus, melon. Simple, sweet, and naturally satisfying.",
+    "difficulty": "easy",
+    "pickyFriendly": true,
+    "fallback": true,
+    "ingredients": [
+      { "name": "Berries", "category": "Produce" },
+      { "name": "Citrus", "category": "Produce" },
+      { "name": "Melon", "category": "Produce" }
+    ]
+  },
+  {
+    "id": "dark-chocolate",
+    "name": "Dark Chocolate",
+    "slots": ["snack"],
+    "description": "Organic, high-cacao chocolate. Just enough indulgence.",
+    "difficulty": "easy",
+    "pickyFriendly": true,
+    "fallback": true,
+    "ingredients": [
+      { "name": "Organic dark chocolate", "category": "Pantry" }
+    ]
+  }
+]

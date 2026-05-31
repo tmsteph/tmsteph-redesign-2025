@@ -1,0 +1,115 @@
+:root {
+  color-scheme: light;
+  --calm-bg: #f4f1ea;
+  --calm-surface: #fffdf8;
+  --calm-surface-2: #ebe7dc;
+  --calm-ink: #252820;
+  --calm-muted: #62685b;
+  --calm-line: #d6d0c2;
+  --calm-sage: #6f8e78;
+  --calm-blue: #426b83;
+  --calm-clay: #a55f46;
+  --calm-gold: #c79035;
+  --calm-danger: #8b2f2f;
+  --calm-radius: 8px;
+  --calm-shadow: 0 16px 36px rgba(40, 43, 36, 0.12);
+  --calm-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --calm-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--calm-bg);
+  color: var(--calm-ink);
+  font-family: var(--calm-font);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+.calm-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border: 1px solid var(--calm-line);
+  border-radius: var(--calm-radius);
+  padding: 0.55rem 0.85rem;
+  background: var(--calm-surface);
+  color: var(--calm-ink);
+  font-weight: 750;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover,
+button:focus-visible,
+.calm-button:hover,
+.calm-button:focus-visible {
+  border-color: var(--calm-sage);
+  outline: 2px solid rgba(111, 142, 120, 0.22);
+  outline-offset: 2px;
+}
+
+button.primary,
+.calm-button.primary {
+  border-color: var(--calm-sage);
+  background: var(--calm-sage);
+  color: #fffdf8;
+}
+
+button.danger,
+.calm-button.danger {
+  border-color: rgba(139, 47, 47, 0.34);
+  color: var(--calm-danger);
+}
+
+button.ghost,
+.calm-button.ghost {
+  background: transparent;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--calm-line);
+  border-radius: var(--calm-radius);
+  background: #fffefb;
+  color: var(--calm-ink);
+  padding: 0.72rem 0.78rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  color: var(--calm-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.calm-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
