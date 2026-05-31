@@ -12,12 +12,12 @@ import {
   getWeekDates
 } from '../assets/js/calm-models.js';
 import {
-  clearSafetyNotes,
+  clearGroundingNotes,
   createRecord,
-  loadSafetyNotes,
+  loadGroundingNotes,
   loadState,
   resetState,
-  saveSafetyNotes,
+  saveGroundingNotes,
   saveState,
   upsertById
 } from '../assets/js/calm-store.js';
@@ -25,7 +25,7 @@ import { addDaysISO, formatDate, todayISO } from '../assets/js/calm-utils.js';
 
 const state = loadState();
 let seedMeals = [];
-let safetyResources = [];
+let groundingPrompts = [];
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
@@ -232,15 +232,13 @@ function renderRepairs() {
     : '<div class="empty">No repairs logged yet.</div>';
 }
 
-function renderSafety() {
-  $('#safety-resources').innerHTML = safetyResources
+function renderGrounding() {
+  $('#grounding-prompts').innerHTML = groundingPrompts
     .sort((a, b) => a.priority - b.priority)
-    .map((resource) => `
+    .map((prompt) => `
       <div class="resource">
-        <strong>${escapeHtml(resource.label)}</strong>
-        <a href="tel:${resource.phone.replace(/[^0-9]/g, '')}">${escapeHtml(resource.phone)}</a>
-        <span>${escapeHtml(resource.description)}</span>
-        <a href="${resource.url}" target="_blank" rel="noreferrer">Source</a>
+        <strong>${escapeHtml(prompt.label)}</strong>
+        <span>${escapeHtml(prompt.description)}</span>
       </div>
     `).join('');
 }
@@ -256,7 +254,7 @@ function renderAll() {
   renderTasks();
   renderCheckIns();
   renderRepairs();
-  renderSafety();
+  renderGrounding();
   renderSettings();
 }
 
@@ -405,17 +403,13 @@ function setupEvents() {
     renderAll();
   });
 
-  $('#quick-exit').addEventListener('click', () => {
-    window.location.replace('https://www.google.com/search?q=weather');
+  $('#grounding-notes').value = loadGroundingNotes();
+  $('#save-grounding-notes').addEventListener('click', () => {
+    saveGroundingNotes($('#grounding-notes').value);
   });
-
-  $('#safety-notes').value = loadSafetyNotes();
-  $('#save-safety-notes').addEventListener('click', () => {
-    saveSafetyNotes($('#safety-notes').value);
-  });
-  $('#clear-safety-notes').addEventListener('click', () => {
-    clearSafetyNotes();
-    $('#safety-notes').value = '';
+  $('#clear-grounding-notes').addEventListener('click', () => {
+    clearGroundingNotes();
+    $('#grounding-notes').value = '';
   });
 
   $('#settings-form').addEventListener('submit', (event) => {
@@ -499,9 +493,9 @@ async function loadJson(path, fallback = []) {
 }
 
 async function init() {
-  [seedMeals, safetyResources] = await Promise.all([
+  [seedMeals, groundingPrompts] = await Promise.all([
     loadJson('../data/seed-meals.json'),
-    loadJson('../data/safety-resources.json')
+    loadJson('../data/grounding-prompts.json')
   ]);
   setupStaticOptions();
   setupEvents();

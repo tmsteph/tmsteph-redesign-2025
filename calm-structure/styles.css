@@ -333,23 +333,23 @@ h3 {
   gap: 0.35rem;
 }
 
-.safety-banner {
+.grounding-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border: 1px solid rgba(139, 47, 47, 0.28);
+  border: 1px solid rgba(111, 142, 120, 0.28);
   border-radius: var(--calm-radius);
   padding: 1rem;
-  background: #fff7f1;
+  background: #f4f8f0;
 }
 
 .notice {
-  border-left: 4px solid var(--calm-danger);
+  border-left: 4px solid var(--calm-sage);
   border-radius: var(--calm-radius);
   padding: 0.9rem 1rem;
   background: #fffdf8;
-  color: var(--calm-danger);
+  color: #385a42;
   font-weight: 750;
 }
 
@@ -384,7 +384,7 @@ h3 {
 @media (max-width: 620px) {
   .topbar,
   .topbar-actions,
-  .safety-banner,
+  .grounding-banner,
   .inline-form {
     align-items: stretch;
     flex-direction: column;

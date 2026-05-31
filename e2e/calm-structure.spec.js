@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('calm structure local app handles meals, tasks, and safety notes', async ({ page }) => {
+test('calm structure local app handles meals, tasks, and grounding notes', async ({ page }) => {
   await page.goto('/calm-structure/');
 
   await expect(page).toHaveTitle(/Calm Structure/);
@@ -28,11 +28,11 @@ test('calm structure local app handles meals, tasks, and safety notes', async ({
   await page.getByRole('button', { name: 'Add task' }).click();
   await expect(page.locator('#task-list')).toContainText('Pack child supplies');
 
-  await page.getByRole('button', { name: 'Safety' }).click();
-  await expect(page.locator('#safety-resources')).toContainText('Your Safe Place');
-  await page.locator('#safety-notes').fill('Local note only');
+  await page.getByRole('button', { name: 'Grounding' }).click();
+  await expect(page.locator('#grounding-prompts')).toContainText('Pause first');
+  await page.locator('#grounding-notes').fill('Local note only');
   await page.getByRole('button', { name: 'Save locally' }).click();
   await page.reload();
-  await page.getByRole('button', { name: 'Safety' }).click();
-  await expect(page.locator('#safety-notes')).toHaveValue('Local note only');
+  await page.getByRole('button', { name: 'Grounding' }).click();
+  await expect(page.locator('#grounding-notes')).toHaveValue('Local note only');
 });

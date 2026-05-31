@@ -2,7 +2,7 @@ import { createInitialState, migrateState } from './calm-models.js';
 import { createId } from './calm-utils.js';
 
 const STORAGE_KEY = 'tmstephCalmStructure.v1';
-const SAFETY_NOTES_KEY = 'tmstephCalmStructure.safetyNotes.v1';
+const GROUNDING_NOTES_KEY = 'tmstephCalmStructure.groundingNotes.v1';
 
 export function loadState(storage = globalThis.localStorage, now = new Date()) {
   if (!storage) {
@@ -27,23 +27,23 @@ export function resetState(storage = globalThis.localStorage) {
   storage.removeItem(STORAGE_KEY);
 }
 
-export function loadSafetyNotes(storage = globalThis.localStorage) {
+export function loadGroundingNotes(storage = globalThis.localStorage) {
   if (!storage) return '';
   try {
-    return storage.getItem(SAFETY_NOTES_KEY) || '';
+    return storage.getItem(GROUNDING_NOTES_KEY) || '';
   } catch (_error) {
     return '';
   }
 }
 
-export function saveSafetyNotes(notes, storage = globalThis.localStorage) {
+export function saveGroundingNotes(notes, storage = globalThis.localStorage) {
   if (!storage) return;
-  storage.setItem(SAFETY_NOTES_KEY, String(notes || ''));
+  storage.setItem(GROUNDING_NOTES_KEY, String(notes || ''));
 }
 
-export function clearSafetyNotes(storage = globalThis.localStorage) {
+export function clearGroundingNotes(storage = globalThis.localStorage) {
   if (!storage) return;
-  storage.removeItem(SAFETY_NOTES_KEY);
+  storage.removeItem(GROUNDING_NOTES_KEY);
 }
 
 export function createRecord(type, payload = {}) {
