@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pause",
+    "label": "Pause first",
+    "description": "Take two minutes before deciding what the next step should be.",
+    "priority": 1
+  },
+  {
+    "id": "lower-friction",
+    "label": "Lower friction",
+    "description": "Choose the smallest action that makes the next hour easier.",
+    "priority": 2
+  },
+  {
+    "id": "visible-plan",
+    "label": "Make the plan visible",
+    "description": "Write down what will happen, who owns it, and when it will be checked.",
+    "priority": 3
+  },
+  {
+    "id": "repair-step",
+    "label": "Choose one repair",
+    "description": "Name what is yours to handle and take one concrete action.",
+    "priority": 4
+  }
+]

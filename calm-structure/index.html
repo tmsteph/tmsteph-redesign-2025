@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Calm Structure is a private household rhythm for meals, proactive tasks, repair, grounding, and safety.">
+  <meta name="description" content="Calm Structure is a private household rhythm for meals, proactive tasks, repair, grounding, and care.">
   <title>Calm Structure - tmsteph</title>
   <link rel="stylesheet" href="../assets/css/calm-shared.css">
   <link rel="stylesheet" href="./styles.css">
@@ -43,7 +43,7 @@
       <button class="tab" type="button" data-view-target="tasks">Owned by Me</button>
       <button class="tab" type="button" data-view-target="checkin">Check-In</button>
       <button class="tab" type="button" data-view-target="repair">Repair</button>
-      <button class="tab" type="button" data-view-target="safety">Safety</button>
+      <button class="tab" type="button" data-view-target="grounding">Grounding</button>
       <button class="tab" type="button" data-view-target="settings">Settings</button>
     </nav>
 
@@ -330,35 +330,33 @@
       </div>
     </section>
 
-    <section class="view" id="view-safety" aria-labelledby="safety-title">
-      <div class="safety-banner">
+    <section class="view" id="view-grounding" aria-labelledby="grounding-title">
+      <div class="grounding-banner">
         <div>
-          <p class="eyebrow">Safety</p>
-          <h2 id="safety-title">Planning, grounding, and support.</h2>
+          <p class="eyebrow">Grounding</p>
+          <h2 id="grounding-title">A softer landing place.</h2>
         </div>
-        <button class="danger" type="button" id="quick-exit">Quick exit</button>
       </div>
 
       <div class="notice">
-        This tool is for planning, grounding, and repair. It is not therapy, legal advice, or emergency support.
-        If anyone is in immediate danger, call 911.
+        This space is for planning, grounding, and repair. It is a private routine builder, not a replacement for professional care.
       </div>
 
       <div class="two-column">
         <article class="panel">
-          <h3>Resources</h3>
-          <div class="resource-list" id="safety-resources"></div>
+          <h3>Grounding prompts</h3>
+          <div class="resource-list" id="grounding-prompts"></div>
         </article>
 
         <article class="panel">
-          <h3>Local-only safety notes</h3>
-          <label for="safety-notes">
+          <h3>Local-only grounding notes</h3>
+          <label for="grounding-notes">
             Personal notes on this device
-            <textarea id="safety-notes" rows="9" placeholder="Emergency contacts, go-bag location, child-safe exit plan..."></textarea>
+            <textarea id="grounding-notes" rows="9" placeholder="Routines, preferences, reminders, and calming next steps..."></textarea>
           </label>
           <div class="button-row">
-            <button type="button" class="primary" id="save-safety-notes">Save locally</button>
-            <button type="button" class="danger" id="clear-safety-notes">Clear notes</button>
+            <button type="button" class="primary" id="save-grounding-notes">Save locally</button>
+            <button type="button" class="caution" id="clear-grounding-notes">Clear notes</button>
           </div>
           <p class="microcopy">These notes stay in this browser&apos;s local storage in phase one and are not shown anywhere else.</p>
         </article>
@@ -392,9 +390,9 @@
           <div class="settings-stack">
             <p><strong>Current mode:</strong> local-only browser storage.</p>
             <p><strong>Next phase:</strong> GunJS login plus encrypted household records before sync.</p>
-            <p><strong>Safety notes:</strong> local-only by default.</p>
+            <p><strong>Grounding notes:</strong> local-only by default.</p>
           </div>
-          <button class="danger" type="button" id="reset-demo">Reset local demo data</button>
+          <button class="caution" type="button" id="reset-demo">Reset local demo data</button>
         </article>
       </div>
     </section>

@@ -4,7 +4,7 @@ export function describeCryptoPlan() {
   return {
     current: 'Phase one stores only this-browser demo data in localStorage.',
     next: 'Shared household records should be encrypted with a household key before Gun writes.',
-    safety: 'Safety notes remain local-only by default and should not be synced automatically.'
+    grounding: 'Grounding notes remain local-only by default and should not be synced automatically.'
   };
 }
 

@@ -1,6 +1,6 @@
 # Calm Structure
 
-Calm Structure is a private household rhythm for meals, proactive ownership, check-ins, repair, and safety.
+Calm Structure is a private household rhythm for meals, proactive ownership, check-ins, repair, and grounding.
 
 The principle is:
 
@@ -25,21 +25,15 @@ This first version is intentionally local-only. It does not connect to GunJS yet
 - Emotional check-ins
 - Trigger/support maps
 - Repair log
-- Safety resources
-- Local-only safety notes
+- Grounding prompts
+- Local-only grounding notes
 - Settings for household/self labels
 
-## Safety
+## Grounding
 
-This tool is for planning, grounding, and repair. It is not therapy, legal advice, or emergency support. If anyone is in immediate danger, call 911.
+This tool is for planning, grounding, and repair. It is a private routine builder, not a replacement for professional care.
 
-Safety notes are saved only in this browser's `localStorage` in phase one. They are not shared, synced, or sent to analytics.
-
-Current resource sources:
-
-- City of San Diego Domestic Violence page: `https://www.sandiego.gov/police/services/domestic-violence`
-- Your Safe Place / San Diego Family Justice Center: `https://www.sandiego.gov/sdfjc`
-- San Diego Regional Domestic Violence Resources Phone Guide: `https://www.sdcourt.ca.gov/sites/default/files/2021-08/San%20Diego%20Regional%20DOMESTIC%20VIOLENCE%20RESOURCES%20Phone%20Guide.pdf`
+Grounding notes are saved only in this browser's `localStorage` in phase one. They are not shared, synced, or sent to analytics.
 
 ## Data
 
@@ -47,7 +41,7 @@ Phase one stores non-synced demo data at:
 
 ```txt
 localStorage["tmstephCalmStructure.v1"]
-localStorage["tmstephCalmStructure.safetyNotes.v1"]
+localStorage["tmstephCalmStructure.groundingNotes.v1"]
 ```
 
 Seed meal data lives at:
@@ -56,10 +50,10 @@ Seed meal data lives at:
 /data/seed-meals.json
 ```
 
-Safety resource data lives at:
+Grounding prompt data lives at:
 
 ```txt
-/data/safety-resources.json
+/data/grounding-prompts.json
 ```
 
 ## Future GunJS/SEA Plan
@@ -72,7 +66,7 @@ Rules for the next phase:
 2. Use SEA auth for identity.
 3. Generate a household key for shared records.
 4. Encrypt every shared task, check-in, support map, repair, and meal note before writing it to Gun.
-5. Keep safety notes local-only by default.
+5. Keep grounding notes local-only by default.
 6. Do not add diagnostics, scoring, surveillance, or blame language.
 
 Suggested paths:

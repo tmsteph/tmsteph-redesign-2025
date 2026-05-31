@@ -10,7 +10,7 @@
   --calm-blue: #426b83;
   --calm-clay: #a55f46;
   --calm-gold: #c79035;
-  --calm-danger: #8b2f2f;
+  --calm-caution: #8b2f2f;
   --calm-radius: 8px;
   --calm-shadow: 0 16px 36px rgba(40, 43, 36, 0.12);
   --calm-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -68,10 +68,10 @@ button.primary,
   color: #fffdf8;
 }
 
-button.danger,
-.calm-button.danger {
+button.caution,
+.calm-button.caution {
   border-color: rgba(139, 47, 47, 0.34);
-  color: var(--calm-danger);
+  color: var(--calm-caution);
 }
 
 button.ghost,
