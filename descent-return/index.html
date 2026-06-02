@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Descent &amp; Return - The Awakening Map</title>
+  <meta name="description" content="A contemplative single-page site exploring Jesus, Mary, Buddha, Hindu cycles, and the mystical idea of God dissolving and re-finding itself." />
+  <style>
+    :root {
+      --bg: #070713;
+      --panel: rgba(255, 255, 255, 0.075);
+      --text: #f6f1ff;
+      --muted: #c9c0d9;
+      --gold: #f4d38a;
+      --rose: #e891b8;
+      --violet: #9f8cff;
+      --cyan: #85e8ff;
+      --green: #a6f0c6;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --radius: 26px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(159, 140, 255, 0.35), transparent 28rem),
+        radial-gradient(circle at 80% 5%, rgba(232, 145, 184, 0.28), transparent 25rem),
+        radial-gradient(circle at 50% 90%, rgba(133, 232, 255, 0.18), transparent 32rem),
+        linear-gradient(145deg, #060610 0%, #0c0b1d 48%, #130917 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(circle at center, black, transparent 75%);
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.75;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 999px;
+      background: white;
+      animation: twinkle 4s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0.25;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.55);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(22px);
+      background: rgba(7, 7, 19, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, #fff 0 6%, transparent 7%),
+        conic-gradient(from 30deg, var(--gold), var(--rose), var(--violet), var(--cyan), var(--gold));
+      box-shadow: 0 0 30px rgba(244, 211, 138, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+      outline: none;
+    }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      min-height: calc(100vh - 70px);
+      padding: 76px 24px 56px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      align-items: center;
+      gap: 44px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      color: var(--gold);
+      background: rgba(244, 211, 138, 0.1);
+      border: 1px solid rgba(244, 211, 138, 0.24);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 0.86rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 24px 0 20px;
+      font-size: clamp(3.2rem, 8vw, 7.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.075em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(105deg, #fff 8%, var(--gold) 35%, var(--rose) 60%, var(--cyan) 92%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2vw, 1.28rem);
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 14px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 750;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(244, 211, 138, 0.95), rgba(232, 145, 184, 0.9));
+      color: #160d17;
+      border-color: transparent;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-3px);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+      outline: none;
+    }
+
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      background: linear-gradient(135deg, rgba(255, 225, 153, 1), rgba(255, 166, 204, 0.98));
+    }
+
+    .orb-wrap {
+      position: relative;
+      min-height: 620px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orb {
+      width: min(92vw, 520px);
+      aspect-ratio: 1 / 1;
+      position: relative;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.98) 0 4%, transparent 5%),
+        radial-gradient(circle at 50% 50%, rgba(244, 211, 138, 0.28) 0 12%, transparent 14%),
+        conic-gradient(from var(--spin, 0deg), rgba(244, 211, 138, 0.96), rgba(232, 145, 184, 0.88), rgba(159, 140, 255, 0.92), rgba(133, 232, 255, 0.88), rgba(166, 240, 198, 0.86), rgba(244, 211, 138, 0.96));
+      box-shadow:
+        inset 0 0 90px rgba(255, 255, 255, 0.08),
+        0 0 80px rgba(159, 140, 255, 0.38),
+        0 0 140px rgba(232, 145, 184, 0.2);
+      animation: breathe 7s ease-in-out infinite;
+      filter: saturate(115%);
+    }
+
+    .orb::before,
+    .orb::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      transform: rotateX(65deg) rotateZ(14deg);
+      opacity: 0.72;
+    }
+
+    .orb::after {
+      inset: 22%;
+      transform: rotateY(65deg) rotateZ(-28deg);
+      opacity: 0.48;
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scale(0.98) rotate(0deg);
+      }
+
+      50% {
+        transform: scale(1.03) rotate(4deg);
+      }
+    }
+
+    .float-card {
+      position: absolute;
+      max-width: 250px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 22px;
+      background: rgba(7, 7, 19, 0.58);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .float-card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .float-card.one {
+      top: 34px;
+      right: 10px;
+    }
+
+    .float-card.two {
+      left: -8px;
+      bottom: 86px;
+    }
+
+    main section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 78px 24px;
+    }
+
+    .section-title {
+      max-width: 780px;
+      margin-bottom: 34px;
+    }
+
+    .section-title h2 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 4.2rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
+
+    .map {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      min-height: 210px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 20px 58px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content: "";
+      position: absolute;
+      inset: auto -20% -35% -20%;
+      height: 115px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 68%);
+      opacity: 0.6;
+    }
+
+    .step .num {
+      color: var(--gold);
+      font-size: 0.84rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .step h3 {
+      margin: 22px 0 9px;
+      font-size: 1.18rem;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 0.96rem;
+    }
+
+    .step:nth-child(1),
+    .step:nth-child(2),
+    .step:nth-child(3) {
+      grid-column: span 2;
+    }
+
+    .step:nth-child(4),
+    .step:nth-child(5) {
+      grid-column: span 3;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.055));
+      min-height: 330px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      right: -54px;
+      bottom: -58px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--glow, rgba(255, 255, 255, 0.18)), transparent 70%);
+      opacity: 0.8;
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 1.55rem;
+    }
+
+    .card h3 {
+      font-size: 1.55rem;
+      margin: 24px 0 10px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.68;
+    }
+
+    .quote-panel {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .quote,
+    .practice,
+    .cycle-copy,
+    .mantra {
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .quote {
+      padding: 30px;
+    }
+
+    .quote blockquote {
+      margin: 0;
+      font-size: clamp(1.45rem, 3vw, 2.8rem);
+      line-height: 1.13;
+      letter-spacing: -0.04em;
+    }
+
+    .quote cite {
+      display: block;
+      margin-top: 20px;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .practice {
+      padding: 30px;
+    }
+
+    .practice h3 {
+      margin: 0 0 14px;
+      font-size: 1.45rem;
+    }
+
+    .practice-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .practice-item {
+      border-radius: 18px;
+      padding: 15px 16px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .practice-item strong {
+      color: var(--text);
+    }
+
+    .cycle {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .cycle-wheel {
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background:
+        radial-gradient(circle, rgba(7, 7, 19, 0.86) 0 32%, transparent 33%),
+        conic-gradient(var(--gold), var(--green), var(--cyan), var(--violet), var(--rose), var(--gold));
+      box-shadow: 0 0 100px rgba(133, 232, 255, 0.18);
+      position: relative;
+      animation: slowspin 40s linear infinite;
+    }
+
+    .cycle-wheel::before {
+      content: "Order -> Chaos -> Dissolution -> Renewal";
+      position: absolute;
+      inset: 22%;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 22px;
+      color: var(--text);
+      background: rgba(7, 7, 19, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    @keyframes slowspin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .cycle-copy {
+      padding: 30px;
+    }
+
+    .cycle-copy p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0 0 16px;
+    }
+
+    .cycle-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .mantra {
+      margin-top: 40px;
+      padding: 36px;
+      text-align: center;
+      border-radius: calc(var(--radius) + 10px);
+      background: linear-gradient(135deg, rgba(244, 211, 138, 0.16), rgba(232, 145, 184, 0.14), rgba(133, 232, 255, 0.12));
+    }
+
+    .mantra h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4.6vw, 4.7rem);
+      line-height: 1.04;
+      letter-spacing: -0.055em;
+    }
+
+    .mantra p {
+      max-width: 780px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.08rem;
+    }
+
+    footer {
+      color: rgba(246, 241, 255, 0.65);
+      text-align: center;
+      padding: 44px 24px 60px;
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .star,
+      .orb,
+      .cycle-wheel {
+        animation: none;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 940px) {
+      .hero,
+      .quote-panel,
+      .cycle {
+        grid-template-columns: 1fr;
+      }
+
+      .orb-wrap {
+        min-height: 540px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .map {
+        grid-template-columns: 1fr;
+      }
+
+      .step,
+      .step:nth-child(1),
+      .step:nth-child(2),
+      .step:nth-child(3),
+      .step:nth-child(4),
+      .step:nth-child(5) {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 680px) {
+      nav {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 54px;
+      }
+
+      .orb-wrap {
+        min-height: 450px;
+      }
+
+      .float-card {
+        position: static;
+        margin: 12px auto;
+      }
+
+      .orb {
+        width: min(82vw, 360px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <div class="page">
+    <header>
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Descent and Return home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Descent &amp; Return</span>
+        </a>
+        <div class="nav-links">
+          <a href="../index.html">tmsteph</a>
+          <a href="#map">The Map</a>
+          <a href="#figures">Figures</a>
+          <a href="#cycle">Cycles</a>
+          <a href="#practice">Practice</a>
+        </div>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Mystic Christianity / Awakening / Cosmic Cycles</span>
+        <h1><span class="gradient-text">God remembering through matter.</span></h1>
+        <p>
+          A contemplative map of descent and return: the One becomes the many,
+          forgets itself as matter, life, instinct, ego, and fear - then awakens
+          again as awareness, compassion, wisdom, and love.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#map">Enter the map</a>
+          <a class="button" href="#practice">Begin the practice</a>
+        </div>
+      </div>
+
+      <div class="orb-wrap reveal" aria-label="Animated radiant orb symbolizing descent and return">
+        <div class="orb"></div>
+        <div class="float-card one">
+          <strong>The descent</strong>
+          Spirit contracts into form: star, stone, cell, animal, human.
+        </div>
+        <div class="float-card two">
+          <strong>The return</strong>
+          Form becomes transparent: awareness, mercy, clarity, union.
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="map">
+        <div class="section-title reveal">
+          <h2>The awakening map</h2>
+          <p>
+            Not a doctrine to force on reality, but a poetic framework: creation as divine self-forgetting,
+            evolution as divine self-recognition, and awakening as the return of the many into conscious unity.
+          </p>
+        </div>
+
+        <div class="map">
+          <article class="step reveal">
+            <span class="num">01 / The One</span>
+            <h3>Pure being</h3>
+            <p>Before separation, before name, before object: indivisible presence.</p>
+          </article>
+
+          <article class="step reveal">
+            <span class="num">02 / Descent</span>
+            <h3>Compression into matter</h3>
+            <p>The infinite appears as finitude: stars, stone, chemistry, body.</p>
+          </article>
+
+          <article class="step reveal">
+            <span class="num">03 / Life</span>
+            <h3>The first stirring</h3>
+            <p>Simple life begins to seek, respond, hunger, adapt, and remember.</p>
+          </article>
+
+          <article class="step reveal">
+            <span class="num">04 / Mind</span>
+            <h3>Animals into humans</h3>
+            <p>Instinct becomes imagination. Awareness looks out through eyes and asks, "What am I?"</p>
+          </article>
+
+          <article class="step reveal">
+            <span class="num">05 / Return</span>
+            <h3>God-form remembered</h3>
+            <p>The ego softens. The soul clears. Love, wisdom, and surrender make the human transparent to the Divine.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="figures">
+        <div class="section-title reveal">
+          <h2>Three awakened symbols</h2>
+          <p>
+            Jesus, Mary, and Buddha can be read as archetypes of remembering: love embodied,
+            wisdom received, and consciousness liberated from illusion.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card reveal" style="--glow: rgba(244, 211, 138, 0.38);">
+            <div class="icon" aria-hidden="true">✦</div>
+            <h3>Jesus</h3>
+            <p>
+              The divine-human pattern: God entering flesh, suffering, love, death, and return.
+              In the mystical reading, Christ is humanity made transparent to God.
+            </p>
+          </article>
+
+          <article class="card reveal" style="--glow: rgba(232, 145, 184, 0.34);">
+            <div class="icon" aria-hidden="true">☾</div>
+            <h3>Mary</h3>
+            <p>
+              The soul that can receive the hidden teaching. Mary symbolizes contemplative intimacy,
+              direct knowing, and the feminine keeper of divine wisdom.
+            </p>
+          </article>
+
+          <article class="card reveal" style="--glow: rgba(133, 232, 255, 0.32);">
+            <div class="icon" aria-hidden="true">◌</div>
+            <h3>Buddha</h3>
+            <p>
+              Consciousness waking from craving, illusion, and false identity. Not ego becoming God,
+              but separateness dissolving into clarity and compassion.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="cycle">
+        <div class="section-title reveal">
+          <h2>The cosmic breath</h2>
+          <p>
+            Many traditions imagine reality as cyclical: emergence, order, fragmentation,
+            dissolution, and renewal. The fall into chaos is not the end; it is the pressure
+            that makes remembering necessary.
+          </p>
+        </div>
+
+        <div class="cycle">
+          <div class="cycle-wheel reveal" aria-hidden="true"></div>
+          <div class="cycle-copy reveal">
+            <p>
+              In this lens, the universe does not simply move in a straight line. It breathes:
+              unity into multiplicity, harmony into fragmentation, fragmentation into longing,
+              longing into awakening.
+            </p>
+            <p>
+              The reset is not failure. It is compost. Worlds dissolve, forms break, names vanish -
+              and the Divine discovers new ways to become conscious of itself.
+            </p>
+            <p>
+              The human task is to participate consciously in the return: to become less opaque,
+              less ruled by fear, and more available to love.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="practice">
+        <div class="quote-panel">
+          <div class="quote reveal">
+            <blockquote>
+              "The ego says: I am God. The awakened soul says: only God is."
+            </blockquote>
+            <cite>- A working mantra</cite>
+          </div>
+
+          <div class="practice reveal">
+            <h3>A small daily practice</h3>
+            <p style="color: var(--muted); line-height: 1.7; margin: 0;">
+              Use this as a simple ritual for remembering without turning awakening into ego inflation.
+            </p>
+            <div class="practice-list">
+              <div class="practice-item"><strong>1. Stillness:</strong> Sit for three minutes and notice awareness before thought.</div>
+              <div class="practice-item"><strong>2. Descent:</strong> Feel the body as sacred matter, not as a prison.</div>
+              <div class="practice-item"><strong>3. Mercy:</strong> Bring one fear, wound, or enemy into compassion.</div>
+              <div class="practice-item"><strong>4. Return:</strong> Ask, "What would love do through me now?"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mantra reveal">
+          <h2><span class="gradient-text">The many are the One learning to remember.</span></h2>
+          <p>
+            You are not merely a creature trying to please a distant God. You are a place where
+            the Divine has entered limitation, and your awakening is God remembering through you.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Built as a contemplative single-page prototype. Edit the text, symbols, and sections freely.
+    </footer>
+  </div>
+
+  <script>
+    const starLayer = document.querySelector('.stars');
+    const starCount = Math.min(130, Math.floor(window.innerWidth / 8));
+
+    for (let i = 0; i < starCount; i += 1) {
+      const star = document.createElement('span');
+      star.className = 'star';
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 4}s`;
+      star.style.opacity = String(Math.random() * 0.65 + 0.15);
+      starLayer.appendChild(star);
+    }
+
+    const orb = document.querySelector('.orb');
+    let spin = 0;
+    window.addEventListener('pointermove', (event) => {
+      if (!orb) return;
+      const x = event.clientX / window.innerWidth - 0.5;
+      const y = event.clientY / window.innerHeight - 0.5;
+      spin = x * 55;
+      orb.style.setProperty('--spin', `${spin}deg`);
+      orb.style.translate = `${x * 12}px ${y * 12}px`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>
