@@ -69,6 +69,14 @@
             <h3>Household shopping list</h3>
             <p class="tracker-note">Organize your list as you shop.</p>
           </div>
+          <div class="shopping-sync-panel">
+            <label for="shopping-share-link">Current list link</label>
+            <div class="shopping-sync-row">
+              <input id="shopping-share-link" type="url" readonly aria-label="Current shopping list link">
+              <button class="shopping-action-btn" type="button" id="shopping-copy-link">Copy link</button>
+            </div>
+            <p class="tracker-note" id="shopping-sync-status" aria-live="polite"></p>
+          </div>
           <div class="tracker-filter">
             <label for="shopping-sort">Sort list by</label>
             <select id="shopping-sort" name="shopping-sort">

@@ -80,11 +80,47 @@ export const initShoppingList = ({
   const list = documentRef.getElementById('shopping-list');
   const emptyState = documentRef.getElementById('shopping-empty');
   const sortSelect = documentRef.getElementById('shopping-sort');
+  const shareInput = documentRef.getElementById('shopping-share-link');
+  const copyLinkButton = documentRef.getElementById('shopping-copy-link');
+  const syncStatus = documentRef.getElementById('shopping-sync-status');
 
   const listId = getListId();
-  const entries = gun.get('shopping-list').get(listId).get('items');
+  const getShareUrl = () => {
+    const url = new URL(windowRef?.location?.href || 'https://example.com/shopping-list/');
+    url.searchParams.set(LIST_PARAM, listId);
+    return url.toString();
+  };
+  const shareUrl = getShareUrl();
+  const listRoot = gun.get('shopping-list').get(listId);
+  const entries = listRoot.get('items');
+  const itemIndex = listRoot.get('item-index');
   const cache = new Map();
+  const subscribedItems = new Set();
   let editingId = null;
+
+  if (shareInput) {
+    shareInput.value = shareUrl;
+  }
+
+  copyLinkButton?.addEventListener('click', async () => {
+    try {
+      if (windowRef?.navigator?.clipboard?.writeText) {
+        await windowRef.navigator.clipboard.writeText(shareUrl);
+      } else if (shareInput?.select && documentRef.execCommand) {
+        shareInput.select();
+        documentRef.execCommand('copy');
+      } else {
+        throw new Error('Clipboard unavailable');
+      }
+      if (syncStatus) {
+        syncStatus.textContent = 'Current list link copied.';
+      }
+    } catch (err) {
+      if (syncStatus) {
+        syncStatus.textContent = 'Copy failed. Select the link above.';
+      }
+    }
+  });
 
   const resetForm = () => {
     form.reset();
@@ -230,6 +266,7 @@ export const initShoppingList = ({
       deleteButton.className = 'shopping-action-btn shopping-action-btn--ghost';
       deleteButton.textContent = 'Delete';
       deleteButton.addEventListener('click', () => {
+        itemIndex.put({ [item.id]: false });
         entries.get(item.id).put(null);
         if (editingId === item.id) {
           setEditState(null);
@@ -243,7 +280,7 @@ export const initShoppingList = ({
     }
   };
 
-  entries.map().on((data, key) => {
+  const applyItemData = (data, key) => {
     if (!data) {
       cache.delete(key);
       renderItems();
@@ -264,6 +301,30 @@ export const initShoppingList = ({
     });
 
     renderItems();
+  };
+
+  const subscribeToItem = (key) => {
+    if (!key || subscribedItems.has(key)) {
+      return;
+    }
+    subscribedItems.add(key);
+    entries.get(key).on((data) => {
+      applyItemData(data, key);
+    });
+  };
+
+  itemIndex.map().on((active, key) => {
+    if (!active) {
+      cache.delete(key);
+      renderItems();
+      return;
+    }
+
+    subscribeToItem(key);
+  });
+
+  entries.map().on((data, key) => {
+    applyItemData(data, key);
   });
 
   sortSelect?.addEventListener('change', () => {
@@ -297,6 +358,7 @@ export const initShoppingList = ({
         purchased: existing.purchased ?? false,
         purchasedAt: existing.purchasedAt ?? null,
       });
+      itemIndex.put({ [editingId]: true });
       setEditState(null);
       return;
     }
@@ -311,6 +373,7 @@ export const initShoppingList = ({
       notes,
       createdAt: Date.now(),
     });
+    itemIndex.put({ [id]: true });
     resetForm();
   });
 
@@ -323,7 +386,7 @@ export const initShoppingList = ({
     dateInput.value = today;
   }
 
-  return {};
+  return { listId, shareUrl };
 };
 
 if (typeof window !== 'undefined') {

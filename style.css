@@ -1743,6 +1743,51 @@ footer {
   box-shadow: inset 0 0 0 1px rgba(127, 255, 225, 0.08);
 }
 
+.shopping-sync-panel {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(127, 255, 225, 0.16);
+  background: rgba(11, 29, 57, 0.32);
+  text-align: left;
+}
+
+.shopping-sync-panel label {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.shopping-sync-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.shopping-sync-row input {
+  min-width: 0;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffe066;
+  font-weight: 600;
+}
+
+.shopping-sync-panel .tracker-note {
+  min-height: 1.2em;
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .shopping-sync-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .cycle-results {
   display: flex;
   flex-direction: column;
