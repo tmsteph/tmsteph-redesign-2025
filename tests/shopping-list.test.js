@@ -15,6 +15,9 @@ const baseMarkup = `
     <textarea id="item-notes"></textarea>
     <button type="submit">Submit</button>
   </form>
+  <input id="shopping-share-link" />
+  <button id="shopping-copy-link" type="button">Copy link</button>
+  <p id="shopping-sync-status"></p>
   <div id="shopping-empty"></div>
   <ul id="shopping-list"></ul>
 `;
@@ -27,22 +30,39 @@ const createDom = (url = 'https://example.com/shopping-list/') =>
 const createGunMock = () => {
   const put = vi.fn();
   const on = vi.fn();
-  const itemsNode = {
+  const paths = [];
+  const puts = [];
+  const createNode = (path = []) => ({
     map: () => ({ on }),
-    get: vi.fn(() => ({ put })),
-  };
-  const listIdNode = {
-    get: vi.fn(() => itemsNode),
-  };
-  const listNode = {
-    get: vi.fn(() => listIdNode),
-  };
-  const rootNode = {
-    get: vi.fn(() => listNode),
-  };
-  const Gun = vi.fn(() => rootNode);
+    get: vi.fn((key) => {
+      const nextPath = [...path, key];
+      paths.push(nextPath);
+      return createNode(nextPath);
+    }),
+    put: (value) => {
+      puts.push({ path, value });
+      return put(value);
+    },
+  });
+  const Gun = vi.fn(() => createNode());
 
-  return { Gun, put };
+  return { Gun, put, paths, puts };
+};
+
+const pathWasRequested = (paths, expectedPath) =>
+  paths.some((path) => path.join('/') === expectedPath.join('/'));
+
+const createClipboardMock = (dom) => {
+  const clipboard = {
+    writeText: vi.fn().mockResolvedValue(undefined),
+  };
+
+  Object.defineProperty(dom.window.navigator, 'clipboard', {
+    configurable: true,
+    value: clipboard,
+  });
+
+  return clipboard;
 };
 
 describe('shopping list sync', () => {
@@ -59,7 +79,7 @@ describe('shopping list sync', () => {
 
   it('uses the list id from the URL when present', () => {
     const dom = createDom('https://example.com/shopping-list/?list=family123');
-    const { Gun } = createGunMock();
+    const { Gun, paths } = createGunMock();
 
     initShoppingList({
       Gun,
@@ -68,6 +88,7 @@ describe('shopping list sync', () => {
     });
 
     expect(dom.window.location.search).toContain('list=family123');
+    expect(pathWasRequested(paths, ['shopping-list', 'family123', 'items'])).toBe(true);
   });
 
   it('adds a list id to the URL when missing', () => {
@@ -85,7 +106,7 @@ describe('shopping list sync', () => {
 
   it('stores submitted items in Gun', () => {
     const dom = createDom('https://example.com/shopping-list/?list=family123');
-    const { Gun, put } = createGunMock();
+    const { Gun, put, puts } = createGunMock();
     const documentRef = dom.window.document;
 
     documentRef.getElementById('item-name').value = 'Milk';
@@ -115,12 +136,25 @@ describe('shopping list sync', () => {
         notes: 'Organic',
       })
     );
+
+    const itemPut = puts.find(
+      (entry) =>
+        entry.path.slice(0, -1).join('/') === 'shopping-list/family123/items' &&
+        entry.value?.name === 'Milk'
+    );
+    const itemId = itemPut?.path.at(-1);
+    const indexPut = puts.find((entry) =>
+      pathWasRequested([entry.path], ['shopping-list', 'family123', 'item-index'])
+    );
+
+    expect(itemPut).toBeTruthy();
+    expect(indexPut?.value?.[itemId]).toBe(true);
   });
 
   it('reuses the stored list id when returning', () => {
     const dom = createDom('https://example.com/shopping-list/');
     dom.window.localStorage.setItem('shoppingListId', 'returning-456');
-    const { Gun } = createGunMock();
+    const { Gun, paths } = createGunMock();
 
     initShoppingList({
       Gun,
@@ -129,5 +163,62 @@ describe('shopping list sync', () => {
     });
 
     expect(dom.window.location.search).toContain('list=returning-456');
+    expect(pathWasRequested(paths, ['shopping-list', 'returning-456', 'items'])).toBe(true);
+  });
+
+  it('exposes a copyable sync link for the current list', async () => {
+    const dom = createDom('https://example.com/shopping-list/?list=family123');
+    const clipboard = createClipboardMock(dom);
+    const { Gun } = createGunMock();
+
+    const result = initShoppingList({
+      Gun,
+      document: dom.window.document,
+      window: dom.window,
+    });
+
+    const shareInput = dom.window.document.getElementById('shopping-share-link');
+    const copyButton = dom.window.document.getElementById('shopping-copy-link');
+    const syncStatus = dom.window.document.getElementById('shopping-sync-status');
+
+    expect(result).toEqual(
+      expect.objectContaining({
+        listId: 'family123',
+        shareUrl: 'https://example.com/shopping-list/?list=family123',
+      })
+    );
+    expect(shareInput.value).toBe('https://example.com/shopping-list/?list=family123');
+
+    copyButton.dispatchEvent(new dom.window.Event('click', { bubbles: true }));
+    await vi.waitFor(() => {
+      expect(clipboard.writeText).toHaveBeenCalledWith(
+        'https://example.com/shopping-list/?list=family123'
+      );
+      expect(syncStatus.textContent).toBe('Current list link copied.');
+    });
+  });
+
+  it('uses the same Gun list path across isolated browsers when opened from the sync link', () => {
+    const sharedUrl = 'https://example.com/shopping-list/?list=family123';
+    const chromePwa = createDom(sharedUrl);
+    const braveBrowser = createDom(sharedUrl);
+    const chromeGun = createGunMock();
+    const braveGun = createGunMock();
+
+    const chromeResult = initShoppingList({
+      Gun: chromeGun.Gun,
+      document: chromePwa.window.document,
+      window: chromePwa.window,
+    });
+    const braveResult = initShoppingList({
+      Gun: braveGun.Gun,
+      document: braveBrowser.window.document,
+      window: braveBrowser.window,
+    });
+
+    expect(chromeResult.listId).toBe('family123');
+    expect(braveResult.listId).toBe('family123');
+    expect(pathWasRequested(chromeGun.paths, ['shopping-list', 'family123', 'items'])).toBe(true);
+    expect(pathWasRequested(braveGun.paths, ['shopping-list', 'family123', 'items'])).toBe(true);
   });
 });
