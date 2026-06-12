@@ -12,4 +12,14 @@ describe('homepage personal positioning', () => {
     expect(html).not.toContain('Launch in 3 Days');
     expect(html).not.toContain('Need a site, offer, or business system live fast?');
   });
+
+  it('links to the regenerative farm tracker', async () => {
+    const html = await readFile('index.html', 'utf8');
+    const trackerHtml = await readFile('regenerative-farm/index.html', 'utf8');
+
+    expect(html).toContain('href="regenerative-farm/index.html"');
+    expect(html).toContain('Regenerative Farm Tracker');
+    expect(trackerHtml).toContain('<title>Regenerative Farm Tracker</title>');
+    expect(trackerHtml).toContain('California FarmLink');
+  });
 });

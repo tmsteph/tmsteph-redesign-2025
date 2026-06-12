@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Regenerative Farm Tracker</title>
+  <style>
+    :root {
+      --bg: #f5f1e8;
+      --paper: #fffaf0;
+      --ink: #26301f;
+      --muted: #6f735f;
+      --green: #314b2b;
+      --sage: #73845f;
+      --gold: #b78d46;
+      --clay: #a56542;
+      --line: rgba(38, 48, 31, 0.16);
+      --shadow: 0 24px 60px rgba(38, 48, 31, 0.14);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(183, 141, 70, 0.22), transparent 32rem),
+        radial-gradient(circle at 85% 12%, rgba(115, 132, 95, 0.24), transparent 30rem),
+        linear-gradient(180deg, #fbf7ed 0%, var(--bg) 48%, #e9e0cc 100%);
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.22em;
+    }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      min-height: 92vh;
+      display: grid;
+      place-items: center;
+      padding: 72px 0 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .card,
+    .tracker,
+    .note-box {
+      background: rgba(255, 250, 240, 0.82);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-copy {
+      border-radius: 34px;
+      padding: clamp(28px, 5vw, 60px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0.2em 0 0.12em;
+      font-size: clamp(3rem, 5.5rem, 7rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+      color: var(--green);
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 2.6rem, 3.1rem);
+      line-height: 1;
+      margin: 0 0 18px;
+      color: var(--green);
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+      color: var(--green);
+    }
+
+    p {
+      margin: 0 0 1rem;
+    }
+
+    .lede {
+      font-size: clamp(1.08rem, 1.2rem, 1.32rem);
+      max-width: 62ch;
+      color: #3e452f;
+    }
+
+    .tagline {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-left: 5px solid var(--gold);
+      background: rgba(183, 141, 70, 0.12);
+      border-radius: 12px;
+      font-style: italic;
+      font-size: 1.12rem;
+    }
+
+    .hero-card {
+      border-radius: 34px;
+      padding: 24px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .farm-window {
+      min-height: 380px;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(30, 52, 22, 0.08), rgba(30, 52, 22, 0.18)),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1300&q=80") center/cover;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 250, 240, 0.7);
+    }
+
+    .farm-window::after {
+      content: "family • soil • music • retreats";
+      position: absolute;
+      left: 20px;
+      bottom: 18px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.8);
+      color: var(--green);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--clay);
+      line-height: 1;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(245, 241, 232, 0.82);
+      backdrop-filter: blur(12px);
+      border-block: 1px solid var(--line);
+    }
+
+    nav .wrap {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 12px 0;
+    }
+
+    nav a {
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--green);
+      border: 1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.6);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .card ul,
+    .card ol {
+      padding-left: 1.1em;
+      margin: 0;
+    }
+
+    .card li {
+      margin: 0.45em 0;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.42);
+      color: #3f4a32;
+      font-size: 0.93rem;
+    }
+
+    .tracker {
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: rgba(255, 250, 240, 0.72);
+    }
+
+    th,
+    td {
+      text-align: left;
+      vertical-align: top;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    th {
+      background: rgba(49, 75, 43, 0.08);
+      color: var(--green);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    td small {
+      display: block;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(183, 141, 70, 0.16);
+      color: #6f4f18;
+    }
+
+    .status.hot {
+      background: rgba(165, 101, 66, 0.16);
+      color: #804123;
+    }
+
+    .status.ready {
+      background: rgba(115, 132, 95, 0.18);
+      color: #3d542d;
+    }
+
+    .note-box {
+      border-radius: 28px;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(49, 75, 43, 0.95), rgba(70, 87, 50, 0.92)),
+        url("https://images.unsplash.com/photo-1470753937643-efeb931202a9?auto=format&fit=crop&w=1200&q=80") center/cover;
+      color: #fff8e9;
+    }
+
+    .note-box h2,
+    .note-box h3 {
+      color: #fff8e9;
+    }
+
+    .note-box a {
+      color: #fff1c4;
+    }
+
+    .contact-script {
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92rem;
+      background: rgba(255, 250, 240, 0.8);
+      border: 1px solid var(--line);
+      padding: 18px;
+      border-radius: 18px;
+      overflow-x: auto;
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    details + details {
+      margin-top: 10px;
+    }
+
+    summary {
+      cursor: pointer;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 42px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .checklist label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 10px 0;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      transform: translateY(4px);
+      accent-color: var(--green);
+    }
+
+    .small {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .grid.two,
+      .grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        min-height: auto;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tr {
+        border-bottom: 1px solid var(--line);
+      }
+
+      td {
+        border: none;
+        padding: 11px 16px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--sage);
+        margin-bottom: 3px;
+      }
+    }
+
+    @media print {
+      nav,
+      .farm-window {
+        display: none;
+      }
+
+      body {
+        background: white;
+      }
+
+      .hero-copy,
+      .hero-card,
+      .card,
+      .tracker,
+      .note-box {
+        box-shadow: none;
+        background: white;
+      }
+
+      section {
+        padding: 28px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap hero">
+      <div class="hero-copy">
+        <div class="eyebrow">tmsteph project tracker</div>
+        <h1>Regenerative Farm</h1>
+        <p class="lede">
+          A family-led plan for land, soil, food, retreats, music-led wellness,
+          nature education, and community renewal in the San Diego region.
+        </p>
+        <div class="tagline">
+          Start with relationships and land access. Grow slowly. Keep the soil, family, and community at the center.
+        </div>
+        <div class="pill-row">
+          <span class="pill">🌱 Regenerative agriculture</span>
+          <span class="pill">🎶 Music + nature circles</span>
+          <span class="pill">🏕️ Retreats + workshops</span>
+          <span class="pill">👨‍👩‍👧 Family farm path</span>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div class="farm-window" role="img" aria-label="A sunlit farm field"></div>
+        <div class="stats">
+          <div class="stat">
+            <strong>1</strong>
+            page land-seeker profile
+          </div>
+          <div class="stat">
+            <strong>4</strong>
+            core organizations to contact
+          </div>
+          <div class="stat">
+            <strong>12</strong>
+            month pilot before buying
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <nav>
+    <div class="wrap">
+      <a href="#vision">Vision</a>
+      <a href="#land">Land Leads</a>
+      <a href="#areas">Target Areas</a>
+      <a href="#outreach">Outreach</a>
+      <a href="#retreats">Retreats</a>
+      <a href="#therapy-language">Careful Language</a>
+      <a href="#next">Next Steps</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="vision">
+      <div class="wrap grid two">
+        <article class="card">
+          <h2>Project Vision</h2>
+          <p>
+            Regenerative Farm is a future family homestead, working farm, retreat space,
+            and community learning project. The goal is to build healthy soil, produce
+            nourishing food, host meaningful gatherings, and create a life rhythm rooted
+            in nature.
+          </p>
+          <p>
+            This tracker keeps the project organized while exploring land access in and
+            around San Diego County.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Current Strategy</h2>
+          <ol>
+            <li>Do not rush into buying expensive land.</li>
+            <li>Build a clear land-seeker profile.</li>
+            <li>Contact local land-access and food-system organizations.</li>
+            <li>Visit existing farms and ask what they would do if starting now.</li>
+            <li>Find a lease, incubator plot, partnership, or retreat-property host.</li>
+            <li>Run a 12-month pilot before committing to major debt.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section id="land">
+      <div class="wrap">
+        <h2>Land + Project Leads</h2>
+        <div class="tracker">
+          <table>
+            <thead>
+              <tr>
+                <th>Lead</th>
+                <th>Why it matters</th>
+                <th>Ask</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Lead">
+                  <strong>California FarmLink</strong>
+                  <small>Land access, financing, farmer-landowner matchmaking.</small>
+                </td>
+                <td data-label="Why it matters">
+                  Best first call for finding a lease, landowner partnership, or beginning farmer path.
+                </td>
+                <td data-label="Ask">
+                  “Can you help us understand land access options for a family-led regenerative farm near San Diego?”
+                </td>
+                <td data-label="Status"><span class="status hot">Contact first</span></td>
+              </tr>
+              <tr>
+                <td data-label="Lead">
+                  <strong>Resource Conservation District of Greater San Diego County</strong>
+                  <small>Soil health, conservation, water efficiency, farmer support.</small>
+                </td>
+                <td data-label="Why it matters">
+                  Strong local institution for farm support, grants, conservation practices, and incubator history.
+                </td>
+                <td data-label="Ask">
+                  Ask about incubator plots, mentor farms, conservation planning, and water-wise regenerative practices.
+                </td>
+                <td data-label="Status"><span class="status hot">Contact early</span></td>
+              </tr>
+              <tr>
+                <td data-label="Lead">
+                  <strong>San Diego Food System Alliance</strong>
+                  <small>Food-system network, land tenure, local food economy.</small>
+                </td>
+                <td data-label="Why it matters">
+                  Good network for community food, land access policy, and values-aligned partners.
+                </td>
+                <td data-label="Ask">
+                  Ask who is working on land tenure, regenerative farming, and community food projects.
+                </td>
+                <td data-label="Status"><span class="status ready">Network</span></td>
+              </tr>
+              <tr>
+                <td data-label="Lead">
+                  <strong>Project New Village</strong>
+                  <small>Food sovereignty, community gardens, land stewardship.</small>
+                </td>
+                <td data-label="Why it matters">
+                  Good model for food, community wellness, land, and environmental justice.
+                </td>
+                <td data-label="Ask">
+                  Ask about community food projects, land trust activity, and volunteer/learning opportunities.
+                </td>
+                <td data-label="Status"><span class="status ready">Learn + serve</span></td>
+              </tr>
+              <tr>
+                <td data-label="Lead">
+                  <strong>Existing farms</strong>
+                  <small>Sand n’ Straw, Coastal Roots, Agrarian Institute, Sage Mountain, Good Neighbor Gardens.</small>
+                </td>
+                <td data-label="Why it matters">
+                  Models to visit before choosing land. These farms can teach real economics, water, labor, and community needs.
+                </td>
+                <td data-label="Ask">
+                  “What would you do if you were starting a small regenerative farm family project now?”
+                </td>
+                <td data-label="Status"><span class="status">Visit</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="areas">
+      <div class="wrap">
+        <h2>Target Areas Around San Diego</h2>
+        <div class="grid three">
+          <article class="card">
+            <h3>Vista / Bonsall / Fallbrook / Valley Center</h3>
+            <p>
+              Best fit for small farms, fruit trees, families, farm stands, workshops, and North County connections.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Ramona / Lakeside / Escondido</h3>
+            <p>
+              More room for animals, workshops, and retreat energy. Watch heat, water, fire risk, and zoning.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Julian / Descanso / Alpine</h3>
+            <p>
+              Beautiful retreat potential. Farming may be more seasonal. Water, fire, access, and winter climate matter.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Anza / Temecula-adjacent</h3>
+            <p>
+              Farther away, possibly more realistic for larger land and livestock. Good for studying inland regenerative systems.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Southeast San Diego / Urban Parcels</h3>
+            <p>
+              Good for a pilot project, food justice, community gardens, music circles, and partnerships before rural land.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Baja / Rosarito Region</h3>
+            <p>
+              Worth considering later because of family/life context, but legal, water, and business structure need separate research.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="outreach">
+      <div class="wrap grid two">
+        <article class="card">
+          <h2>Outreach Checklist</h2>
+          <div class="checklist">
+            <label><input type="checkbox" /> Create one-page land-seeker profile.</label>
+            <label><input type="checkbox" /> Email California FarmLink.</label>
+            <label><input type="checkbox" /> Email RCD Greater San Diego County.</label>
+            <label><input type="checkbox" /> Email San Diego Food System Alliance.</label>
+            <label><input type="checkbox" /> Reach out to Project New Village.</label>
+            <label><input type="checkbox" /> Schedule first farm visit.</label>
+            <label><input type="checkbox" /> List family land requirements and deal-breakers.</label>
+            <label><input type="checkbox" /> Build 12-month pilot plan.</label>
+            <label><input type="checkbox" /> Decide whether music therapy credentialing is part of the plan.</label>
+          </div>
+          <p class="small">
+            Note: these checkboxes are static. For a persistent tracker, connect this page to localStorage, GitHub, Notion, Airtable, or a tiny backend later.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Email Template</h2>
+          <div class="contact-script">Subject: Family-led regenerative farm project seeking land access guidance
+
+Hi,
+
+My partner and I are exploring how to start a small family-led regenerative farm in or near San Diego County. Our vision combines soil-building agriculture, local food, education, retreats, community gatherings, and music-led nature experiences.
+
+We are not looking to rush into buying land blindly. We are hoping to learn about realistic land access paths: incubator plots, lease arrangements, landowner partnerships, conservation-oriented properties, farm mentorship, and any programs that help beginning farmers build a viable operation.
+
+We are especially interested in regenerative practices, water-wise growing, community food access, small-scale diversified production, and eventually hosting educational workshops or retreat-style gatherings where appropriate.
+
+Would you be open to pointing us toward the right person, program, farmer, landowner, or next step?
+
+Thank you,
+Thomas</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="retreats">
+      <div class="wrap grid two">
+        <article class="note-box">
+          <h2>Retreat Concept</h2>
+          <p>
+            The retreat side should begin small: farm days, music circles, family nature days,
+            community meals, simple workshops, and volunteer weekends.
+          </p>
+          <p>
+            Later it can grow into weekend retreats, farm stays, creative retreats, song circles,
+            nature immersion days, and seasonal gatherings.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Potential Offerings</h2>
+          <ul>
+            <li>Community music circles</li>
+            <li>Sound and nature relaxation sessions</li>
+            <li>Songwriting in nature</li>
+            <li>Farm-to-table meals</li>
+            <li>Family farm days</li>
+            <li>Children’s garden classes</li>
+            <li>Digital detox weekends</li>
+            <li>Regenerative gardening workshops</li>
+            <li>Volunteer and skill-sharing days</li>
+            <li>Seasonal gatherings and small festivals</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="therapy-language">
+      <div class="wrap">
+        <h2>Careful Language for Music + Wellness</h2>
+        <div class="grid two">
+          <article class="card">
+            <h3>Use for now</h3>
+            <ul>
+              <li>Music-led wellness</li>
+              <li>Community music circles</li>
+              <li>Creative expression sessions</li>
+              <li>Nature-based reflection</li>
+              <li>Sound and nature relaxation</li>
+              <li>Group singing and rhythm workshops</li>
+              <li>Music and mindfulness gatherings</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Avoid unless properly credentialed</h3>
+            <ul>
+              <li>Clinical music therapy</li>
+              <li>Therapy for anxiety, depression, PTSD, trauma, etc.</li>
+              <li>Diagnosis, treatment, cure, or medical claims</li>
+              <li>Licensed mental health service language</li>
+              <li>Anything that implies healthcare without the right structure</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="card" style="margin-top:18px;">
+          <h3>Safe positioning statement</h3>
+          <p>
+            Regenerative Farm offers music-led wellness, creative expression, and nature-based group experiences.
+            These offerings are designed for connection, relaxation, reflection, and community. They are not a
+            substitute for medical care, psychotherapy, or licensed clinical music therapy.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="next">
+      <div class="wrap grid two">
+        <article class="card">
+          <h2>Immediate Next Steps</h2>
+          <ol>
+            <li>Turn this page into a public/private project hub on tmsteph.</li>
+            <li>Make a one-page PDF land-seeker profile.</li>
+            <li>Send outreach to the first four organizations.</li>
+            <li>Visit at least three local farms.</li>
+            <li>Build a simple spreadsheet of leads, dates, responses, and follow-ups.</li>
+            <li>Draft a 12-month pilot that could work before owning land.</li>
+          </ol>
+        </article>
+
+        <article class="card">
+          <h2>Land Requirements Draft</h2>
+          <details open>
+            <summary>Needs</summary>
+            <ul>
+              <li>Reliable water or clear water plan</li>
+              <li>Safe place for family life</li>
+              <li>Agricultural use allowed</li>
+              <li>Potential for workshops or gatherings</li>
+              <li>Reachable from San Diego network</li>
+              <li>Low enough overhead to avoid pressure</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Deal-breakers to research</summary>
+            <ul>
+              <li>No water security</li>
+              <li>Unworkable zoning</li>
+              <li>Unsafe access roads</li>
+              <li>High fire risk with no mitigation plan</li>
+              <li>Debt too high before farm income exists</li>
+              <li>Restrictions against events, guests, animals, or farm sales</li>
+            </ul>
+          </details>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>
+        Regenerative Farm tracker • tmsteph • healthy soil, healthy food, healthy people, healthy planet.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
