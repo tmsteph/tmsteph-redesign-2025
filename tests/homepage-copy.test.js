@@ -21,5 +21,9 @@ describe('homepage personal positioning', () => {
     expect(html).toContain('Regenerative Farm Tracker');
     expect(trackerHtml).toContain('<title>Regenerative Farm Tracker</title>');
     expect(trackerHtml).toContain('California FarmLink');
+    expect(trackerHtml).toContain('Urban Agriculture Incentive Zone');
+    expect(trackerHtml).toContain('Project New Village');
+    expect(trackerHtml).toContain('RCD incubator plots');
+    expect(trackerHtml).toContain('Local Models to Visit');
   });
 });
