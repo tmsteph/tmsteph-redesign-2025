@@ -27,6 +27,15 @@ describe('homepage personal positioning', () => {
     expect(trackerHtml).toContain('Local Models to Visit');
   });
 
+  it('keeps the regenerative farm page compact on narrow displays', async () => {
+    const trackerHtml = await readFile('regenerative-farm/index.html', 'utf8');
+
+    expect(trackerHtml).toContain('@media (max-width: 480px)');
+    expect(trackerHtml).toContain('grid-template-columns: repeat(3, minmax(0, 1fr));');
+    expect(trackerHtml).toContain('min-height: 178px;');
+    expect(trackerHtml).toContain('font-size: clamp(2.35rem, 15vw, 2.9rem);');
+  });
+
   it('centers incomplete Command Central link rows', async () => {
     const css = await readFile('style.css', 'utf8');
 
