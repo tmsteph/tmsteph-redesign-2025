@@ -35,4 +35,17 @@ describe('homepage personal positioning', () => {
     expect(css).toContain('flex-wrap: wrap;');
     expect(css).toContain('justify-content: center;');
   });
+
+  it('provides a top app search shortcut that focuses the app search', async () => {
+    const html = await readFile('index.html', 'utf8');
+    const js = await readFile('index.js', 'utf8');
+    const css = await readFile('style.css', 'utf8');
+
+    expect(html).toContain('href="#explore-more"');
+    expect(html).toContain('data-app-search-jump');
+    expect(html).toContain('id="explore-more"');
+    expect(js).toContain('exploreSearchInput.focus');
+    expect(js).toContain("classList.add('is-highlighted')");
+    expect(css).toContain('.explore-search.is-highlighted .explore-search-input');
+  });
 });
