@@ -36,6 +36,19 @@ describe('homepage personal positioning', () => {
     expect(trackerHtml).toContain('font-size: clamp(2.35rem, 15vw, 2.9rem);');
   });
 
+  it('tracks relocation and farm incentive research leads', async () => {
+    const trackerHtml = await readFile('regenerative-farm/index.html', 'utf8');
+
+    expect(trackerHtml).toContain('Relocation and Farm Incentive Leads');
+    expect(trackerHtml).toContain('South Dakota Beginning Farmer Bond Program');
+    expect(trackerHtml).toContain('ISMEA Generazione Terra');
+    expect(trackerHtml).toContain('Kansas Rural Opportunity Zones');
+    expect(trackerHtml).toContain('Minnesota Beginning Farmer Tax Credit');
+    expect(trackerHtml).toContain('Nebraska NextGen Beginning Farmer Program');
+    expect(trackerHtml).toContain('Iowa beginning farmer programs');
+    expect(trackerHtml).toContain('Classify every incentive as relocation-only');
+  });
+
   it('centers incomplete Command Central link rows', async () => {
     const css = await readFile('style.css', 'utf8');
 
