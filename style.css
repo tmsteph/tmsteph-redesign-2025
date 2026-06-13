@@ -1609,8 +1609,9 @@ footer {
    COMMAND CENTRAL LINKS
 =========================== */
 .quick-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.25rem;
   margin-top: 2rem;
 }
@@ -1628,7 +1629,9 @@ footer {
   font-weight: 700;
   letter-spacing: 0.02em;
   transition: transform 0.3s ease, background 0.3s ease, border 0.3s ease;
+  flex: 0 1 190px;
   min-height: 58px;
+  text-align: center;
 }
 
 .quick-link:hover {
@@ -2251,11 +2254,11 @@ footer {
   }
 
   .quick-links {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 1rem;
   }
 
   .quick-link {
+    flex-basis: 160px;
     padding: 0.85rem 1rem;
     min-height: 52px;
   }
