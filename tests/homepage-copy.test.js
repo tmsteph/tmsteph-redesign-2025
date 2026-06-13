@@ -26,4 +26,13 @@ describe('homepage personal positioning', () => {
     expect(trackerHtml).toContain('RCD incubator plots');
     expect(trackerHtml).toContain('Local Models to Visit');
   });
+
+  it('centers incomplete Command Central link rows', async () => {
+    const css = await readFile('style.css', 'utf8');
+
+    expect(css).toContain('.quick-links');
+    expect(css).toContain('display: flex;');
+    expect(css).toContain('flex-wrap: wrap;');
+    expect(css).toContain('justify-content: center;');
+  });
 });
