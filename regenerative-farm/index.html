@@ -26,6 +26,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -37,6 +38,7 @@
         radial-gradient(circle at 85% 12%, rgba(115, 132, 95, 0.24), transparent 30rem),
         linear-gradient(180deg, #fbf7ed 0%, var(--bg) 48%, #e9e0cc 100%);
       line-height: 1.55;
+      overflow-x: hidden;
     }
 
     a {
@@ -455,6 +457,85 @@
         letter-spacing: 0.08em;
         color: var(--sage);
         margin-bottom: 3px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wrap {
+        width: min(var(--max), calc(100% - 20px));
+      }
+
+      .hero-copy,
+      .hero-card,
+      .card,
+      .note-box,
+      .tracker {
+        max-width: 100%;
+      }
+
+      header {
+        padding: 24px 0 18px;
+      }
+
+      .hero {
+        gap: 14px;
+      }
+
+      .hero-copy,
+      .hero-card {
+        border-radius: 22px;
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 2.7rem;
+        line-height: 0.98;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+        line-height: 1.05;
+      }
+
+      .lede,
+      .research-note {
+        font-size: 1rem;
+      }
+
+      .pill {
+        max-width: 100%;
+        white-space: normal;
+      }
+
+      .tagline,
+      .card,
+      .note-box {
+        padding: 18px;
+      }
+
+      .farm-window {
+        min-height: 240px;
+      }
+
+      .farm-window::after {
+        right: 12px;
+        left: 12px;
+        bottom: 12px;
+        white-space: normal;
+        line-height: 1.25;
+      }
+
+      section {
+        padding: 42px 0;
+      }
+
+      nav .wrap {
+        padding: 10px 0;
+      }
+
+      .contact-script {
+        padding: 14px;
+        font-size: 0.78rem;
       }
     }
 
