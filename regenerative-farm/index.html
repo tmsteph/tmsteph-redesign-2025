@@ -615,7 +615,6 @@
       <a href="#areas">Target Areas</a>
       <a href="#farm-models">Farm Models</a>
       <a href="#outreach">Outreach</a>
-      <a href="#project-desk">Project Desk</a>
       <a href="#retreats">Retreats</a>
       <a href="#therapy-language">Careful Language</a>
       <a href="#next">Next Steps</a>
@@ -861,7 +860,12 @@
 
     <section id="areas">
       <div class="wrap">
-        <h2>Target Areas Around San Diego</h2>
+        <h2>Target Areas to Compare</h2>
+        <p class="research-note">
+          San Diego is still the first research base, but the farm search should stay open.
+          South Dakota, Tennessee, Italy, and Baja all deserve comparison before any major
+          land decision.
+        </p>
         <div class="grid three">
           <article class="card">
             <h3>Vista / Bonsall / Fallbrook / Valley Center</h3>
@@ -897,6 +901,30 @@
             <h3>Baja / Rosarito Region</h3>
             <p>
               Worth considering later because of family/life context, but legal, water, and business structure need separate research.
+            </p>
+          </article>
+          <article class="card">
+            <h3>South Dakota</h3>
+            <p>
+              Potentially more room and lower land pressure than coastal California. Research
+              winter severity, water, soil, growing season, community fit, schools, healthcare,
+              and whether the family rhythm can handle the climate.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Tennessee</h3>
+            <p>
+              Worth looking into for family land, music culture, longer growing seasons, and a
+              stronger homestead path. Research humidity, storms, politics, soil, water, and
+              which regions support regenerative farms and retreat-style gatherings.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Italy</h3>
+            <p>
+              A longer-term dream path for food, culture, beauty, and rural renewal. Research
+              visas, citizenship options, language, land rules, taxes, healthcare, farm income,
+              and whether it should begin as seasonal learning before relocation.
             </p>
           </article>
         </div>
@@ -966,7 +994,6 @@
             <label><input type="checkbox" /> Schedule first farm visit.</label>
             <label><input type="checkbox" /> List family land requirements and deal-breakers.</label>
             <label><input type="checkbox" /> Build 12-month pilot plan.</label>
-            <label><input type="checkbox" /> Build the farm's Project Desk: web address, email identity, contact form, booking requests, and payment links.</label>
             <label><input type="checkbox" /> Decide whether music therapy credentialing is part of the plan.</label>
           </div>
           <p class="small">
@@ -991,227 +1018,6 @@ Would you be open to pointing us toward the right person, program, farmer, lando
 Thank you,
 Thomas</div>
         </article>
-      </div>
-    </section>
-
-    <section id="project-desk">
-      <div class="wrap">
-        <h2>3DVR Project Desk for the Farm</h2>
-        <div class="grid two">
-          <article class="card">
-            <h3>Simple promise</h3>
-            <p>
-              Regenerative Farm should eventually have a basic digital front desk: a public
-              web identity, a professional email identity, contact forms, booking requests,
-              payment links, simple lead follow-up, and a dashboard for keeping requests from
-              getting lost.
-            </p>
-            <p>
-              The owner should not need to understand DNS, MX records, Vercel, SMTP, DKIM,
-              calendars, form backends, or payment tools. The practical question is:
-              "Can people find us, contact us, book us, and pay us?" 3DVR should make the
-              answer yes.
-            </p>
-            <div class="contact-script">Project: Regenerative Farm
-Website: regenerative-farm.3dvr.tech
-Email: farm@3dvr.tech
-Contact form: regenerative-farm.3dvr.tech/contact
-Booking page: regenerative-farm.3dvr.tech/book
-Dashboard: 3dvr.tech/admin/projects/regenerative-farm</div>
-          </article>
-
-          <article class="card">
-            <h3>What the desk handles</h3>
-            <ul>
-              <li>Project subdomain or public page.</li>
-              <li>Project email alias or managed inbox.</li>
-              <li>Landing page or microsite for the farm vision.</li>
-              <li>Contact form for landowners, farms, volunteers, and partners.</li>
-              <li>Booking request form for farm visits, music circles, and workshops.</li>
-              <li>Lead notifications to the project owner or 3DVR operator.</li>
-              <li>Optional Stripe payment links for deposits, donations, or tickets.</li>
-              <li>Optional dashboard for leads, bookings, notes, status, and follow-up.</li>
-              <li>Optional AI-drafted responses with human approval before sending.</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="grid three" style="margin-top:18px;">
-          <article class="card">
-            <h3>Contact form MVP</h3>
-            <p>
-              The first useful form should collect name, email, phone, message, project or
-              service needed, preferred contact method, and consent. Optional fields can cover
-              budget, timeline, location, urgency, referral source, and uploaded photos or files.
-            </p>
-            <p>
-              Each submission should create a lead record, notify the owner, optionally send an
-              autoresponder, and show up in the project dashboard.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Booking request MVP</h3>
-            <p>
-              Start with request forms instead of full calendar scheduling. A visitor submits
-              preferred dates, backup dates, time window, location, service needed, budget, and
-              notes. The farm owner approves, replies, invoices, or schedules manually.
-            </p>
-            <p>
-              Real calendar scheduling can come later through Cal.com, Calendly, Google Calendar,
-              or a 3DVR-native availability system.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Payments</h3>
-            <p>
-              Begin with Stripe Payment Links, Stripe invoices, one-time buttons, deposit links,
-              and subscription checkout where appropriate. Future dashboard actions can include
-              "Send Deposit Request," "Mark Lead Paid," "Attach Payment to Booking," and
-              "Create Invoice."
-            </p>
-          </article>
-        </div>
-
-        <div class="grid two" style="margin-top:18px;">
-          <article class="card">
-            <h3>Email support ladder</h3>
-            <details open>
-              <summary>Level A: forwarding</summary>
-              <p>
-                Incoming mail to <code>farm@3dvr.tech</code> forwards to the owner's existing
-                email. This is easy, cheap, and good for the first paid tier, but replies may
-                come from the owner's personal address unless send-as is configured.
-              </p>
-            </details>
-            <details>
-              <summary>Level B: forwarding + send-as</summary>
-              <p>
-                Incoming mail still lands in the owner's existing inbox, but replies can be sent
-                as <code>farm@3dvr.tech</code>. This likely needs outbound SMTP plus correct
-                SPF, DKIM, and DMARC setup.
-              </p>
-            </details>
-            <details>
-              <summary>Level C: managed inbox / ticket view</summary>
-              <p>
-                Messages become leads or tickets inside the 3DVR dashboard with actions like
-                Reply, Mark Done, Send Invoice, or Create Booking. This supports AI-drafted
-                replies with human approval.
-              </p>
-            </details>
-            <details>
-              <summary>Level D: full mailbox add-on</summary>
-              <p>
-                A real mailbox through Google Workspace, Microsoft 365, Zoho, Fastmail, Proton,
-                or another provider. This is cleanest for users but carries more cost, support,
-                password recovery, abuse, and deliverability burden.
-              </p>
-            </details>
-          </article>
-
-          <article class="card">
-            <h3>Pricing ladder fit</h3>
-            <ul>
-              <li><strong>$0 Demo:</strong> 3DVR-branded demo page, manual setup, no custom email.</li>
-              <li><strong>$5 Project Address:</strong> subdomain, email forwarding, basic contact form, simple landing page.</li>
-              <li><strong>$20 Project Desk:</strong> microsite, contact form, booking request form, lead records, payment link, send-as support.</li>
-              <li><strong>$50 Managed Client Flow:</strong> ticket view, calendar requests, form routing, reminders, monthly updates, AI drafts.</li>
-              <li><strong>$200 Business OS:</strong> full operating layer, CRM-lite, invoices, automations, custom domain/email setup, priority support.</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="grid two" style="margin-top:18px;">
-          <article class="card">
-            <h3>Technical architecture path</h3>
-            <p>
-              Start manually and sellably: create the project record by hand, deploy a simple
-              page, add the subdomain, set up email forwarding, add contact and booking forms,
-              send notifications, and use Stripe links manually.
-            </p>
-            <p>
-              Later, move toward one shared Next.js app with dynamic subdomain routing:
-              <code>regenerative-farm.3dvr.tech</code> reads <code>projectSlug=regenerative-farm</code>.
-              Store project data, leads, booking requests, messages, and approval queue items
-              in a database such as Postgres, Supabase, Firebase, or a SQLite-to-Postgres path.
-            </p>
-            <p>
-              Inbound email can start as Cloudflare Email Routing or an ImprovMX-style forwarder.
-              For ticket workflow, use Mailgun, SendGrid, Postmark, Resend, or another inbound
-              parse provider that posts messages to a webhook.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Operating rules</h3>
-            <ul>
-              <li>AI drafts. Human approves. Then it sends.</li>
-              <li>Do not let untrusted users freely send bulk mail from <code>3dvr.tech</code>.</li>
-              <li>Use honeypot fields, Turnstile/CAPTCHA, rate limits, validation, and blocklists for forms.</li>
-              <li>Require manual approval for new outbound email projects.</li>
-              <li>Keep logs, rate limits, spam monitoring, and the ability to disable a project.</li>
-              <li>Use dashboard statuses: new, contacted, booked, paid, done, archived.</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="grid two" style="margin-top:18px;">
-          <article class="card">
-            <h3>Data model draft</h3>
-            <div class="contact-script">Project:
-- slug
-- name
-- ownerName
-- ownerEmail
-- plan
-- status
-- subdomain
-- emailAddress
-- emailForwardTo
-
-Lead:
-- projectId
-- source
-- name
-- email
-- phone
-- message
-- status
-- createdAt
-
-BookingRequest:
-- projectId
-- service
-- preferredDate
-- preferredTimeWindow
-- location
-- budgetRange
-- notes
-- status
-
-ApprovalQueueItem:
-- projectId
-- type
-- draftBody
-- status
-- createdBy</div>
-          </article>
-
-          <article class="card">
-            <h3>Immediate product decisions</h3>
-            <ul>
-              <li>Choose the first public farm slug.</li>
-              <li>Decide whether the email should be <code>farm@3dvr.tech</code> or <code>contact@regenerative-farm.3dvr.tech</code>.</li>
-              <li>Decide whether low-tier projects can use <code>@3dvr.tech</code> or need manual approval.</li>
-              <li>Choose shared app vs project-per-customer for MVP.</li>
-              <li>Choose database, email forwarding provider, transactional email provider, spam protection, and Stripe flow.</li>
-              <li>Decide whether the dashboard is internal-only first or client-facing from the start.</li>
-              <li>Decide the final brand name: Project Desk, Launch Desk, 3DVR Desk, or Farm Desk.</li>
-            </ul>
-          </article>
-        </div>
       </div>
     </section>
 
@@ -1304,7 +1110,7 @@ ApprovalQueueItem:
             <li>Visit at least five local models before choosing land.</li>
             <li>Build a spreadsheet of leads, dates, responses, next steps, and follow-ups.</li>
             <li>Draft a 12-month pilot that could work before owning land.</li>
-            <li>Use Project Desk as the digital infrastructure plan: subdomain, farm email, contact form, booking request page, payment links, dashboard, and human-approved AI drafts.</li>
+            <li>Compare San Diego County with South Dakota, Tennessee, Italy, and Baja before narrowing the land search.</li>
           </ol>
         </article>
 
