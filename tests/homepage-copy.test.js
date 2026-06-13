@@ -27,6 +27,8 @@ describe('homepage personal positioning', () => {
     expect(trackerHtml).toContain('Local Models to Visit');
     expect(trackerHtml).toContain('https://www.sdmake.org/');
     expect(trackerHtml).toContain('MAKE Projects');
+    expect(trackerHtml).toContain('https://cafarmandgarden.com/');
+    expect(trackerHtml).toContain('California Farm & Garden');
   });
 
   it('keeps the regenerative farm page compact on narrow displays', async () => {
