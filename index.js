@@ -2,6 +2,7 @@ const exploreSearchInput = document.getElementById('explore-search-input');
 const exploreSearchStatus = document.getElementById('explore-search-status');
 const exploreSearchEmpty = document.getElementById('explore-search-empty');
 const exploreGrid = document.getElementById('explore-project-grid');
+const appSearchJump = document.querySelector('[data-app-search-jump]');
 
 if (exploreSearchInput && exploreSearchStatus && exploreSearchEmpty && exploreGrid) {
   const projectCards = Array.from(exploreGrid.querySelectorAll('.project-card'));
@@ -32,4 +33,25 @@ if (exploreSearchInput && exploreSearchStatus && exploreSearchEmpty && exploreGr
 
   exploreSearchInput.addEventListener('input', updateSearchResults);
   updateSearchResults();
+
+  if (appSearchJump) {
+    appSearchJump.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const searchContainer = exploreSearchInput.closest('.explore-search');
+      document.getElementById('explore-more')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+      window.setTimeout(() => {
+        exploreSearchInput.focus({ preventScroll: true });
+        searchContainer?.classList.add('is-highlighted');
+      }, 260);
+
+      window.setTimeout(() => {
+        searchContainer?.classList.remove('is-highlighted');
+      }, 1800);
+    });
+  }
 }
