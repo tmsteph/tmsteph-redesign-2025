@@ -389,6 +389,23 @@
       color: var(--muted);
     }
 
+    .source-list {
+      columns: 2;
+      column-gap: 28px;
+      padding-left: 1.1em;
+      margin: 0;
+    }
+
+    .source-list li {
+      break-inside: avoid;
+      margin: 0 0 0.65em;
+    }
+
+    .research-note {
+      color: #3e452f;
+      font-size: 1.04rem;
+    }
+
     @media (max-width: 860px) {
       .hero,
       .grid.two,
@@ -398,6 +415,10 @@
 
       .stats {
         grid-template-columns: 1fr;
+      }
+
+      .source-list {
+        columns: 1;
       }
 
       header {
@@ -488,8 +509,8 @@
         <div class="farm-window" role="img" aria-label="A sunlit farm field"></div>
         <div class="stats">
           <div class="stat">
-            <strong>1</strong>
-            page land-seeker profile
+            <strong>23%</strong>
+            reported San Diego farmland loss in a decade
           </div>
           <div class="stat">
             <strong>4</strong>
@@ -507,12 +528,16 @@
   <nav>
     <div class="wrap">
       <a href="#vision">Vision</a>
+      <a href="#research">Research</a>
       <a href="#land">Land Leads</a>
+      <a href="#land-reality">Land Reality</a>
       <a href="#areas">Target Areas</a>
+      <a href="#farm-models">Farm Models</a>
       <a href="#outreach">Outreach</a>
       <a href="#retreats">Retreats</a>
       <a href="#therapy-language">Careful Language</a>
       <a href="#next">Next Steps</a>
+      <a href="#sources">Sources</a>
     </div>
   </nav>
 
@@ -547,6 +572,39 @@
       </div>
     </section>
 
+    <section id="research">
+      <div class="wrap grid two">
+        <article class="card">
+          <h2>Research Read</h2>
+          <p class="research-note">
+            Around San Diego, the realistic path is not to find cheap land and buy immediately.
+            The stronger path is land access, farm incubator or lease options, existing farm
+            mentorship, county food-system relationships, and possibly a retreat or agritourism
+            partner later.
+          </p>
+          <p>
+            The best first win is not ownership. It is getting into the local farm and food
+            network, then finding a lease, incubator plot, landowner partnership, backyard-farm
+            pilot, or retreat-property host that likes the family regenerative vision.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Best Opening</h2>
+          <p>
+            California FarmLink is the strongest first call because its work is directly about
+            land access, financing, resilience, land tenure, and farmer-landowner matching.
+            Local reporting has also tied FarmLink's San Diego expansion to steep regional
+            farmland loss, which makes this project timely.
+          </p>
+          <p>
+            The first ask should be simple: land access support for a family-led regenerative
+            farm, retreat, and education project in San Diego County or nearby.
+          </p>
+        </article>
+      </div>
+    </section>
+
     <section id="land">
       <div class="wrap">
         <h2>Land + Project Leads</h2>
@@ -563,72 +621,159 @@
             <tbody>
               <tr>
                 <td data-label="Lead">
-                  <strong>California FarmLink</strong>
+                  <strong><a href="https://www.californiafarmlink.org/">California FarmLink</a></strong>
                   <small>Land access, financing, farmer-landowner matchmaking.</small>
                 </td>
                 <td data-label="Why it matters">
                   Best first call for finding a lease, landowner partnership, or beginning farmer path.
+                  This is the organization most aligned with the question: how does a beginning
+                  regenerative farm family access land without buying blindly?
                 </td>
                 <td data-label="Ask">
-                  “Can you help us understand land access options for a family-led regenerative farm near San Diego?”
+                  "Can you help us understand land access options for a family-led regenerative
+                  farm, retreat, and education project near San Diego?"
                 </td>
                 <td data-label="Status"><span class="status hot">Contact first</span></td>
               </tr>
               <tr>
                 <td data-label="Lead">
-                  <strong>Resource Conservation District of Greater San Diego County</strong>
+                  <strong><a href="https://www.rcdsandiego.org/">Resource Conservation District of Greater San Diego County</a></strong>
                   <small>Soil health, conservation, water efficiency, farmer support.</small>
                 </td>
                 <td data-label="Why it matters">
-                  Strong local institution for farm support, grants, conservation practices, and incubator history.
+                  Strong local institution for soil health, grants, conservation planning, water-wise
+                  farming, and beginning farmer contacts. Their incubator history matters even if
+                  plots are full or program details change.
                 </td>
                 <td data-label="Ask">
-                  Ask about incubator plots, mentor farms, conservation planning, and water-wise regenerative practices.
+                  Ask about incubator updates, mentor farms, conservation planning, water efficiency,
+                  and who is helping new farmers move from small plots to longer-term sites.
                 </td>
                 <td data-label="Status"><span class="status hot">Contact early</span></td>
               </tr>
               <tr>
                 <td data-label="Lead">
-                  <strong>San Diego Food System Alliance</strong>
+                  <strong><a href="https://www.sdfsa.org/">San Diego Food System Alliance</a></strong>
                   <small>Food-system network, land tenure, local food economy.</small>
                 </td>
                 <td data-label="Why it matters">
-                  Good network for community food, land access policy, and values-aligned partners.
+                  Good network for community food, land tenure, capital, cooperative local food
+                  economies, and values-aligned partners.
                 </td>
                 <td data-label="Ask">
-                  Ask who is working on land tenure, regenerative farming, and community food projects.
+                  Ask who is working on land tenure, regenerative farming, community wealth,
+                  food justice, producer-friendly leases, and local food projects.
                 </td>
                 <td data-label="Status"><span class="status ready">Network</span></td>
               </tr>
               <tr>
                 <td data-label="Lead">
-                  <strong>Project New Village</strong>
+                  <strong><a href="https://www.projectnewvillage.org/">Project New Village</a></strong>
                   <small>Food sovereignty, community gardens, land stewardship.</small>
                 </td>
                 <td data-label="Why it matters">
-                  Good model for food, community wellness, land, and environmental justice.
+                  Serious local model for food sovereignty, community health, land stewardship,
+                  environmental justice, and neighborhood wealth through food.
                 </td>
                 <td data-label="Ask">
-                  Ask about community food projects, land trust activity, and volunteer/learning opportunities.
+                  Ask about community food projects, land trust activity, volunteer pathways,
+                  learning opportunities, and how a music + wellness farm vision could serve.
                 </td>
                 <td data-label="Status"><span class="status ready">Learn + serve</span></td>
               </tr>
               <tr>
                 <td data-label="Lead">
                   <strong>Existing farms</strong>
-                  <small>Sand n’ Straw, Coastal Roots, Agrarian Institute, Sage Mountain, Good Neighbor Gardens.</small>
+                  <small>Sand n' Straw, Coastal Roots, Agrarian Institute, Sage Mountain, Good Neighbor Gardens.</small>
                 </td>
                 <td data-label="Why it matters">
-                  Models to visit before choosing land. These farms can teach real economics, water, labor, and community needs.
+                  Models to visit before choosing land. These farms can teach real economics,
+                  water, labor, CSA structure, education, food justice, and community needs.
                 </td>
                 <td data-label="Ask">
-                  “What would you do if you were starting a small regenerative farm family project now?”
+                  "What would you do if you were starting a small regenerative farm family project now?"
                 </td>
                 <td data-label="Status"><span class="status">Visit</span></td>
               </tr>
             </tbody>
           </table>
         </div>
+      </div>
+    </section>
+
+    <section id="land-reality">
+      <div class="wrap grid two">
+        <article class="card">
+          <h2>Actual Land Situation</h2>
+          <p>
+            San Diego County land is expensive, fragmented, and unusual. There are agricultural
+            and ranch listings through local classifieds, including North County acreage and
+            avocado-style properties, but prices can move far beyond what makes sense for a
+            first farm pilot.
+          </p>
+          <p>
+            Public lease inventory also appears thin. The practical move is to treat public
+            listings as market research, not the whole opportunity set. Better leads may come
+            through FarmLink, RCD, food-system relationships, existing farms, churches, schools,
+            retreat properties, private landowners, or urban parcels.
+          </p>
+          <p>
+            At the time of research, LandSearch showed very limited small-farm lease inventory
+            in San Diego County, with one small farm lease listing around $7,000. That supports
+            the idea that relationship-driven land access matters more than waiting for the
+            perfect public listing.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Landowner Pitch Angle</h2>
+          <p>
+            San Diego County's Urban Agriculture Incentive Zone can help frame conversations
+            with owners of underused land: let a responsible grower activate the parcel for
+            agriculture, community food, and stewardship, and there may be property-tax
+            assessment benefits if the owner qualifies and signs the required contract. The
+            researched program notes describe a five-year minimum contract.
+          </p>
+          <p>
+            That does not hand you land, but it gives you a useful pitch: "Let us farm and
+            care for your underused parcel while you explore whether an agricultural incentive
+            can reduce holding costs."
+          </p>
+        </article>
+      </div>
+
+      <div class="wrap grid two" style="margin-top:18px;">
+        <article class="card">
+          <h2>RCD Program Notes</h2>
+          <p>
+            RCD's incubator history is useful even if the exact site changes. The researched
+            incubator notes listed quarter-acre beginning farmer plots, all ten plots full as
+            of December 2, 2024, and new plots expected as farmers scale to other sites. The
+            listed rent was $1,400 in Year 1, $1,600 in Years 2 and 3, plus a $1,000 deposit.
+          </p>
+          <p>
+            Important wrinkle: Wild Willow Farm & Education Center was listed as closed as
+            of July 1, 2025. RCD also noted that management of the Tijuana River Valley
+            Community Garden returned to the County, with Olivewood Gardens overseeing it.
+            Confirm the current structure directly before planning around that site.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Community Land Signals</h2>
+          <p>
+            San Diego Food System Alliance and Project New Village are important because this
+            vision overlaps with land tenure, community food, food sovereignty, environmental
+            justice, and neighborhood wealth. Civil Eats has described local partners working
+            toward what it called the county's first agricultural land trust.
+          </p>
+          <p>
+            Project New Village also has a concrete land-stewardship precedent: The
+            Conservation Fund reported financing that helped Project New Village buy land from
+            the City of San Diego so Mount Hope Community Garden could continue as a community
+            resource.
+          </p>
+        </article>
       </div>
     </section>
 
@@ -670,6 +815,56 @@
             <h3>Baja / Rosarito Region</h3>
             <p>
               Worth considering later because of family/life context, but legal, water, and business structure need separate research.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="farm-models">
+      <div class="wrap">
+        <h2>Local Models to Visit</h2>
+        <div class="grid three">
+          <article class="card">
+            <h3><a href="https://www.sandnstraw.com/">Sand n' Straw Community Farm</a></h3>
+            <p>
+              Vista family farm model with regenerative, organic, permaculture, education,
+              and community connection themes.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="https://coastalrootsfarm.org/">Coastal Roots Farm</a></h3>
+            <p>
+              Encinitas nonprofit farm combining sustainable agriculture, food justice,
+              education, and community connection.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="https://www.theagrarianinstitute.org/">The Agrarian Institute</a></h3>
+            <p>
+              Bonsall education farm model for organic produce, health education, land care,
+              and feeding neighbors in need.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="https://sagemountainfarm.com/">Sage Mountain Farm</a></h3>
+            <p>
+              Inland Southern California reference point for organic/regenerative growing,
+              CSA structure, and climate realities.
+            </p>
+          </article>
+          <article class="card">
+            <h3><a href="https://www.goodneighborgardens.com/">Good Neighbor Gardens</a></h3>
+            <p>
+              Urban/backyard farming model that could inspire a "farm before owning land"
+              pilot across yards, schools, and small parcels.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Visit Question</h3>
+            <p>
+              Do not lead by asking for land. Ask: "What would you do if you were starting
+              a small regenerative farm family project now?"
             </p>
           </article>
         </div>
@@ -784,6 +979,12 @@ Thomas</div>
             These offerings are designed for connection, relaxation, reflection, and community. They are not a
             substitute for medical care, psychotherapy, or licensed clinical music therapy.
           </p>
+          <p>
+            Use retreats and music as the differentiator, not the first legal burden. Start
+            with music-led wellness, community music circles, nature connection, creative
+            expression, and farm education unless the credentialing, insurance, and clinical
+            structure are in place.
+          </p>
         </div>
       </div>
     </section>
@@ -793,11 +994,11 @@ Thomas</div>
         <article class="card">
           <h2>Immediate Next Steps</h2>
           <ol>
-            <li>Turn this page into a public/private project hub on tmsteph.</li>
-            <li>Make a one-page PDF land-seeker profile.</li>
-            <li>Send outreach to the first four organizations.</li>
-            <li>Visit at least three local farms.</li>
-            <li>Build a simple spreadsheet of leads, dates, responses, and follow-ups.</li>
+            <li>Make a one-page land-seeker profile for "Regenerative Farm - Family Farm, Retreats, Music & Nature Education."</li>
+            <li>Send outreach to FarmLink, RCD Greater San Diego County, San Diego Food System Alliance, and Project New Village.</li>
+            <li>Ask for land access guidance, mentor farms, incubator updates, landowners, and producer-friendly lease pathways.</li>
+            <li>Visit at least five local models before choosing land.</li>
+            <li>Build a spreadsheet of leads, dates, responses, next steps, and follow-ups.</li>
             <li>Draft a 12-month pilot that could work before owning land.</li>
           </ol>
         </article>
@@ -826,6 +1027,54 @@ Thomas</div>
               <li>Restrictions against events, guests, animals, or farm sales</li>
             </ul>
           </details>
+        </article>
+      </div>
+
+      <div class="wrap" style="margin-top:18px;">
+        <article class="note-box">
+          <h2>Honest Read</h2>
+          <p>
+            There are people and organizations around San Diego that could help, but the
+            dream should start through relationships, not debt. The strongest opening is
+            the regional conversation around farmland loss, land access, producer-friendly
+            leases, regenerative agriculture, food justice, and community land stewardship.
+          </p>
+          <p>
+            The first win is probably a lease, incubator plot, backyard-farm CSA, existing
+            farm partnership, or retreat-property pilot. Ownership can come later after the
+            model, community, water reality, and economics are clearer.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="wrap">
+        <article class="card">
+          <h2>Research Sources</h2>
+          <p>
+            Use these as the starting source list for calls, visits, and follow-up research.
+            Details like incubator availability, lease pricing, and county programs should be
+            confirmed directly before making commitments.
+          </p>
+          <ul class="source-list">
+            <li><a href="https://www.californiafarmlink.org/">California FarmLink</a></li>
+            <li><a href="https://www.kpbs.org/news/economy/2026/04/30/combating-farmland-loss-california-farmlink-connects-landowners-farmers">KPBS: FarmLink and San Diego farmland loss</a></li>
+            <li><a href="https://www.rcdsandiego.org/">Resource Conservation District of Greater San Diego County</a></li>
+            <li><a href="https://www.rcdsandiego.org/incubator-plots">RCD incubator plots</a></li>
+            <li><a href="https://www.rcdsandiego.org/past-programs-tijuana-river-valley-community-garden">RCD Tijuana River Valley Community Garden update</a></li>
+            <li><a href="https://www.sdfsa.org/">San Diego Food System Alliance</a></li>
+            <li><a href="https://www.projectnewvillage.org/">Project New Village</a></li>
+            <li><a href="https://civileats.com/2026/03/31/in-southeast-san-diego-a-model-for-creating-community-wealth-through-food/">Civil Eats: Southeast San Diego food and land work</a></li>
+            <li><a href="https://www.conservationfund.org/our-impact/projects/mount-hope-community-garden-san-diego-california/">The Conservation Fund: Mount Hope Community Garden</a></li>
+            <li><a href="https://www.sdfarmbureau.org/classifieds/">San Diego County Farm Bureau classifieds</a></li>
+            <li><a href="https://www.sandiegocounty.gov/content/sdc/pds/advance/uaiz.html">County Urban Agriculture Incentive Zone</a></li>
+            <li><a href="https://www.sandnstraw.com/">Sand n' Straw Community Farm</a></li>
+            <li><a href="https://coastalrootsfarm.org/">Coastal Roots Farm</a></li>
+            <li><a href="https://www.theagrarianinstitute.org/">The Agrarian Institute</a></li>
+            <li><a href="https://sagemountainfarm.com/">Sage Mountain Farm</a></li>
+            <li><a href="https://www.goodneighborgardens.com/">Good Neighbor Gardens</a></li>
+          </ul>
         </article>
       </div>
     </section>
