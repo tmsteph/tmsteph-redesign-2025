@@ -49,6 +49,17 @@ describe('homepage personal positioning', () => {
     expect(trackerHtml).toContain('Classify every incentive as relocation-only');
   });
 
+  it('tracks microgreens as a first farm pilot', async () => {
+    const trackerHtml = await readFile('regenerative-farm/index.html', 'utf8');
+
+    expect(trackerHtml).toContain('Microgreens as the First Farm Pilot');
+    expect(trackerHtml).toContain('90-day microgreens pilot');
+    expect(trackerHtml).toContain('Keep microgreens separate from sprouts');
+    expect(trackerHtml).toContain('MU Extension: Microgreens Planning Budget');
+    expect(trackerHtml).toContain('CDFA Produce Safety Program');
+    expect(trackerHtml).toContain('UT Extension: Regulatory Considerations for Sprouts, Microgreens and Baby Greens');
+  });
+
   it('centers incomplete Command Central link rows', async () => {
     const css = await readFile('style.css', 'utf8');
 
