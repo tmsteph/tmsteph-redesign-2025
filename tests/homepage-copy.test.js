@@ -53,6 +53,21 @@ describe('homepage personal positioning', () => {
     expect(trackerHtml).toContain('Classify every incentive as relocation-only');
   });
 
+  it('tracks family-friendly farm work-trade and caretaker paths', async () => {
+    const trackerHtml = await readFile('regenerative-farm/index.html', 'utf8');
+
+    expect(trackerHtml).toContain('Family Work-Trade + Caretaker Path');
+    expect(trackerHtml).toContain('WWOOF');
+    expect(trackerHtml).toContain('RanchWork');
+    expect(trackerHtml).toContain('CAFF Jobs + Farm Bureau');
+    expect(trackerHtml).toContain('Workaway');
+    expect(trackerHtml).toContain('Worldpackers');
+    expect(trackerHtml).toContain('Foundation for Intentional Community');
+    expect(trackerHtml).toContain('Toddler Safety Filter');
+    expect(trackerHtml).toContain('Julian WWOOF farm-to-table camp/conference center');
+    expect(trackerHtml).toContain('https://www.ranchwork.com/jcategory/ranch-jobs-with-housing/');
+  });
+
   it('tracks microgreens as a first farm pilot', async () => {
     const trackerHtml = await readFile('regenerative-farm/index.html', 'utf8');
 
