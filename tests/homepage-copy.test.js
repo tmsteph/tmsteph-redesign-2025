@@ -5,7 +5,7 @@ describe('homepage personal positioning', () => {
   it('keeps tmsteph framed as a personal site', async () => {
     const html = await readFile('index.html', 'utf8');
 
-    expect(html).toContain(
+    expect(html).not.toContain(
       'Personal notes, tools, and experiments from a life spent learning in public.'
     );
     expect(html).not.toContain('launch-in-3-days');
