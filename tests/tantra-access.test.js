@@ -49,16 +49,25 @@ describe('tantra approval gate', () => {
   it('keeps external adult references inside the approval-only room', async () => {
     const html = await readFile('tantra/index.html', 'utf8');
     const homepage = await readFile('index.html', 'utf8');
-    const url = 'https://xhamster.com/videos/lingam-massage-will-relax-him-9419776';
+    const urls = [
+      'https://xhamster.com/videos/lingam-massage-will-relax-him-9419776',
+      'https://xhamster.com/videos/discovering-tantra-xhZY9Ev',
+    ];
 
     expect(practiceReferences).toEqual([
       expect.objectContaining({
         title: 'Lingam massage reference',
-        url,
+        url: urls[0],
+      }),
+      expect.objectContaining({
+        title: 'Discovering Tantra reference',
+        url: urls[1],
       }),
     ]);
     expect(html).toContain('id="tantra-reference-list"');
-    expect(homepage).not.toContain(url);
+    urls.forEach((url) => {
+      expect(homepage).not.toContain(url);
+    });
   });
 
   it('links the approval-only section from the homepage', async () => {
