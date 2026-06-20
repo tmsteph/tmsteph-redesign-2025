@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#241713" />
+  <title>Tantra Room - tmsteph</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <script defer src="/_vercel/analytics/script.js"></script>
+</head>
+<body class="tantra-body">
+  <header class="tantra-hero">
+    <nav class="tantra-nav" aria-label="Tantra navigation">
+      <a href="../index.html">tmsteph</a>
+      <a href="../admin/index.html#auth-section">Admin Login</a>
+    </nav>
+    <div class="tantra-hero__content">
+      <p class="tantra-eyebrow">Approval-only room</p>
+      <h1>Tantra</h1>
+      <p>
+        A private practice space for breath, devotion, embodied attention, and visual ritual.
+      </p>
+    </div>
+  </header>
+
+  <main class="tantra-shell">
+    <section class="tantra-grid" aria-label="Tantra access system">
+      <article class="tantra-panel">
+        <p class="tantra-eyebrow">Access</p>
+        <h2 id="access-title">Request approval</h2>
+        <p id="access-copy">
+          Log in or create a tmsteph account, then request access. The `tmsteph` admin user can approve or deny requests.
+        </p>
+
+        <form class="tantra-form" id="tantra-auth-form" autocomplete="off">
+          <label for="tantra-alias">Alias</label>
+          <input id="tantra-alias" name="alias" type="text" autocomplete="username" placeholder="your-alias" required />
+
+          <label for="tantra-password">Password</label>
+          <input id="tantra-password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+
+          <div class="tantra-actions">
+            <button class="btn-primary" type="submit" data-action="login">Log in</button>
+            <button class="btn-secondary" type="submit" data-action="create">Create account</button>
+          </div>
+        </form>
+
+        <div class="tantra-account" id="tantra-account" hidden>
+          <p>Signed in as <strong id="tantra-current-alias">Account</strong>.</p>
+          <div class="tantra-actions">
+            <button class="btn-primary" type="button" id="tantra-request-access">Request access</button>
+            <button class="btn-secondary" type="button" id="tantra-logout">Log out</button>
+          </div>
+        </div>
+
+        <p class="tantra-status" id="tantra-status" role="status" aria-live="polite">Waiting for login.</p>
+      </article>
+
+      <article class="tantra-panel tantra-admin" id="tantra-admin-panel" hidden>
+        <p class="tantra-eyebrow">tmsteph admin</p>
+        <h2>Approvals</h2>
+        <p>Approve or deny access requests from signed-in users.</p>
+        <ul class="tantra-request-list" id="tantra-request-list" aria-live="polite"></ul>
+      </article>
+    </section>
+
+    <section class="tantra-private" id="tantra-private" hidden aria-labelledby="tantra-private-title">
+      <div class="tantra-section-heading">
+        <p class="tantra-eyebrow">Private room</p>
+        <h2 id="tantra-private-title">Embodied visual set</h2>
+        <p>
+          Approved viewers can use these frames for quiet study, moodboarding, and ritual design.
+        </p>
+      </div>
+
+      <div class="tantra-gallery" id="tantra-gallery"></div>
+
+      <div class="tantra-references" aria-labelledby="tantra-reference-title">
+        <div class="tantra-section-heading tantra-section-heading--compact">
+          <p class="tantra-eyebrow">Practice references</p>
+          <h3 id="tantra-reference-title">Approved-only links</h3>
+        </div>
+        <div class="tantra-reference-list" id="tantra-reference-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gun/sea.js" defer></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

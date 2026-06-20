@@ -24,7 +24,10 @@ const STATIC_ASSETS = [
   '/journal/journal.js',
   '/admin/index.html',
   '/admin/style.css',
-  '/admin/admin.js'
+  '/admin/admin.js',
+  '/tantra/index.html',
+  '/tantra/styles.css',
+  '/tantra/app.js'
 ];
 
 self.addEventListener('install', (event) => {
