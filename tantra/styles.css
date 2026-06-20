@@ -1,0 +1,310 @@
+:root {
+  --tantra-ink: #241713;
+  --tantra-paper: #f8f3ee;
+  --tantra-muted: #7a665e;
+  --tantra-line: rgba(36, 23, 19, 0.16);
+  --tantra-rose: #9f4e5c;
+  --tantra-gold: #b98144;
+  --tantra-water: #4c9cb0;
+  --tantra-white: #fffaf4;
+}
+
+.tantra-body {
+  margin: 0;
+  color: var(--tantra-ink);
+  background: var(--tantra-paper);
+  font-family: "Quicksand", Arial, sans-serif;
+}
+
+.tantra-hero {
+  min-height: 72vh;
+  display: grid;
+  align-items: end;
+  padding: 24px;
+  color: var(--tantra-white);
+  background:
+    linear-gradient(90deg, rgba(36, 23, 19, 0.9), rgba(36, 23, 19, 0.34)),
+    url("assets/threshold-portrait.jpg") center 34% / cover;
+}
+
+.tantra-nav {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tantra-nav a {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 250, 244, 0.36);
+  background: rgba(36, 23, 19, 0.52);
+  color: var(--tantra-white);
+  text-decoration: none;
+}
+
+.tantra-hero__content {
+  width: min(760px, 100%);
+  padding-bottom: 8vh;
+}
+
+.tantra-eyebrow {
+  margin: 0 0 10px;
+  color: var(--tantra-rose);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.tantra-hero h1,
+.tantra-panel h2,
+.tantra-section-heading h2 {
+  margin: 0;
+  font-family: "Caveat", Georgia, serif;
+  letter-spacing: 0;
+}
+
+.tantra-hero h1 {
+  font-size: clamp(5rem, 15vw, 11rem);
+  line-height: 0.82;
+}
+
+.tantra-hero p:last-child {
+  max-width: 640px;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  line-height: 1.45;
+}
+
+.tantra-shell {
+  width: min(1180px, calc(100% - 28px));
+  margin: -46px auto 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.tantra-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.tantra-panel,
+.tantra-private {
+  background: rgba(255, 250, 244, 0.96);
+  border: 1px solid var(--tantra-line);
+  box-shadow: 0 24px 70px rgba(36, 23, 19, 0.16);
+}
+
+.tantra-panel {
+  padding: 24px;
+}
+
+.tantra-panel h2,
+.tantra-section-heading h2 {
+  font-size: clamp(2.6rem, 7vw, 5.8rem);
+  line-height: 0.9;
+}
+
+.tantra-panel p,
+.tantra-section-heading p {
+  color: var(--tantra-muted);
+  line-height: 1.55;
+}
+
+.tantra-form,
+.tantra-account {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.tantra-form label {
+  font-weight: 800;
+}
+
+.tantra-form input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--tantra-line);
+  background: #fff;
+  color: var(--tantra-ink);
+  padding: 0 12px;
+  font: inherit;
+}
+
+.tantra-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.tantra-status {
+  min-height: 24px;
+  margin: 18px 0 0;
+  font-weight: 800;
+}
+
+.tantra-status[data-state="approved"] {
+  color: #26714a;
+}
+
+.tantra-status[data-state="denied"] {
+  color: #9b2f36;
+}
+
+.tantra-status[data-state="pending"] {
+  color: var(--tantra-gold);
+}
+
+.tantra-request-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tantra-request {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--tantra-line);
+  background: #fff;
+}
+
+.tantra-request__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tantra-badge {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 0 9px;
+  background: rgba(185, 129, 68, 0.14);
+  color: var(--tantra-ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.tantra-private {
+  margin-top: 18px;
+  padding: 24px;
+}
+
+.tantra-section-heading {
+  max-width: 760px;
+  margin-bottom: 18px;
+}
+
+.tantra-section-heading--compact h3 {
+  margin: 0;
+  font-family: "Caveat", Georgia, serif;
+  font-size: clamp(2.1rem, 5vw, 4rem);
+  line-height: 0.9;
+}
+
+.tantra-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tantra-card {
+  min-height: 390px;
+  position: relative;
+  overflow: hidden;
+  background: var(--tantra-ink);
+}
+
+.tantra-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.tantra-card figcaption {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  padding: 10px;
+  background: rgba(36, 23, 19, 0.66);
+  color: var(--tantra-white);
+  font-weight: 800;
+}
+
+.tantra-references {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--tantra-line);
+}
+
+.tantra-reference-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tantra-reference-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 16px;
+  border: 1px solid var(--tantra-line);
+  background: #fff;
+}
+
+.tantra-reference-card h4 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.tantra-reference-card p {
+  margin: 0;
+  color: var(--tantra-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .tantra-grid,
+  .tantra-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .tantra-hero {
+    min-height: 82vh;
+    padding: 18px;
+  }
+
+  .tantra-shell {
+    width: calc(100% - 20px);
+  }
+
+  .tantra-grid,
+  .tantra-gallery,
+  .tantra-reference-list {
+    grid-template-columns: 1fr;
+  }
+
+  .tantra-card {
+    min-height: 430px;
+  }
+}
