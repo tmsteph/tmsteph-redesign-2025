@@ -52,6 +52,12 @@ export const practiceReferences = Object.freeze([
     url: 'https://xhamster.com/videos/lingam-massage-will-relax-him-9419776',
     note: 'External adult practice reference. Open only from the approved private room.',
   },
+  {
+    title: 'Discovering Tantra reference',
+    source: 'xHamster',
+    url: 'https://xhamster.com/videos/discovering-tantra-xhZY9Ev',
+    note: 'External adult practice reference. Open only from the approved private room.',
+  },
 ]);
 
 export function normalizeAlias(alias) {
