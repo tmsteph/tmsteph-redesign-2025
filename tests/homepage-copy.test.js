@@ -100,4 +100,14 @@ describe('homepage personal positioning', () => {
     expect(js).toContain("classList.add('is-highlighted')");
     expect(css).toContain('.explore-search.is-highlighted .explore-search-input');
   });
+
+  it('links to the yuga cycle map app', async () => {
+    const html = await readFile('index.html', 'utf8');
+    const yugaHtml = await readFile('yuga-cycles/index.html', 'utf8');
+
+    expect(html).toContain('href="yuga-cycles/index.html"');
+    expect(html).toContain('Yuga Cycle Map');
+    expect(yugaHtml).toContain('<title>The Long Horoscope, Yugas & Builder-Yuga</title>');
+    expect(yugaHtml).toContain('Back to tmsteph');
+  });
 });

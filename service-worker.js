@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tmsteph-pwa-v2';
+const CACHE_NAME = 'tmsteph-pwa-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -27,7 +27,9 @@ const STATIC_ASSETS = [
   '/admin/admin.js',
   '/tantra/index.html',
   '/tantra/styles.css',
-  '/tantra/app.js'
+  '/tantra/app.js',
+  '/yuga-cycles/index.html',
+  '/yuga-cycles/style.css'
 ];
 
 self.addEventListener('install', (event) => {
