@@ -2714,3 +2714,38 @@ footer {
     align-items: flex-start;
   }
 }
+.recipe-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.recipe-time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.75rem;
+}
+
+.recipe-time-grid label {
+  display: block;
+}
+
+.recipe-card {
+  padding: 1rem;
+}
+
+.recipe-card p {
+  white-space: pre-wrap;
+}
+
+.recipe-details {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.4rem;
+}
+
+.recipe-actions a {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tmsteph-pwa-v4';
+const CACHE_NAME = 'tmsteph-pwa-v5';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -8,6 +8,13 @@ const STATIC_ASSETS = [
   '/opensource.html',
   '/spirituality.html',
   '/stagehand.html',
+  '/recipe-book/index.html',
+  '/recipe-book/recipe-book.js',
+  '/meal-tracker/index.html',
+  '/meal-tracker/meal-tracker.js',
+  '/shopping-list/index.html',
+  '/shopping-list/shopping-list.js',
+  '/clean-meals/index.html',
   '/pwa.js',
   '/login-status.js',
   '/favicon.ico',

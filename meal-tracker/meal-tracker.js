@@ -11,6 +11,9 @@ const cancelButton = document.getElementById('meal-cancel');
 const list = document.getElementById('meal-list');
 const emptyState = document.getElementById('meal-empty');
 const today = new Date().toISOString().split('T')[0];
+const query = new URLSearchParams(window.location.search);
+const linkedRecipeId = query.get('recipe') || '';
+const linkedBookId = query.get('book') || '';
 
 const entries = gun.get('meal-tracker').get('entries');
 const cache = new Map();
@@ -75,6 +78,15 @@ const renderMeals = () => {
     dateTag.textContent = formatDate(entry.date);
 
     meta.append(typeTag, dateTag);
+    if (entry.recipeId) {
+      const recipeLink = document.createElement('a');
+      recipeLink.className = 'meal-tag';
+      const params = new URLSearchParams();
+      if (entry.recipeBookId) params.set('book', entry.recipeBookId);
+      recipeLink.href = `../recipe-book/${params.size ? `?${params.toString()}` : ''}`;
+      recipeLink.textContent = 'View recipe';
+      meta.appendChild(recipeLink);
+    }
     header.append(title, meta);
 
     const actions = document.createElement('div');
@@ -150,6 +162,8 @@ entries.map().on((data, key) => {
     mealType: data.mealType,
     date: data.date,
     menu: data.menu,
+    recipeId: data.recipeId,
+    recipeBookId: data.recipeBookId,
     createdAt: data.createdAt,
   });
 
@@ -173,6 +187,8 @@ form.addEventListener('submit', (event) => {
       mealType,
       date,
       menu,
+      recipeId: existing?.recipeId || linkedRecipeId,
+      recipeBookId: existing?.recipeBookId || linkedBookId,
       createdAt: existing?.createdAt ?? Date.now(),
       updatedAt: Date.now(),
     });
@@ -185,6 +201,8 @@ form.addEventListener('submit', (event) => {
     mealType,
     date,
     menu,
+    recipeId: linkedRecipeId,
+    recipeBookId: linkedBookId,
     createdAt: Date.now(),
   });
 
@@ -193,6 +211,9 @@ form.addEventListener('submit', (event) => {
 
 if (!dateInput.value) {
   dateInput.value = today;
+}
+if (query.get('menu')) {
+  menuInput.value = query.get('menu');
 }
 
 cancelButton.addEventListener('click', () => {

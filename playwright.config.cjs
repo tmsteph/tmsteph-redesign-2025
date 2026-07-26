@@ -2,6 +2,7 @@
 const { defineConfig } = require('@playwright/test');
 const isTermux = Boolean(process.env.TERMUX_VERSION);
 const chromiumExecutablePath = '/data/data/com.termux/files/usr/bin/chromium-browser';
+const configuredExecutablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
 
 module.exports = defineConfig({
   testDir: '.',
@@ -11,7 +12,12 @@ module.exports = defineConfig({
   use: {
     baseURL: 'http://localhost:8000',
     headless: true,
-    launchOptions: isTermux
+    launchOptions: configuredExecutablePath
+      ? {
+          executablePath: configuredExecutablePath,
+          args: ['--no-sandbox', '--disable-dev-shm-usage']
+        }
+      : isTermux
       ? {
           executablePath: chromiumExecutablePath,
           args: ['--no-sandbox', '--disable-dev-shm-usage']
