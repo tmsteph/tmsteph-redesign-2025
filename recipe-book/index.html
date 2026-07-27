@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1d39">
+  <title>Recipe Book - Thomas Stephens</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="shortcut icon" href="../favicon-16x16.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="../icons/pwa-icon-192.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <script src="../pwa.js" defer></script>
+  <script defer src="/_vercel/analytics/script.js"></script>
+</head>
+<body>
+  <div id="starfield"></div>
+
+  <header class="hero fade-in">
+    <div class="container">
+      <h1 class="handwritten">Family Recipe Book</h1>
+      <p class="tagline">Keep useful recipe links, family directions, and grocery ingredients together.</p>
+      <div class="recipe-nav">
+        <a href="../index.html" class="btn-primary">← Home</a>
+        <a href="../meal-tracker/" class="btn-secondary">Meal tracker</a>
+        <a id="recipe-shopping-link" href="../shopping-list/" class="btn-secondary">Shopping list</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section card fade-in">
+    <div class="container">
+      <div class="section-header">
+        <h2>Save a recipe</h2>
+        <p>A title and link are enough. Add ingredients or directions whenever they are useful.</p>
+      </div>
+
+      <div class="tracker-grid">
+        <form class="tracker-form" id="recipe-form">
+          <h3 id="recipe-form-title">New recipe</h3>
+
+          <label for="recipe-title">Recipe title</label>
+          <input id="recipe-title" name="recipe-title" type="text" placeholder="Sheet-pan lemon chicken" required>
+
+          <label for="recipe-url">Recipe link</label>
+          <input id="recipe-url" name="recipe-url" type="url" placeholder="https://example.com/recipe">
+
+          <label for="recipe-description">Notes</label>
+          <textarea id="recipe-description" name="recipe-description" rows="3" placeholder="Why we saved it, substitutions, or who likes it"></textarea>
+
+          <div class="recipe-time-grid">
+            <div>
+              <label for="recipe-servings">Servings</label>
+              <input id="recipe-servings" name="recipe-servings" type="text" placeholder="4">
+            </div>
+            <div>
+              <label for="recipe-prep-time">Prep time</label>
+              <input id="recipe-prep-time" name="recipe-prep-time" type="text" placeholder="15 min">
+            </div>
+            <div>
+              <label for="recipe-cook-time">Cook time</label>
+              <input id="recipe-cook-time" name="recipe-cook-time" type="text" placeholder="30 min">
+            </div>
+          </div>
+
+          <label for="recipe-ingredients">Ingredients</label>
+          <textarea id="recipe-ingredients" name="recipe-ingredients" rows="7" placeholder="1 lb | chicken thighs | Meat&#10;2 | lemons | Produce&#10;Olive oil"></textarea>
+          <p class="tracker-note">One per line. Optional format: quantity | ingredient | category.</p>
+
+          <label for="recipe-directions">Directions</label>
+          <textarea id="recipe-directions" name="recipe-directions" rows="7" placeholder="Heat the oven to 425°F.&#10;Season the chicken.&#10;Roast until cooked through."></textarea>
+          <p class="tracker-note">One step per line.</p>
+
+          <button class="btn-primary" type="submit" id="recipe-submit">Save recipe</button>
+          <button class="btn-secondary" type="button" id="recipe-cancel" hidden>Cancel edit</button>
+        </form>
+
+        <div class="tracker-results">
+          <div class="section-header">
+            <h3>Saved recipes</h3>
+            <p class="tracker-note">Shared through the same relay pattern as the shopping list.</p>
+          </div>
+
+          <div class="shopping-sync-panel">
+            <label for="recipe-share-link">Family recipe-book link</label>
+            <div class="shopping-sync-row">
+              <input id="recipe-share-link" type="url" readonly aria-label="Current recipe book link">
+              <button class="shopping-action-btn" type="button" id="recipe-copy-link">Copy link</button>
+            </div>
+            <p class="tracker-note" id="recipe-sync-status" aria-live="polite">Connecting…</p>
+          </div>
+
+          <div class="tracker-filter">
+            <label for="recipe-search">Find a recipe</label>
+            <input id="recipe-search" type="search" placeholder="Search title, notes, or ingredients">
+          </div>
+
+          <p class="tracker-note" id="recipe-empty">No recipes yet. Save a favorite link or family recipe above.</p>
+          <ul class="meal-list" id="recipe-list" aria-live="polite"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <div class="container">
+      <p class="handwritten">© 2026 Thomas Stephens | Save what works. Cook it again.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js" defer></script>
+  <script src="recipe-book.js" type="module" defer></script>
+  <script>
+    const starField = document.getElementById('starfield');
+    for (let i = 0; i < 80; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + 'vh';
+      star.style.left = Math.random() * 100 + 'vw';
+      starField.appendChild(star);
+    }
+  </script>
+</body>
+</html>
