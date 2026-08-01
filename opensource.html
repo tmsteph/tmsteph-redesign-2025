@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b1d39">
-  <title>Open Source Projects - Thomas Stephens</title>
+  <title>Open Source Contributions - Thomas Stephens</title>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="favicon-16x16.png" type="image/x-icon">
   <link rel="apple-touch-icon" href="icons/pwa-icon-192.png">
@@ -19,8 +19,8 @@
 
   <header class="hero fade-in">
     <div class="container">
-      <h1 class="handwritten">Open Source Projects</h1>
-      <p class="tagline">Building the Tools for Freedom.</p>
+      <h1 class="handwritten">Open Source Contributions</h1>
+      <p class="tagline">Building, testing, and sharing tools people can own.</p>
       <a href="index.html" class="btn-primary">← Back to Home</a>
     </div>
   </header>
@@ -31,6 +31,39 @@
       <p>Today, we have unprecedented access to information and creativity. Yet much of modern technology remains closed, controlled, and difficult for everyday people to truly own.</p>
 
       <p>I believe in building and supporting open systems — tools that anyone can use, modify, and extend — because true empowerment comes from understanding and ownership.</p>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
+    <div class="container">
+      <p class="contribution-eyebrow">Merged upstream</p>
+      <h2>Contributions to the wider community</h2>
+      <article class="contribution-card">
+        <div class="contribution-heading">
+          <div>
+            <p class="contribution-project">GUN · graph database</p>
+            <h3>Reproduced a late-subscription sync gap</h3>
+          </div>
+          <span class="contribution-status">Merged</span>
+        </div>
+        <p>
+          I turned an intermittent synchronization problem from real-world use into a repeatable PANIC regression test.
+          The test creates a relay, writes a dynamic index from one browser, starts a second browser later, and verifies
+          that the initial <code>.map().on()</code> subscription receives every indexed record without a reload.
+        </p>
+        <ul class="contribution-details">
+          <li>Added a 177-line automated browser test and configurable load controls.</li>
+          <li>Documented the load-sensitive results across the repository build and published release.</li>
+          <li>Merged into the official GUN repository on August 1, 2026.</li>
+        </ul>
+        <div class="contribution-links">
+          <a href="https://github.com/amark/gun/pull/1421" target="_blank" rel="noopener">View merged pull request #1421 ↗</a>
+          <a href="https://github.com/amark/gun/commit/3795ac0ac888848a13afbbe346e50052f73b1157" target="_blank" rel="noopener">View contribution commit ↗</a>
+        </div>
+      </article>
+      <p class="contribution-note">
+        This is a living record. I add contributions here when they are accepted by projects outside my own repositories.
+      </p>
     </div>
   </section>
 
@@ -60,7 +93,7 @@
 
   <footer class="fade-in">
     <div class="container">
-      <p class="handwritten">© 2025 Thomas Stephens | Dream. Build. Share.</p>
+      <p class="handwritten">© 2026 Thomas Stephens | Dream. Build. Share.</p>
     </div>
   </footer>
 

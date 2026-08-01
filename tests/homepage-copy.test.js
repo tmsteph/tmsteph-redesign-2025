@@ -110,4 +110,13 @@ describe('homepage personal positioning', () => {
     expect(yugaHtml).toContain('<title>The Long Horoscope, Yugas & Builder-Yuga</title>');
     expect(yugaHtml).toContain('Back to tmsteph');
   });
+
+  it('documents accepted upstream open-source contributions', async () => {
+    const html = await readFile('opensource.html', 'utf8');
+
+    expect(html).toContain('Contributions to the wider community');
+    expect(html).toContain('Merged into the official GUN repository on August 1, 2026.');
+    expect(html).toContain('https://github.com/amark/gun/pull/1421');
+    expect(html).toContain('3795ac0ac888848a13afbbe346e50052f73b1157');
+  });
 });
