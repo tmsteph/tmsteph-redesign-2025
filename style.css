@@ -687,6 +687,80 @@ footer {
 /* ===========================
    OPEN SOURCE CONTRIBUTIONS
 =========================== */
+.opensource-page {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(45, 123, 190, 0.34), transparent 28rem),
+    linear-gradient(180deg, #102d4d 0%, #081a2e 100%);
+  color: #f4f8fc;
+}
+
+.opensource-page h1,
+.opensource-page h2,
+.opensource-page h3,
+.opensource-page p {
+  text-shadow: none;
+}
+
+.opensource-page .hero {
+  padding-block: 5rem 3rem;
+}
+
+.opensource-page .hero .container {
+  max-width: 760px;
+}
+
+.opensource-page .hero h1 {
+  color: #ffe066;
+  font-size: clamp(3rem, 8vw, 5rem);
+  line-height: 0.95;
+}
+
+.opensource-page .tagline {
+  color: #d9e8f5;
+}
+
+.opensource-page .section.card {
+  max-width: 1080px;
+  padding: 0;
+  border: 1px solid rgba(149, 205, 238, 0.18);
+  background: rgba(11, 35, 60, 0.88);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.opensource-page .section > .container {
+  max-width: none;
+  padding: clamp(2rem, 5vw, 4rem);
+}
+
+.opensource-page .section h2 {
+  max-width: 720px;
+  margin-inline: auto;
+  color: #ffe066;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+
+.opensource-page .section > .container > p:not(.contribution-eyebrow):not(.contribution-note),
+.opensource-page .section > .container > ul {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.opensource-page .section > .container > p,
+.opensource-page .section > .container > li {
+  color: #e2edf6;
+  line-height: 1.7;
+}
+
+.opensource-page .section > .container > ul {
+  padding-left: 1.4rem;
+  text-align: left;
+}
+
+.opensource-page .section > .container > ul li + li {
+  margin-top: 0.55rem;
+}
+
 .contribution-eyebrow,
 .contribution-project {
   margin-bottom: 0.45rem;
@@ -698,14 +772,26 @@ footer {
 }
 
 .contribution-card {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  border: 1px solid rgba(127, 255, 225, 0.3);
-  border-radius: 20px;
-  background: rgba(5, 20, 40, 0.45);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.18);
+  min-width: 0;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid rgba(127, 255, 225, 0.28);
+  border-radius: 16px;
+  background: #0c2947;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.22);
   text-align: left;
+}
+
+.contribution-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.contribution-intro {
+  margin-bottom: 0;
+  color: #c9dceb !important;
+  font-size: 1.08rem;
 }
 
 .contribution-heading {
@@ -717,8 +803,9 @@ footer {
 }
 
 .contribution-heading h3 {
-  font-size: 1.45rem;
-  line-height: 1.25;
+  color: #ffe066;
+  font-size: clamp(1.45rem, 2.5vw, 1.85rem);
+  line-height: 1.18;
 }
 
 .contribution-status {
@@ -733,8 +820,9 @@ footer {
 
 .contribution-card p,
 .contribution-card li {
-  font-size: 1rem;
-  line-height: 1.65;
+  color: #eef6fb;
+  font-size: 1.05rem;
+  line-height: 1.68;
 }
 
 .contribution-card code {
@@ -753,7 +841,19 @@ footer {
 .contribution-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1.25rem;
+  gap: 0.75rem;
+}
+
+.contribution-links a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid rgba(127, 255, 225, 0.34);
+  border-radius: 10px;
+  background: rgba(127, 255, 225, 0.08);
+  line-height: 1.35;
+  text-decoration: none;
 }
 
 .contribution-note {
@@ -763,12 +863,65 @@ footer {
 }
 
 @media (max-width: 600px) {
+  .opensource-page .hero {
+    padding: 3rem 0.75rem 2rem;
+  }
+
+  .opensource-page .hero .container {
+    padding: 1rem;
+  }
+
+  .opensource-page .hero h1 {
+    font-size: 3.25rem;
+  }
+
+  .opensource-page .section.card {
+    width: calc(100% - 1rem);
+    margin-block: 1rem;
+    border-radius: 14px;
+  }
+
+  .opensource-page .section > .container {
+    padding: 1.5rem 1.1rem;
+  }
+
+  .opensource-page .section h2 {
+    font-size: 2rem;
+  }
+
+  .opensource-page .section > .container > p {
+    font-size: 1.05rem;
+  }
+
+  .contribution-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.35rem;
+  }
+
+  .contribution-card {
+    padding: 1.25rem;
+  }
+
   .contribution-heading {
     display: grid;
   }
 
   .contribution-status {
     justify-self: start;
+  }
+
+  .contribution-card p,
+  .contribution-card li {
+    font-size: 1rem;
+  }
+
+  .contribution-details {
+    margin-left: 1rem;
+  }
+
+  .contribution-links {
+    display: grid;
   }
 }
 
