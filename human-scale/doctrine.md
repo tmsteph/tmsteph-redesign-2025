@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.7 — August 2026**
+**Version 0.8 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -96,9 +96,10 @@ A civilization is progressing when more people can:
 - work without surrendering their entire waking lives
 - retain meaningful time that is not claimed by employment or constant economic activity
 - use powerful technology without surrendering attention, ownership, judgment, or the ability to leave
+- rely on modern energy without accepting permanent pollution, waste, fragility, or total dependence
 - access nature and public space
 - participate directly in the living world through soil, plants, food, animals, and stewardship
-- obtain food, shelter, education, and healthcare without permanent desperation
+- obtain food, shelter, education, healthcare, and essential energy without permanent desperation
 - participate in culture and community
 - develop spiritually, intellectually, emotionally, and creatively
 - leave a healthy world to the next generation
@@ -109,7 +110,7 @@ This doctrine is not anti-technology.
 
 It argues for **human-compatible technology**:
 
-- renewable and locally resilient energy
+- clean, reliable, abundant, and locally resilient energy
 - open-source software and hardware
 - distributed networks
 - repairable devices
@@ -140,6 +141,7 @@ It should favor:
 - cooperative creation
 - meaningful public spaces and third places
 - meaningful access to living land
+- resilient local capability connected to larger shared systems
 - decentralized political and economic power
 - cultural pluralism
 - freedom of belief
@@ -180,11 +182,15 @@ The fourth chapter asks how much of life employment should consume, distinguishe
 
 The fifth chapter asks how technology can expand human capability without demanding attention, dependence, lock-in, or loss of judgment. It explores repair, interoperability, open systems, AI, automation, resilience, local capability, and technology that knows when to get out of the way.
 
+### 6. [Energy — Power Without Dependence](energy/index.html)
+
+The sixth chapter asks how modern civilization can keep reliable, abundant energy while reducing ecological damage, waste, fragility, and dependence. It explores grids, local resilience, renewables, nuclear power, buildings, transportation, energy access, and the value of judging energy sources by real tradeoffs instead of political identity.
+
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
 ## Where This Can Grow
 
-Future subjects may include energy, economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, family, health, ecology, and open source.
+Future subjects may include economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, family, health, ecology, and open source.
 
 We do not need a complete system before we can learn, write, test ideas, or act.
 
@@ -211,6 +217,9 @@ Among the questions still to explore:
 - How should gains from productivity be divided among wages, prices, profits, public benefits, and human time?
 - What forms of technological openness most effectively preserve agency without blocking safety, reliability, or innovation?
 - How should AI preserve human judgment when systems become increasingly capable of acting on our behalf?
+- What mix of energy generation, storage, transmission, efficiency, and local resilience works best in different places?
+- How much redundancy should energy systems preserve even when it appears economically inefficient during normal conditions?
+- How can energy transitions reduce ecological harm without making reliable power unaffordable or politically fragile?
 - How can dense cities become deeply connected to nature?
 - How do we preserve scientific rigor while allowing spiritual pluralism?
 - What should children learn in a civilization built around human flourishing?
