@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.2 — August 2026**
+**Version 0.3 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -12,33 +12,17 @@ Modern industrial civilization changed that environment at extraordinary speed.
 
 The problem is not that humanity learned too much. The problem is that our power to redesign the world grew faster than our understanding of what kind of world human beings actually need.
 
-## How to Use This Doctrine
+## What This Is For
 
-This doctrine is meant to help people do more than hold beliefs. It should help us understand the world, navigate it, and change it.
+This is not only a statement of belief. It should help us understand the world, live better inside it, and change the systems that work against human flourishing.
 
-Every major subject should eventually be developed in three layers:
+Each major subject can be approached through three simple questions:
 
-### Diagnosis
+1. **Diagnosis — What is happening, and why?**
+2. **Field Guide — What can people do now?**
+3. **Program — What should we change together?**
 
-What is happening? How did the current system develop? Which incentives, technologies, institutions, cultural habits, and physical environments shape the problem? Where does modern life conflict with recurring human needs?
-
-### Field Guide
-
-How can a person, family, or small group live better inside the world that exists now? What practical changes improve health, agency, competence, relationships, meaning, and resilience without requiring escape from society?
-
-### Program
-
-What should communities, institutions, businesses, cities, and governments change? Which reforms, technologies, public investments, ownership models, rules, and experiments could make human-compatible life easier for ordinary people?
-
-The doctrine should move repeatedly through the same cycle:
-
-**understand → adapt → organize → reform → build alternatives**
-
-And it should operate across a ladder of action:
-
-**Self → Household → Neighborhood → Institutions → City & Region → Economy & Government → Civilization**
-
-Higher-level change is not an excuse to neglect daily life. Personal adaptation is not an excuse to ignore structural problems.
+That is the structure. It is a tool for thinking, not a bureaucracy around the philosophy.
 
 ## The Wrong Turn
 
@@ -166,48 +150,25 @@ Science can tell us an extraordinary amount about how the world works.
 
 It does not eliminate the human need to ask what life is for.
 
-## Chapters
+## Chapter 1
 
-### 1. [Human Nature — The Environment We Were Built For](human-nature/index.html)
+### [Human Nature — The Environment We Were Built For](human-nature/index.html)
 
-The foundation of the doctrine. It introduces the mismatch lens, a practical Field Guide, a Human Scale policy test, and a ladder from personal action to societal change.
+The first long-form chapter explores the mismatch between recurring human needs and modern environments, then asks what individuals can do now and what communities or institutions might change.
 
-## Doctrine Map
+Long chapters are optional depth. The doctrine itself should remain readable without them.
 
-This project can grow into connected bodies of thought:
+## Where This Can Grow
 
-- [Human Nature](human-nature/index.html)
-- Technology
-- Energy
-- Economics
-- Community
-- Education
-- Artificial Intelligence
-- Spirituality
-- Governance
-- Food and Agriculture
-- Architecture
-- Transportation
-- Work
-- Family
-- Health
-- Ecology
-- Open Source
+Future subjects may include technology, energy, economics, community, education, artificial intelligence, spirituality, governance, food, architecture, transportation, work, family, health, ecology, and open source.
 
-Each branch should eventually contain principles, evidence, unanswered questions, and practical experiments.
+We do not need a complete system before we can learn, write, test ideas, or act.
 
-## Evidence Standard
+## One Rule for the Project
 
-A serious doctrine must distinguish between different kinds of claims:
+We should distinguish between **evidence**, **hypothesis**, **values**, and **political proposals**.
 
-- **Strong evidence** — supported across multiple methods, populations, or disciplines.
-- **Working hypothesis** — plausible and worth testing, but not settled.
-- **Value judgment** — a statement about the kind of life or society we consider desirable.
-- **Political proposal** — an intervention that must be evaluated for effectiveness, rights, cost, tradeoffs, unintended consequences, and public legitimacy.
-
-A scientific finding does not automatically determine a political answer, and a political preference should not be disguised as scientific certainty.
-
-The doctrine should be willing to change when reality contradicts it.
+We should be willing to say *we do not know*. We should test claims where we can. We should not disguise political preferences as scientific certainty. And when reality contradicts the doctrine, the doctrine should change.
 
 ## Open Questions
 
@@ -215,7 +176,7 @@ This doctrine is intentionally unfinished.
 
 Among the questions still to explore:
 
-- Which parts of modern life create the greatest evolutionary mismatch?
+- Which parts of modern life create the greatest mismatch with human nature?
 - Which technologies measurably improve human flourishing?
 - What is the ideal scale for different institutions?
 - How much localization is resilient without becoming isolationist?
