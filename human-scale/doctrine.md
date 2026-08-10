@@ -1,10 +1,10 @@
 # The Human Scale Doctrine
 
-**Version 0.8 — August 2026**
+**Version 0.12 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
-This is a living doctrine about human nature, technology, energy, community, ecology, and the kind of civilization worth building.
+This is a living doctrine about human nature, technology, energy, community, economics, governance, ecology, and the kind of civilization worth building.
 
 It begins with a simple observation: human beings are biological organisms whose bodies and minds developed within nature, small communities, physical movement, direct relationships, seasonal rhythms, and meaningful dependence on the living world.
 
@@ -97,100 +97,91 @@ A civilization is progressing when more people can:
 - retain meaningful time that is not claimed by employment or constant economic activity
 - use powerful technology without surrendering attention, ownership, judgment, or the ability to leave
 - rely on modern energy without accepting permanent pollution, waste, fragility, or total dependence
+- obtain necessities without permanent desperation while preserving practical freedom and room to build ownership
+- participate in government without needing politics or bureaucracy to consume their lives
+- access nourishing food and retain some relationship to cooking, growing, soil, and the people who produce it
+- live in places where daily needs, nature, public space, and other people are not unnecessarily distant
 - access nature and public space
 - participate directly in the living world through soil, plants, food, animals, and stewardship
-- obtain food, shelter, education, healthcare, and essential energy without permanent desperation
 - participate in culture and community
 - develop spiritually, intellectually, emotionally, and creatively
 - leave a healthy world to the next generation
 
-## The Technological Direction
+## The Direction
 
-This doctrine is not anti-technology.
+This doctrine is not anti-technology, anti-market, anti-government, anti-city, or anti-modernity.
 
-It argues for **human-compatible technology**:
+It argues for systems that remain accountable to human purposes.
 
-- clean, reliable, abundant, and locally resilient energy
-- open-source software and hardware
-- distributed networks
-- repairable devices
-- interoperable systems and portable data
-- local and flexible manufacturing
-- automation of dangerous, repetitive, and bureaucratic labor
-- AI that expands human agency rather than replacing human judgment everywhere
-- computing that disappears into the background when it is not needed
-- architecture and transportation that encourage movement and community
-- agricultural systems that regenerate rather than exhaust the land
+**Technology:** open, repairable, interoperable, resilient, agency-expanding, and quiet enough to disappear when it is not needed.
 
-The goal is not maximum technology.
+**Energy:** clean, reliable, affordable, resilient, and capable of combining strong shared grids with meaningful local capacity.
 
-The goal is the right technology in the right place, serving life.
+**Economy:** productive and innovative while protecting practical freedom, broadening ownership, preserving room for small enterprise, and ensuring that rising productivity reaches ordinary human life.
 
-## The Social Direction
+**Governance:** power exercised at the smallest scale that can solve the problem well, with larger institutions capable enough to function and accountable enough to remain legitimate.
 
-Human-scale civilization should make it easier to form durable communities without forcing everyone into one ideology or lifestyle.
+**Food:** modern abundance combined with cooking competence, regional capacity, living soil, responsible agriculture, wider trade, and food systems people can understand and participate in.
 
-It should favor:
+**Place:** housing, streets, transportation, public space, buildings, trees, gardens, and daily destinations arranged to reduce unnecessary distance and make healthy social life easier.
 
-- strong families and chosen families
-- neighborhoods where people repeatedly encounter one another
-- voluntary associations
-- mutual aid
-- time for relationships, care, rest, and civic life
-- local ownership
-- cooperative creation
-- meaningful public spaces and third places
-- meaningful access to living land
-- resilient local capability connected to larger shared systems
-- decentralized political and economic power
-- cultural pluralism
-- freedom of belief
-- privacy, boundaries, and the ability to leave unhealthy groups
-- room for spiritual life
+**Community:** strong families and chosen families, repeated local relationships, meaningful public spaces and third places, mutual aid, care, pluralism, privacy, and the ability to leave unhealthy groups.
 
-Large systems will still exist. The principle is that scale should have to justify itself.
+**Inner life:** room for science and reason alongside prayer, meditation, yoga, art, music, philosophy, nature, and the human search for meaning.
 
-## The Spiritual Direction
+Large systems will still exist. The principle is that **scale should have to justify itself.**
 
-Human beings have always searched for meaning.
+The goal is not maximum technology, maximum production, maximum consumption, maximum localism, or maximum central control.
 
-A humane civilization should make room for contemplation, ritual, prayer, meditation, yoga, art, music, mystery, philosophy, direct encounters with nature, and other practices that bring people back into body, place, relationship, and immediate experience without demanding one metaphysical explanation from everyone.
-
-Science can tell us an extraordinary amount about how the world works.
-
-It does not eliminate the human need to ask what life is for.
+The goal is enough capability to support human life well.
 
 ## Chapters
 
 ### 1. [Human Nature — The Environment We Were Built For](human-nature/index.html)
 
-The first long-form chapter explores the mismatch between recurring human needs and modern environments, then asks what individuals can do now and what communities or institutions might change.
+The foundation: recurring human needs, evolutionary mismatch, practical adaptation, and the question of how society can make healthy human behavior easier.
 
 ### 2. [Land & Life — Reconnecting Humans to the Living World](land-life/index.html)
 
-The second chapter argues that meaningful access to soil, plants, animals, gardens, food forests, open sky, and embodied practices should be part of ordinary life rather than a luxury. It explores both personal participation and public design.
+Land access, gardens, food forests, plants, animals, embodied practices, and the idea that living systems belong inside ordinary infrastructure.
 
 ### 3. [Community — The Human Need to Belong](community/index.html)
 
-The third chapter explores repeated relationships, neighbors, shared meals and work, third places, caregiving, local participation, digital community, and the challenge of creating belonging without sacrificing freedom or pluralism.
+Neighbors, repeated relationships, shared meals and work, third places, caregiving, local participation, and belonging without captivity.
 
 ### 4. [Work & Time — What Is a Human Life For?](work-time/index.html)
 
-The fourth chapter asks how much of life employment should consume, distinguishes paid work from human contribution, and explores predictable time, worker agency, care, commuting, automation, shorter-work experiments, and the idea that productivity should sometimes give time back.
+Paid work and human contribution, predictable time, commuting, care, worker agency, automation, and the possibility that productivity should give some of our lives back.
 
 ### 5. [Technology — Tools That Serve Life](technology/index.html)
 
-The fifth chapter asks how technology can expand human capability without demanding attention, dependence, lock-in, or loss of judgment. It explores repair, interoperability, open systems, AI, automation, resilience, local capability, and technology that knows when to get out of the way.
+Attention, repairability, interoperability, AI, automation, resilience, open systems, and tools that expand human capability without becoming the whole environment.
 
 ### 6. [Energy — Power Without Dependence](energy/index.html)
 
-The sixth chapter asks how modern civilization can keep reliable, abundant energy while reducing ecological damage, waste, fragility, and dependence. It explores grids, local resilience, renewables, nuclear power, buildings, transportation, energy access, and the value of judging energy sources by real tradeoffs instead of political identity.
+Reliable modern energy, strong grids, local resilience, renewables, nuclear power, efficiency, energy access, and abundance placed back in service of life.
+
+### 7. [Economics — What Is the Economy For?](economics/index.html)
+
+Markets, material security, ownership, entrepreneurship, public goods, commons, housing, automation, and an economy designed to serve practical human freedom.
+
+### 8. [Governance — Power Close Enough to Understand](governance/index.html)
+
+Subsidiarity, rights, institutional capacity, legibility, civic participation, public technology, corruption, emergencies, and accountable power at the right scale.
+
+### 9. [Food — Nourishment, Culture & Living Systems](food/index.html)
+
+Cooking, gardens, agriculture, soil, food workers, animals, regional processing, trade, resilience, and food as the daily meeting point between body and Earth.
+
+### 10. [Architecture & Place — Build for Human Life](architecture-place/index.html)
+
+Housing, streets, walkability, transit, public space, nature, climate, beauty, accessibility, childhood, and the physical distances that shape everyday life.
 
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
 ## Where This Can Grow
 
-Future subjects may include economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, family, health, ecology, and open source.
+Future subjects may include education, artificial intelligence in greater depth, spirituality, family, health, transportation, ecology, open source, justice, childhood, media, and the design of institutions for an automated future.
 
 We do not need a complete system before we can learn, write, test ideas, or act.
 
@@ -210,22 +201,22 @@ Among the questions still to explore:
 - Which technologies measurably improve human flourishing?
 - What is the ideal scale for different institutions?
 - How much localization is resilient without becoming isolationist?
-- How can land access be expanded without pretending ownership, housing, farming, ecology, and public access have no tradeoffs?
-- How can institutions make belonging easier without making community compulsory or oppressive?
 - How should ownership change in a highly automated economy?
-- What work should humans continue doing even when machines can do it?
-- How should gains from productivity be divided among wages, prices, profits, public benefits, and human time?
-- What forms of technological openness most effectively preserve agency without blocking safety, reliability, or innovation?
-- How should AI preserve human judgment when systems become increasingly capable of acting on our behalf?
+- How should gains from productivity be divided among wages, prices, profits, ownership, public benefits, and human time?
+- Which forms of material security most effectively expand freedom without creating unnecessary administrative complexity or bad incentives?
+- Where do markets work exceptionally well, and where do monopoly, externalities, information problems, or public goods require other institutions?
+- How can subsidiarity preserve local agency while still protecting rights and solving cross-boundary problems?
+- How can government become simpler for citizens without losing the expertise required by complex systems?
 - What mix of energy generation, storage, transmission, efficiency, and local resilience works best in different places?
-- How much redundancy should energy systems preserve even when it appears economically inefficient during normal conditions?
-- How can energy transitions reduce ecological harm without making reliable power unaffordable or politically fragile?
-- How can dense cities become deeply connected to nature?
+- How much regional food capacity produces useful resilience without sacrificing the benefits of trade?
+- Which agricultural practices best preserve soil, water, biodiversity, productivity, affordability, and farmer livelihoods in different ecosystems?
+- How can cities add enough housing while improving nature, infrastructure, public space, beauty, and community rather than merely increasing density?
+- How do we design places where children, older people, disabled people, and non-drivers can participate in ordinary life?
 - How do we preserve scientific rigor while allowing spiritual pluralism?
 - What should children learn in a civilization built around human flourishing?
-- How should AI be designed if attention, agency, and human development are primary values?
+- How should AI be designed if attention, agency, human development, broad ownership, and human time are primary values?
 
-## The Direction
+## The Direction of the Project
 
 The future does not need to be a choice between technological acceleration and a romantic return to the past.
 
@@ -235,7 +226,9 @@ We can keep the science.
 
 We can keep the computers.
 
-And we can use them to build a civilization in which people once again belong to their bodies, their communities, and the Earth.
+We can keep markets, cities, large infrastructure, specialized institutions, global exchange, and the extraordinary capabilities of modern civilization where they genuinely serve us.
+
+And we can recover bodies, neighborhoods, gardens, useful competence, durable relationships, human time, living landscapes, understandable institutions, and the ability to participate in the systems around us.
 
 **The village and the computer can coexist.**
 

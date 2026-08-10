@@ -8,299 +8,58 @@
   <meta name="theme-color" content="#07111f" />
   <link rel="icon" href="../favicon.ico" type="image/x-icon" />
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #07111f;
-      --panel: #0b1728;
-      --text: #e8eef7;
-      --muted: #a9b8cb;
-      --line: #22344c;
-      --sky: #78c8ff;
-      --sun: #ffe28a;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 15% 0%, rgba(120, 200, 255, 0.12), transparent 34rem),
-        radial-gradient(circle at 90% 10%, rgba(158, 216, 170, 0.08), transparent 30rem),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.72;
-    }
-    a { color: var(--sky); }
-    .topbar {
-      max-width: 1050px;
-      margin: 0 auto;
-      padding: 1.25rem 1.4rem 0;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-    .topbar a { color: var(--muted); text-decoration: none; }
-    .topbar a:hover { color: var(--text); }
-    header {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 6.5rem 1.4rem 4.5rem;
-      text-align: center;
-    }
-    .eyebrow {
-      color: var(--sky);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-    h1 {
-      margin: 0.75rem 0 1.1rem;
-      font-size: clamp(3rem, 9vw, 6rem);
-      line-height: 0.97;
-      letter-spacing: -0.055em;
-    }
-    h2 {
-      margin: 0 0 1rem;
-      font-size: clamp(1.9rem, 5vw, 2.8rem);
-      line-height: 1.08;
-      letter-spacing: -0.035em;
-    }
-    h3 { margin: 0; font-size: 1.12rem; line-height: 1.3; }
-    p { margin: 0.9rem 0; }
-    .lead {
-      max-width: 720px;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: clamp(1.08rem, 2.6vw, 1.35rem);
-    }
-    .thesis {
-      max-width: 780px;
-      margin: 2.3rem auto 0;
-      padding: 1.35rem 1.5rem;
-      border: 1px solid rgba(255, 226, 138, 0.28);
-      border-radius: 18px;
-      background: rgba(255, 226, 138, 0.055);
-      color: #fff4cf;
-      font-size: clamp(1.25rem, 3vw, 1.7rem);
-      font-weight: 750;
-    }
-    main {
-      width: min(100% - 2rem, 880px);
-      margin: 0 auto;
-      padding-bottom: 5rem;
-    }
-    section {
-      padding: 3.1rem 0;
-      border-top: 1px solid var(--line);
-    }
-    .muted { color: var(--muted); }
-    .callout {
-      margin: 1.7rem 0 0;
-      padding: 1.3rem 1.4rem;
-      border-left: 4px solid var(--sky);
-      border-radius: 0 14px 14px 0;
-      background: var(--panel);
-      font-size: 1.1rem;
-    }
-    .three {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-    .card {
-      padding: 1.2rem;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--panel);
-    }
-    .card p { margin-bottom: 0; color: var(--muted); }
-    .needs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      padding: 0;
-      margin: 1.4rem 0;
-      list-style: none;
-    }
-    .needs li {
-      padding: 0.42rem 0.75rem;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(255,255,255,0.025);
-      color: #dbe6f3;
-    }
-    .theses {
-      display: grid;
-      gap: 0.9rem;
-      margin-top: 1.5rem;
-    }
-    .thesis-card {
-      display: grid;
-      grid-template-columns: 2.7rem 1fr;
-      gap: 1rem;
-      padding: 1.15rem;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: linear-gradient(145deg, rgba(16,32,55,0.82), rgba(8,19,34,0.82));
-    }
-    .number {
-      width: 2.7rem;
-      height: 2.7rem;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(120, 200, 255, 0.1);
-      color: var(--sky);
-      font-weight: 850;
-    }
-    .thesis-card p { margin: 0.4rem 0 0; color: var(--muted); }
-    .chapter {
-      display: block;
-      padding: 1.4rem;
-      margin-top: 1rem;
-      border: 1px solid rgba(120, 200, 255, 0.3);
-      border-radius: 16px;
-      background: rgba(120, 200, 255, 0.06);
-      color: var(--text);
-      text-decoration: none;
-    }
-    .chapter strong { color: var(--sky); font-size: 1.08rem; }
-    .chapter span { display: block; margin-top: 0.4rem; color: var(--muted); }
-    .closing { text-align: center; }
-    .closing strong {
-      display: block;
-      max-width: 720px;
-      margin: 2rem auto 0;
-      color: var(--sun);
-      font-size: clamp(1.6rem, 5vw, 2.5rem);
-      line-height: 1.15;
-      letter-spacing: -0.035em;
-    }
-    .version { margin-top: 2rem; color: var(--muted); font-size: 0.9rem; }
-    footer {
-      padding: 2.5rem 1.4rem 3.5rem;
-      border-top: 1px solid var(--line);
-      text-align: center;
-      color: var(--muted);
-    }
-    footer a { text-decoration: none; }
-    @media (max-width: 700px) {
-      header { padding-top: 5rem; }
-      .three { grid-template-columns: 1fr; }
-    }
+    :root { color-scheme:dark; --bg:#07111f; --panel:#0b1728; --text:#e8eef7; --muted:#a9b8cb; --line:#22344c; --sky:#78c8ff; --sun:#ffe28a; }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 15% 0%,rgba(120,200,255,.12),transparent 34rem),radial-gradient(circle at 90% 10%,rgba(158,216,170,.08),transparent 30rem),var(--bg);color:var(--text);line-height:1.72}a{color:var(--sky)}
+    .topbar{max-width:1050px;margin:0 auto;padding:1.25rem 1.4rem 0;display:flex;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.92rem}.topbar a{color:var(--muted);text-decoration:none}.topbar a:hover{color:var(--text)}header{max-width:900px;margin:0 auto;padding:6.5rem 1.4rem 4.5rem;text-align:center}.eyebrow{color:var(--sky);font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}h1{margin:.75rem 0 1.1rem;font-size:clamp(3rem,9vw,6rem);line-height:.97;letter-spacing:-.055em}h2{margin:0 0 1rem;font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.08;letter-spacing:-.035em}h3{margin:0;font-size:1.12rem;line-height:1.3}p{margin:.9rem 0}.lead{max-width:720px;margin:0 auto;color:var(--muted);font-size:clamp(1.08rem,2.6vw,1.35rem)}.thesis{max-width:780px;margin:2.3rem auto 0;padding:1.35rem 1.5rem;border:1px solid rgba(255,226,138,.28);border-radius:18px;background:rgba(255,226,138,.055);color:#fff4cf;font-size:clamp(1.25rem,3vw,1.7rem);font-weight:750}
+    main{width:min(100% - 2rem,880px);margin:0 auto;padding-bottom:5rem}section{padding:3.1rem 0;border-top:1px solid var(--line)}.muted{color:var(--muted)}.callout{margin:1.7rem 0 0;padding:1.3rem 1.4rem;border-left:4px solid var(--sky);border-radius:0 14px 14px 0;background:var(--panel);font-size:1.1rem}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem}.card{padding:1.2rem;border:1px solid var(--line);border-radius:16px;background:var(--panel)}.card p{margin-bottom:0;color:var(--muted)}.needs{display:flex;flex-wrap:wrap;gap:.6rem;padding:0;margin:1.4rem 0;list-style:none}.needs li{padding:.42rem .75rem;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.025);color:#dbe6f3}.theses{display:grid;gap:.9rem;margin-top:1.5rem}.thesis-card{display:grid;grid-template-columns:2.7rem 1fr;gap:1rem;padding:1.15rem;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(16,32,55,.82),rgba(8,19,34,.82))}.number{width:2.7rem;height:2.7rem;display:grid;place-items:center;border-radius:50%;background:rgba(120,200,255,.1);color:var(--sky);font-weight:850}.thesis-card p{margin:.4rem 0 0;color:var(--muted)}.chapter{display:block;padding:1.4rem;margin-top:1rem;border:1px solid rgba(120,200,255,.3);border-radius:16px;background:rgba(120,200,255,.06);color:var(--text);text-decoration:none}.chapter strong{color:var(--sky);font-size:1.08rem}.chapter span{display:block;margin-top:.4rem;color:var(--muted)}.closing{text-align:center}.closing strong{display:block;max-width:720px;margin:2rem auto 0;color:var(--sun);font-size:clamp(1.6rem,5vw,2.5rem);line-height:1.15;letter-spacing:-.035em}.version{margin-top:2rem;color:var(--muted);font-size:.9rem}footer{padding:2.5rem 1.4rem 3.5rem;border-top:1px solid var(--line);text-align:center;color:var(--muted)}footer a{text-decoration:none}@media(max-width:700px){header{padding-top:5rem}.three{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <nav class="topbar" aria-label="Page navigation">
-    <a href="../index.html">← tmsteph home</a>
-    <span>Living doctrine · v0.8</span>
-  </nav>
-
-  <header>
-    <div class="eyebrow">Thomas Stephens · August 2026</div>
-    <h1>The Human Scale Doctrine</h1>
-    <p class="lead">A living framework for understanding modern life, living more humanly, and building a civilization around human flourishing.</p>
-    <div class="thesis">Humanity became powerful faster than it became wise.</div>
-  </header>
-
+  <nav class="topbar"><a href="../index.html">← tmsteph home</a><span>Living doctrine · v0.12</span></nav>
+  <header><div class="eyebrow">Thomas Stephens · August 2026</div><h1>The Human Scale Doctrine</h1><p class="lead">A living framework for understanding modern life, living more humanly, and building a civilization around human flourishing.</p><div class="thesis">Humanity became powerful faster than it became wise.</div></header>
   <main>
-    <section>
-      <h2>The premise</h2>
-      <p>Human beings are biological organisms whose bodies and minds developed within nature, small communities, physical movement, direct relationships, seasonal rhythms, and meaningful dependence on the living world.</p>
-      <p>Modern industrial civilization changed that environment at extraordinary speed.</p>
-      <div class="callout">The problem is not that humanity learned too much. The problem is that our power to redesign the world grew faster than our understanding of what kind of world human beings actually need.</div>
+    <section><h2>The premise</h2><p>Human beings are biological organisms whose bodies and minds developed within nature, small communities, physical movement, direct relationships, seasonal rhythms, and meaningful dependence on the living world.</p><p>Modern industrial civilization changed that environment at extraordinary speed.</p><div class="callout">The problem is not that humanity learned too much. The problem is that our power to redesign the world grew faster than our understanding of what kind of world human beings actually need.</div></section>
+
+    <section><h2>What this is for</h2><p>This is not only a statement of belief. It should help us understand the world, live better inside it, and change the systems that work against human flourishing.</p><div class="three"><div class="card"><h3>Diagnosis</h3><p>What is happening, and why?</p></div><div class="card"><h3>Field Guide</h3><p>What can people do now?</p></div><div class="card"><h3>Program</h3><p>What should we change together?</p></div></div></section>
+
+    <section><h2>The wrong turn</h2><p>Fossil fuels gave humanity access to immense stores of concentrated energy. That energy multiplied transportation, manufacturing, extraction, construction, communication, and economic production.</p><p>It also made it possible to redesign everyday life around machines: cities spread outward, work became more abstract, food traveled farther, artificial light extended the day, cars reorganized public space, screens reorganized attention, and institutions grew larger and more centralized.</p><p>None of these inventions are automatically evil.</p><div class="callout">The wrong turn was subtler: <strong>we began optimizing civilization around what machines and markets could do instead of around what human beings need.</strong></div></section>
+
+    <section><h2>The human mismatch</h2><p class="muted">The human animal still needs things that cannot be engineered away.</p><ul class="needs"><li>Movement</li><li>Sunlight</li><li>Sleep</li><li>Nature</li><li>Family</li><li>Friendship</li><li>Belonging</li><li>Meaningful work</li><li>Play</li><li>Beauty</li><li>Touch</li><li>Autonomy</li><li>Purpose</li><li>Quiet</li><li>A livable environment</li></ul><p>A civilization can become more technologically sophisticated while becoming less compatible with the beings living inside it.</p></section>
+
+    <section><h2>Ten theses</h2><div class="theses">
+      <article class="thesis-card"><div class="number">1</div><div><h3>Human beings are biological organisms, not abstract economic units.</h3><p>Durable systems must begin with the realities of the body, mind, relationships, and ecology.</p></div></article>
+      <article class="thesis-card"><div class="number">2</div><div><h3>Our biology changes more slowly than our technological environment.</h3><p>Material advancement can still create psychologically or physically hostile conditions.</p></div></article>
+      <article class="thesis-card"><div class="number">3</div><div><h3>Fossil energy accelerated the mismatch.</h3><p>Human environments and institutions could transform at a speed previously impossible.</p></div></article>
+      <article class="thesis-card"><div class="number">4</div><div><h3>Efficiency is not the same as flourishing.</h3><p>A system can produce more and move faster while making everyday life worse.</p></div></article>
+      <article class="thesis-card"><div class="number">5</div><div><h3>Technology is a tool, not a destiny.</h3><p>We can decide which technologies deserve a place in human life and under what conditions.</p></div></article>
+      <article class="thesis-card"><div class="number">6</div><div><h3>Human-scale systems should be preferred when they work.</h3><p>Local, understandable, repairable systems often preserve agency and resilience.</p></div></article>
+      <article class="thesis-card"><div class="number">7</div><div><h3>Advanced technology should become quieter.</h3><p>The best machines remove drudgery without consuming attention, identity, and purpose.</p></div></article>
+      <article class="thesis-card"><div class="number">8</div><div><h3>Open systems protect human agency.</h3><p>Knowledge and infrastructure should be understandable, repairable, interoperable, and shareable whenever possible.</p></div></article>
+      <article class="thesis-card"><div class="number">9</div><div><h3>Ecology is not an externality.</h3><p>Human civilization exists inside the living world, not outside it.</p></div></article>
+      <article class="thesis-card"><div class="number">10</div><div><h3>Recover what modernity discarded without discarding what humanity learned.</h3><p>We do not need to choose between the village and the computer. We can build both.</p></div></article>
+    </div></section>
+
+    <section><h2>What progress should mean</h2><p>Progress is more than GDP, speed, scale, convenience, or computational power. A civilization is progressing when people have healthier bodies, deeper relationships, durable community, meaningful work, time that is actually theirs, practical economic freedom, accountable institutions, agency over technology, reliable energy, nourishing food, access to living land, and places designed around human life.</p></section>
+
+    <section><h2>The direction</h2><p><strong>Technology:</strong> open, repairable, interoperable, resilient, agency-expanding, and quiet enough to disappear when it is not needed.</p><p><strong>Energy:</strong> clean, reliable, affordable, resilient, and capable of combining strong shared grids with meaningful local capacity.</p><p><strong>Economy:</strong> productive and innovative while protecting practical freedom, broadening ownership, and making sure progress reaches ordinary life.</p><p><strong>Governance:</strong> power at the smallest scale that can solve the problem well, with larger institutions capable and accountable when scale is necessary.</p><p><strong>Food & place:</strong> living soil, cooking, regional capacity, useful trade, enough housing, shorter distances, public space, nature, shade, beauty, and daily environments that support the body.</p><p><strong>Community & inner life:</strong> durable relationships, pluralism, privacy, care, prayer, meditation, yoga, art, music, philosophy, nature, and room to ask what life is for.</p><div class="callout">The goal is not maximum technology, production, consumption, localism, or central control. The goal is enough capability to support human life well.</div></section>
+
+    <section><h2>Go deeper</h2><p>The doctrine should remain readable on its own. Longer chapters are optional depth, not prerequisites.</p>
+      <a class="chapter" href="human-nature/index.html"><strong>Chapter 1: Human Nature — The Environment We Were Built For →</strong><span>Recurring human needs, mismatch, practical adaptation, and society designed around human flourishing.</span></a>
+      <a class="chapter" href="land-life/index.html"><strong>Chapter 2: Land & Life — Reconnecting Humans to the Living World →</strong><span>Land access, gardens, food forests, plants, animals, embodied practice, and living-world infrastructure.</span></a>
+      <a class="chapter" href="community/index.html"><strong>Chapter 3: Community — The Human Need to Belong →</strong><span>Neighbors, repeated relationships, shared meals and work, third places, care, and belonging without captivity.</span></a>
+      <a class="chapter" href="work-time/index.html"><strong>Chapter 4: Work & Time — What Is a Human Life For? →</strong><span>Paid work, human contribution, schedules, commuting, care, automation, worker agency, and getting some of our time back.</span></a>
+      <a class="chapter" href="technology/index.html"><strong>Chapter 5: Technology — Tools That Serve Life →</strong><span>Attention, repairability, interoperability, AI, automation, resilience, open systems, and technological freedom.</span></a>
+      <a class="chapter" href="energy/index.html"><strong>Chapter 6: Energy — Power Without Dependence →</strong><span>Reliable modern energy, grids, local resilience, renewables, nuclear power, efficiency, access, and stewardship.</span></a>
+      <a class="chapter" href="economics/index.html"><strong>Chapter 7: Economics — What Is the Economy For? →</strong><span>Markets, ownership, security, entrepreneurship, public goods, commons, automation, housing, and practical freedom.</span></a>
+      <a class="chapter" href="governance/index.html"><strong>Chapter 8: Governance — Power Close Enough to Understand →</strong><span>Subsidiarity, rights, capable institutions, legibility, civic participation, public technology, and accountable power.</span></a>
+      <a class="chapter" href="food/index.html"><strong>Chapter 9: Food — Nourishment, Culture & Living Systems →</strong><span>Cooking, gardens, agriculture, soil, workers, animals, regional processing, trade, resilience, and food culture.</span></a>
+      <a class="chapter" href="architecture-place/index.html"><strong>Chapter 10: Architecture & Place — Build for Human Life →</strong><span>Housing, streets, walking, transit, public space, climate, nature, beauty, accessibility, childhood, and human time.</span></a>
     </section>
 
-    <section>
-      <h2>What this is for</h2>
-      <p>This is not only a statement of belief. It should help us understand the world, live better inside it, and change the systems that work against human flourishing.</p>
-      <div class="three">
-        <div class="card"><h3>Diagnosis</h3><p>What is happening, and why?</p></div>
-        <div class="card"><h3>Field Guide</h3><p>What can people do now?</p></div>
-        <div class="card"><h3>Program</h3><p>What should we change together?</p></div>
-      </div>
-    </section>
+    <section><h2>One rule for the project</h2><p>We should distinguish evidence from hypothesis, values, and political proposals. We should be willing to say <em>we do not know</em>, test ideas where we can, and change the doctrine when reality contradicts it.</p></section>
 
-    <section>
-      <h2>The wrong turn</h2>
-      <p>Fossil fuels gave humanity access to immense stores of concentrated energy. That energy multiplied transportation, manufacturing, extraction, construction, communication, and economic production.</p>
-      <p>It also made it possible to redesign everyday life around machines: cities spread outward, work became more abstract, food traveled farther, artificial light extended the day, cars reorganized public space, screens reorganized attention, and institutions grew larger and more centralized.</p>
-      <p>None of these inventions are automatically evil.</p>
-      <div class="callout">The wrong turn was subtler: <strong>we began optimizing civilization around what machines and markets could do instead of around what human beings need.</strong></div>
-    </section>
-
-    <section>
-      <h2>The human mismatch</h2>
-      <p class="muted">The human animal still needs things that cannot be engineered away.</p>
-      <ul class="needs">
-        <li>Movement</li><li>Sunlight</li><li>Sleep</li><li>Nature</li><li>Family</li><li>Friendship</li><li>Belonging</li><li>Meaningful work</li><li>Play</li><li>Beauty</li><li>Touch</li><li>Autonomy</li><li>Purpose</li><li>Quiet</li><li>A livable environment</li>
-      </ul>
-      <p>A civilization can become more technologically sophisticated while becoming less compatible with the beings living inside it.</p>
-    </section>
-
-    <section>
-      <h2>Ten theses</h2>
-      <div class="theses">
-        <article class="thesis-card"><div class="number">1</div><div><h3>Human beings are biological organisms, not abstract economic units.</h3><p>Durable systems must begin with the realities of the body, mind, relationships, and ecology.</p></div></article>
-        <article class="thesis-card"><div class="number">2</div><div><h3>Our biology changes more slowly than our technological environment.</h3><p>Material advancement can still create psychologically or physically hostile conditions.</p></div></article>
-        <article class="thesis-card"><div class="number">3</div><div><h3>Fossil energy accelerated the mismatch.</h3><p>Human environments and institutions could transform at a speed previously impossible.</p></div></article>
-        <article class="thesis-card"><div class="number">4</div><div><h3>Efficiency is not the same as flourishing.</h3><p>A system can produce more and move faster while making everyday life worse.</p></div></article>
-        <article class="thesis-card"><div class="number">5</div><div><h3>Technology is a tool, not a destiny.</h3><p>We can decide which technologies deserve a place in human life and under what conditions.</p></div></article>
-        <article class="thesis-card"><div class="number">6</div><div><h3>Human-scale systems should be preferred when they work.</h3><p>Local, understandable, repairable systems often preserve agency and resilience.</p></div></article>
-        <article class="thesis-card"><div class="number">7</div><div><h3>Advanced technology should become quieter.</h3><p>The best machines remove drudgery without consuming attention, identity, and purpose.</p></div></article>
-        <article class="thesis-card"><div class="number">8</div><div><h3>Open systems protect human agency.</h3><p>Knowledge and infrastructure should be understandable, repairable, interoperable, and shareable whenever possible.</p></div></article>
-        <article class="thesis-card"><div class="number">9</div><div><h3>Ecology is not an externality.</h3><p>Human civilization exists inside the living world, not outside it.</p></div></article>
-        <article class="thesis-card"><div class="number">10</div><div><h3>Recover what modernity discarded without discarding what humanity learned.</h3><p>We do not need to choose between the village and the computer. We can build both.</p></div></article>
-      </div>
-    </section>
-
-    <section>
-      <h2>What progress should mean</h2>
-      <p>Progress is more than GDP, speed, scale, convenience, or computational power. A civilization is progressing when people have healthier bodies, deeper relationships, durable community, meaningful work, time that is actually theirs, agency over technology, reliable energy without permanent ecological damage or fragility, access to nature and living land, material security, room to create, and a living world to pass on.</p>
-    </section>
-
-    <section>
-      <h2>The direction</h2>
-      <p><strong>Technology:</strong> open, repairable, interoperable, resilient, agency-expanding, and quiet enough to disappear when it is not needed.</p>
-      <p><strong>Energy:</strong> clean, reliable, affordable, resilient, and capable of combining strong shared grids with meaningful local capacity.</p>
-      <p><strong>Society:</strong> stronger families and communities, repeated local relationships, meaningful public space, access to living land, time for care, rest and civic life, pluralism, and power that stays understandable and accountable.</p>
-      <p><strong>Inner life:</strong> room for science and reason alongside prayer, meditation, yoga, art, music, philosophy, nature, and the human search for meaning.</p>
-      <div class="callout">The goal is not maximum technology or maximum consumption. The goal is enough capability to support life well.</div>
-    </section>
-
-    <section>
-      <h2>Go deeper</h2>
-      <p>The doctrine should remain readable on its own. Longer chapters are optional depth, not prerequisites.</p>
-      <a class="chapter" href="human-nature/index.html"><strong>Chapter 1: Human Nature — The Environment We Were Built For →</strong><span>How recurring human needs collide with modern environments, what we can do personally, and what we may want to change together.</span></a>
-      <a class="chapter" href="land-life/index.html"><strong>Chapter 2: Land & Life — Reconnecting Humans to the Living World →</strong><span>Land access, gardens, food forests, plants, animals, embodied practice, and the idea that living systems belong inside everyday infrastructure.</span></a>
-      <a class="chapter" href="community/index.html"><strong>Chapter 3: Community — The Human Need to Belong →</strong><span>Neighbors, repeated relationships, shared meals and work, third places, caregiving, local participation, and belonging without captivity.</span></a>
-      <a class="chapter" href="work-time/index.html"><strong>Chapter 4: Work & Time — What Is a Human Life For? →</strong><span>Paid work and human contribution, predictable time, commuting, care, worker agency, automation, and the possibility that productivity should give some of our lives back.</span></a>
-      <a class="chapter" href="technology/index.html"><strong>Chapter 5: Technology — Tools That Serve Life →</strong><span>Attention, repairability, interoperability, AI, automation, resilience, open systems, and tools that expand human capability without becoming the whole environment.</span></a>
-      <a class="chapter" href="energy/index.html"><strong>Chapter 6: Energy — Power Without Dependence →</strong><span>Reliable modern energy, strong grids, local resilience, renewables, nuclear power, efficiency, energy access, and abundance placed back in service of life.</span></a>
-    </section>
-
-    <section>
-      <h2>One rule for the project</h2>
-      <p>We should distinguish evidence from hypothesis, values, and political proposals. We should be willing to say <em>we do not know</em>, test ideas where we can, and change the doctrine when reality contradicts it.</p>
-    </section>
-
-    <section class="closing">
-      <h2>The future</h2>
-      <p>The future does not need to be a choice between technological acceleration and a romantic return to the past.</p>
-      <p>We can keep the knowledge. We can keep the science. We can keep the computers.</p>
-      <p>And we can use them to build a civilization in which people once again belong to their bodies, their communities, and the Earth.</p>
-      <strong>The village and the computer can coexist.</strong>
-      <p class="version">Version 0.8 · A living doctrine, expected to change as its ideas are challenged, tested, and refined.</p>
-    </section>
+    <section class="closing"><h2>The future</h2><p>The future does not need to be a choice between technological acceleration and a romantic return to the past.</p><p>We can keep the knowledge. We can keep the science. We can keep the computers, markets, cities, specialized institutions, global exchange, and large infrastructure where they genuinely serve us.</p><p>And we can recover bodies, neighborhoods, gardens, competence, durable relationships, human time, living landscapes, and understandable institutions.</p><strong>The village and the computer can coexist.</strong><p class="version">Version 0.12 · A living doctrine, expected to change as its ideas are challenged, tested, and refined.</p></section>
   </main>
-
-  <footer>
-    <a href="../index.html">Thomas Stephens · tmsteph</a><br />
-    Dream. Build. Share.
-  </footer>
+  <footer><a href="../index.html">Thomas Stephens · tmsteph</a><br />Dream. Build. Share.</footer>
 </body>
 </html>
