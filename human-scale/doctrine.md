@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.14 — August 2026**
+**Version 0.15 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -152,6 +152,14 @@ The Program turns the doctrine outward. It proposes a first civic and political 
 It is not a party platform. Its proposals should be debated, piloted where possible, measured, revised, and abandoned when they fail.
 
 Its central principle is: **systems must justify themselves by the lives they make possible.**
+
+### [Human Scale Evidence Atlas — What We Know, What We Think, What We Choose](evidence/index.html)
+
+The Evidence Atlas separates empirical evidence from working hypotheses, value judgments, and political proposals.
+
+Its first claim register covers movement, social connection, long working hours, nature contact, walkability, schedule instability, local scale, open technology, human time, living-world access, subsidiarity, and quiet technology.
+
+It also asks what findings would make us weaken or abandon favored ideas. Its central rule is: **a doctrine that cannot lose an argument is not learning.**
 
 ## Chapters
 
