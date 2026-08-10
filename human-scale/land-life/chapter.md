@@ -2,307 +2,614 @@
 
 **Human Scale Doctrine — Diagnosis / Field Guide / Program**
 
-> Humans do not only need to look at nature. We need ways to participate in the living world.
+> Humans depend on the living world whether or not modern systems make that dependence visible.
 
-Modern life often treats land as scenery, real estate, or a resource to be extracted. Food arrives packaged. Water arrives through pipes. Waste disappears into systems most people never see. Plants become decoration. Animals become pets, products, pests, or distant wildlife.
+Modern civilization can make ecological dependence remarkably easy to ignore.
 
-The Human Scale view is different.
+Food arrives through stores and delivery systems. Water arrives through pipes. Waste disappears into infrastructure. Climate control buffers weather. Parks may become destinations rather than daily surroundings. Agriculture can be physically and culturally distant from the people it feeds.
 
-Human beings are part of an ecological world. We depend on soil, water, plants, animals, fungi, insects, microbes, sunlight, weather, and seasons whether or not modern systems make those relationships visible.
+Many of these systems are achievements.
 
-A healthier civilization should make those relationships easier to experience directly.
+They reduce dangerous labor, improve sanitation, stabilize food supplies, and allow dense cities to function.
 
-That does not mean everyone must become a farmer or live in the countryside. It means that **access to living land should not be a luxury reserved for people wealthy enough to buy rural property.**
+Human Scale does not seek to dismantle them.
 
-Every person should have meaningful opportunities to touch soil, grow food, care for plants or animals, spend time under open sky, and participate in places where life is actively growing.
+It asks what becomes invisible when they work too well.
+
+We remain materially dependent on soil, water, plants, animals, fungi, microbes, biodiversity, climate, energy, and ecological processes.
+
+Human Scale also makes an explicit value judgment:
+
+**people should have broad, safe opportunities to experience, understand, and participate in living systems directly.**
+
+That value is informed by evidence on green space, physical activity, gardening, urban heat, soil, and ecosystems. It is not itself a scientific law that every person needs the same amount of soil, gardening, or nature contact.
+
+The first Land & Life evidence audit changed this chapter accordingly.
 
 ---
 
 # Part I — Diagnosis
 
-## 1. Nature became something we visit
+## 1. Ecological Dependence Can Become Invisible
 
-Industrial civilization has made it possible for millions of people to live almost entirely inside built systems.
+A person can wake indoors, travel in a vehicle, work indoors, purchase food grown far away, exercise indoors, relax through a screen, and sleep without directly seeing most of the systems supporting life.
 
-A person can wake indoors, travel inside a vehicle, work indoors, buy food grown far away, exercise indoors, relax through a screen, and go to sleep without directly interacting with soil, plants, animals, or the processes that sustain life.
+That is not inherently unhealthy.
 
-This is extraordinary in one sense. It frees people from many forms of dangerous and exhausting labor.
+It is technologically impressive.
 
-But something can be gained and lost at the same time.
+But invisible dependence creates governance problems.
 
-When the living world becomes invisible, people can become dependent on ecological systems they barely understand and emotionally detached from damage occurring inside them.
+People may have little practical knowledge of:
 
-Nature becomes a destination instead of a relationship.
+- where water comes from
+- where food is produced
+- how soil functions
+- what happens to waste
+- which landscapes absorb floodwater
+- what trees do for heat
+- how local ecosystems are changing
+- what infrastructure fails during disruption
 
-## 2. Land became primarily property
+Human Scale therefore values ecological legibility.
 
-Private property can protect independence, stability, stewardship, and personal freedom.
+The goal is not constant contact with “nature.”
 
-But when nearly every useful piece of land is accessible only through ownership, rent, or commercial permission, people without wealth may have very little ability to participate in land at all.
+It is a civilization that does not require people to remain ignorant of the living systems they depend on.
 
-The Human Scale Doctrine therefore distinguishes **ownership** from **access**.
+## 2. Ownership Is Not the Same as Access
 
-Everyone does not need to own acres of land.
+Private property can support stability, stewardship, independence, investment, and freedom.
 
-Everyone should have realistic access to some combination of:
+But access to outdoor and living systems should not require everyone to purchase private acreage.
 
+People can encounter living systems through:
+
+- parks
+- trails
+- street trees
 - gardens
-- community growing space
-- trees and shade
-- edible landscapes
-- parks and natural areas
-- water and soil
-- places for children to explore
-- nearby opportunities to grow food
-- opportunities to care for animals where appropriate
-- quiet outdoor places that do not require a purchase
+- natural areas
+- community agriculture
+- school grounds
+- courtyards
+- balconies
+- waterways
+- habitat restoration
+- farms
+- orchards
+- public landscapes
+- private land shared voluntarily
 
-Land access can be private, shared, cooperative, institutional, or public.
+Human Scale therefore distinguishes:
 
-The important question is whether ordinary people can actually participate.
+**ownership, access, participation, and stewardship.**
 
-## 3. Food became disconnected from ecology
+They overlap, but they are not the same thing.
 
-A modern food system can deliver enormous variety and convenience.
+## 3. Green Space Has More Than One Function
 
-It can also hide nearly every step between soil and plate.
+“Nature” is too broad a policy category.
 
-Many people rarely see food being planted, harvested, preserved, composted, or regenerated through soil.
+A shaded urban park, a desert preserve, a wetland, a farm, a school garden, a forest, a street tree, and a rooftop growing system do different things.
 
-The Human Scale goal is not total local self-sufficiency. Trade is useful. Cities need regional and global systems.
+Possible functions include:
 
-The goal is to restore enough local food knowledge and production that communities retain competence, resilience, and a direct relationship with nourishment.
+- physical activity
+- cooling
+- stormwater management
+- habitat
+- food
+- air-quality effects
+- social gathering
+- play
+- beauty
+- quiet
+- ecological restoration
+- education
 
-## 4. The body became abstract too
+Evidence should therefore match the claim.
 
-The separation from land is related to a broader separation from the body.
+If the goal is cooling, measure temperature.
 
-Modern life can pull attention continually into schedules, screens, symbols, money, information, arguments, and distant events.
+If the goal is physical activity, measure use and movement.
 
-Practices such as yoga, meditation, prayer, gardening, walking, music, breathwork, manual crafts, animal care, and quiet time outdoors can bring attention back toward immediate bodily experience.
+If the goal is habitat, measure ecological outcomes.
 
-The doctrine does not require one practice.
+If the goal is food access, measure production and who receives it.
 
-The principle is simpler: **a healthy civilization should leave room for people to inhabit their bodies and experience reality directly, without constant mediation by machines or markets.**
+Do not call all of those “green space benefits” and assume one intervention produces all of them.
 
-## 5. Plants and animals are not decoration
+## 4. Trees Can Be Infrastructure
 
-A tree can provide shade, habitat, food, beauty, cooling, memory, and a meeting place.
+Trees and vegetation can reduce local heat through shade and evapotranspiration and can contribute to stormwater management and other urban functions.
 
-A garden can provide food, exercise, education, competence, conversation, habitat, and a reason for people to work together.
+That makes them more than decoration.
 
-Animals can teach care, responsibility, attention, interdependence, and respect for forms of life unlike ourselves.
+But tree policy still requires engineering and ecological judgment.
 
-A living landscape is not merely prettier infrastructure.
+Species, roots, power lines, sidewalks, water, drought, fire, allergens, maintenance, canopy, pruning, disease, equity, and climate all matter.
 
-It can perform social, ecological, practical, and psychological functions at the same time.
+The Human Scale principle is not simply “more trees.”
+
+It is:
+
+**use living infrastructure where it performs the needed function well.**
+
+## 5. Gardening Is Promising, Not Magical
+
+Growing food can make seasonality, soil, water, labor, insects, risk, patience, and food production more visible.
+
+A randomized community-gardening trial found improvements in some health-related behaviors and well-being outcomes.
+
+That matters.
+
+It does not make gardening a universal prescription.
+
+A garden can also become:
+
+- expensive
+- neglected
+- inaccessible
+- contaminated
+- water-intensive
+- conflict-ridden
+- another obligation
+
+Gardening is best treated as a **multi-function intervention worth offering and testing**, not a biological requirement.
+
+## 6. Urban Soil Is Not Automatically Safe
+
+This is an important correction to the original chapter.
+
+Vacant land is not synonymous with safe growing land.
+
+Past industry, leaded gasoline, old paint, waste disposal, pesticides, fill material, fuel, and other activities can leave contaminants in urban soil.
+
+Before public or community food growing begins, planners should consider:
+
+- site history
+- soil and groundwater risk
+- testing where appropriate
+- clean soil
+- raised beds or containers
+- water quality
+- dust
+- handwashing
+- accessibility
+- long-term tenure
+- maintenance
+
+Sometimes the correct use of a site is a garden.
+
+Sometimes it is a garden with imported clean soil.
+
+Sometimes it is habitat, shade, a market, recreation, housing, or another use entirely.
+
+Human Scale is not served by ignoring contamination because a project feels ecological.
+
+## 7. Local Food Is Not Automatically Sustainable
+
+Food distance is visible.
+
+Many other impacts are less visible.
+
+The environmental performance of food can depend on:
+
+- production method
+- fertilizer
+- irrigation
+- energy
+- yield
+- land use
+- refrigeration
+- storage
+- processing
+- packaging
+- transport mode
+- waste
+- seasonality
+
+Human Scale still values local and regional food capacity where it improves:
+
+- access
+- freshness
+- competence
+- culture
+- local economic activity
+- redundancy
+- emergency resilience
+
+But “local” should not be used as a substitute for measuring the outcome that actually matters.
+
+## 8. Participation Can Build Stewardship
+
+The original chapter said participation changes the relationship.
+
+That was too categorical.
+
+A stronger statement is:
+
+**participation can make ecological processes more visible and can build knowledge, competence, stewardship, or attachment to place for some people.**
+
+It may do none of those things for others.
+
+This should be tested rather than assumed.
+
+## 9. Caring for Life Is an Opportunity, Not an Obligation
+
+Plants and animals can create companionship, responsibility, routine, learning, and care.
+
+They can also create cost, work, grief, allergy, noise, conflict, injury, or welfare problems.
+
+People should have opportunities to care for living things.
+
+They should not be told that doing so is required for mental health or moral worth.
+
+Animal policy must center animal welfare as well as human benefit.
+
+## 10. Children Need Access to Real Environments
+
+Children benefit from movement, play, learning, and opportunities to develop competence.
+
+Living environments can provide distinctive opportunities to:
+
+- observe change
+- dig
+- plant
+- climb
+- build
+- identify organisms
+- care for something
+- encounter weather
+- understand food systems
+
+The value claim is straightforward:
+
+**children should not be restricted to commercial, indoor, and digital environments merely because those environments are easier for adults to control.**
+
+The exact developmental benefits of specific nature programs should still be studied rather than inflated.
 
 ---
 
 # Part II — Field Guide
 
-## 6. Participate in life where you already are
+## 11. Participate Where Participation Fits
 
-The answer does not have to begin with buying land.
+You do not need to buy land or perform a rural identity.
 
-Start with whatever access exists.
+Possible entry points include:
 
-Grow herbs in a window. Keep a few containers. Help with a community garden. Plant a tree. Learn local plants. Compost where practical. Visit a farmers market. Volunteer on a farm. Help restore habitat. Spend regular time outside without turning the experience into another productivity task.
+- walking in a local park
+- learning local plants
+- growing herbs
+- keeping containers
+- joining a garden
+- planting an appropriate tree
+- volunteering in habitat restoration
+- visiting a farm
+- learning where water comes from
+- learning what happens to waste
+- cooking whole ingredients
+- composting where practical
+- caring for an animal responsibly
+- noticing seasonal and weather changes
 
-The goal is not to perform a lifestyle.
+The purpose is not to collect “nature habits.”
 
-The goal is to rebuild relationship and competence.
+It is to become less anonymous to the systems around you.
 
-## 7. Grow some food
+## 12. Grow Food Safely If You Want To
 
-Growing even a small amount of food changes the relationship with food.
+Growing even a small amount of food can be educational and useful.
 
-A tomato plant will not replace the grocery store. It can still teach season, soil, water, patience, failure, abundance, insects, decay, and the effort hidden inside a meal.
+In urban settings, first consider whether the soil is appropriate.
 
-Start small enough to succeed.
+Where contamination is possible, use local technical guidance, soil testing when appropriate, clean soil, raised beds, containers, or other safe methods.
 
-A few useful plants are better than an ambitious garden that immediately becomes another burden.
+Start small enough that the garden remains an opportunity rather than a burden.
 
-## 8. Learn the place you live
+## 13. Learn the Place
 
-Know something about the local watershed, climate, soil, native plants, common animals, edible plants, seasonal changes, and where food and water come from.
+Know something about:
 
-Human Scale living is partly about becoming less anonymous to place.
+- climate
+- water supply
+- watershed
+- heat
+- major local ecosystems
+- common plants and animals
+- native and invasive species
+- food production
+- wildfire, flood, drought, storm, or other local risks
+- waste systems
+- public land
 
-## 9. Practice returning to the body
+Place literacy is not nostalgia.
 
-Choose practices that reduce abstraction and restore direct awareness.
+It is practical knowledge.
 
-That could include:
+## 14. Use Embodied Practices Without Overclaiming Them
 
-- yoga
-- meditation
-- prayer
-- walking
-- gardening
-- swimming
-- dancing
-- music
-- stretching
-- breath practice
-- cooking
-- woodworking or crafts
-- caring for animals
-- sitting quietly outdoors
+Walking, gardening, swimming, yoga, prayer, meditation, music, cooking, crafts, animal care, and quiet outdoor time can all create forms of embodied or direct experience.
 
-The practice matters less than the function: returning attention to body, place, relationship, and immediate reality.
+Different people benefit from different practices.
 
-## 10. Care for something alive
+Human Scale values having options outside continuous commercial and digital mediation.
 
-Growing a plant or caring for an animal creates responsibility that cannot be solved entirely through abstraction.
+It does not claim one practice is universally necessary.
 
-Living things have rhythms and needs of their own.
+## 15. Share Land When Sharing Adds Value
 
-This can be grounding precisely because life does not always obey our schedule.
+A garden or orchard can become social infrastructure through:
 
-Animal care should of course fit the welfare of the animal, the household, and the environment. The principle is care, not possession.
+- shared tools
+- seed exchanges
+- meals
+- seating
+- classes
+- intergenerational learning
+- harvest sharing
+- compost
+- mutual maintenance
 
-## 11. Make shared land social
+But shared land needs governance.
 
-A community garden is more powerful when it becomes more than a collection of fenced plots.
+Who maintains it?
 
-Share seeds. Share harvests. Teach children. Hold meals. Compost together. Learn from experienced growers. Create places to sit. Plant perennials that future participants can inherit.
+Who has access?
 
-The land becomes part of community life.
+What happens when participation drops?
+
+Who pays for water?
+
+Who resolves conflict?
+
+A commons is not self-governing merely because it is called community.
 
 ---
 
 # Part III — Program
 
-## 12. A principle of meaningful land access
+## 16. A Principle of Meaningful Living-World Access
 
-The Human Scale Doctrine proposes a value judgment:
+Human Scale makes a value judgment:
 
-> **Every person should have meaningful access to the living world, including nearby land where plants can grow and people can participate in caring for life.**
+> **People should have broad, safe, practical access to outdoor and living systems, including opportunities for nature, shade, play, ecological learning, and stewardship.**
 
-This is not necessarily a demand that government give every individual private acreage.
+This is not a scientific finding and not a demand for equal private land ownership.
 
-It is a design goal for civilization.
+It is a design goal.
 
-A neighborhood should not be considered complete if residents can reach parking, retail, and roads but cannot realistically reach soil, shade, trees, gardens, play space, and living habitat.
+Different places can satisfy it differently.
 
-## 13. Gardens as basic neighborhood infrastructure
+## 17. Treat Green and Living Infrastructure by Function
 
-Cities, housing developments, schools, libraries, churches, workplaces, and public agencies can make growing space normal rather than exceptional.
+Cities should identify what a landscape is meant to accomplish.
 
-Possible forms include:
+Possible tools include:
 
+- trees
+- parks
+- wetlands
+- bioswales
+- gardens
+- native habitat
+- green roofs
+- orchards
+- permeable landscapes
+- shade structures
+- water features where appropriate
+- restored waterways
+
+Choose based on:
+
+- climate
+- ecology
+- water
+- public use
+- maintenance
+- cost
+- accessibility
+- health and safety
+- measurable performance
+
+## 18. Make Growing Space Available Without Pretending Everyone Will Use It
+
+Community gardens, school gardens, allotments, courtyards, rooftops, greenhouses, and urban farms can widen participation.
+
+Programs should measure:
+
+- demand
+- who participates
+- food output
+- cost
+- maintenance
+- accessibility
+- soil safety
+- water use
+- social effects
+- waiting lists
+- abandonment
+
+Supply should respond to actual use rather than ideology.
+
+## 19. Food Forests and Edible Landscapes Are Experiments
+
+Food forests, orchards, edible hedges, herbs, and perennial crops can be valuable where they fit.
+
+They are not automatically better than:
+
+- native habitat
+- shade trees
+- sports fields
+- housing
+- conventional parks
+- wetlands
 - community gardens
-- allotment gardens
-- school gardens
-- rooftop gardens
-- courtyard gardens
-- edible landscaping
-- neighborhood orchards
-- shared greenhouses
-- seed libraries
-- tool libraries
-- compost hubs
+- ornamental landscapes with other functions
 
-These should be treated as practical infrastructure, not merely hobbies for enthusiasts.
+Test them where climate, water, maintenance, harvesting, food safety, ecology, accessibility, and governance support the idea.
 
-## 14. Food forests and perennial public landscapes
+## 20. Protect Renters and Non-Owners From Land Exclusion
 
-Some public and shared landscapes can produce food while also providing habitat, shade, beauty, soil improvement, and gathering places.
+If land-centered programs only serve homeowners, they reproduce the access problem they claim to solve.
 
-Food forests, orchards, edible hedges, herbs, and perennial crops will not replace conventional agriculture everywhere.
+Consider:
 
-They can still make productive ecology visible inside everyday neighborhoods.
+- distance
+- transit
+- mobility access
+- language
+- fees
+- tools
+- water
+- storage
+- childcare
+- safety
+- plot tenure
+- waitlists
+- hours of access
 
-The important principle is to stop assuming that public landscaping must be biologically simple and mostly decorative.
+Human Scale is interested in **usable access**, not symbolic acreage.
 
-## 15. Children need living places
+## 21. Protect Ecological and Working Land With Tradeoffs Visible
 
-Children should have opportunities to dig, climb, plant, build, observe insects, care for animals, get dirty, take age-appropriate risks, and watch living systems change over time.
+Regions need housing.
 
-Schools and neighborhoods can treat these experiences as part of development rather than optional enrichment.
+They also need watersheds, farms, habitat, floodplain, open space, energy infrastructure, industry, transportation, and other land uses.
 
-A child who understands food only as something purchased and nature only as a special destination has been denied an important form of literacy.
+No single category wins automatically.
 
-## 16. Public land should sometimes be productive land
+Land-use decisions should make tradeoffs visible and test claims about scarcity, value, risk, and public benefit.
 
-Parks do not all need to serve the same purpose.
+## 22. Judge Agriculture by Outcomes, Not Labels
 
-Some public land can remain wild. Some can support sports. Some can provide quiet. Some can host gardens, orchards, grazing, habitat restoration, community kitchens, markets, or ecological education.
+“Organic,” “conventional,” “regenerative,” “local,” “industrial,” and “natural” can each hide enormous variation.
 
-Human Scale policy should favor a diverse public landscape rather than one standardized model.
+Human Scale should evaluate practices using outcomes such as:
 
-## 17. Make access possible for renters and people without yards
+- soil function
+- water use and quality
+- biodiversity
+- emissions
+- yield
+- nutrient output
+- worker health
+- animal welfare
+- affordability
+- farmer income
+- input dependence
+- resilience
+- long-term productivity
 
-Land-centered policy easily becomes meaningless if it only benefits homeowners.
+USDA soil-health principles can provide useful tools without becoming dogma.
 
-Renters, apartment residents, children, older adults, disabled people, and low-income households should be part of the design from the beginning.
+## 23. Put Site Safety Into Urban Agriculture Policy
 
-That means considering distance, transportation, water access, tools, physical accessibility, security, long-term tenure for community gardens, and whether participation requires fees people cannot afford.
+Before public land becomes a garden or urban farm:
 
-## 18. Protect working land near communities
+1. investigate site history;
+2. identify likely contaminants;
+3. test where appropriate;
+4. choose safe growing systems;
+5. provide clean soil where needed;
+6. plan water access;
+7. design for handwashing and produce handling;
+8. consider children’s exposure;
+9. establish maintenance responsibility;
+10. create long-enough tenure for investment to make sense.
 
-Not every piece of land should become housing, retail, warehouses, roads, or speculative property.
+A city should not invite residents to become the environmental-testing department.
 
-Regions need farms, watersheds, habitat, forests, and open land.
+## 24. A Living-World Test
 
-The difficult political task is balancing housing, economic needs, property rights, ecological protection, and food production without pretending any one value eliminates the others.
+When evaluating a neighborhood, landscape, development, institution, or investment, ask:
 
-Human Scale policy should make those tradeoffs visible.
+1. What ecological and human functions is this place meant to provide?
+2. Can ordinary people reach safe outdoor space?
+3. Is shade adequate for local climate?
+4. Can children interact with real environments safely enough to learn and play?
+5. Are renters and people without yards included?
+6. Is there actual demand for growing space?
+7. Is urban soil safe for the proposed use?
+8. Does the design improve or degrade water, soil, habitat, heat, or biodiversity?
+9. What are the water and maintenance requirements?
+10. Who performs the maintenance?
+11. Does the intervention crowd out housing or another high-value use?
+12. Can the outcomes be measured?
+13. What evidence would make us change the design?
 
-## 19. Support regenerative experimentation
+The objective is not maximum greenery.
 
-Communities should be able to test forms of agriculture and land stewardship that aim to rebuild soil, conserve water, increase biodiversity, reduce harmful inputs, and produce food over long time horizons.
-
-Some methods will work better in some climates and contexts than others.
-
-The doctrine should care more about measurable outcomes than loyalty to agricultural labels.
-
-## 20. A living-world test
-
-When evaluating a neighborhood, development, institution, or public investment, ask:
-
-- Can ordinary people reach living land without making a special trip?
-- Can children safely interact with plants, soil, water, and nonhuman life?
-- Is there space to grow food?
-- Are trees and shade treated as infrastructure?
-- Does the landscape support more than decoration?
-- Can renters and people without yards participate?
-- Does the system rebuild or degrade soil, water, and habitat?
-- Can people learn where their food and water come from?
-- Does the place create opportunities for care, stewardship, and shared work?
-- Is there room for quiet and contemplation as well as recreation?
-
-No place will satisfy every goal perfectly.
-
-The test is meant to change what we notice.
+It is fit between place, ecology, and human life.
 
 ---
 
-## The deeper idea
+# Evidence Notes
 
-A society can provide entertainment, consumer goods, fast transportation, and endless information while still leaving people starved for direct contact with life.
+**Ecological dependence — global assessment.** IPBES assessments document human dependence on biodiversity, ecosystems, water, food, and nature’s contributions to people.
 
-The answer is not to abandon civilization.
+Sources:
+- https://doi.org/10.5281/zenodo.3831673
+- https://doi.org/10.5281/zenodo.13850054
 
-It is to weave life back through civilization.
+**Soil function — official agronomic framework.** USDA NRCS defines healthy soil as a living ecosystem and describes water regulation, nutrient cycling, filtration, habitat, and production functions.
 
-Gardens beside apartments.
+Source: https://www.nrcs.usda.gov/conservation-basics/soil/soil-health
 
-Trees along streets.
+**Trees and urban heat — official environmental guidance.** EPA documents shade and evapotranspiration as mechanisms for urban cooling and identifies stormwater and other co-benefits.
 
-Food forests in neighborhoods.
+Source: https://www.epa.gov/heatislands/benefits-trees-and-vegetation
 
-Animals cared for responsibly.
+**Parks and physical activity — official public-health guidance.** CDC reports that safer, closer park and trail access is associated with greater physical activity and recommends accessible park and recreation infrastructure as part of activity-supportive communities.
 
-Children who know soil.
+Source: https://www.cdc.gov/healthy-places/php/key-topics/parks.html
 
-Adults who still know how to grow something.
+**Community gardening — randomized evidence.** Litt and colleagues conducted an observer-blind randomized controlled trial of community gardening in Denver-area adults and found changes in physical activity, fiber intake, and psychosocial outcomes, while not every health measure changed.
 
-Places to practice yoga, pray, meditate, walk, breathe, work with our hands, and become quiet enough to notice the world around us.
+Source: https://doi.org/10.1016/S2542-5196(22)00303-5
 
-Technology can help us manage water, share knowledge, coordinate resources, monitor ecosystems, reduce drudgery, and learn from growers around the world.
+**Urban agriculture — official agricultural support with real constraints.** USDA recognizes urban agriculture across community gardens, rooftops, controlled-environment systems, and urban farms and provides technical support for soil, water, pests, compost, and irrigation.
 
-Then it should get out of the way.
+Source: https://www.nrcs.usda.gov/getting-assistance/other-topics/urban-agriculture
 
-**The living world should not be something we escape to. It should be part of the place we call home.**
+**Urban soil safety — official environmental guidance.** EPA recommends assessing land history and potential contaminants before urban food production and provides alternatives such as clean raised beds, containers, or other uses where soil is unsafe.
+
+Sources:
+- https://www.epa.gov/brownfields/urban-agriculture
+- https://www.epa.gov/lead/lead-soil
+
+---
+
+# The Direction
+
+The answer is not “return to nature.”
+
+There is no single nature to return to, and nature is not automatically safe, comfortable, productive, or just.
+
+The stronger project is to build modern places that remain ecologically literate and materially compatible with the living systems that support them.
+
+That can mean trees along a hot street.
+
+A wetland that handles stormwater.
+
+A garden beside apartments.
+
+A safe park.
+
+A school growing food in tested soil.
+
+A restored habitat.
+
+A farm using practices that improve measurable soil function.
+
+A food forest where the site actually supports one.
+
+A child who understands that food, water, weather, soil, waste, and biodiversity are not abstractions.
+
+Technology can help map, monitor, irrigate, coordinate, model, diagnose, share knowledge, reduce labor, and detect environmental risk.
+
+Then it should leave room for direct participation where people want it.
+
+**The living world should not be a romantic escape from civilization. It should be a functioning part of civilization.**
