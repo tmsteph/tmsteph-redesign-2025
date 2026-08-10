@@ -3,10 +3,24 @@
   <channel>
     <title>Human Scale — Thomas Stephens</title>
     <link>https://tmsteph.com/human-scale/</link>
-    <description>A living doctrine about human nature, technology, community, ecology, economics, governance, education, and civilization.</description>
+    <description>A living doctrine about human nature, technology, health, community, ecology, economics, governance, education, and civilization.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Aug 2026 19:50:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 20:20:00 GMT</lastBuildDate>
     <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="https://tmsteph.com/human-scale/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapter 12: Health &amp; Care — Keeping People Well, Caring for People When They Aren’t</title>
+      <link>https://tmsteph.com/human-scale/health-care/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/health-care/</guid>
+      <pubDate>Mon, 10 Aug 2026 20:20:00 GMT</pubDate>
+      <description>Modern medicine, prevention, primary care, safety, coordination, mental health, disability, caregiving, financial protection, interoperability, public health, AI, and palliative care.</description>
+    </item>
+    <item>
+      <title>Evidence Audit 02: Land &amp; Life Under Pressure</title>
+      <link>https://tmsteph.com/human-scale/evidence/land-life/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/evidence/land-life/</guid>
+      <pubDate>Mon, 10 Aug 2026 20:16:00 GMT</pubDate>
+      <description>Ecological dependence survives; gardening, food forests, local food, stewardship, and living-world psychology become more precise and more technical.</description>
+    </item>
     <item>
       <title>Chapter 11: Education &amp; Childhood — Raising Capable Human Beings</title>
       <link>https://tmsteph.com/human-scale/education-childhood/</link>
@@ -29,11 +43,11 @@
       <description>A private, no-signup audit of whether everyday life supports movement, nature, time, community, place, security, and agency.</description>
     </item>
     <item>
-      <title>Human Scale Evidence Atlas v0.1</title>
+      <title>Human Scale Evidence Atlas</title>
       <link>https://tmsteph.com/human-scale/evidence/</link>
       <guid isPermaLink="true">https://tmsteph.com/human-scale/evidence/</guid>
       <pubDate>Mon, 10 Aug 2026 19:10:00 GMT</pubDate>
-      <description>Evidence grades, hypotheses, value judgments, political proposals, falsification conditions, and a research backlog.</description>
+      <description>Evidence grades, deep audits, hypotheses, value judgments, political proposals, falsification conditions, and a research queue.</description>
     </item>
     <item>
       <title>Human Scale Program v0.1</title>
@@ -48,13 +62,6 @@
       <guid isPermaLink="true">https://tmsteph.com/human-scale/field-guide/</guid>
       <pubDate>Mon, 10 Aug 2026 18:54:00 GMT</pubDate>
       <description>A practical guide for living more humanly inside the world that exists now.</description>
-    </item>
-    <item>
-      <title>Human Scale Doctrine</title>
-      <link>https://tmsteph.com/human-scale/</link>
-      <guid isPermaLink="true">https://tmsteph.com/human-scale/</guid>
-      <pubDate>Mon, 10 Aug 2026 17:00:00 GMT</pubDate>
-      <description>Humanity became powerful faster than it became wise.</description>
     </item>
   </channel>
 </rss>
