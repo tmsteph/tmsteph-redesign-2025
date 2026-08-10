@@ -1,10 +1,10 @@
 # The Human Scale Doctrine
 
-**Version 0.16 — August 2026**
+**Version 0.17 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
-This is a living doctrine about human nature, technology, energy, community, economics, governance, ecology, education, and the kind of civilization worth building.
+This is a living doctrine about human nature, technology, energy, community, economics, governance, ecology, education, health, and the kind of civilization worth building.
 
 It begins with a simple observation: human beings are biological organisms whose bodies and minds developed within nature, physical movement, sleep and light-dark rhythms, supportive social relationships, and dependence on living ecological systems.
 
@@ -94,6 +94,9 @@ A civilization is progressing when more people can:
 
 - live healthy lives
 - sleep and move in ways compatible with their bodies
+- obtain effective healthcare without catastrophic financial harm
+- receive coordinated care when illness becomes complex
+- receive relief, rehabilitation, disability support, and palliative care when cure is not the only relevant goal
 - spend time with people they love
 - raise children in safe, supportive environments
 - belong to durable relationships and communities where people can rely on one another
@@ -108,15 +111,15 @@ A civilization is progressing when more people can:
 - participate in government without needing politics or bureaucracy to consume their lives
 - access nourishing food and retain some relationship to cooking, growing, soil, and the people who produce it
 - live in places where daily needs, nature, public space, and other people are not unnecessarily distant
-- access nature and public space
-- participate directly in the living world through soil, plants, food, animals, and stewardship
+- access safe outdoor and living environments
+- participate directly in living systems when they choose to
 - participate in culture and community
 - develop spiritually, intellectually, emotionally, and creatively
 - leave a healthy world to the next generation
 
 ## The Direction
 
-This doctrine is not anti-technology, anti-market, anti-government, anti-city, anti-school, or anti-modernity.
+This doctrine is not anti-technology, anti-market, anti-government, anti-city, anti-school, anti-medicine, or anti-modernity.
 
 It argues for systems that remain accountable to human purposes.
 
@@ -128,7 +131,11 @@ It argues for systems that remain accountable to human purposes.
 
 **Governance:** power exercised at the smallest scale that can solve the problem well, with larger institutions capable enough to function and accountable enough to remain legitimate.
 
+**Health & care:** modern medicine, prevention, primary care, specialty care, public health, mental health, rehabilitation, disability support, caregiving, palliative care, patient safety, financial protection, and interoperable information organized around the person rather than disconnected encounters.
+
 **Food:** modern abundance combined with cooking competence, regional capacity, living soil, responsible agriculture, wider trade, and food systems people can understand and participate in.
+
+**Land & ecology:** safe green space, trees, soil, habitat, water, gardens, agriculture, and living infrastructure judged by function, ecology, access, maintenance, and competing land needs rather than romantic labels.
 
 **Place:** housing, streets, transportation, public space, buildings, trees, gardens, and daily destinations arranged to reduce unnecessary distance and make healthy social life easier.
 
@@ -140,7 +147,7 @@ It argues for systems that remain accountable to human purposes.
 
 Large systems will still exist. The principle is that **scale should have to justify itself.**
 
-The goal is not maximum technology, maximum production, maximum consumption, maximum localism, maximum schooling, or maximum central control.
+The goal is not maximum technology, maximum production, maximum consumption, maximum localism, maximum schooling, maximum medicine, or maximum central control.
 
 The goal is enough capability to support human life well.
 
@@ -174,15 +181,17 @@ Its central principle is: **systems must justify themselves by the lives they ma
 
 The Evidence Atlas separates empirical evidence from working hypotheses, value judgments, and political proposals.
 
-Its first claim register covers movement, social connection, long working hours, nature contact, walkability, schedule instability, local scale, open technology, human time, living-world access, subsidiarity, and quiet technology.
-
 It also asks what findings would make us weaken or abandon favored ideas. Its central rule is: **a doctrine that cannot lose an argument is not learning.**
 
-The first deep audit now puts Chapter 1 itself under pressure:
+Deep audits now include:
 
 ### [Evidence Audit 01 — Human Nature Under Pressure](evidence/human-nature/index.html)
 
-The audit narrows several original claims about ancestral social scale, face-to-face relationships, seasonal rhythm, learning through doing, low stimulation, nature, and meaning. The point is not to defend the original wording. It is to make the doctrine harder to knock down.
+This audit narrows original claims about ancestral social scale, face-to-face relationships, seasonal rhythm, learning through doing, low stimulation, nature, and meaning.
+
+### [Evidence Audit 02 — Land & Life Under Pressure](evidence/land-life/index.html)
+
+This audit strengthens Chapter 2’s ecological foundations while narrowing claims about gardening, stewardship, food forests, local food, and psychological “reconnection.” It also adds explicit urban-soil safety and land-use tradeoffs.
 
 ## Chapters
 
@@ -192,7 +201,7 @@ The foundation: recurring human constraints and needs, the mismatch lens, practi
 
 ### 2. [Land & Life — Reconnecting Humans to the Living World](land-life/index.html)
 
-Land access, gardens, food forests, plants, animals, embodied practices, and the idea that living systems belong inside ordinary infrastructure.
+Ecological dependence, safe green space, trees, soil, gardens, urban agriculture, stewardship, access, and living infrastructure judged by function rather than romance.
 
 ### 3. [Community — The Human Need to Belong](community/index.html)
 
@@ -230,11 +239,15 @@ Housing, streets, walkability, transit, public space, nature, climate, beauty, a
 
 Knowledge, play, movement, belonging, practical competence, measurement, independence, multiple pathways, student voice, AI, free time, and childhood designed for growing judgment rather than permanent supervision.
 
+### 12. [Health & Care — Keeping People Well, Caring for People When They Aren’t](health-care/index.html)
+
+Modern medicine, prevention, primary care, patient safety, coordination, mental health, disability, caregiving, financial protection, interoperability, public health, AI, and palliative care organized around human beings rather than transactions.
+
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
 ## Where This Can Grow
 
-Future subjects may include health, family, transportation, ecology, artificial intelligence in greater depth, open source, justice, media and attention, spirituality, care, disability, aging, and the design of institutions for an automated future.
+Future subjects may include family, transportation, ecology in greater depth, artificial intelligence in greater depth, open source, justice, media and attention, spirituality, care, disability, aging, and the design of institutions for an automated future.
 
 We do not need a complete system before we can learn, write, test ideas, or act.
 
@@ -264,9 +277,14 @@ Among the questions still to explore:
 - What mix of energy generation, storage, transmission, efficiency, and local resilience works best in different places?
 - How much regional food capacity produces useful resilience without sacrificing the benefits of trade?
 - Which agricultural practices best preserve soil, water, biodiversity, productivity, affordability, and farmer livelihoods in different ecosystems?
+- Which green-space, gardening, and stewardship interventions produce benefits beyond movement, income, self-selection, and social contact?
+- How should contaminated urban land be safely reused?
 - How can cities add enough housing while improving nature, infrastructure, public space, beauty, and community rather than merely increasing density?
 - How do we design places where children, older people, disabled people, and non-drivers can participate in ordinary life?
 - Which forms of local physical connection add benefits that digitally mediated relationships cannot provide, and for whom?
+- How should health systems balance access, clinical quality, patient choice, financial protection, workforce capacity, innovation, and administrative simplicity?
+- Which administrative requirements in healthcare genuinely improve safety and accountability, and which mainly consume time?
+- Where can AI reduce health-system burden without creating opaque or unsafe decision-making?
 - How do we preserve scientific rigor while allowing spiritual pluralism?
 - What should children learn in a civilization built around human flourishing?
 - How much unclaimed time do children need, and how should that vary with age and circumstance?
@@ -282,7 +300,7 @@ We can keep the science.
 
 We can keep the computers.
 
-We can keep markets, schools, cities, large infrastructure, specialized institutions, global exchange, and the extraordinary capabilities of modern civilization where they genuinely serve us.
+We can keep modern medicine, markets, schools, cities, large infrastructure, specialized institutions, global exchange, and the extraordinary capabilities of modern civilization where they genuinely serve us.
 
 And we can recover bodies, neighborhoods, gardens, useful competence, durable relationships, human time, living landscapes, understandable institutions, and the ability to participate in the systems around us.
 
