@@ -1,20 +1,22 @@
 # The Human Scale Doctrine
 
-**Version 0.15 — August 2026**
+**Version 0.16 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
-This is a living doctrine about human nature, technology, energy, community, economics, governance, ecology, and the kind of civilization worth building.
+This is a living doctrine about human nature, technology, energy, community, economics, governance, ecology, education, and the kind of civilization worth building.
 
-It begins with a simple observation: human beings are biological organisms whose bodies and minds developed within nature, small communities, physical movement, direct relationships, seasonal rhythms, and meaningful dependence on the living world.
+It begins with a simple observation: human beings are biological organisms whose bodies and minds developed within nature, physical movement, sleep and light-dark rhythms, supportive social relationships, and dependence on living ecological systems.
 
-Modern industrial civilization changed that environment at extraordinary speed.
+Modern industrial civilization changed many of those conditions at extraordinary speed.
 
 The problem is not that humanity learned too much. The problem is that our power to redesign the world grew faster than our understanding of what kind of world human beings actually need.
 
+**Novelty is a reason to investigate, not a reason to condemn.** Modern environments can be better than ancestral ones. Human Scale exists to distinguish useful progress from avoidable mismatch rather than assume the answer in advance.
+
 ## What This Is For
 
-This is not only a statement of belief. It should help us understand the world, live better inside it, and change the systems that work against human flourishing.
+This is not only a statement of belief. It should help us understand the world, live better inside it, change the systems that work against human flourishing, and remain honest about what we actually know.
 
 Each major subject can be approached through three simple questions:
 
@@ -38,46 +40,49 @@ The wrong turn was subtler: **we began optimizing civilization around what machi
 
 ## The Human Mismatch
 
-The human animal still needs things that cannot be engineered away:
+Human beings remain embodied organisms with recurring constraints, needs, motivations, and values. The evidentiary confidence behind individual claims varies, which is why the Evidence Atlas exists.
 
-- movement
-- sunlight
+Among the strongest foundations are:
+
+- physical movement
 - sleep
-- nature
-- family and friendship
-- belonging
-- meaningful work
-- play
-- beauty
-- touch
-- autonomy
-- purpose
-- periods of quiet
-- a livable environment
+- supportive social connection
+- attachment and care during development
+- a functioning physical and ecological environment
 
-A civilization can become more technologically sophisticated while becoming less compatible with the beings living inside it.
+Other Human Scale concerns are supported in more specific contexts or remain working hypotheses and values, including:
 
-That mismatch should become one of our central measures of progress.
+- daylight and circadian timing
+- play and exploration
+- opportunities to learn, practice, and develop competence
+- autonomy and meaningful agency
+- contact with nature and living systems
+- access to rest and focused attention
+- contribution, beauty, purpose, ritual, spirituality, and meaning
+
+A civilization can become more technologically sophisticated while becoming less compatible with some of the beings living inside it.
+
+Mismatch is therefore a question to test, not an answer to assume.
 
 ## Ten Theses
 
-1. **Human beings are biological organisms, not abstract economic units.** Any durable social system must begin with the realities of the body, mind, relationships, and ecology.
+1. **Human beings are biological organisms, not abstract economic units.** Any durable social system must begin with the realities of bodies, minds, relationships, development, and ecology.
 
-2. **Our biology changes far more slowly than our technological environment.** Civilization can therefore create conditions that are materially advanced but psychologically or physically hostile.
+2. **Technological environments can change faster than biological adaptation.** That makes mismatch possible, but novelty itself is neither proof of harm nor proof of progress.
 
-3. **Fossil energy accelerated this mismatch.** It allowed human environments, institutions, and consumption patterns to transform at a speed previously impossible.
+3. **Fossil energy accelerated environmental change.** It allowed human environments, institutions, and consumption patterns to transform at a speed and scale previously impossible.
 
 4. **Efficiency is not the same as flourishing.** A system can produce more goods, move faster, and generate more profit while making everyday life worse.
 
 5. **Technology is a tool, not a destiny.** We are allowed to decide which technologies deserve a place in human life and under what conditions.
 
-6. **Human-scale systems should be preferred when they work.** Local food, walkable places, small groups, repairable tools, distributed production, and understandable institutions often preserve agency and resilience.
+6. **Human-scale systems should be preferred when they work.** Scale is a hypothesis to test, not a moral shortcut. Local systems can preserve agency and resilience; larger systems can provide rights, capacity, science, infrastructure, and coordination that smaller systems cannot.
 
-7. **Advanced technology should become quieter.** The best machines should remove drudgery and bureaucracy without consuming human attention, identity, and purpose.
+7. **Advanced technology should become quieter.** The best machines should remove drudgery and bureaucracy without consuming human attention, identity, judgment, and purpose.
 
-8. **Open systems protect human agency.** Knowledge, software, hardware, protocols, and infrastructure should be understandable, repairable, interoperable, and shareable whenever possible.
+8. **Open systems can protect human agency.** Knowledge, software, hardware, protocols, data, and infrastructure should be understandable, repairable, interoperable, portable, and shareable where the benefits justify the tradeoffs.
 
-9. **Ecology is not an externality.** Human civilization exists inside the living world, not outside it. Damage to soil, water, air, climate, biodiversity, and ecosystems eventually becomes damage to human life.
+9. **Ecology is not an externality.** Human civilization exists inside the living world, not outside it. Damage to soil, water, air, climate, biodiversity, and ecosystems eventually becomes damage to human possibility.
 
 10. **The future should recover what modernity discarded without discarding what humanity learned.** We do not need to choose between the village and the computer. We can build both.
 
@@ -88,14 +93,16 @@ Progress should not be measured only by GDP, speed, scale, convenience, or compu
 A civilization is progressing when more people can:
 
 - live healthy lives
+- sleep and move in ways compatible with their bodies
 - spend time with people they love
-- raise children in safe communities
+- raise children in safe, supportive environments
 - belong to durable relationships and communities where people can rely on one another
 - understand and influence the systems around them
 - create rather than merely consume
+- develop knowledge, judgment, skill, and practical competence
 - work without surrendering their entire waking lives
 - retain meaningful time that is not claimed by employment or constant economic activity
-- use powerful technology without surrendering attention, ownership, judgment, or the ability to leave
+- use powerful technology without surrendering attention, ownership, judgment, privacy, or the ability to leave
 - rely on modern energy without accepting permanent pollution, waste, fragility, or total dependence
 - obtain necessities without permanent desperation while preserving practical freedom and room to build ownership
 - participate in government without needing politics or bureaucracy to consume their lives
@@ -109,7 +116,7 @@ A civilization is progressing when more people can:
 
 ## The Direction
 
-This doctrine is not anti-technology, anti-market, anti-government, anti-city, or anti-modernity.
+This doctrine is not anti-technology, anti-market, anti-government, anti-city, anti-school, or anti-modernity.
 
 It argues for systems that remain accountable to human purposes.
 
@@ -125,17 +132,27 @@ It argues for systems that remain accountable to human purposes.
 
 **Place:** housing, streets, transportation, public space, buildings, trees, gardens, and daily destinations arranged to reduce unnecessary distance and make healthy social life easier.
 
-**Community:** strong families and chosen families, repeated local relationships, meaningful public spaces and third places, mutual aid, care, pluralism, privacy, and the ability to leave unhealthy groups.
+**Community:** strong families and chosen families, supportive relationships, repeated local encounters, meaningful public spaces and third places, mutual aid, care, pluralism, privacy, and the ability to leave unhealthy groups.
+
+**Education:** serious knowledge combined with play, movement, belonging, practical competence, multiple pathways, increasing independence, and technology that scaffolds human development rather than replacing it.
 
 **Inner life:** room for science and reason alongside prayer, meditation, yoga, art, music, philosophy, nature, and the human search for meaning.
 
 Large systems will still exist. The principle is that **scale should have to justify itself.**
 
-The goal is not maximum technology, maximum production, maximum consumption, maximum localism, or maximum central control.
+The goal is not maximum technology, maximum production, maximum consumption, maximum localism, maximum schooling, or maximum central control.
 
 The goal is enough capability to support human life well.
 
 ## Practical Companions
+
+### [Start Here — Human Scale in Two Minutes](start/index.html)
+
+A short introduction for people who do not want to begin with a long doctrine.
+
+### [Human Scale Audit — How Human Is Your Environment?](audit/index.html)
+
+A private, no-signup reflection tool that scores conditions around body, living-world access, community, time, agency, place, security, and meaning. The score is provisional and intentionally not presented as a scientific diagnostic.
 
 ### [Human Scale Field Guide — Living More Humanly Right Now](field-guide/index.html)
 
@@ -161,11 +178,17 @@ Its first claim register covers movement, social connection, long working hours,
 
 It also asks what findings would make us weaken or abandon favored ideas. Its central rule is: **a doctrine that cannot lose an argument is not learning.**
 
+The first deep audit now puts Chapter 1 itself under pressure:
+
+### [Evidence Audit 01 — Human Nature Under Pressure](evidence/human-nature/index.html)
+
+The audit narrows several original claims about ancestral social scale, face-to-face relationships, seasonal rhythm, learning through doing, low stimulation, nature, and meaning. The point is not to defend the original wording. It is to make the doctrine harder to knock down.
+
 ## Chapters
 
 ### 1. [Human Nature — The Environment We Were Built For](human-nature/index.html)
 
-The foundation: recurring human needs, evolutionary mismatch, practical adaptation, and the question of how society can make healthy human behavior easier.
+The foundation: recurring human constraints and needs, the mismatch lens, practical adaptation, environmental design, and the discipline of treating novelty as a question rather than a verdict.
 
 ### 2. [Land & Life — Reconnecting Humans to the Living World](land-life/index.html)
 
@@ -203,11 +226,15 @@ Cooking, gardens, agriculture, soil, food workers, animals, regional processing,
 
 Housing, streets, walkability, transit, public space, nature, climate, beauty, accessibility, childhood, and the physical distances that shape everyday life.
 
+### 11. [Education & Childhood — Raising Capable Human Beings](education-childhood/index.html)
+
+Knowledge, play, movement, belonging, practical competence, measurement, independence, multiple pathways, student voice, AI, free time, and childhood designed for growing judgment rather than permanent supervision.
+
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
 ## Where This Can Grow
 
-Future subjects may include education, artificial intelligence in greater depth, spirituality, family, health, transportation, ecology, open source, justice, childhood, media, and the design of institutions for an automated future.
+Future subjects may include health, family, transportation, ecology, artificial intelligence in greater depth, open source, justice, media and attention, spirituality, care, disability, aging, and the design of institutions for an automated future.
 
 We do not need a complete system before we can learn, write, test ideas, or act.
 
@@ -215,7 +242,7 @@ We do not need a complete system before we can learn, write, test ideas, or act.
 
 We should distinguish between **evidence**, **hypothesis**, **values**, and **political proposals**.
 
-We should be willing to say *we do not know*. We should test claims where we can. We should not disguise political preferences as scientific certainty. And when reality contradicts the doctrine, the doctrine should change.
+We should be willing to say *we do not know*. We should state claims narrowly enough to be wrong. We should test claims where we can. We should seek contrary evidence. We should not disguise political preferences as scientific certainty. And when reality contradicts the doctrine, the doctrine should change.
 
 ## Open Questions
 
@@ -223,9 +250,10 @@ This doctrine is intentionally unfinished.
 
 Among the questions still to explore:
 
-- Which parts of modern life create the greatest mismatch with human nature?
+- Which parts of modern life create the greatest measurable mismatch with human biology and psychology?
+- Which supposed mismatch effects disappear after income, selection, culture, disability, neurotype, and other confounders are considered?
 - Which technologies measurably improve human flourishing?
-- What is the ideal scale for different institutions?
+- What is the effective scale for different institutions?
 - How much localization is resilient without becoming isolationist?
 - How should ownership change in a highly automated economy?
 - How should gains from productivity be divided among wages, prices, profits, ownership, public benefits, and human time?
@@ -238,8 +266,10 @@ Among the questions still to explore:
 - Which agricultural practices best preserve soil, water, biodiversity, productivity, affordability, and farmer livelihoods in different ecosystems?
 - How can cities add enough housing while improving nature, infrastructure, public space, beauty, and community rather than merely increasing density?
 - How do we design places where children, older people, disabled people, and non-drivers can participate in ordinary life?
+- Which forms of local physical connection add benefits that digitally mediated relationships cannot provide, and for whom?
 - How do we preserve scientific rigor while allowing spiritual pluralism?
 - What should children learn in a civilization built around human flourishing?
+- How much unclaimed time do children need, and how should that vary with age and circumstance?
 - How should AI be designed if attention, agency, human development, broad ownership, and human time are primary values?
 
 ## The Direction of the Project
@@ -252,7 +282,7 @@ We can keep the science.
 
 We can keep the computers.
 
-We can keep markets, cities, large infrastructure, specialized institutions, global exchange, and the extraordinary capabilities of modern civilization where they genuinely serve us.
+We can keep markets, schools, cities, large infrastructure, specialized institutions, global exchange, and the extraordinary capabilities of modern civilization where they genuinely serve us.
 
 And we can recover bodies, neighborhoods, gardens, useful competence, durable relationships, human time, living landscapes, understandable institutions, and the ability to participate in the systems around us.
 

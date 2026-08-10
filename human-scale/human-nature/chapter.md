@@ -4,260 +4,338 @@
 
 > Before we redesign society, we need a better model of the creature who has to live inside it.
 
-This chapter starts from a simple premise: human beings are embodied, social, meaning-making organisms. We can adapt to an extraordinary range of environments, but adaptation is not infinite and it is not free.
+Human beings are embodied and social organisms with extraordinary behavioral and cultural flexibility.
 
-Modern civilization can change the conditions of daily life much faster than biological evolution can change the human organism. Culture can adapt faster than biology, but culture can also be overwhelmed, commercialized, centralized, or replaced.
+We can live in deserts, forests, farms, dense cities, islands, spacecraft, offices, and digital networks. We can learn new tools and invent new institutions much faster than genes alone could redesign the organism.
 
-The Human Scale Doctrine calls the resulting gap **mismatch**: a condition in which an environment can be technologically impressive, economically productive, or convenient while still working against recurring human needs.
+That flexibility is real.
 
-This is not an argument that everything old is good or everything modern is bad. The past contained violence, disease, hierarchy, scarcity, and suffering that should not be romanticized.
+So are constraints.
 
-The task is more precise: **identify the parts of human nature that remain relevant, identify where modern systems conflict with them, and redesign life so that technology serves the organism instead of forcing the organism to serve the system.**
+Humans still require sleep, movement, material resources, care during development, social connection, and functioning ecological conditions. Other Human Scale concerns — particular forms of nature contact, local relationships, quiet, embodied competence, autonomy, meaning, ritual, and purpose — range from well-supported in specific contexts to working hypotheses and explicit values.
 
----
+The first evidence audit changed this chapter's language on purpose.
 
-## 1. What We Mean by Human Nature
+Human Scale no longer treats “small communities,” “face-to-face relationships,” “seasonal rhythms,” “learning through doing,” or “low stimulation” as one bundle of universal biological facts.
 
-Human nature is not one rigid lifestyle.
+The stronger principle is:
 
-Humans are unusually flexible. We live in deserts, forests, islands, dense cities, farms, mountains, and digital networks. We create radically different cultures.
+**modern systems can change human environments faster than we understand their effects. We should identify the relevant human constraint, measure the interaction, and redesign harmful defaults when the evidence supports it.**
 
-But flexibility exists inside constraints.
-
-Across human societies, several recurring needs appear again and again:
-
-- physical movement
-- sleep and daily rhythms
-- face-to-face relationships
-- belonging and mutual dependence
-- play and exploration
-- learning through doing
-- autonomy and meaningful choice
-- status and recognition
-- contribution to a group
-- contact with the physical world
-- periods of low stimulation
-- attachment, care, touch, and affection
-- meaning, story, ritual, or purpose
-- a functioning ecological environment
-
-The exact form varies. The underlying needs do not disappear because a new device, market, institution, or ideology arrives.
-
----
-
-## 2. The Environment We Developed In
-
-For most of human existence, daily life required much more direct interaction with the body, other people, and the local environment than is required by industrial civilization.
-
-People generally had to move through physical space, respond to daylight and weather, cooperate with familiar groups, learn practical skills, care for children and elders, obtain food and materials from the living world, and directly experience many of the consequences of their decisions.
-
-This does **not** mean ancestral life was idyllic.
-
-It means that the human organism was shaped under conditions very different from:
-
-- sitting indoors for most waking hours
-- commuting long distances alone
-- receiving endless streams of information
-- performing abstract work for distant institutions
-- buying most necessities through global supply chains
-- spending large portions of childhood separated by age
-- sleeping under artificial light and around-the-clock stimulation
-- maintaining hundreds or thousands of weak digital connections while lacking nearby support
-- having entertainment, food, shopping, outrage, pornography, gambling, and social comparison available on demand
-- living in places where ordinary movement requires deliberate exercise rather than daily life
-
-The question is not whether modern humans *can* live this way.
-
-Clearly we can.
-
-The better question is: **what does it cost us, and which costs are avoidable?**
+Novelty is a reason to investigate, not a reason to condemn.
 
 ---
 
 # Part I — Diagnosis
 
-## 3. The Mismatch Lens
+## 1. What We Mean by Human Nature
 
-Mismatch is not a universal explanation for every human problem. It is a diagnostic tool.
+Human nature is not one rigid lifestyle.
 
-When we encounter a problem, we can ask:
+It is the combination of capacities, constraints, tendencies, developmental processes, and variation that any social system has to work with.
 
-1. What human need or tendency is involved?
-2. What environment did that tendency normally operate within?
-3. What has changed about the modern environment?
-4. Who benefits from the new arrangement?
-5. Who carries the cost?
-6. Can the environment be redesigned instead of demanding more self-control from the individual?
+Some foundations are unusually strong:
 
-This matters because modern systems often treat predictable human responses as personal failures.
+- physical movement matters for health
+- sleep is biologically necessary
+- children require care and attachment
+- supportive social relationships and belonging matter
+- humans require functioning physical and ecological conditions
 
-If a city makes walking dangerous, inactivity is framed only as a motivation problem.
+Other claims need narrower language:
 
-If software is engineered to capture attention, distraction is framed only as a discipline problem.
+- play has strong developmental importance in childhood, but not every form of play is beneficial
+- learning requires opportunities to practice and develop competence, but no one pedagogy fits every task
+- daylight and circadian timing matter, while vague claims about “seasonal rhythm” should be avoided
+- nature contact is associated with health and well-being, while best forms and causal magnitude remain uncertain
+- local physical relationships can provide distinctive practical support, but digital relationships are real relationships too
+- autonomy and agency are important design values, but no single political arrangement automatically maximizes them
+- meaning, ritual, spirituality, purpose, contribution, and beauty matter to Human Scale partly as philosophical commitments, not merely as medical variables
 
-If parents are isolated from extended family and community, exhaustion is framed only as a parenting problem.
+This distinction makes the doctrine more useful, not less.
 
-If work consumes most useful waking hours, loneliness and lack of civic life are framed only as time-management problems.
+## 2. The Mismatch Lens
 
-Personal responsibility matters. But responsibility without environmental analysis is incomplete.
+Mismatch is a diagnostic hypothesis, not a universal explanation.
 
-## 4. Major Areas of Possible Mismatch
+A good mismatch argument asks:
+
+1. What human trait, need, or constraint is relevant?
+2. What modern exposure or environment changed?
+3. What measurable outcome appears to change with it?
+4. What plausible mechanisms connect the two?
+5. What alternatives and confounders might explain the pattern?
+6. Does changing the exposure change the outcome?
+7. Who benefits from the current arrangement?
+8. Who carries its costs?
+
+The weak form of mismatch reasoning says:
+
+> humans did not evolve with this, therefore it is bad.
+
+The strong form says:
+
+> this environment creates a specific exposure; evidence suggests that exposure interacts badly with a recurring human characteristic; here is a testable alternative.
+
+The second form can lose an argument.
+
+That is the point.
+
+## 3. The Environment Changed Quickly
+
+Industrial energy, sanitation, medicine, refrigeration, mechanization, cars, artificial light, telecommunications, computation, global supply chains, and digital networks radically changed what daily life can look like.
+
+Many of those changes are enormous gains.
+
+A person can survive infections that once killed routinely, communicate across continents, learn from a global library, avoid dangerous labor, obtain food through winter, travel rapidly, and use tools of extraordinary power.
+
+Human Scale should actively look for these **matches** between technology and human flourishing.
+
+The same civilization can also create conditions worth investigating:
+
+- very low ordinary physical movement
+- chronically short or disrupted sleep
+- long or unpredictable work schedules
+- dangerous walking environments
+- attention-capturing digital products
+- weak local practical support
+- children with little opportunity for independent movement
+- high exposure to noise, artificial light, or commercial stimulation
+- food environments optimized for purchase rather than regulation
+- institutions ordinary people cannot understand or challenge
+
+No item is condemned merely because it is modern.
+
+The question is:
+
+**what does this environment reliably make easier or harder for actual human beings?**
+
+## 4. Personal Responsibility Is Not the Whole Model
+
+Modern systems often treat predictable responses as though they occur in a vacuum.
+
+If a street makes walking dangerous, inactivity is discussed only as motivation.
+
+If a schedule repeatedly cuts sleep opportunity, fatigue is discussed only as discipline.
+
+If software is deliberately optimized for engagement, distraction is discussed only as self-control.
+
+If housing and transportation separate families, friends, work, school, stores, and parks by large distances, time scarcity is discussed only as planning.
+
+If caregivers have little practical support, exhaustion is discussed only as personal resilience.
+
+Personal responsibility still matters.
+
+But a useful model asks what the individual is responsible **inside of**.
+
+## 5. Major Areas Worth Testing
 
 ### Movement
 
-The body is not merely transportation for the brain. Movement affects how people work, play, socialize, learn, age, and experience place.
+Regular physical activity has a strong empirical foundation.
 
-A human-scale environment should make ordinary movement part of ordinary life rather than requiring everyone to purchase exercise as a separate activity.
+Human Scale therefore asks whether ordinary environments make movement easy, safe, and available — without implying that deliberate exercise, gyms, sports, or modern movement practices are somehow inauthentic.
+
+### Sleep and circadian timing
+
+Sleep is a biological requirement.
+
+Schedules, light, noise, work, school, caregiving, and technology can shape sleep opportunity.
+
+Instead of vague language about returning to “natural rhythms,” Human Scale should study specific exposures and outcomes.
+
+### Relationships and belonging
+
+Supportive social connection matters.
+
+Human Scale values repeated local relationships because physical proximity can support caregiving, shared work, spontaneous contact, mutual aid, and place-based community.
+
+But physical proximity is not the only meaningful relationship form.
+
+Digital communication can sustain real friendship, family, learning, identity, and community, especially when local opportunities are limited.
+
+The research question is not “online or real life?”
+
+It is:
+
+**which forms of connection provide which forms of human support, for whom, and under what conditions?**
 
 ### Attention
 
-Human attention developed in environments where novel signals were limited compared with modern digital life.
+Attention is economically valuable and technologically shapeable.
 
-Today, attention is economically valuable. Entire industries compete to capture and retain it.
+Human Scale should investigate specific mechanisms — notifications, recommendation systems, variable rewards, endless feeds, advertising, interruption, multitasking, and persuasive design — rather than rely on a generic story that ancestral humans experienced fewer stimuli.
 
-A Human Scale analysis therefore treats attention not only as a personal habit but as a resource shaped by product design, business models, institutions, architecture, and law.
+### Work and time
 
-### Relationships
+Work can provide income, contribution, identity, competence, friendship, structure, and purpose.
 
-Humans can interact with far more people than ever before, yet quantity of contact is not the same as durable belonging.
+It can also consume sleep, care, relationships, civic life, and recovery.
 
-Human-scale communities create repeated encounters, shared responsibilities, reciprocal help, and places where relationships can deepen without being scheduled as special events.
+The Human Scale question is not how to eliminate work.
 
-### Work
-
-Work can provide money, skill, contribution, identity, cooperation, and meaning. It can also become detached from visible purpose and local consequence.
-
-The Human Scale question is not simply how to eliminate work. It is how to reduce needless drudgery while preserving agency, competence, contribution, craftsmanship, and social usefulness.
+It is whether economic progress can reduce needless drudgery while preserving contribution and returning some gains as material security and human time.
 
 ### Childhood
 
-Children learn through attachment, imitation, play, experimentation, physical movement, responsibility, and gradually increasing independence.
+Children need care, movement, play, learning, relationships, and increasing opportunities to develop competence.
 
-A Human Scale society should ask whether homes, schools, streets, schedules, technologies, and legal norms support those developmental needs or unintentionally suppress them.
+The exact balance among supervision, instruction, freedom, technology, play, and responsibility is developmental and contextual.
 
-### Nature and sensory life
+That question now has its own chapter: **Education & Childhood — Raising Capable Human Beings.**
 
-Human life developed inside a world of changing light, weather, plants, animals, soil, water, sound, texture, and season.
+### Nature and living systems
 
-Nature should not be treated only as a vacation destination or decorative amenity. Contact with the living world can be a normal part of neighborhoods, schools, workplaces, healthcare, food systems, and public space.
+Nature contact is associated with health and well-being, but exposure, active participation, stewardship, biodiversity, air quality, movement, and social context are not the same variable.
 
-### Food, sleep, and rhythm
+Human Scale also makes a value judgment: people should have meaningful access to the living world and opportunities to participate in caring for it.
 
-Industrial systems can make highly stimulating food, artificial light, irregular schedules, and around-the-clock consumption normal.
+Evidence can inform that commitment without pretending to dictate it.
 
-The question is not whether individuals should exercise discipline. The question is why environments routinely make biological regulation difficult and whether healthier defaults can be designed.
+### Rest and stimulation
 
----
+People differ in temperament, neurotype, sensory preference, work, culture, disability, and desired stimulation.
 
-## 5. Avoiding the Naturalistic Fallacy
+The stronger universal design concern is access to sleep, rest, focused attention, and environments not continuously demanding response.
 
-"Natural" does not automatically mean "good."
+### Meaning and inner life
 
-Humans are capable of aggression, domination, tribalism, jealousy, exploitation, and cruelty as well as cooperation, care, creativity, and love.
+Purpose, narrative, ritual, religion, spirituality, philosophy, art, music, service, and contemplation overlap but should not be collapsed into one scientific variable.
 
-The Human Scale Doctrine does not argue that society should reproduce every ancestral condition or every human impulse.
+Human Scale's claim here is partly philosophical:
+
+**a good civilization should leave room for people to ask what life is for.**
+
+## 6. Avoiding the Naturalistic Fallacy
+
+Natural does not automatically mean good.
+
+Humans are capable of aggression, domination, exploitation, tribalism, jealousy, care, cooperation, creativity, sacrifice, and love.
+
+Human Scale does not argue that society should reproduce ancestral conditions or indulge every human impulse.
 
 Instead:
 
-- biology tells us what kinds of creatures we are
-- history tells us what humans have done
-- science helps us test consequences
-- ethics helps us decide what should be encouraged or restrained
-- politics determines how shared rules are negotiated
-- design shapes the environments in which choices are made
+- biology describes constraints and capacities
+- history reveals possibilities and failures
+- science tests consequences
+- ethics asks what should be valued
+- politics negotiates shared rules
+- design shapes the choice environment
 
-Human nature is a starting constraint, not a moral command.
+Human nature is a starting condition, not a moral command.
 
----
+## 7. Evidence Discipline
 
-## 6. Evidence Discipline
+Each important claim should be labeled.
 
-A serious doctrine must be able to say, "we do not know."
+**Strong evidence** — substantial empirical support exists for the claim as stated.
 
-For each major claim, future versions should distinguish among:
+**Moderate / emerging evidence** — the direction is credible but causality, magnitude, population, dose, or implementation remains uncertain.
 
-**Strong evidence** — findings supported across multiple methods, populations, or disciplines.
+**Working hypothesis** — plausible and worth testing, but not established.
 
-**Working hypothesis** — a plausible explanation worth testing but not yet strong enough to treat as settled.
+**Value judgment** — a statement about what kind of life or society we want.
 
-**Value judgment** — a statement about what kind of life or society we consider desirable.
+**Political proposal** — a mechanism for acting on evidence and values, which must itself be tested for effectiveness, cost, rights, incentives, distribution, and unintended consequences.
 
-**Political proposal** — a specific intervention that must be evaluated for effectiveness, tradeoffs, rights, cost, unintended consequences, and public legitimacy.
+The first deep audit is public:
 
-This separation matters. A scientific finding does not automatically determine a political answer, and a political preference should not be disguised as scientific certainty.
+**Evidence Audit 01 — Human Nature Under Pressure**
+
+https://tmsteph.com/human-scale/evidence/human-nature/
+
+Its result is simple:
+
+**Chapter 1 survives, but it becomes narrower and stronger.**
 
 ---
 
 # Part II — Field Guide
 
-## 7. How to Live More Humanly Inside the Existing World
+## 8. Live More Humanly Without Pretending to Escape Modernity
 
-The goal is not purity. Most people cannot immediately leave their job, move to a farm, abandon technology, rebuild their neighborhood, or reorganize their family structure.
+Most people cannot immediately redesign their job, neighborhood, school, family obligations, housing, or technology stack.
 
-The Field Guide asks: **what small changes move life toward human compatibility without requiring escape from society?**
+The first practical move is not purity.
 
-### Restore bodily rhythm
+It is visibility.
 
-Build movement, daylight, meals, rest, and sleep into the structure of the day instead of treating the body as an obstacle to productivity.
+### Support the body
 
-### Protect attention
+Create realistic opportunities for movement, sleep, daylight, meals, healthcare, rest, and recovery.
 
-Create places and periods where nothing is trying to sell, notify, recommend, measure, or provoke.
+Do not demand identical routines from different bodies and lives.
 
-Use technology intentionally. Turn off unnecessary signals. Prefer tools that finish a task and get out of the way.
+### Protect some attention
 
-### Build repeated local relationships
+Create periods where nothing is trying to notify, recommend, advertise, measure, or provoke.
 
-Know neighbors. Use nearby businesses and public spaces. Join recurring groups. Help people before an emergency creates the need.
+Use technology where it helps and let it stop when the task is finished.
 
-Community is difficult to manufacture during a crisis if it was never practiced during ordinary life.
+### Build support, not a social quota
 
-### Recover useful competence
+Invest in relationships that provide affection, truth, help, responsibility, shared work, laughter, learning, or belonging.
 
-Cook. Repair. Grow something. Make music. Build things. Care for children. Learn first aid. Fix a bicycle. Understand basic finances. Participate in civic meetings. Learn how local infrastructure works.
+Local relationships are valuable when available. Long-distance and digital relationships can be valuable too.
 
-The point is not self-sufficiency in everything. It is reducing helplessness.
+### Develop competence
 
-### Choose friction when friction is healthy
+Cook. Repair. Grow. Make. Read. Write. Budget. Use tools. Learn first aid. Understand local infrastructure. Participate in civic processes. Teach something. Care for someone.
 
-Convenience is valuable, but removing every effort can remove movement, skill, patience, social contact, and awareness.
+The point is not self-sufficiency.
 
-Sometimes walking, cooking, repairing, waiting, practicing, carrying, making, or talking to a human is better than eliminating the friction.
+It is reducing avoidable helplessness.
 
-### Create real rest
+### Choose useful friction
 
-Rest is not the same as passive stimulation.
+Convenience can free human time.
 
-Protect some time for sleep, silence, prayer, meditation, conversation, music, wandering, reading, nature, and unstructured play.
+It can also remove movement, skill, patience, contact, or awareness.
+
+Ask what the friction was doing before automatically eliminating it.
+
+### Create actual rest
+
+Rest is not identical to passive stimulation.
+
+Make room, where useful, for sleep, silence, prayer, meditation, conversation, music, reading, wandering, nature, play, and doing nothing in particular.
 
 ### Audit the environment before blaming yourself
 
-When a habit repeatedly fails, ask what in the environment makes the unwanted behavior easy and the desired behavior hard.
+When a pattern repeatedly fails, ask:
 
-Then change the environment where possible.
+- what makes the undesired behavior easy?
+- what makes the desired behavior hard?
+- is this problem personal, household-level, workplace-level, neighborhood-level, or structural?
+- are many other people compensating for the same friction?
 
----
+Sometimes self-discipline is the answer.
 
-## 8. A Personal Human Scale Audit
+Sometimes the environment is the project.
 
-For one week, observe without trying to perfect anything.
+## 9. A One-Week Human Scale Audit
 
-At the end of each day, ask:
+Observe without trying to perfect anything.
 
-- How much did I move naturally?
-- How much daylight and outdoor time did I get?
-- Did I have unhurried contact with someone I care about?
-- What captured most of my attention?
-- What work felt useful or meaningful?
-- When did I feel competent and capable?
-- When did I feel powerless inside a system I did not understand?
+Ask:
+
+- How much did I move?
+- Did my schedule give me a realistic sleep opportunity?
+- What kinds of relationships supported me?
+- When did I feel belonging?
+- What captured my attention?
+- What work felt useful?
+- When did I feel competent?
+- When did I feel trapped inside a system I could not understand or leave?
 - What did I create?
 - What did I consume?
-- Did I experience quiet?
-- What part of my day felt most human?
-- What part felt most machine-like?
+- Did I have access to rest or focused attention?
+- Did I encounter nature or living systems?
+- What part of my day felt most life-giving?
+- What recurring friction looked larger than an individual habit?
 
-Do not turn this into another optimization score.
+Do not turn the answers into another performance identity.
 
 Look for patterns.
 
@@ -265,166 +343,113 @@ Look for patterns.
 
 # Part III — Program
 
-## 9. From Personal Adaptation to Social Change
+## 10. From Coping to Environmental Design
 
-A doctrine that only teaches individuals to cope with unhealthy systems is incomplete.
+A doctrine that only helps individuals cope with unhealthy systems is incomplete.
 
-If a problem is repeatedly produced by infrastructure, incentives, institutions, or law, then the environment itself becomes a legitimate target for change.
+If a recurring burden is produced by infrastructure, incentives, institutional rules, product design, or law, changing the environment becomes a legitimate response.
 
-The Program therefore asks how communities, governments, businesses, schools, and technologies can make human-compatible choices easier and more ordinary.
+Human Scale therefore asks communities, governments, employers, schools, designers, and technology builders to test environments that make human-compatible behavior easier.
 
-## 10. Design Goals for a Human-Scale Society
+## 11. Design Goals
 
-### Daily life should allow movement
+### Make movement an ordinary option
 
-Neighborhoods should make walking, cycling, transit, play, and access to daily needs realistic choices rather than special lifestyle preferences.
+Walking, cycling, transit, play, recreation, and physical work should be realistic choices where context allows.
 
-### Public space should create belonging
+### Protect sleep opportunity
 
-Parks, libraries, markets, sidewalks, plazas, community centers, playgrounds, and other shared spaces should make repeated local encounter possible without requiring a purchase.
+Workplaces, schools, housing, transportation, noise policy, and technology can affect sleep. When institutions control the clock, sleep should be treated as a design constraint.
 
-### Children should have room to develop agency
+### Create conditions for supportive relationships
 
-Communities should examine whether streets, schools, housing, schedules, and public spaces allow children increasing independence, outdoor play, responsibility, and relationships across generations.
+Housing, public space, third places, caregiving systems, schedules, transportation, and local institutions can either support or obstruct repeated human connection.
 
-### Work should leave room for life
+### Leave room for life outside work
 
-Economic institutions should be judged partly by whether people retain enough time and predictability for sleep, family, friendship, caregiving, civic participation, health, creativity, and rest.
+Economic institutions should be evaluated partly by whether people retain time and predictability for sleep, family, friendship, caregiving, civic participation, health, creativity, and rest.
 
-### Technology should respect attention and agency
+### Respect technological agency
 
-Users should be able to understand, control, leave, repair, modify, or replace important technologies wherever practical.
+People should be able to understand, control, repair, replace, export from, or leave important technologies where practical.
 
-Business models that depend on compulsive engagement deserve special scrutiny when they shape childhood, public discourse, mental life, or essential services.
+### Build capable childhoods
 
-### Healthy choices should not require exceptional privilege
+Children need serious education and real pathways toward movement, play, belonging, responsibility, competence, and increasing independence.
 
-Access to safe housing, movement, nutritious food, education, healthcare, nature, clean air, and community should be treated as infrastructure questions, not merely consumer preferences.
+### Keep ecological systems inside the model
 
-### Decision-making should occur at the smallest workable scale
+Clean air, water, climate stability, soil, food systems, biodiversity, and resilient landscapes are not outside the economy or the city.
 
-Local control can increase understanding, accountability, experimentation, and participation.
+### Make scale empirical
 
-But localism is not automatically just or competent. Some problems require regional, national, or global coordination.
+Local institutions can be legible, adaptable, and participatory.
 
-The principle is not "local good, large bad." The principle is: **scale should justify itself.**
+They can also be exclusionary, under-resourced, coercive, or incompetent.
 
-### Ecology should be designed into ordinary life
+Large institutions can be distant and bureaucratic.
 
-Cities, agriculture, energy, transportation, housing, and industry should be evaluated as parts of ecosystems rather than as systems operating outside nature.
+They can also protect rights, pool risk, build infrastructure, fund science, and solve cross-boundary problems.
 
----
+**Scale is a hypothesis to test, not a moral shortcut.**
 
-## 11. The Human Scale Policy Test
+## 12. The Human Scale Policy Test
 
 Before supporting a policy, technology, development, institution, or reform, ask:
 
-1. Does it improve or degrade human health?
-2. Does it increase or reduce meaningful agency?
-3. Does it strengthen or weaken durable relationships and community?
-4. Does it return time to people or consume more of it?
-5. Does it make the system easier to understand and influence?
-6. Does it protect the ecological systems human life depends on?
-7. Who receives the benefits, and who carries the costs?
-8. What happens if the system fails?
-9. Can people opt out or choose an alternative?
-10. Is the scale necessary for the problem being solved?
+1. What human problem is it actually trying to solve?
+2. What evidence supports the diagnosis?
+3. What remains uncertain?
+4. What happens to health and development?
+5. What happens to human time?
+6. What happens to agency and practical exit?
+7. What happens to relationships and community?
+8. What happens to ecological systems?
+9. Who receives the benefits?
+10. Who carries the costs and risks?
+11. Is this scale necessary?
+12. Can ordinary people understand and challenge the system?
+13. Can the intervention be piloted or reversed?
+14. What evidence would make us change or repeal it?
 
-No policy will score perfectly.
+No proposal will maximize every value.
 
-The test exists to expose tradeoffs that conventional measures can hide.
-
----
-
-## 12. A Ladder of Action
-
-Human-scale change can happen at several levels:
-
-**Self** — habits, attention, skills, health, consumption, work, civic understanding.
-
-**Family and household** — rhythms, caregiving, food, media, money, learning, shared responsibilities.
-
-**Neighborhood** — relationships, mutual aid, public space, local commerce, safety, mobility.
-
-**Community and institutions** — schools, workplaces, churches, clubs, nonprofits, cooperatives, libraries, healthcare.
-
-**City and region** — land use, transportation, housing, parks, utilities, public services, local democracy.
-
-**Economy and government** — labor rules, ownership structures, competition, taxation, safety nets, infrastructure, regulation, public investment.
-
-**Civilization** — energy systems, AI, ecological limits, global coordination, cultural stories, definitions of progress.
-
-The higher levels should not become an excuse to neglect the lower ones.
-
-The lower levels should not become an excuse to ignore structural problems.
-
----
+The test exposes the tradeoffs.
 
 ## 13. Experiments Before Dogma
 
-Whenever possible, test ideas at small scale.
+Whenever possible, test ideas.
 
-A neighborhood can try a temporary street closure before permanent reconstruction.
+A neighborhood can test a safer street design.
 
-A school can test outdoor learning.
+A school can test outdoor learning or a later start.
 
-A workplace can test shorter or more predictable scheduling.
+A workplace can test shorter or more predictable schedules.
 
-A community can build a repair cafe, tool library, garden, parent cooperative, or local mesh network.
+A community can test a garden, tool library, repair event, shared workspace, parent cooperative, or public gathering.
 
-A city can compare different street designs, public-space programs, or permitting rules.
+A city can compare permitting rules, shade interventions, public-space programs, housing reforms, and transportation designs.
 
-A person can test a week with fewer notifications, more walking, shared meals, or scheduled community time.
+A technology team can compare an attention-hungry interface with a calmer task-completion design.
 
-The doctrine should collect these experiments, including failures.
+A person can test fewer notifications, more walking, shared meals, different sleep timing, or recurring community time.
 
----
-
-## 14. What Would Change Our Minds?
-
-Human Scale ideas should be revisable.
-
-We should change a claim when better evidence shows that:
-
-- the proposed mismatch is not actually harmful
-- a supposedly human-scale intervention produces worse outcomes
-- a large centralized system reliably protects human flourishing better than a smaller alternative
-- a technology thought to damage agency can be designed or governed to improve it
-- a cherished tradition causes more harm than benefit
-- a policy creates serious unintended consequences that outweigh its gains
-
-A doctrine becomes dangerous when preserving the doctrine becomes more important than understanding reality.
+Collect failures too.
 
 ---
 
-## 15. Open Questions
+# The Direction
 
-- Which human needs are most universal, and which are primarily cultural?
-- Which modern mismatches cause the greatest preventable harm?
-- How do poverty, disability, gender, age, race, geography, and culture alter the experience of mismatch?
-- How should cities balance density, nature, privacy, mobility, affordability, and community?
-- Which aspects of digital life can be redesigned rather than rejected?
-- How much work is necessary in a highly automated society, and how should its benefits be distributed?
-- What forms of community work for people who do not fit traditional family or religious structures?
-- Which decisions truly benefit from local control, and which require larger coordination?
-- How do we measure flourishing without turning human life into another dashboard?
+Human Scale does not need a myth of a perfect ancestral world.
 
----
+It needs a rigorous model of actual humans.
 
-## 16. The Direction
+We can accept that modernity has produced extraordinary gains while asking where specific systems create measurable friction against bodies, relationships, development, agency, ecology, and human time.
 
-The purpose of studying human nature is not to imprison people in the past.
+We can keep what works.
 
-It is to give the future a better design brief.
+We can redesign what does not.
 
-We can build cities with computers and trees.
+And where evidence cannot tell us what to value, we can say so openly.
 
-We can automate drudgery without automating meaning.
-
-We can use global knowledge while rebuilding local competence.
-
-We can protect individual freedom while creating conditions where community is easier.
-
-We can keep scientific and technological progress while asking it to serve bodies, relationships, ecosystems, and human purpose.
-
-**The goal is not to become primitive. The goal is to become compatible with ourselves.**
+**The goal is not to become primitive. The goal is to become more compatible with ourselves — without pretending we already know exactly what that requires.**

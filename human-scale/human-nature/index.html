@@ -4,360 +4,64 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Human Nature — The Environment We Were Built For</title>
-  <meta name="description" content="Chapter 1 of the Human Scale Doctrine: human nature, evolutionary mismatch, practical navigation, and social change." />
+  <meta name="description" content="Human Scale Chapter 1, revised after evidence audit: mismatch as a testable lens, human constraints, environmental design, and corrigibility." />
   <meta name="theme-color" content="#07111f" />
+  <link rel="canonical" href="https://tmsteph.com/human-scale/human-nature/" />
+  <meta property="og:title" content="Human Nature — The Environment We Were Built For" />
+  <meta property="og:description" content="Mismatch is a question to test, not an answer to assume." />
+  <meta property="og:url" content="https://tmsteph.com/human-scale/human-nature/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
   <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <script defer src="/_vercel/analytics/script.js"></script>
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #07111f;
-      --panel: #0c192a;
-      --soft: #11233a;
-      --text: #edf3fa;
-      --muted: #aab9ca;
-      --line: #243850;
-      --sky: #7bcaff;
-      --sun: #ffe18a;
-      --green: #a4d9ad;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
-      line-height: 1.72;
-      background:
-        radial-gradient(circle at 15% 0%, rgba(123,202,255,.12), transparent 34rem),
-        radial-gradient(circle at 92% 8%, rgba(164,217,173,.09), transparent 30rem),
-        var(--bg);
-    }
-    a { color: var(--sky); }
-    .topbar {
-      width: min(100% - 2rem, 1080px);
-      margin: 0 auto;
-      padding: 1.25rem 0;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      color: var(--muted);
-      font-size: .94rem;
-    }
-    .topbar a { color: var(--muted); text-decoration: none; }
-    .topbar a:hover { color: var(--text); }
-    header {
-      width: min(100% - 2rem, 900px);
-      margin: 0 auto;
-      padding: 5.5rem 0 4.2rem;
-      text-align: center;
-    }
-    .eyebrow {
-      color: var(--sky);
-      text-transform: uppercase;
-      letter-spacing: .16em;
-      font-weight: 800;
-      font-size: .78rem;
-    }
-    h1 {
-      margin: .8rem 0 1rem;
-      font-size: clamp(2.8rem, 8vw, 5.8rem);
-      line-height: .98;
-      letter-spacing: -.05em;
-    }
-    .lead {
-      max-width: 740px;
-      margin: 1.3rem auto 0;
-      color: var(--muted);
-      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-    }
-    .thesis {
-      max-width: 800px;
-      margin: 2.2rem auto 0;
-      padding: 1.35rem 1.5rem;
-      border: 1px solid rgba(255,225,138,.28);
-      border-radius: 18px;
-      background: rgba(255,225,138,.05);
-      color: #fff2c7;
-      font-size: clamp(1.2rem, 3vw, 1.65rem);
-      font-weight: 750;
-    }
-    main { width: min(100% - 2rem, 900px); margin: 0 auto; padding-bottom: 6rem; }
-    section { padding: 3.2rem 0; border-top: 1px solid var(--line); }
-    h2 { margin: 0 0 1rem; font-size: clamp(1.8rem, 5vw, 2.8rem); line-height: 1.08; letter-spacing: -.035em; }
-    h3 { margin: 1.5rem 0 .5rem; font-size: 1.25rem; }
-    p { margin: .9rem 0; }
-    .muted { color: var(--muted); }
-    .callout {
-      margin: 1.6rem 0 0;
-      padding: 1.3rem 1.4rem;
-      border-left: 4px solid var(--sky);
-      border-radius: 0 14px 14px 0;
-      background: var(--panel);
-      font-size: 1.1rem;
-    }
-    .three {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-    .card {
-      padding: 1.3rem;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: linear-gradient(145deg, rgba(17,35,58,.9), rgba(8,19,34,.9));
-    }
-    .card h3 { margin-top: 0; color: #f5f9fd; }
-    .card p { color: var(--muted); margin-bottom: 0; }
-    .lens {
-      display: grid;
-      gap: .8rem;
-      margin-top: 1.2rem;
-    }
-    .lens div {
-      padding: 1rem 1.1rem;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: rgba(255,255,255,.025);
-    }
-    ul, ol { padding-left: 1.3rem; }
-    li { margin: .55rem 0; }
-    .part {
-      color: var(--green);
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      font-size: .78rem;
-      font-weight: 850;
-      margin-bottom: .55rem;
-    }
-    .audit {
-      display: grid;
-      gap: .7rem;
-      margin-top: 1.3rem;
-    }
-    .audit div {
-      padding: .95rem 1rem;
-      border-radius: 12px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-    }
-    .action-ladder {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
-      gap: .8rem;
-      margin-top: 1.3rem;
-    }
-    .action-ladder div {
-      border: 1px solid var(--line);
-      background: rgba(164,217,173,.04);
-      border-radius: 14px;
-      padding: 1rem;
-    }
-    .action-ladder strong { display:block; color: #dff1e3; margin-bottom:.35rem; }
-    .policy-test li { padding-left: .2rem; }
-    .closing { text-align: center; }
-    .closing strong {
-      display: block;
-      margin: 2rem auto 0;
-      max-width: 760px;
-      color: var(--sun);
-      font-size: clamp(1.55rem, 4.5vw, 2.5rem);
-      line-height: 1.15;
-      letter-spacing: -.03em;
-    }
-    footer { border-top:1px solid var(--line); padding:2.5rem 1rem 3.5rem; text-align:center; color:var(--muted); }
-    footer a { text-decoration:none; }
+    :root{color-scheme:dark;--bg:#07111f;--panel:#0c192a;--text:#edf3fa;--muted:#aab9ca;--line:#243850;--sky:#7bcaff;--sun:#ffe18a;--green:#a4d9ad}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);line-height:1.72;background:radial-gradient(circle at 15% 0%,rgba(123,202,255,.12),transparent 34rem),radial-gradient(circle at 92% 8%,rgba(164,217,173,.09),transparent 30rem),var(--bg)}a{color:var(--sky)}
+    .topbar{width:min(100% - 2rem,1080px);margin:0 auto;padding:1.25rem 0;display:flex;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.94rem}.topbar a{color:var(--muted);text-decoration:none}header{width:min(100% - 2rem,900px);margin:0 auto;padding:5.3rem 0 4rem;text-align:center}.eyebrow{color:var(--sky);text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:.78rem}h1{margin:.8rem 0 1rem;font-size:clamp(2.8rem,8vw,5.8rem);line-height:.98;letter-spacing:-.05em}.lead{max-width:750px;margin:1.2rem auto 0;color:var(--muted);font-size:clamp(1.08rem,2.5vw,1.34rem)}.thesis{max-width:820px;margin:2rem auto 0;padding:1.35rem 1.5rem;border:1px solid rgba(255,225,138,.28);border-radius:18px;background:rgba(255,225,138,.05);color:#fff2c7;font-size:clamp(1.18rem,3vw,1.58rem);font-weight:750}
+    main{width:min(100% - 2rem,900px);margin:0 auto;padding-bottom:6rem}section{padding:3.1rem 0;border-top:1px solid var(--line)}h2{margin:0 0 1rem;font-size:clamp(1.8rem,5vw,2.75rem);line-height:1.08;letter-spacing:-.035em}p{margin:.9rem 0}.muted{color:var(--muted)}.callout{margin:1.5rem 0;padding:1.25rem 1.35rem;border-left:4px solid var(--sky);border-radius:0 14px 14px 0;background:var(--panel);font-size:1.08rem}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.2rem}.card{padding:1.2rem;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(17,35,58,.9),rgba(8,19,34,.9))}.card h3{margin:0 0 .45rem}.card p{margin:0;color:var(--muted)}.list{display:grid;gap:.7rem;margin-top:1.1rem}.item{padding:1rem 1.05rem;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025)}.part{color:var(--green);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:850;margin-bottom:.55rem}.closing{text-align:center}.closing strong{display:block;margin:1.7rem auto 0;max-width:790px;color:var(--sun);font-size:clamp(1.55rem,4.6vw,2.4rem);line-height:1.15}.next{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem}.next a{padding:1rem;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--text);text-decoration:none}.next span{display:block;color:var(--muted);font-size:.9rem;margin-top:.25rem}footer{border-top:1px solid var(--line);padding:2.5rem 1rem 3.5rem;text-align:center;color:var(--muted)}footer a{text-decoration:none}@media(max-width:650px){.next{grid-template-columns:1fr}.topbar{display:block}.topbar span{display:block;margin-top:.4rem}header{padding-top:4rem}}
   </style>
 </head>
 <body>
-  <nav class="topbar" aria-label="Page navigation">
-    <a href="../index.html">← Human Scale Doctrine</a>
-    <span>Chapter 1 · Human Nature</span>
-  </nav>
-
-  <header>
-    <div class="eyebrow">Diagnosis · Field Guide · Program</div>
-    <h1>Human Nature</h1>
-    <p class="lead">The environment we were built for — and what that means for navigating modern life and changing the systems around us.</p>
-    <div class="thesis">Before we redesign society, we need a better model of the creature who has to live inside it.</div>
-  </header>
-
+  <nav class="topbar"><a href="../index.html">← Human Scale Doctrine</a><span>Chapter 1 · revised after Evidence Audit 01</span></nav>
+  <header><div class="eyebrow">Diagnosis · Field Guide · Program</div><h1>Human Nature</h1><p class="lead">The environment we were built for — without pretending that “ancestral” automatically means healthy or that every Human Scale preference is a biological law.</p><div class="thesis">Before we redesign society, we need a better model of the creature who has to live inside it.</div></header>
   <main>
-    <section>
-      <h2>The starting point</h2>
-      <p>Human beings are embodied, social, meaning-making organisms. We can adapt to an extraordinary range of environments, but adaptation is not infinite and it is not free.</p>
-      <p>Modern civilization can change the conditions of daily life much faster than biological evolution can change the human organism. Culture can adapt faster than biology, but culture can also be overwhelmed, centralized, commercialized, or replaced.</p>
-      <div class="callout"><strong>Mismatch</strong> is the gap between recurring human needs and an environment that may be technologically impressive, economically productive, or convenient while still working against those needs.</div>
-      <p class="muted">This is not an argument that everything old is good or everything modern is bad. The past contained suffering that should not be romanticized. The task is to recover what serves human life while keeping what humanity has learned.</p>
-    </section>
+    <section><h2>What changed</h2><p>The first evidence audit kept the mismatch lens and narrowed several original claims. Human Scale no longer treats “small communities,” face-to-face contact, seasonal rhythms, learning-through-doing, low stimulation, nature, ritual, and purpose as though they are one equally proven package.</p><div class="callout"><strong>Novelty is a reason to investigate, not a reason to condemn.</strong> Modern environments can be better than ancestral ones. Mismatch is useful only when it identifies a specific human constraint, a specific exposure, and a measurable outcome.</div><p><a href="../evidence/human-nature/index.html">Read Evidence Audit 01 — Human Nature Under Pressure →</a></p></section>
 
-    <section>
-      <h2>What we mean by human nature</h2>
-      <p>Human nature is not one rigid lifestyle. Humans are unusually flexible, but flexibility exists inside constraints.</p>
-      <div class="three">
-        <div class="card"><h3>Body</h3><p>Movement, sleep, light, food, touch, rest, sensory life, and a functioning physical environment.</p></div>
-        <div class="card"><h3>Relationship</h3><p>Attachment, friendship, belonging, mutual dependence, recognition, caregiving, and contribution to a group.</p></div>
-        <div class="card"><h3>Meaning</h3><p>Autonomy, competence, play, learning, story, ritual, creativity, service, spirituality, and purpose.</p></div>
-      </div>
-      <p>The form varies across cultures. The underlying needs do not simply disappear because a new device, market, institution, or ideology arrives.</p>
-    </section>
+    <section><h2>What we can say with more confidence</h2><div class="grid">
+      <div class="card"><h3>Movement</h3><p>Physical activity matters for health. The intervention can vary; “natural movement” is not a magic category.</p></div>
+      <div class="card"><h3>Sleep</h3><p>Sleep is biologically necessary. Schedules, light, noise, work, school, care, and technology can affect sleep opportunity.</p></div>
+      <div class="card"><h3>Social connection</h3><p>Supportive relationships and belonging matter. Local physical relationships can add practical support, but digital relationships are real relationships too.</p></div>
+      <div class="card"><h3>Development</h3><p>Children require care and opportunities to develop movement, play, knowledge, competence, relationships, and increasing judgment.</p></div>
+      <div class="card"><h3>Ecology</h3><p>Humans require functioning physical and ecological conditions. Nature exposure, stewardship, biodiversity, and living-land access are related but distinct claims.</p></div>
+      <div class="card"><h3>Variation</h3><p>Temperament, disability, neurotype, culture, age, work, and circumstance change what supportive environments look like.</p></div>
+    </div></section>
 
-    <section>
-      <div class="part">Part I — Diagnosis</div>
-      <h2>The mismatch lens</h2>
-      <p>Mismatch is not a universal explanation for every human problem. It is a diagnostic tool.</p>
-      <ol>
-        <li>What human need or tendency is involved?</li>
-        <li>What environment did that tendency normally operate within?</li>
-        <li>What changed in the modern environment?</li>
-        <li>Who benefits from the new arrangement?</li>
-        <li>Who carries the cost?</li>
-        <li>Can the environment be redesigned instead of demanding more self-control from the individual?</li>
-      </ol>
-      <div class="callout">Personal responsibility matters. But responsibility without environmental analysis is incomplete.</div>
-    </section>
+    <section><div class="part">Part I — Diagnosis</div><h2>The mismatch lens</h2><p>A strong mismatch argument asks:</p><div class="list"><div class="item">What human trait, need, or constraint is relevant?</div><div class="item">What modern exposure changed?</div><div class="item">What measurable outcome appears to change with it?</div><div class="item">What mechanisms, confounders, and alternatives might explain the pattern?</div><div class="item">Does changing the exposure change the outcome?</div><div class="item">Who benefits from the arrangement, and who carries its cost?</div></div><div class="callout">The weak form says: “humans did not evolve with this, therefore it is bad.” The strong form makes a claim precise enough to lose.</div></section>
 
-    <section>
-      <h2>Where mismatch may show up</h2>
-      <div class="lens">
-        <div><strong>Movement.</strong> Ordinary life can require so little physical movement that exercise becomes a separate purchased activity.</div>
-        <div><strong>Attention.</strong> Attention is economically valuable, and modern products can compete continuously to capture it.</div>
-        <div><strong>Relationships.</strong> Huge networks of weak contact can coexist with little nearby, durable, reciprocal support.</div>
-        <div><strong>Work.</strong> Work can provide contribution and competence, but can also become abstract, externally controlled, and detached from visible purpose.</div>
-        <div><strong>Childhood.</strong> Children need attachment, play, movement, responsibility, imitation, and gradually increasing independence.</div>
-        <div><strong>Nature.</strong> The living world can become something visited occasionally instead of something woven through daily life.</div>
-        <div><strong>Food, sleep, and rhythm.</strong> Artificial light, irregular schedules, constant stimulation, and highly engineered consumption environments can make regulation harder.</div>
-      </div>
-    </section>
+    <section><h2>Where mismatch may be worth testing</h2><div class="grid">
+      <div class="card"><h3>Movement</h3><p>Does the environment make ordinary physical activity realistic, safe, and convenient?</p></div>
+      <div class="card"><h3>Sleep & timing</h3><p>Do institutional clocks and environments create sufficient sleep opportunity?</p></div>
+      <div class="card"><h3>Relationships</h3><p>Which forms of connection provide affection, belonging, caregiving, reciprocal help, and shared life?</p></div>
+      <div class="card"><h3>Attention</h3><p>How do notifications, feeds, advertising, interruption, recommendation systems, and persuasive design shape behavior?</p></div>
+      <div class="card"><h3>Work & time</h3><p>Does productivity preserve contribution while returning enough time for sleep, care, friendship, civic life, and recovery?</p></div>
+      <div class="card"><h3>Childhood</h3><p>Do homes, schools, streets, schedules, and technologies create a path toward competence and increasing independence?</p></div>
+      <div class="card"><h3>Nature</h3><p>Distinguish exposure, participation, stewardship, ecological quality, movement, and social context.</p></div>
+      <div class="card"><h3>Rest & stimulation</h3><p>Can people access sleep, rest, focused attention, and environments not continuously demanding response?</p></div>
+      <div class="card"><h3>Meaning</h3><p>Leave room for purpose, philosophy, religion, art, ritual, service, music, and contemplation without reducing them to one medical variable.</p></div>
+    </div></section>
 
-    <section>
-      <h2>Do not confuse natural with good</h2>
-      <p>Humans are capable of aggression, domination, tribalism, jealousy, exploitation, care, cooperation, creativity, love, and much more.</p>
-      <p>Human nature is a starting constraint, not a moral command.</p>
-      <div class="three">
-        <div class="card"><h3>Biology</h3><p>Helps describe what kinds of creatures we are.</p></div>
-        <div class="card"><h3>Evidence</h3><p>Helps test consequences and distinguish intuition from reality.</p></div>
-        <div class="card"><h3>Ethics & politics</h3><p>Help decide what should be encouraged, restrained, protected, funded, or changed.</p></div>
-      </div>
-    </section>
+    <section><h2>Personal responsibility inside environments</h2><p>Personal responsibility matters. Environmental analysis asks what a person is responsible <em>inside of</em>.</p><p>If walking is dangerous, schedules cut sleep, software is optimized for engagement, essential destinations are needlessly distant, or caregivers have no practical support, individual discipline is only part of the causal model.</p><div class="callout"><strong>Sometimes self-discipline is the answer. Sometimes the environment is the project.</strong></div></section>
 
-    <section>
-      <h2>Evidence discipline</h2>
-      <p>A serious doctrine must be able to say, <strong>we do not know.</strong></p>
-      <div class="three">
-        <div class="card"><h3>Strong evidence</h3><p>Claims supported across multiple methods, populations, or disciplines.</p></div>
-        <div class="card"><h3>Working hypothesis</h3><p>A plausible explanation worth testing, but not strong enough to treat as settled.</p></div>
-        <div class="card"><h3>Value judgment</h3><p>A statement about what kind of life or society we consider desirable.</p></div>
-      </div>
-      <div class="callout">A scientific finding does not automatically determine a political answer, and a political preference should never be disguised as scientific certainty.</div>
-    </section>
+    <section><h2>Do not confuse natural with good</h2><p>Human beings are capable of cooperation, love, creativity, sacrifice, aggression, domination, tribalism, and exploitation. Biology describes constraints and capacities; it does not issue moral commands.</p><div class="grid"><div class="card"><h3>Science</h3><p>Tests consequences.</p></div><div class="card"><h3>Ethics</h3><p>Asks what should be valued.</p></div><div class="card"><h3>Politics</h3><p>Negotiates shared rules and power.</p></div><div class="card"><h3>Design</h3><p>Shapes the environments in which choices become easier or harder.</p></div></div></section>
 
-    <section>
-      <div class="part">Part II — Field Guide</div>
-      <h2>Living more humanly inside the existing world</h2>
-      <p>The goal is not purity or escape. The Field Guide asks what small changes move life toward human compatibility without requiring a person to abandon modern society.</p>
-      <div class="three">
-        <div class="card"><h3>Restore bodily rhythm</h3><p>Build movement, daylight, meals, rest, and sleep into the structure of the day.</p></div>
-        <div class="card"><h3>Protect attention</h3><p>Create periods where nothing is trying to sell, notify, recommend, measure, or provoke.</p></div>
-        <div class="card"><h3>Build local relationships</h3><p>Know neighbors, use public spaces, join recurring groups, and practice mutual help before crisis.</p></div>
-        <div class="card"><h3>Recover competence</h3><p>Cook, repair, grow, build, create, care, learn first aid, understand money, and learn how local systems work.</p></div>
-        <div class="card"><h3>Choose healthy friction</h3><p>Walking, cooking, repairing, practicing, waiting, and talking to humans can preserve skill and awareness.</p></div>
-        <div class="card"><h3>Create real rest</h3><p>Make room for sleep, silence, prayer, meditation, conversation, music, reading, nature, and unstructured play.</p></div>
-      </div>
-    </section>
+    <section><div class="part">Part II — Field Guide</div><h2>Live more humanly without pretending to escape modernity</h2><div class="list"><div class="item"><strong>Support the body.</strong> Create realistic opportunities for movement, sleep, daylight, meals, care, rest, and recovery.</div><div class="item"><strong>Protect some attention.</strong> Create periods where nothing is trying to notify, recommend, advertise, measure, or provoke.</div><div class="item"><strong>Build support, not a social quota.</strong> Invest in relationships that provide affection, truth, help, responsibility, laughter, learning, or belonging.</div><div class="item"><strong>Develop competence.</strong> Cook, repair, grow, make, read, write, budget, use tools, learn first aid, understand infrastructure, care, and participate.</div><div class="item"><strong>Choose useful friction.</strong> Convenience can free time or remove skill, movement, patience, contact, and awareness. Ask what the friction was doing.</div><div class="item"><strong>Create actual rest.</strong> Sleep, silence, prayer, meditation, conversation, music, reading, wandering, nature, play, or simply doing nothing can all be forms of recovery.</div><div class="item"><strong>Audit before blaming yourself.</strong> Ask whether a recurring burden is personal, household-level, workplace-level, neighborhood-level, or structural.</div></div></section>
 
-    <section>
-      <h2>A one-week Human Scale audit</h2>
-      <p class="muted">Observe first. Do not turn this into another optimization score.</p>
-      <div class="audit">
-        <div>How much did I move naturally?</div>
-        <div>How much daylight and outdoor time did I get?</div>
-        <div>Did I have unhurried contact with someone I care about?</div>
-        <div>What captured most of my attention?</div>
-        <div>What work felt useful or meaningful?</div>
-        <div>When did I feel competent and capable?</div>
-        <div>When did I feel powerless inside a system I did not understand?</div>
-        <div>What did I create? What did I consume?</div>
-        <div>Did I experience quiet?</div>
-        <div>What part of my day felt most human? What part felt most machine-like?</div>
-      </div>
-    </section>
+    <section><div class="part">Part III — Program</div><h2>From coping to environmental design</h2><p>If a burden is repeatedly produced by infrastructure, incentives, product design, institutional rules, or law, the environment itself becomes a legitimate target for change.</p><div class="grid"><div class="card"><h3>Movement</h3><p>Make safe ordinary movement a realistic option.</p></div><div class="card"><h3>Sleep</h3><p>Treat sleep opportunity as a constraint where institutions control the clock.</p></div><div class="card"><h3>Relationships</h3><p>Use housing, public space, schedules, transport, and care systems to support repeated human connection.</p></div><div class="card"><h3>Time</h3><p>Judge economic progress partly by whether it leaves room for life outside employment.</p></div><div class="card"><h3>Technology</h3><p>Protect practical control, repair, portability, replacement, privacy, judgment, and exit.</p></div><div class="card"><h3>Childhood</h3><p>Build serious education with movement, play, belonging, responsibility, competence, and growing independence.</p></div><div class="card"><h3>Ecology</h3><p>Keep air, water, climate, soil, food systems, habitat, and future generations inside the model.</p></div><div class="card"><h3>Scale</h3><p>Local and large systems both have strengths and failure modes. Scale is a hypothesis to test, not a moral shortcut.</p></div></div></section>
 
-    <section>
-      <div class="part">Part III — Program</div>
-      <h2>From coping to changing the environment</h2>
-      <p>A doctrine that only teaches individuals to cope with unhealthy systems is incomplete.</p>
-      <p>If a problem is repeatedly produced by infrastructure, incentives, institutions, product design, or law, then the environment itself becomes a legitimate target for change.</p>
-      <div class="three">
-        <div class="card"><h3>Movement by default</h3><p>Make walking, cycling, transit, play, and access to daily needs realistic choices.</p></div>
-        <div class="card"><h3>Public belonging</h3><p>Create parks, libraries, markets, sidewalks, plazas, playgrounds, and community spaces that do not require a purchase.</p></div>
-        <div class="card"><h3>Child agency</h3><p>Design streets, schools, housing, schedules, and public spaces for play, responsibility, and increasing independence.</p></div>
-        <div class="card"><h3>Time for life</h3><p>Judge work partly by whether people retain time and predictability for family, health, civic life, creativity, and rest.</p></div>
-        <div class="card"><h3>Humane technology</h3><p>Protect attention, user control, interoperability, repairability, choice, and the ability to leave.</p></div>
-        <div class="card"><h3>Healthy defaults</h3><p>Treat safe housing, movement, food, education, healthcare, nature, clean air, and community as design and infrastructure questions.</p></div>
-      </div>
-    </section>
+    <section><h2>The Human Scale policy test</h2><div class="list"><div class="item">What human problem is this actually trying to solve?</div><div class="item">What evidence supports the diagnosis, and what remains uncertain?</div><div class="item">What happens to health, development, time, relationships, agency, and ecology?</div><div class="item">Who gains power, who receives benefits, and who carries costs or risks?</div><div class="item">Can ordinary people understand, challenge, or leave the system?</div><div class="item">Is this scale necessary?</div><div class="item">Can the intervention be piloted, reversed, or compared?</div><div class="item">What evidence would make us change or repeal it?</div></div></section>
 
-    <section>
-      <h2>The Human Scale policy test</h2>
-      <ol class="policy-test">
-        <li>Does it improve or degrade human health?</li>
-        <li>Does it increase or reduce meaningful agency?</li>
-        <li>Does it strengthen or weaken durable relationships and community?</li>
-        <li>Does it return time to people or consume more of it?</li>
-        <li>Does it make the system easier to understand and influence?</li>
-        <li>Does it protect the ecological systems human life depends on?</li>
-        <li>Who receives the benefits, and who carries the costs?</li>
-        <li>What happens if the system fails?</li>
-        <li>Can people opt out or choose an alternative?</li>
-        <li>Is the scale necessary for the problem being solved?</li>
-      </ol>
-      <p class="muted">No policy will score perfectly. The test exists to expose tradeoffs that conventional measures can hide.</p>
-    </section>
-
-    <section>
-      <h2>A ladder of action</h2>
-      <div class="action-ladder">
-        <div><strong>Self</strong>Habits, health, attention, skills, consumption, work, civic understanding.</div>
-        <div><strong>Household</strong>Caregiving, food, media, money, learning, rhythms, shared responsibilities.</div>
-        <div><strong>Neighborhood</strong>Relationships, public space, local commerce, safety, mobility, mutual aid.</div>
-        <div><strong>Institutions</strong>Schools, workplaces, churches, clubs, cooperatives, libraries, healthcare.</div>
-        <div><strong>City & region</strong>Housing, land use, transportation, parks, utilities, public services, local democracy.</div>
-        <div><strong>Economy & government</strong>Labor rules, ownership, competition, taxation, safety nets, infrastructure, regulation.</div>
-        <div><strong>Civilization</strong>Energy, AI, ecology, global coordination, cultural stories, definitions of progress.</div>
-      </div>
-      <div class="callout">Higher-level change is not an excuse to neglect daily life. Personal adaptation is not an excuse to ignore structural problems.</div>
-    </section>
-
-    <section>
-      <h2>Experiments before dogma</h2>
-      <p>Whenever possible, test ideas at small scale and keep the failures.</p>
-      <ul>
-        <li>Temporary street changes before permanent reconstruction.</li>
-        <li>Outdoor learning experiments in schools.</li>
-        <li>Shorter or more predictable scheduling trials at work.</li>
-        <li>Repair cafes, tool libraries, gardens, parent cooperatives, and local networks.</li>
-        <li>Personal experiments with fewer notifications, more walking, shared meals, or scheduled community time.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>What would change our minds?</h2>
-      <p>We should revise a Human Scale claim when better evidence shows that a proposed mismatch is not harmful, an intervention produces worse outcomes, a larger system protects flourishing better, or a cherished tradition creates more harm than benefit.</p>
-      <div class="callout">A doctrine becomes dangerous when preserving the doctrine becomes more important than understanding reality.</div>
-    </section>
-
-    <section class="closing">
-      <h2>The direction</h2>
-      <p>The purpose of studying human nature is not to imprison people in the past. It is to give the future a better design brief.</p>
-      <p>We can automate drudgery without automating meaning. We can use global knowledge while rebuilding local competence. We can protect freedom while making community easier.</p>
-      <strong>The goal is not to become primitive. The goal is to become compatible with ourselves.</strong>
-    </section>
+    <section class="closing"><h2>The direction</h2><p>Human Scale does not need a myth of a perfect ancestral world. It needs a rigorous model of actual humans.</p><strong>The goal is not to become primitive. The goal is to become more compatible with ourselves — without pretending we already know exactly what that requires.</strong><div class="next"><a href="../evidence/human-nature/index.html">Evidence Audit 01 →<span>See exactly what changed and why.</span></a><a href="../education-childhood/index.html">Chapter 11 →<span>Education & Childhood: Raising Capable Human Beings.</span></a></div></section>
   </main>
-
-  <footer>
-    <a href="../index.html">Human Scale Doctrine</a> · <a href="../../index.html">tmsteph home</a><br />
-    Living framework · August 2026
-  </footer>
+  <footer><a href="../start/index.html">Start Here</a> · <a href="../index.html">Doctrine</a> · <a href="../evidence/index.html">Evidence Atlas</a> · <a href="../audit/index.html">Audit</a></footer>
 </body>
 </html>
