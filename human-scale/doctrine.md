@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.5 — August 2026**
+**Version 0.6 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -94,6 +94,7 @@ A civilization is progressing when more people can:
 - understand and influence the systems around them
 - create rather than merely consume
 - work without surrendering their entire waking lives
+- retain meaningful time that is not claimed by employment or constant economic activity
 - access nature and public space
 - participate directly in the living world through soil, plants, food, animals, and stewardship
 - obtain food, shelter, education, and healthcare without permanent desperation
@@ -132,7 +133,7 @@ It should favor:
 - neighborhoods where people repeatedly encounter one another
 - voluntary associations
 - mutual aid
-- time for relationships and civic life
+- time for relationships, care, rest, and civic life
 - local ownership
 - cooperative creation
 - meaningful public spaces and third places
@@ -169,11 +170,15 @@ The second chapter argues that meaningful access to soil, plants, animals, garde
 
 The third chapter explores repeated relationships, neighbors, shared meals and work, third places, caregiving, local participation, digital community, and the challenge of creating belonging without sacrificing freedom or pluralism.
 
+### 4. [Work & Time — What Is a Human Life For?](work-time/index.html)
+
+The fourth chapter asks how much of life employment should consume, distinguishes paid work from human contribution, and explores predictable time, worker agency, care, commuting, automation, shorter-work experiments, and the idea that productivity should sometimes give time back.
+
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
 ## Where This Can Grow
 
-Future subjects may include technology, energy, economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, work, family, health, ecology, and open source.
+Future subjects may include technology, energy, economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, family, health, ecology, and open source.
 
 We do not need a complete system before we can learn, write, test ideas, or act.
 
@@ -197,6 +202,7 @@ Among the questions still to explore:
 - How can institutions make belonging easier without making community compulsory or oppressive?
 - How should ownership change in a highly automated economy?
 - What work should humans continue doing even when machines can do it?
+- How should gains from productivity be divided among wages, prices, profits, public benefits, and human time?
 - How can dense cities become deeply connected to nature?
 - How do we preserve scientific rigor while allowing spiritual pluralism?
 - What should children learn in a civilization built around human flourishing?
