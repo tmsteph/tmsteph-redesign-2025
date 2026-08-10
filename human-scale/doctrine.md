@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.6 — August 2026**
+**Version 0.7 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -95,6 +95,7 @@ A civilization is progressing when more people can:
 - create rather than merely consume
 - work without surrendering their entire waking lives
 - retain meaningful time that is not claimed by employment or constant economic activity
+- use powerful technology without surrendering attention, ownership, judgment, or the ability to leave
 - access nature and public space
 - participate directly in the living world through soil, plants, food, animals, and stewardship
 - obtain food, shelter, education, and healthcare without permanent desperation
@@ -112,6 +113,7 @@ It argues for **human-compatible technology**:
 - open-source software and hardware
 - distributed networks
 - repairable devices
+- interoperable systems and portable data
 - local and flexible manufacturing
 - automation of dangerous, repetitive, and bureaucratic labor
 - AI that expands human agency rather than replacing human judgment everywhere
@@ -174,11 +176,15 @@ The third chapter explores repeated relationships, neighbors, shared meals and w
 
 The fourth chapter asks how much of life employment should consume, distinguishes paid work from human contribution, and explores predictable time, worker agency, care, commuting, automation, shorter-work experiments, and the idea that productivity should sometimes give time back.
 
+### 5. [Technology — Tools That Serve Life](technology/index.html)
+
+The fifth chapter asks how technology can expand human capability without demanding attention, dependence, lock-in, or loss of judgment. It explores repair, interoperability, open systems, AI, automation, resilience, local capability, and technology that knows when to get out of the way.
+
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
 ## Where This Can Grow
 
-Future subjects may include technology, energy, economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, family, health, ecology, and open source.
+Future subjects may include energy, economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, family, health, ecology, and open source.
 
 We do not need a complete system before we can learn, write, test ideas, or act.
 
@@ -203,6 +209,8 @@ Among the questions still to explore:
 - How should ownership change in a highly automated economy?
 - What work should humans continue doing even when machines can do it?
 - How should gains from productivity be divided among wages, prices, profits, public benefits, and human time?
+- What forms of technological openness most effectively preserve agency without blocking safety, reliability, or innovation?
+- How should AI preserve human judgment when systems become increasingly capable of acting on our behalf?
 - How can dense cities become deeply connected to nature?
 - How do we preserve scientific rigor while allowing spiritual pluralism?
 - What should children learn in a civilization built around human flourishing?
