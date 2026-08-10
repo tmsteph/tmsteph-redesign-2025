@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Human Scale — Thomas Stephens</title>
+    <link>https://tmsteph.com/human-scale/</link>
+    <description>A living doctrine about human nature, technology, community, ecology, economics, governance, and civilization.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Aug 2026 19:30:00 GMT</lastBuildDate>
+    <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="https://tmsteph.com/human-scale/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Human Scale Audit v0.1</title>
+      <link>https://tmsteph.com/human-scale/audit/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/audit/</guid>
+      <pubDate>Mon, 10 Aug 2026 19:30:00 GMT</pubDate>
+      <description>A private, no-signup audit of whether everyday life supports movement, nature, time, community, place, security, and agency.</description>
+    </item>
+    <item>
+      <title>Human Scale Evidence Atlas v0.1</title>
+      <link>https://tmsteph.com/human-scale/evidence/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/evidence/</guid>
+      <pubDate>Mon, 10 Aug 2026 19:10:00 GMT</pubDate>
+      <description>Evidence grades, hypotheses, value judgments, political proposals, falsification conditions, and a research backlog.</description>
+    </item>
+    <item>
+      <title>Human Scale Program v0.1</title>
+      <link>https://tmsteph.com/human-scale/program/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/program/</guid>
+      <pubDate>Mon, 10 Aug 2026 19:02:00 GMT</pubDate>
+      <description>A civic and political agenda for systems that make human life easier to live.</description>
+    </item>
+    <item>
+      <title>Human Scale Field Guide v0.1</title>
+      <link>https://tmsteph.com/human-scale/field-guide/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/field-guide/</guid>
+      <pubDate>Mon, 10 Aug 2026 18:54:00 GMT</pubDate>
+      <description>A practical guide for living more humanly inside the world that exists now.</description>
+    </item>
+    <item>
+      <title>Human Scale Doctrine</title>
+      <link>https://tmsteph.com/human-scale/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/</guid>
+      <pubDate>Mon, 10 Aug 2026 17:00:00 GMT</pubDate>
+      <description>Humanity became powerful faster than it became wise.</description>
+    </item>
+  </channel>
+</rss>
