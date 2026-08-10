@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.13 — August 2026**
+**Version 0.14 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -135,7 +135,7 @@ The goal is not maximum technology, maximum production, maximum consumption, max
 
 The goal is enough capability to support human life well.
 
-## Practical Companion
+## Practical Companions
 
 ### [Human Scale Field Guide — Living More Humanly Right Now](field-guide/index.html)
 
@@ -144,6 +144,14 @@ The doctrine asks what kind of civilization we should build. The Field Guide ask
 It covers body, food, land, home, work, time, technology, money, community, place, inner life, a seven-day reset, and a method for recognizing when a recurring personal burden is really a systems problem.
 
 Its central warning is simple: **do not turn Human Scale into another optimization religion.** The purpose is to participate in life more fully, not to create another impossible standard for living it.
+
+### [Human Scale Program — What We Should Change Together](program/index.html)
+
+The Program turns the doctrine outward. It proposes a first civic and political agenda for land access, housing and proximity, public space, work and time, technological freedom, AI, ownership, energy, food, institutional legibility, childhood, and concrete local participation.
+
+It is not a party platform. Its proposals should be debated, piloted where possible, measured, revised, and abandoned when they fail.
+
+Its central principle is: **systems must justify themselves by the lives they make possible.**
 
 ## Chapters
 
