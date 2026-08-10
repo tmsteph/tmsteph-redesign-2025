@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.4 — August 2026**
+**Version 0.5 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -90,6 +90,7 @@ A civilization is progressing when more people can:
 - live healthy lives
 - spend time with people they love
 - raise children in safe communities
+- belong to durable relationships and communities where people can rely on one another
 - understand and influence the systems around them
 - create rather than merely consume
 - work without surrendering their entire waking lives
@@ -131,13 +132,15 @@ It should favor:
 - neighborhoods where people repeatedly encounter one another
 - voluntary associations
 - mutual aid
+- time for relationships and civic life
 - local ownership
 - cooperative creation
-- meaningful public spaces
+- meaningful public spaces and third places
 - meaningful access to living land
 - decentralized political and economic power
 - cultural pluralism
 - freedom of belief
+- privacy, boundaries, and the ability to leave unhealthy groups
 - room for spiritual life
 
 Large systems will still exist. The principle is that scale should have to justify itself.
@@ -162,11 +165,15 @@ The first long-form chapter explores the mismatch between recurring human needs 
 
 The second chapter argues that meaningful access to soil, plants, animals, gardens, food forests, open sky, and embodied practices should be part of ordinary life rather than a luxury. It explores both personal participation and public design.
 
+### 3. [Community — The Human Need to Belong](community/index.html)
+
+The third chapter explores repeated relationships, neighbors, shared meals and work, third places, caregiving, local participation, digital community, and the challenge of creating belonging without sacrificing freedom or pluralism.
+
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
 ## Where This Can Grow
 
-Future subjects may include technology, energy, economics, community, education, artificial intelligence, spirituality, governance, food, architecture, transportation, work, family, health, ecology, and open source.
+Future subjects may include technology, energy, economics, education, artificial intelligence, spirituality, governance, food, architecture, transportation, work, family, health, ecology, and open source.
 
 We do not need a complete system before we can learn, write, test ideas, or act.
 
@@ -187,6 +194,7 @@ Among the questions still to explore:
 - What is the ideal scale for different institutions?
 - How much localization is resilient without becoming isolationist?
 - How can land access be expanded without pretending ownership, housing, farming, ecology, and public access have no tradeoffs?
+- How can institutions make belonging easier without making community compulsory or oppressive?
 - How should ownership change in a highly automated economy?
 - What work should humans continue doing even when machines can do it?
 - How can dense cities become deeply connected to nature?
