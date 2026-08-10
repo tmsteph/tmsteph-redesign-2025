@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.1 — August 2026**
+**Version 0.2 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -11,6 +11,34 @@ It begins with a simple observation: human beings are biological organisms whose
 Modern industrial civilization changed that environment at extraordinary speed.
 
 The problem is not that humanity learned too much. The problem is that our power to redesign the world grew faster than our understanding of what kind of world human beings actually need.
+
+## How to Use This Doctrine
+
+This doctrine is meant to help people do more than hold beliefs. It should help us understand the world, navigate it, and change it.
+
+Every major subject should eventually be developed in three layers:
+
+### Diagnosis
+
+What is happening? How did the current system develop? Which incentives, technologies, institutions, cultural habits, and physical environments shape the problem? Where does modern life conflict with recurring human needs?
+
+### Field Guide
+
+How can a person, family, or small group live better inside the world that exists now? What practical changes improve health, agency, competence, relationships, meaning, and resilience without requiring escape from society?
+
+### Program
+
+What should communities, institutions, businesses, cities, and governments change? Which reforms, technologies, public investments, ownership models, rules, and experiments could make human-compatible life easier for ordinary people?
+
+The doctrine should move repeatedly through the same cycle:
+
+**understand → adapt → organize → reform → build alternatives**
+
+And it should operate across a ladder of action:
+
+**Self → Household → Neighborhood → Institutions → City & Region → Economy & Government → Civilization**
+
+Higher-level change is not an excuse to neglect daily life. Personal adaptation is not an excuse to ignore structural problems.
 
 ## The Wrong Turn
 
@@ -138,11 +166,17 @@ Science can tell us an extraordinary amount about how the world works.
 
 It does not eliminate the human need to ask what life is for.
 
+## Chapters
+
+### 1. [Human Nature — The Environment We Were Built For](human-nature/index.html)
+
+The foundation of the doctrine. It introduces the mismatch lens, a practical Field Guide, a Human Scale policy test, and a ladder from personal action to societal change.
+
 ## Doctrine Map
 
 This project can grow into connected bodies of thought:
 
-- Human Nature
+- [Human Nature](human-nature/index.html)
 - Technology
 - Energy
 - Economics
@@ -161,6 +195,19 @@ This project can grow into connected bodies of thought:
 - Open Source
 
 Each branch should eventually contain principles, evidence, unanswered questions, and practical experiments.
+
+## Evidence Standard
+
+A serious doctrine must distinguish between different kinds of claims:
+
+- **Strong evidence** — supported across multiple methods, populations, or disciplines.
+- **Working hypothesis** — plausible and worth testing, but not settled.
+- **Value judgment** — a statement about the kind of life or society we consider desirable.
+- **Political proposal** — an intervention that must be evaluated for effectiveness, rights, cost, tradeoffs, unintended consequences, and public legitimacy.
+
+A scientific finding does not automatically determine a political answer, and a political preference should not be disguised as scientific certainty.
+
+The doctrine should be willing to change when reality contradicts it.
 
 ## Open Questions
 

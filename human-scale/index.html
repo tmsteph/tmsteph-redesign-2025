@@ -204,6 +204,20 @@
       margin-bottom: 0;
     }
 
+    .chapter-link {
+      display: block;
+      margin-top: 1.4rem;
+      padding: 1.2rem 1.3rem;
+      border: 1px solid rgba(120, 200, 255, 0.3);
+      border-radius: 16px;
+      background: rgba(120, 200, 255, 0.06);
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .chapter-link strong { color: var(--sky); }
+    .chapter-link span { display: block; margin-top: 0.35rem; color: var(--muted); }
+
     .map {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -219,6 +233,8 @@
       color: #dceee1;
       text-align: center;
     }
+
+    .map a { color: inherit; text-decoration: none; }
 
     .questions {
       margin: 1.3rem 0 0;
@@ -268,7 +284,7 @@
 <body>
   <nav class="topbar" aria-label="Page navigation">
     <a href="../index.html">← tmsteph home</a>
-    <span>Living doctrine · v0.1</span>
+    <span>Living doctrine · v0.2</span>
   </nav>
 
   <header>
@@ -284,6 +300,18 @@
       <p>Human beings are biological organisms whose bodies and minds developed within nature, small communities, physical movement, direct relationships, seasonal rhythms, and meaningful dependence on the living world.</p>
       <p>Modern industrial civilization changed that environment at extraordinary speed.</p>
       <div class="callout">The problem is not that humanity learned too much. The problem is that our power to redesign the world grew faster than our understanding of what kind of world human beings actually need.</div>
+    </section>
+
+    <section>
+      <h2>A doctrine for living and changing the world</h2>
+      <p>This is not meant to be a collection of beliefs. It is meant to help people understand the systems around them, navigate daily life, and make those systems better.</p>
+      <div class="principles">
+        <div class="principle"><h3>Diagnosis</h3><p>What is happening? How did the system develop? What incentives, institutions, technologies, and environments shape the problem?</p></div>
+        <div class="principle"><h3>Field Guide</h3><p>How can a person, household, or small group live better inside the world that exists now?</p></div>
+        <div class="principle"><h3>Program</h3><p>What should communities, institutions, businesses, cities, and governments change or build?</p></div>
+      </div>
+      <div class="callout"><strong>understand → adapt → organize → reform → build alternatives</strong><br /><span class="muted">Self → Household → Neighborhood → Institutions → City & Region → Economy & Government → Civilization</span></div>
+      <a class="chapter-link" href="human-nature/index.html"><strong>Chapter 1: Human Nature — The Environment We Were Built For →</strong><span>The mismatch lens, a personal Field Guide, a Human Scale policy test, and a ladder from daily life to societal change.</span></a>
     </section>
 
     <section>
@@ -349,8 +377,14 @@
       <h2>Doctrine map</h2>
       <p class="muted">This is the beginning, not the finished system. Each branch can grow into principles, evidence, unanswered questions, and practical experiments.</p>
       <div class="map">
-        <div>Human Nature</div><div>Technology</div><div>Energy</div><div>Economics</div><div>Community</div><div>Education</div><div>Artificial Intelligence</div><div>Spirituality</div><div>Governance</div><div>Food & Agriculture</div><div>Architecture</div><div>Transportation</div><div>Work</div><div>Family</div><div>Health</div><div>Ecology</div><div>Open Source</div>
+        <div><a href="human-nature/index.html">Human Nature ↗</a></div><div>Technology</div><div>Energy</div><div>Economics</div><div>Community</div><div>Education</div><div>Artificial Intelligence</div><div>Spirituality</div><div>Governance</div><div>Food & Agriculture</div><div>Architecture</div><div>Transportation</div><div>Work</div><div>Family</div><div>Health</div><div>Ecology</div><div>Open Source</div>
       </div>
+    </section>
+
+    <section>
+      <h2>Evidence before dogma</h2>
+      <p>A serious doctrine should distinguish <strong>strong evidence</strong>, <strong>working hypotheses</strong>, <strong>value judgments</strong>, and <strong>political proposals</strong>.</p>
+      <div class="callout">A scientific finding does not automatically determine a political answer, and a political preference should not be disguised as scientific certainty. The doctrine should change when reality contradicts it.</div>
     </section>
 
     <section>
@@ -375,7 +409,7 @@
       <p>We can keep the knowledge. We can keep the science. We can keep the computers.</p>
       <p>And we can use them to build a civilization in which people once again belong to their bodies, their communities, and the Earth.</p>
       <strong>The village and the computer can coexist.</strong>
-      <p class="version">This is version 0.1 of a living doctrine. It is expected to change as the ideas are challenged, tested, refined, and expanded.</p>
+      <p class="version">This is version 0.2 of a living doctrine. It is expected to change as the ideas are challenged, tested, refined, and expanded.</p>
     </section>
   </main>
 
