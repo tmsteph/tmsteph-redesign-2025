@@ -3,10 +3,24 @@
   <channel>
     <title>Human Scale — Thomas Stephens</title>
     <link>https://tmsteph.com/human-scale/</link>
-    <description>A living doctrine about human nature, technology, community, ecology, economics, governance, and civilization.</description>
+    <description>A living doctrine about human nature, technology, community, ecology, economics, governance, education, and civilization.</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Aug 2026 19:30:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 19:50:00 GMT</lastBuildDate>
     <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="https://tmsteph.com/human-scale/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chapter 11: Education &amp; Childhood — Raising Capable Human Beings</title>
+      <link>https://tmsteph.com/human-scale/education-childhood/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/education-childhood/</guid>
+      <pubDate>Mon, 10 Aug 2026 19:50:00 GMT</pubDate>
+      <description>Knowledge, play, movement, belonging, practical competence, independence, AI, free time, and multiple paths into adulthood.</description>
+    </item>
+    <item>
+      <title>Evidence Audit 01: Human Nature Under Pressure</title>
+      <link>https://tmsteph.com/human-scale/evidence/human-nature/</link>
+      <guid isPermaLink="true">https://tmsteph.com/human-scale/evidence/human-nature/</guid>
+      <pubDate>Mon, 10 Aug 2026 19:48:00 GMT</pubDate>
+      <description>Chapter 1 is pressure-tested and revised: mismatch survives, but several ancestral and universal claims become narrower and more testable.</description>
+    </item>
     <item>
       <title>Human Scale Audit v0.1</title>
       <link>https://tmsteph.com/human-scale/audit/</link>
