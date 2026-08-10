@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Human Scale Lab
+    url: https://tmsteph.com/human-scale/lab/
+    about: Review active experiments and evidence-audit work before opening an issue.
+  - name: Human Scale Doctrine
+    url: https://tmsteph.com/human-scale/
+    about: Read the current public doctrine and chapter index.
