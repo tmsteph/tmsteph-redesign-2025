@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energy — Power Without Dependence</title>
+  <meta name="description" content="Chapter 6 of the Human Scale Doctrine: reliable energy, resilience, local capability, grids, renewables, nuclear power, efficiency, and ecological stewardship." />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f;
+      --panel: #0c192a;
+      --text: #edf3fa;
+      --muted: #aab9ca;
+      --line: #243850;
+      --sky: #7bcaff;
+      --sun: #ffe18a;
+      --green: #a9ddb0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      line-height: 1.72;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255,225,138,.12), transparent 34rem),
+        radial-gradient(circle at 92% 8%, rgba(123,202,255,.09), transparent 32rem),
+        var(--bg);
+    }
+    a { color: var(--sky); }
+    .topbar {
+      width: min(100% - 2rem, 1060px);
+      margin: 0 auto;
+      padding: 1.25rem 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+    .topbar a { color: var(--muted); text-decoration: none; }
+    header {
+      width: min(100% - 2rem, 900px);
+      margin: 0 auto;
+      padding: 5.6rem 0 4.3rem;
+      text-align: center;
+    }
+    .eyebrow {
+      color: var(--sun);
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: .78rem;
+      font-weight: 850;
+    }
+    h1 {
+      margin: .8rem 0 1rem;
+      font-size: clamp(2.8rem, 8vw, 5.8rem);
+      line-height: .98;
+      letter-spacing: -.05em;
+    }
+    h2 {
+      margin: 0 0 1rem;
+      font-size: clamp(1.85rem, 5vw, 2.8rem);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+    h3 { margin: 0; font-size: 1.18rem; }
+    p { margin: .9rem 0; }
+    .lead {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    }
+    .thesis {
+      max-width: 820px;
+      margin: 2.2rem auto 0;
+      padding: 1.35rem 1.5rem;
+      border: 1px solid rgba(255,225,138,.28);
+      border-radius: 18px;
+      background: rgba(255,225,138,.05);
+      color: #fff4cf;
+      font-size: clamp(1.15rem, 3vw, 1.58rem);
+      font-weight: 750;
+    }
+    main { width: min(100% - 2rem, 900px); margin: 0 auto; padding-bottom: 6rem; }
+    section { padding: 3.2rem 0; border-top: 1px solid var(--line); }
+    .muted { color: var(--muted); }
+    .callout {
+      margin: 1.6rem 0 0;
+      padding: 1.3rem 1.4rem;
+      border-left: 4px solid var(--sun);
+      border-radius: 0 14px 14px 0;
+      background: var(--panel);
+      font-size: 1.1rem;
+    }
+    .part {
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-size: .78rem;
+      font-weight: 850;
+      margin-bottom: .55rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+    .card {
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(17,35,58,.9), rgba(8,19,34,.9));
+    }
+    .card p { color: var(--muted); margin-bottom: 0; }
+    .principle {
+      padding: 1.5rem;
+      border: 1px solid rgba(123,202,255,.26);
+      border-radius: 18px;
+      background: rgba(123,202,255,.045);
+      color: #eaf7ff;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .test { display: grid; gap: .7rem; margin-top: 1.2rem; }
+    .test div {
+      padding: .95rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+    }
+    .closing { text-align: center; }
+    .closing strong {
+      display: block;
+      max-width: 760px;
+      margin: 2rem auto 0;
+      color: var(--sun);
+      font-size: clamp(1.55rem, 4.5vw, 2.45rem);
+      line-height: 1.15;
+      letter-spacing: -.03em;
+    }
+    footer { border-top: 1px solid var(--line); padding: 2.5rem 1rem 3.5rem; text-align: center; color: var(--muted); }
+    footer a { text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Page navigation">
+    <a href="../index.html">← Human Scale Doctrine</a>
+    <span>Chapter 6 · Energy</span>
+  </nav>
+
+  <header>
+    <div class="eyebrow">Diagnosis · Field Guide · Program</div>
+    <h1>Energy</h1>
+    <p class="lead">Power without dependence — reliable modern energy, ecological stewardship, local resilience, strong grids, and the question of what abundance is for.</p>
+    <div class="thesis">Energy should be abundant enough to support a good life, clean enough not to poison the future, resilient enough to survive failure, and distributed enough that power does not always mean dependence.</div>
+  </header>
+
+  <main>
+    <section>
+      <h2>The starting point</h2>
+      <p>Civilization runs on energy. Clean water, refrigeration, hospitals, heating and cooling, transportation, manufacturing, communication, computing, and modern infrastructure all depend on dependable power.</p>
+      <p>The Human Scale Doctrine is not an argument for energy scarcity.</p>
+      <div class="callout">The question is <strong>how to keep the power of modern civilization while reducing ecological damage, fragility, waste, and unnecessary dependence.</strong></div>
+    </section>
+
+    <section>
+      <div class="part">Part I — Diagnosis</div>
+      <h2>Energy changed the scale of civilization</h2>
+      <div class="grid">
+        <div class="card"><h3>Hidden infrastructure</h3><p>Daily life depends on generation, fuels, grids, markets, maintenance, extraction, software, and institutions most people rarely see.</p></div>
+        <div class="card"><h3>Fossil abundance</h3><p>Concentrated fuels enabled extraordinary capability while also encouraging systems built around long distances, high throughput, and constant mechanical power.</p></div>
+        <div class="card"><h3>Bad design</h3><p>Cheap energy can compensate for poor buildings, long trips, disposable products, and environments that ignore climate and place.</p></div>
+        <div class="card"><h3>Extraction</h3><p>Every energy technology has physical inputs, land, materials, infrastructure, maintenance, and eventual waste or decommissioning.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Large systems are useful — and can be fragile</h2>
+      <p>Interconnected grids and large power plants can share generation across regions, support hospitals and industry, and achieve capabilities that isolated systems cannot.</p>
+      <div class="principle">Human Scale does not mean every household goes off-grid. It means large shared systems and smaller local systems should reinforce one another.</div>
+    </section>
+
+    <section>
+      <h2>Energy scarcity is not the answer</h2>
+      <p>Reliable energy supports health, safety, food, medicine, communication, comfort, and participation in modern society.</p>
+      <div class="callout">The goal is <strong>sufficiency, abundance where it improves life, and restraint where consumption mainly compensates for wasteful design.</strong></div>
+    </section>
+
+    <section>
+      <div class="part">Part II — Field Guide</div>
+      <h2>Use energy with more agency</h2>
+      <div class="grid">
+        <div class="card"><h3>Know the system</h3><p>Understand the basics of what powers your home, what uses the most energy, and what fails first during an outage.</p></div>
+        <div class="card"><h3>Cut waste, not life</h3><p>Prioritize shade, insulation, maintenance, efficient equipment, durable goods, and unnecessary loads before sacrificing health or comfort.</p></div>
+        <div class="card"><h3>Design with climate</h3><p>Use daylight, shade, ventilation, trees, orientation, insulation, and other passive strategies alongside modern systems.</p></div>
+        <div class="card"><h3>Build modest resilience</h3><p>Backup lighting, safe emergency power, communication, temperature plans, and neighbor coordination can make outages less dangerous.</p></div>
+        <div class="card"><h3>Match scale to need</h3><p>Use the smallest adequate solution when it genuinely works instead of defaulting to the largest machine available.</p></div>
+        <div class="card"><h3>Participate</h3><p>Community energy, retrofits, local utility decisions, resilience projects, and home monitoring can make energy less abstract.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="part">Part III — Program</div>
+      <h2>Build a capable energy civilization</h2>
+      <div class="grid">
+        <div class="card"><h3>Clean + reliable</h3><p>Energy policy should pursue dependable, affordable power with lower pollution, lower carbon impact, and responsible material use.</p></div>
+        <div class="card"><h3>Portfolio thinking</h3><p>Solar, wind, hydro, geothermal, nuclear, storage, transmission, efficiency, and other resources should be judged by real tradeoffs, not tribal identity.</p></div>
+        <div class="card"><h3>Strong grids</h3><p>Keep regional interconnection as a backbone while adding distributed generation, storage, microgrids, and flexible demand.</p></div>
+        <div class="card"><h3>Local benefit</h3><p>Communities hosting infrastructure should have meaningful voice and a fair opportunity to share in its benefits.</p></div>
+        <div class="card"><h3>Better buildings</h3><p>Treat shade, insulation, passive design, retrofits, trees, and efficient equipment as energy infrastructure.</p></div>
+        <div class="card"><h3>Resilience</h3><p>Redundancy, backup capacity, storage, multiple pathways, and graceful failure deserve value even when they look inefficient in normal conditions.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Do not turn energy sources into identities</h2>
+      <p>Nuclear energy raises real questions about cost, safety, waste, governance, construction, and institutional competence. It also has characteristics worth serious evaluation wherever reliable low-carbon power is needed.</p>
+      <p>Renewable generation can reduce fuel dependence and distribute production, while still requiring honest consideration of land, transmission, storage, materials, habitat, manufacturing, and local acceptance.</p>
+      <div class="callout">Human Scale should ask <strong>what works here, under what conditions, at what cost, with what risks?</strong> — not which technology proves membership in the right political tribe.</div>
+    </section>
+
+    <section>
+      <h2>Local resilience + regional interconnection</h2>
+      <p>Rooftop and community generation, batteries, microgrids, resilience hubs, local repair workers, and public emergency power can make communities less brittle.</p>
+      <p>Regional grids can move energy between places, balance generation and demand, and support uses that local systems cannot handle alone.</p>
+      <div class="principle">Local resilience and regional interconnection are complements, not enemies.</div>
+    </section>
+
+    <section>
+      <h2>Energy access matters</h2>
+      <p>A basic level of reliable household energy is foundational to modern life. The exact mechanism is a political question, but energy policy should not force people to choose between electricity, food, safe temperature, or medicine while large amounts of energy are wasted elsewhere.</p>
+    </section>
+
+    <section>
+      <h2>A Human Scale energy test</h2>
+      <div class="test">
+        <div>Does it provide dependable energy for real human needs?</div>
+        <div>Is it affordable for ordinary people?</div>
+        <div>What ecological and pollution costs exist across the full lifecycle?</div>
+        <div>What land, water, fuel, materials, and infrastructure does it require?</div>
+        <div>How well does it survive outages, extreme conditions, market shocks, or supply disruption?</div>
+        <div>Who owns it, who controls it, and who receives the benefits?</div>
+        <div>Who bears the physical risks and local burdens?</div>
+        <div>Does it strengthen local capability without pretending communities can isolate themselves from larger systems?</div>
+        <div>Can it be maintained, repaired, and eventually decommissioned responsibly?</div>
+        <div>Does it reduce wasteful demand or merely feed it?</div>
+        <div>Does it support healthier places and more human time?</div>
+      </div>
+      <p class="muted">No energy system is impact-free. The purpose is to make tradeoffs visible enough to choose wisely.</p>
+    </section>
+
+    <section class="closing">
+      <h2>The deeper idea</h2>
+      <p>Energy is not the enemy. Humanity learned to command extraordinary amounts of power, and much of modern civilization depends on that achievement.</p>
+      <p>We should keep medicine, refrigeration, clean water, communication, industry, transportation, computing, and machines that spare people dangerous physical labor.</p>
+      <p>The challenge is to become wiser about what all that power is for.</p>
+      <p>Abundance should become compatible with stewardship. Large systems should coexist with local capability. Communities should benefit from the infrastructure they carry.</p>
+      <strong>The goal is not less power. It is power placed back in service of life.</strong>
+    </section>
+  </main>
+
+  <footer>
+    <a href="../index.html">Human Scale Doctrine</a> · <a href="../../index.html">tmsteph home</a><br />
+    Living framework · August 2026
+  </footer>
+</body>
+</html>
