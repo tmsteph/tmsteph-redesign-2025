@@ -1,312 +1,318 @@
 # Human Scale Evidence Atlas
 
-**Version 0.1 — August 2026**
+**Version 0.2 — August 2026**
 
 > A philosophy becomes more trustworthy when it knows which parts are evidence, which parts are hypotheses, and which parts are choices.
 
-The Human Scale Doctrine makes claims about human bodies, relationships, work, technology, place, ecology, institutions, and civilization. Those claims should not all be treated as though they have the same kind of support.
+The Human Scale Doctrine makes claims about human bodies, relationships, work, technology, place, childhood, ecology, institutions, and civilization.
 
-This atlas is the beginning of an evidence layer behind the public doctrine.
+Those claims should not all be treated as though they have the same kind of support.
 
-It does not try to prove Human Scale as a single package. A worldview cannot be validated by one study. Instead, it breaks the doctrine into claims that can be examined separately.
+The Atlas has two jobs:
 
-## The Evidence Labels
+1. maintain a broad register of important claims and their current evidentiary status;
+2. conduct deep chapter audits that are allowed to change the public doctrine.
 
-### Strong evidence
+The purpose is not to decorate the doctrine with citations.
 
-A claim is supported by a substantial and reasonably consistent body of evidence. This still does not mean that every mechanism, subgroup, dose, or policy implication is settled.
+The purpose is to make it harder for the doctrine to lie to itself.
 
-### Moderate evidence
+---
 
-The evidence points in a direction, but causality, effect size, generalizability, measurement, or implementation remains meaningfully uncertain.
+# Claim Types
 
-### Emerging or mixed evidence
+## Strong evidence
 
-There are credible findings, but the literature is still limited, heterogeneous, contested, or especially sensitive to context.
+Substantial empirical support exists for the claim as stated. Mechanisms, dose, subgroups, or policy implications may still be uncertain.
 
-### Working hypothesis
+## Moderate / emerging evidence
 
-The claim is plausible and useful enough to test, but should not be presented as established fact.
+The direction is credible, but causality, magnitude, generalizability, population, dose, or implementation remains meaningfully uncertain.
 
-### Value judgment
+## Working hypothesis
 
-The claim says what we believe is worth protecting or pursuing. Evidence can inform the judgment but cannot derive it automatically.
+A plausible explanation or design principle worth testing, but not strong enough to present as settled.
 
-### Political proposal
+## Value judgment
 
-The claim recommends an institution, rule, right, investment, or allocation of power. It must be evaluated not only for intent but for outcomes, tradeoffs, administrative burden, unintended consequences, rights, and alternatives.
+A statement about what kind of life or society Human Scale considers desirable.
 
-## Initial Claim Register
+Science can inform a value judgment. Science cannot choose every value for us.
 
-### 1. Regular physical activity is important for human health
+## Political proposal
 
-**Status: Strong evidence**
+A specific mechanism for acting on evidence and values. Political proposals must be evaluated for effectiveness, cost, rights, distribution, incentives, unintended consequences, institutional capacity, and legitimacy.
 
-The doctrine's emphasis on movement has a strong empirical foundation. Large bodies of epidemiological and intervention research support physical activity as protective across cardiovascular, metabolic, musculoskeletal, and mental-health outcomes.
+---
 
-What this supports:
+# Deep Audits
 
-- designing daily life so movement is easier
-- treating sedentary environments as a legitimate health concern
-- providing safe walking, play, recreation, and active transportation options
+## [Evidence Audit 01 — Human Nature Under Pressure](human-nature/index.html)
 
-What this does **not** prove:
+Audit 01 places Chapter 1 under direct pressure.
 
-- that one exercise system is universally best
-- that every person should reach the same activity target
-- that health problems caused by social or medical conditions can be solved through exercise alone
+It revises the doctrine's original language on:
 
-**Initial sources**
+- “small communities” as a presumed human requirement
+- face-to-face relationships as the only meaningful relationship form
+- vague “seasonal rhythms”
+- “learning through doing” as a universal need
+- low stimulation as a universal prescription
+- nature contact versus active stewardship
+- physical-world contact versus material necessity
+- meaning, story, ritual, spirituality, and purpose as one scientific bundle
 
-- World Health Organization, *WHO Guidelines on Physical Activity and Sedentary Behaviour* (2020): https://www.who.int/publications/i/item/9789240015128
-- Ekelund et al., *Does physical activity attenuate, or even eliminate, the detrimental association of sitting time with mortality?* The Lancet (2016): https://doi.org/10.1016/S0140-6736(16)30370-1
+### Result
 
-### 2. Human relationships and social connection matter for health
+**Chapter 1 survives, but it becomes narrower and stronger.**
 
-**Status: Strong evidence for association; causal pathways remain complex**
+The revised mismatch principle is:
 
-A large literature links stronger social relationships with better health and survival, while isolation and loneliness are associated with worse outcomes.
+> modern systems can change human environments faster than we understand their effects. Identify the relevant human constraint, identify the exposure, measure the interaction, redesign harmful defaults where evidence supports it, and keep values explicit where evidence cannot choose for us.
 
-Human Scale should still be careful with causal language. Social connection interacts with income, illness, mobility, family structure, personality, neighborhood conditions, and many other factors.
+The doctrine now explicitly says:
 
-What this supports:
+**Novelty is a reason to investigate, not a reason to condemn.**
 
-- taking loneliness and isolation seriously
-- designing places and schedules that make repeated human contact possible
-- protecting community institutions, public space, caregiving, and time for relationships
+---
 
-What this does **not** prove:
+# Initial Claim Register
 
-- that everyone needs the same amount or type of social contact
-- that traditional or tightly knit communities are automatically healthy
-- that belonging should override privacy, autonomy, pluralism, or the right to leave
+## 1. Regular physical activity matters for health
 
-**Initial source**
+**Grade: Strong evidence**
 
-- Holt-Lunstad, Smith & Layton, *Social Relationships and Mortality Risk: A Meta-analytic Review*, PLOS Medicine (2010): https://doi.org/10.1371/journal.pmed.1000316
+The doctrine's emphasis on movement has a strong empirical foundation.
 
-### 3. Very long working hours can create measurable health risk
+This supports designing daily life so movement is easier and more available.
 
-**Status: Strong evidence for specific cardiovascular outcomes at high exposure**
+It does not establish:
 
-WHO/ILO analyses have linked long working hours, especially 55 or more hours per week, with increased risk of ischemic heart disease and stroke compared with more standard working-hour ranges.
+- one universal exercise system
+- one ideal ancestral movement pattern
+- that deliberate exercise is inferior to movement embedded in daily life
+- that movement alone explains population health differences
 
-What this supports:
+Official source:
+- WHO, *Guidelines on physical activity and sedentary behaviour* (2020): https://www.who.int/publications/b/55518
 
-- treating time as a real dimension of occupational health
-- questioning labor systems that normalize chronically extreme hours
-- measuring commuting, schedule instability, recovery, and unpaid administrative burden rather than treating paid hours as the only cost of work
+## 2. Supportive social relationships and connection matter
 
-What this does **not** prove:
+**Grade: Strong association / strong public-health consensus**
 
-- that one universal workweek is optimal for every occupation or person
-- that shorter hours automatically improve productivity or well-being in every context
-- that all intensive periods of work are harmful
+Social connection is linked to health and well-being.
 
-**Initial source**
+The revised doctrine avoids treating “face-to-face” as the only legitimate relationship mode. Local physical relationships can provide forms of caregiving, mutual aid, spontaneous contact, and shared place that matter, while digital relationships can also be real and deeply supportive.
 
-- Pega et al., *Global, regional, and national burdens of ischemic heart disease and stroke attributable to exposure to long working hours*, Environment International (2021): https://doi.org/10.1016/j.envint.2021.106595
+Official source:
+- CDC, *Social Connection*: https://www.cdc.gov/social-connectedness/about/
 
-### 4. Contact with nature is associated with health and well-being
+## 3. Chronically very long working hours can create measurable health risk
 
-**Status: Moderate evidence**
+**Grade: Strong evidence**
 
-Research repeatedly finds associations between exposure to green or natural environments and measures of health and well-being. Some experimental work supports short-term psychological effects, but much of the population evidence is observational.
+WHO/ILO analyses link high working-hour exposure, especially 55+ hours per week, with increased ischemic heart disease and stroke risk.
 
-One influential study found that people reporting at least 120 minutes of recreational nature contact per week were more likely to report good health and high well-being. That study was cross-sectional and should not be treated as proof of a universal two-hour biological threshold.
+This supports treating human time as an occupational-health concern.
 
-What this supports:
+It does not establish one ideal workweek for every occupation or person.
 
-- making nature access ordinary rather than rare
-- treating parks, trees, trails, gardens, water, shade, and habitat as potentially health-supporting infrastructure
-- testing participatory forms of nature contact such as gardening and stewardship
+Source:
+- Pega et al., *Environment International* (2021): https://doi.org/10.1016/j.envint.2021.106595
 
-What this does **not** prove:
+## 4. Nature contact is associated with health and well-being
 
-- a universal required dose of nature
-- that rural life is healthier than urban life overall
-- that nature exposure substitutes for medical care, relationships, housing, or economic security
+**Grade: Moderate evidence**
 
-**Initial source**
+Green and natural environments are repeatedly associated with well-being and health, but many population studies are observational and exposure measures differ.
 
-- White et al., *Spending at least 120 minutes a week in nature is associated with good health and wellbeing*, Scientific Reports (2019): https://doi.org/10.1038/s41598-019-44097-3
+Human Scale should distinguish:
 
-### 5. The built environment can influence physical activity and health
+- visual exposure
+- physical access
+- physical activity in green space
+- biodiversity
+- air quality
+- social context
+- active gardening
+- stewardship
+- food production
+- ecological function
 
-**Status: Moderate evidence**
+The doctrine's political commitment to meaningful living-world access is a value judgment informed by this literature, not a conclusion mechanically produced by it.
 
-Walkability, proximity, street connectivity, transit access, and land-use patterns are associated with differences in physical activity and several health outcomes. Longitudinal evidence strengthens the case that place matters, although residential self-selection and socioeconomic differences complicate causal interpretation.
+Example source:
+- White et al., *Scientific Reports* (2019): https://doi.org/10.1038/s41598-019-44097-3
 
-What this supports:
+## 5. The built environment can influence movement and health
 
-- safer walking and cycling
-- housing near daily needs
-- mixed-use neighborhoods where appropriate
-- transit and public-space investment
-- measuring the time cost created by distance
+**Grade: Moderate evidence**
 
-What this does **not** prove:
+Walkability, connectivity, proximity, transit, and land-use patterns are associated with physical activity and several health outcomes.
 
-- that density is always good
-- that cars should disappear
-- that every neighborhood should have the same physical form
-- that urban design overwhelms income, culture, safety, disability, climate, or personal preference
+Residential self-selection, income, disability, age, and other contextual factors complicate causal interpretation.
 
-**Initial source**
+Example source:
+- Creatore et al., *JAMA* (2016): https://doi.org/10.1001/jama.2016.5898
 
-- Creatore et al., *Association of Neighborhood Walkability With Change in Overweight, Obesity, and Diabetes*, JAMA (2016): https://doi.org/10.1001/jama.2016.5898
+## 6. Unpredictable work schedules can damage well-being
 
-### 6. Unpredictable work schedules can damage well-being
+**Grade: Moderate / emerging evidence**
 
-**Status: Moderate / emerging evidence**
+Research among hourly and service-sector workers links schedule instability with sleep disruption, psychological distress, and worse well-being.
 
-Research on service-sector and hourly workers has linked unstable scheduling with worse sleep, psychological distress, and well-being. The literature is newer and more context-specific than the evidence on long hours.
+This literature is newer and more context-sensitive than the evidence on very long hours.
 
-What this supports:
+Example source:
+- Schneider & Harknett, *Social Forces* (2019): https://doi.org/10.1093/sf/soz024
 
-- treating predictability as a legitimate dimension of job quality
-- testing advance-notice and worker-control policies
-- measuring whether schedule reforms improve health, family life, retention, and worker income
+## 7. Play matters in childhood
 
-What this does **not** prove:
+**Grade: Strong clinical/developmental support; implementation varies**
 
-- that one scheduling law fits every industry
-- that flexibility itself is bad
-- that worker preferences are uniform
+The American Academy of Pediatrics describes developmentally appropriate play as supporting social-emotional, cognitive, language, self-regulation, and executive-function development.
 
-**Initial source**
+This does not mean all play is automatically safe, inclusive, beneficial, or superior to instruction.
 
-- Schneider & Harknett, *Consequences of Routine Work-Schedule Instability for Worker Health and Well-Being*, Social Forces (2019): https://doi.org/10.1093/sf/soz024
+Official clinical source:
+- AAP, *The Power of Play* (2018; reaffirmed 2025): https://doi.org/10.1542/peds.2018-2058
 
-## Claims We Should Not Pretend Are Settled Science
+## 8. Later adolescent school starts can increase sleep
 
-### 7. Human-scale systems often preserve agency and resilience
+**Grade: Moderate-to-strong and context-sensitive**
 
-**Status: Working hypothesis / context-dependent principle**
+A 2026 randomized controlled trial found that delaying school start by one hour produced a 26-minute between-group difference in sleep after six months, decreased sleepiness, and improved inhibitory control.
 
-This is central to the doctrine but is not a universal empirical law.
+Earlier quasi-experimental studies also report additional sleep after delays.
 
-Smaller or more local systems may be easier to understand, influence, repair, and adapt. They can also be inefficient, exclusionary, under-resourced, corrupt, fragile, or incapable of handling problems that cross boundaries.
+Other longitudinal evidence suggests effects may attenuate over time and differ across populations.
 
-Therefore the actual claim should remain:
+Sources:
+- Reynaud et al. RCT (2026): https://doi.org/10.1038/s41598-026-50892-6
+- Fairfax quasi-experiment: https://pubmed.ncbi.nlm.nih.gov/29157637/
+- South Korea longitudinal quasi-experiment: https://pubmed.ncbi.nlm.nih.gov/38849057/
+- ABCD heterogeneity study: https://pubmed.ncbi.nlm.nih.gov/40750506/
 
-> Prefer human-scale systems **when they work**, and require larger scale to justify itself by capability, outcomes, rights, and accountability.
+## 9. Active learning can outperform traditional lecturing in some domains
 
-This should be tested domain by domain rather than proven with one general citation.
+**Grade: Strong in a narrower domain**
 
-### 8. Open, repairable, interoperable technology protects human agency
+A major meta-analysis of undergraduate STEM courses found higher assessment performance and lower failure rates under active-learning conditions.
 
-**Status: Value judgment supported by testable hypotheses**
+This does not prove that all ages, subjects, tasks, or lessons should use the same pedagogy.
 
-Repairability, data portability, open formats, interoperability, and the ability to exit a platform plausibly increase user control and reduce lock-in.
+Source:
+- Freeman et al., PNAS (2014): https://doi.org/10.1073/pnas.1319030111
 
-But tradeoffs can include security, support burden, coordination cost, intellectual-property incentives, compatibility limits, and implementation complexity.
+---
 
-The normative commitment is clear: **exit and ownership matter.**
+# Claims We Should Not Call Settled Science
 
-The empirical questions remain open: which openness requirements produce the greatest real agency at acceptable cost in each technical domain?
+## Human-scale systems preserve agency and resilience
 
-### 9. Productivity gains should return some human time
+**Working hypothesis**
 
-**Status: Value judgment + political proposal**
+Sometimes.
 
-Science can measure productivity, working hours, health, income, and well-being. It cannot tell us by itself how the gains from technology should be divided among wages, prices, profits, taxes, ownership, public services, and time.
+Local systems can also be under-resourced, exclusionary, corrupt, fragile, or incapable of solving cross-boundary problems.
 
-Human Scale makes a value choice:
+The doctrine's rule remains:
 
-> When society becomes capable of producing the same or greater value with less human labor, returning some of that gain as human time is a legitimate goal.
+**prefer smaller scale when it works; scale is a hypothesis to test, not a moral shortcut.**
 
-Different mechanisms should be tested rather than assumed.
+## Open, repairable, interoperable technology protects agency
 
-### 10. Everyone should have meaningful access to the living world
+**Value judgment + working hypothesis**
 
-**Status: Value judgment + political proposal**
+Exit, ownership, portability, and repair matter to Human Scale.
 
-Evidence about green space, heat, activity, mental health, biodiversity, and childhood can inform this principle.
+Security, coordination, support, incentives, accessibility, and technical complexity can create real tradeoffs.
 
-But the statement that nature participation should not be a luxury is ultimately a moral and political commitment.
+## Productivity gains should return some human time
 
-Possible implementations include parks, gardens, food forests, public orchards, trails, school gardens, habitat restoration, allotments, urban farms, community land, and access to nearby natural areas.
+**Value judgment + political proposal**
 
-No single land-ownership system follows automatically from the evidence.
+Evidence can measure productivity, wages, health, income, profits, prices, and time.
 
-### 11. Power should be exercised at the smallest effective scale
+It cannot decide how productivity gains should be divided among wages, prices, profits, ownership, public goods, and leisure.
 
-**Status: Political design principle**
+Human Scale makes an explicit value choice that human time should be part of that debate.
 
-This is a form of subsidiarity.
+## Everyone should have meaningful access to the living world
 
-It should not be presented as a scientific law. The appropriate scale depends on the problem.
+**Value judgment + political proposal**
 
-Neighborhoods may be excellent at stewardship of a local garden. They are not sufficient for regional water systems, national civil rights, pandemic surveillance, macroeconomic policy, or a continental electric grid.
+Nature research can inform this commitment.
 
-The principle therefore includes two obligations:
+Equal access to gardens, trees, habitat, parks, food forests, stewardship, and living land is ultimately an ethical and political decision.
 
-- keep power close when smaller institutions can genuinely solve the problem
-- scale power upward when the problem crosses boundaries or requires capabilities unavailable below
+## Power should operate at the smallest effective scale
 
-### 12. Advanced technology should become quieter
+**Political design principle**
 
-**Status: Value judgment + design hypothesis**
+Subsidiarity is not a law of nature.
 
-The doctrine prefers technology that delivers capability without demanding continuous attention.
+The scale should follow the problem while rights remain protected and institutions retain enough capacity to function.
 
-That is partly a design value. It also creates testable questions:
+## Advanced technology should become quieter
 
-- does the technology reduce interruptions?
-- does it save time in practice?
-- does it preserve skill and judgment?
-- does it make users more or less dependent?
-- can users leave it?
-- does it improve outcomes without colonizing more attention?
+**Design value**
 
-## What Would Change Our Minds?
+This becomes empirically testable when we ask whether a tool:
 
-Human Scale should not become a belief system that converts every result into confirmation.
+- saves time
+- reduces interruptions
+- preserves skill
+- improves outcomes
+- protects privacy
+- protects exit
+- allows users to stop interacting with it when the task is complete
 
-We should revise important claims if evidence shows, for example:
+---
 
-- local systems repeatedly produce worse outcomes without meaningful gains in agency, resilience, or accountability
-- specific nature interventions fail to produce expected benefits in stronger causal studies
-- shorter-work experiments consistently reduce well-being or material security once income and workload are considered
-- open or interoperable systems produce harms that cannot be mitigated without losing their intended benefits
-- dense, technologically advanced environments can meet human needs for nature, movement, community, childhood, quiet, and agency as well as or better than smaller-scale alternatives
-- a favored policy creates large unintended burdens for the people it was supposed to help
+# Falsification Conditions
 
-A doctrine that cannot lose an argument is not learning.
+Human Scale should weaken, revise, or abandon favored claims if stronger evidence shows that:
 
-## The Evidence Backlog
+- local systems repeatedly perform worse without meaningful gains in agency, resilience, or accountability
+- supposed mismatch effects disappear under stronger causal designs
+- specific nature interventions fail to reproduce expected benefits
+- shorter-work experiments consistently worsen well-being or material security once income and workload are controlled
+- open or interoperable systems create harms that cannot be mitigated without destroying the intended benefits
+- advanced digital environments produce durable gains without meaningful attention, sleep, development, privacy, or agency tradeoffs
+- dense advanced cities meet needs for movement, nature, community, childhood, quiet, and agency as well as or better than lower-density alternatives
+- a favored policy produces large unintended burdens for the people it was supposed to help
 
-The next research passes should examine:
+The doctrine should also change when a modern environment is demonstrably **better** than the ancestral analogue.
 
-- sleep, circadian rhythm, daylight, and artificial light
-- childhood independence, outdoor play, and development
-- green-space quality versus simple proximity
-- gardening, food growing, and mental or physical health
-- third places, repeated encounters, and social cohesion
-- commuting time and well-being
-- schedule control and job autonomy
-- shorter-workweek trials
-- household and community resilience during disasters
-- local ownership, cooperatives, and employee ownership
-- housing supply, affordability, and neighborhood form
-- urban heat, shade, and tree canopy
-- food processing, dietary patterns, cooking, and health
-- regional food-system resilience
-- right-to-repair and interoperability outcomes
-- digital attention, notifications, and cognitive performance
-- AI and skill retention
-- AI and administrative burden
-- energy reliability, local generation, storage, and grid interconnection
-- institutional complexity, take-up of benefits, and administrative burden
-- subsidiarity, decentralization, corruption, and state capacity
+Mismatch research should find matches too.
 
-## Research Rules
+**A doctrine that cannot lose an argument is not learning.**
 
-For each future claim:
+---
 
-1. State the claim narrowly enough to be wrong.
-2. Prefer systematic reviews, large longitudinal studies, randomized trials where feasible, strong quasi-experiments, official datasets, and primary sources.
+# Research Queue
+
+The next deep evidence modules should examine:
+
+1. Land & Life — passive green exposure versus gardening, stewardship, and living-world participation
+2. Community — local relationships, third places, social infrastructure, loneliness, and digital connection
+3. Work & Time — schedule control, commuting, shorter workweeks, remote work, caregiving, and human time
+4. Technology — persuasive design, attention, repair, interoperability, privacy, skill retention, and exit
+5. Energy — reliability, cost, health, ecological effects, resilience, grids, local generation, nuclear, storage, and transmission
+6. Economics — material security, ownership, competition, small enterprise, employee ownership, and automation
+7. Governance — administrative burden, subsidiarity, institutional capacity, participation, corruption, and rights
+8. Food — diet quality, cooking, agricultural practices, regional processing, trade, affordability, and resilience
+9. Architecture & Place — proximity, housing supply, walking, traffic, shade, public space, transit, accessibility, and displacement
+10. Education & Childhood — movement, play, sleep, connectedness, autonomy, practical learning, assessment, AI, and independent mobility
+11. Health & Care — prevention, treatment, social determinants, access, chronic disease, mental health, disability, and medical overreach
+
+---
+
+# Research Rules
+
+1. State claims narrowly enough to be wrong.
+2. Prefer primary research, official guidance, systematic evidence review, and strong quasi-experimental designs where appropriate.
 3. Separate association from causation.
 4. Report important uncertainty and contrary evidence.
 5. Avoid turning one population or one intervention into a universal rule.
@@ -315,10 +321,12 @@ For each future claim:
 8. Ask what evidence would change the conclusion.
 9. Update the public doctrine when the evidence meaningfully changes the case.
 
-## A Note on This First Source Set
+This Atlas is intentionally unfinished.
 
-This v0.1 atlas is an initial research map, not a complete literature review. The bibliography is deliberately small and should expand during chapter-by-chapter audits. Evidence grades are provisional and should change as stronger or contradictory research is incorporated.
+Its grades should change.
 
-The purpose is not to decorate the doctrine with citations.
+Its bibliography should grow.
 
-The purpose is to make it harder for the doctrine to lie to itself.
+Its favorite ideas should sometimes lose.
+
+**Human Scale should be allowed to have convictions. It should not be allowed to hide uncertainty.**
