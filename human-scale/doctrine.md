@@ -1,6 +1,6 @@
 # The Human Scale Doctrine
 
-**Version 0.3 — August 2026**
+**Version 0.4 — August 2026**
 
 > Humanity became powerful faster than it became wise.
 
@@ -94,6 +94,7 @@ A civilization is progressing when more people can:
 - create rather than merely consume
 - work without surrendering their entire waking lives
 - access nature and public space
+- participate directly in the living world through soil, plants, food, animals, and stewardship
 - obtain food, shelter, education, and healthcare without permanent desperation
 - participate in culture and community
 - develop spiritually, intellectually, emotionally, and creatively
@@ -133,6 +134,7 @@ It should favor:
 - local ownership
 - cooperative creation
 - meaningful public spaces
+- meaningful access to living land
 - decentralized political and economic power
 - cultural pluralism
 - freedom of belief
@@ -144,17 +146,21 @@ Large systems will still exist. The principle is that scale should have to justi
 
 Human beings have always searched for meaning.
 
-A humane civilization should make room for contemplation, ritual, prayer, meditation, art, music, mystery, philosophy, and direct encounters with nature without demanding one metaphysical explanation from everyone.
+A humane civilization should make room for contemplation, ritual, prayer, meditation, yoga, art, music, mystery, philosophy, direct encounters with nature, and other practices that bring people back into body, place, relationship, and immediate experience without demanding one metaphysical explanation from everyone.
 
 Science can tell us an extraordinary amount about how the world works.
 
 It does not eliminate the human need to ask what life is for.
 
-## Chapter 1
+## Chapters
 
-### [Human Nature — The Environment We Were Built For](human-nature/index.html)
+### 1. [Human Nature — The Environment We Were Built For](human-nature/index.html)
 
 The first long-form chapter explores the mismatch between recurring human needs and modern environments, then asks what individuals can do now and what communities or institutions might change.
+
+### 2. [Land & Life — Reconnecting Humans to the Living World](land-life/index.html)
+
+The second chapter argues that meaningful access to soil, plants, animals, gardens, food forests, open sky, and embodied practices should be part of ordinary life rather than a luxury. It explores both personal participation and public design.
 
 Long chapters are optional depth. The doctrine itself should remain readable without them.
 
@@ -180,6 +186,7 @@ Among the questions still to explore:
 - Which technologies measurably improve human flourishing?
 - What is the ideal scale for different institutions?
 - How much localization is resilient without becoming isolationist?
+- How can land access be expanded without pretending ownership, housing, farming, ecology, and public access have no tradeoffs?
 - How should ownership change in a highly automated economy?
 - What work should humans continue doing even when machines can do it?
 - How can dense cities become deeply connected to nature?
