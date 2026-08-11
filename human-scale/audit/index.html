@@ -3,100 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Human Scale Audit — How Human Is Your Environment?</title>
-  <meta name="description" content="A private, no-signup Human Scale Audit for movement, nature, time, community, place, work, and technological agency." />
-  <meta name="theme-color" content="#07111f" />
+  <title>Human Scale Check — How Well Does Daily Life Support You?</title>
+  <meta name="description" content="A private five-minute check of where daily life supports you and where it adds friction." />
+  <meta name="theme-color" content="#08111d" />
   <link rel="canonical" href="https://tmsteph.com/human-scale/audit/" />
-  <meta property="og:title" content="Human Scale Audit — How Human Is Your Environment?" />
-  <meta property="og:description" content="A private, no-signup audit of whether your everyday environment supports human life." />
+  <meta property="og:title" content="Human Scale Check" />
+  <meta property="og:description" content="Where does daily life support you, and where does it make things harder?" />
   <meta property="og:url" content="https://tmsteph.com/human-scale/audit/" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
   <script defer src="/_vercel/analytics/script.js"></script>
   <style>
-    :root{color-scheme:dark;--bg:#07111f;--panel:#0c192a;--text:#eef4fb;--muted:#aab9ca;--line:#263a52;--sky:#7bcaff;--green:#a9ddb0;--sun:#ffe18a;--rose:#ffb8be}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 10% 0%,rgba(123,202,255,.12),transparent 34rem),radial-gradient(circle at 92% 8%,rgba(169,221,176,.09),transparent 31rem),var(--bg);color:var(--text);line-height:1.65}a{color:var(--sky)}
-    .topbar{width:min(100% - 2rem,1020px);margin:0 auto;padding:1.2rem 0;display:flex;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.93rem}.topbar a{color:var(--muted);text-decoration:none}
-    header{width:min(100% - 2rem,850px);margin:0 auto;padding:4.6rem 0 3.4rem;text-align:center}.eyebrow{color:var(--green);font-size:.78rem;font-weight:850;letter-spacing:.15em;text-transform:uppercase}h1{margin:.75rem 0 1rem;font-size:clamp(2.7rem,8vw,5rem);line-height:.98;letter-spacing:-.05em}h2{margin:0 0 .8rem;font-size:clamp(1.65rem,4.5vw,2.35rem);line-height:1.1}h3{margin:0;font-size:1.08rem}.lead{max-width:720px;margin:0 auto;color:var(--muted);font-size:clamp(1.05rem,2.3vw,1.25rem)}
-    main{width:min(100% - 2rem,850px);margin:0 auto;padding-bottom:5rem}.privacy{margin:1.8rem auto 0;padding:1rem 1.2rem;border:1px solid rgba(169,221,176,.32);border-radius:14px;background:rgba(169,221,176,.05);color:#dcf4df}.question{padding:1.35rem;margin:1rem 0;border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,rgba(16,33,55,.92),rgba(8,19,34,.92))}.question p{margin:.45rem 0 .95rem;color:var(--muted)}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:.45rem}.choice{position:relative}.choice input{position:absolute;opacity:0;pointer-events:none}.choice label{min-height:3.2rem;display:grid;place-items:center;padding:.45rem;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025);cursor:pointer;font-weight:750;color:var(--muted);text-align:center}.choice input:checked+label{border-color:var(--sky);background:rgba(123,202,255,.11);color:var(--text);box-shadow:0 0 0 1px rgba(123,202,255,.25)}.choice label:hover{border-color:#466786}.anchors{display:flex;justify-content:space-between;gap:1rem;margin-top:.55rem;color:var(--muted);font-size:.78rem}
-    .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin:1.7rem 0}.btn{appearance:none;border:0;border-radius:999px;padding:.9rem 1.2rem;font:inherit;font-weight:800;cursor:pointer;text-decoration:none}.primary{background:var(--sky);color:#04101e}.secondary{border:1px solid var(--line);background:var(--panel);color:var(--text)}.status{min-height:1.5rem;color:var(--rose)}
-    #results{display:none;margin-top:2rem;padding-top:2.5rem;border-top:1px solid var(--line)}.scorebox{text-align:center;padding:2rem;border:1px solid rgba(255,225,138,.3);border-radius:20px;background:rgba(255,225,138,.045)}.score{font-size:clamp(3.6rem,12vw,6rem);font-weight:900;line-height:1;color:var(--sun)}.grade{margin:.6rem 0;font-size:1.35rem;font-weight:850}.result-copy{max-width:680px;margin:.8rem auto;color:var(--muted)}.domains{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin-top:1.2rem}.domain{padding:1rem;border:1px solid var(--line);border-radius:14px;background:var(--panel)}.bar{height:.55rem;margin-top:.6rem;border-radius:999px;background:#17283b;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--sky),var(--green));border-radius:999px}.next{margin-top:1.2rem;padding:1.2rem;border-left:4px solid var(--green);background:var(--panel);border-radius:0 14px 14px 0}.fine{color:var(--muted);font-size:.88rem}footer{border-top:1px solid var(--line);padding:2.5rem 1rem 3rem;text-align:center;color:var(--muted)}footer a{text-decoration:none}@media(max-width:600px){header{padding-top:3.6rem}.scale{gap:.3rem}.choice label{min-height:3rem;padding:.3rem;font-size:.84rem}}
+    :root{color-scheme:dark;--bg:#08111d;--panel:#101c2b;--text:#f2f5f8;--muted:#b7c2cf;--line:#26384d;--accent:#8bd0ff;--warm:#ffe39a;--green:#b6e3bd;--rose:#ffb9bf}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}a{color:var(--accent)}
+    .top,header,main{width:min(100% - 2rem,780px);margin:auto}.top{padding:1.2rem 0;color:var(--muted);font-size:.92rem}.top a{color:var(--muted);text-decoration:none}header{padding:4.2rem 0 3.2rem;text-align:center}.eyebrow{color:var(--green);font-size:.82rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}h1{margin:.65rem 0 1rem;font-size:clamp(2.8rem,9vw,5rem);line-height:.98;letter-spacing:-.045em}h2{font-size:clamp(1.65rem,5vw,2.3rem);line-height:1.1}.lead{max-width:620px;margin:auto;color:var(--muted);font-size:1.16rem}.note{margin:1.4rem auto 0;padding:1rem 1.1rem;border-radius:13px;background:var(--panel);color:var(--muted)}.note strong{color:var(--green)}
+    .question{padding:1.15rem 0;border-top:1px solid var(--line)}.question h3{margin:0 0 .8rem;font-size:1.08rem;line-height:1.35}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:.38rem}.choice{position:relative}.choice input{position:absolute;opacity:0;pointer-events:none}.choice label{display:grid;place-items:center;min-height:3.1rem;padding:.35rem;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--muted);cursor:pointer;text-align:center;font-size:.78rem;font-weight:750;line-height:1.15}.choice input:checked+label{border-color:var(--accent);background:rgba(139,208,255,.12);color:var(--text);box-shadow:0 0 0 1px rgba(139,208,255,.2)}
+    .actions{display:flex;gap:.75rem;flex-wrap:wrap;margin:1.6rem 0 2.5rem}.btn{appearance:none;border:0;border-radius:999px;padding:.9rem 1.2rem;font:inherit;font-weight:850;cursor:pointer;text-decoration:none}.primary{background:var(--accent);color:#07111c}.secondary{background:var(--panel);border:1px solid var(--line);color:var(--muted)}.status{color:var(--rose);min-height:1.4rem}
+    #results{display:none;padding:3rem 0;border-top:1px solid var(--line)}.result-head{padding:1.3rem;border-radius:15px;background:var(--panel);border-left:4px solid var(--warm)}.result-head strong{display:block;color:var(--warm);font-size:1.25rem}.result-head p{margin:.4rem 0 0;color:var(--muted)}.domains{display:grid;gap:.7rem;margin-top:1.2rem}.domain{padding:1rem 1.1rem;border:1px solid var(--line);border-radius:13px;background:var(--panel)}.row{display:flex;justify-content:space-between;gap:1rem}.level{color:var(--muted);font-size:.9rem}.bar{height:.48rem;margin-top:.65rem;border-radius:999px;background:#19283a;overflow:hidden}.fill{height:100%;background:var(--accent);border-radius:999px}.next{margin-top:1.5rem;padding:1.2rem;border-radius:14px;background:rgba(182,227,189,.07);border:1px solid rgba(182,227,189,.25)}.fine{color:var(--muted);font-size:.88rem}
+    footer{padding:2.5rem 1rem 3rem;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:.9rem}footer a{color:var(--muted);text-decoration:none}
+    @media(max-width:520px){header{padding-top:3.5rem}.scale{gap:.25rem}.choice label{font-size:.68rem;min-height:3.25rem;padding:.2rem}}
   </style>
 </head>
 <body>
-  <nav class="topbar"><a href="../index.html">← Human Scale Doctrine</a><span>Audit · v0.1</span></nav>
+  <nav class="top"><a href="../start/index.html">← Step 1</a></nav>
   <header>
-    <div class="eyebrow">A five-minute environment check</div>
-    <h1>How human is your environment?</h1>
-    <p class="lead">Human Scale is partly about individual habits, but mostly about the conditions around us. This audit asks whether everyday life makes healthy, connected, capable human behavior easier or harder.</p>
-    <div class="privacy"><strong>Private by design:</strong> your answers are calculated in this browser. Nothing is submitted or stored on a server.</div>
+    <div class="eyebrow">Step 2 of 3 · Check your daily life</div>
+    <h1>Where does life feel hard?</h1>
+    <p class="lead">Answer 15 simple questions. This is not a test. It helps you see where daily life supports you and where it adds friction.</p>
+    <div class="note"><strong>Private:</strong> your answers stay in this browser. Nothing is sent or saved.</div>
   </header>
+
   <main>
     <form id="audit" novalidate>
       <div id="questions"></div>
       <p class="status" id="status" aria-live="polite"></p>
-      <div class="actions"><button class="btn primary" type="submit">See my Human Scale score</button><button class="btn secondary" type="button" id="reset">Reset</button></div>
+      <div class="actions"><button class="btn primary" type="submit">Show me my areas</button><button class="btn secondary" type="button" id="reset">Reset</button></div>
     </form>
 
     <section id="results" aria-live="polite">
-      <div class="scorebox"><div class="score" id="score">0</div><div class="grade" id="grade"></div><p class="result-copy" id="summary"></p></div>
+      <h2>Your daily-life map</h2>
+      <div class="result-head"><strong id="focusTitle"></strong><p id="focusCopy"></p></div>
       <div class="domains" id="domains"></div>
-      <div class="next" id="next"></div>
-      <div class="actions"><button class="btn primary" id="share" type="button">Share the audit</button><a class="btn secondary" href="../field-guide/index.html">Open the Field Guide</a><a class="btn secondary" href="../program/index.html">See what should change</a></div>
-      <p class="fine">This is a reflective tool, not a medical, psychological, or scientific diagnostic. The categories and weights are provisional and should improve as the Human Scale Evidence Atlas grows.</p>
+      <div class="next"><strong>Do not try to fix everything.</strong><p>Pick one area that feels hard. The next step gives you a few small things to try.</p><a class="btn primary" href="../try-one-thing/index.html">Step 3: Change one thing →</a></div>
+      <p class="fine">This is a reflection tool, not a medical or scientific test. We do not give one total score. These areas are different, and we do not know a fair way to combine them yet.</p>
     </section>
   </main>
-  <footer><a href="../start/index.html">Start Here</a> · <a href="../index.html">Doctrine</a> · <a href="../evidence/index.html">Evidence</a> · <a href="../share/index.html">Share</a><br />Human Scale · tmsteph.com</footer>
+
+  <footer>Human Scale · <a href="../index.html">Home</a> · <a href="../evidence/cross-cutting/audit-calibration/index.html">How we are testing this check</a></footer>
 
   <script>
     const questions = [
-      {d:'Body',q:'Most days, my environment makes ordinary physical movement easy.',h:'Walking, carrying, climbing, standing, playing, exercise, or physical work can happen without heroic planning.'},
-      {d:'Body',q:'I can usually get adequate sleep without my schedule constantly fighting it.',h:'Work, commuting, noise, caregiving, screens, or institutional demands do not routinely make sufficient sleep impossible.'},
-      {d:'Living world',q:'I have easy access to daylight, fresh air, plants, trees, soil, water, or other living systems.',h:'Nature is part of ordinary life rather than something available only on special trips.'},
-      {d:'Living world',q:'I have a realistic chance to grow, tend, cook, repair, make, or care for something tangible.',h:'I am not restricted to consuming finished products and digital experiences.'},
-      {d:'Community',q:'There are people nearby who know me and whom I can realistically help or ask for help.',h:'Belonging includes repeated relationships and some degree of reciprocity.'},
-      {d:'Community',q:'I have places where I can spend time with other people without needing to buy much.',h:'Parks, libraries, homes, courtyards, faith communities, plazas, clubs, workshops, or other third places count.'},
-      {d:'Time',q:'A meaningful portion of my week belongs to me rather than work, commuting, bureaucracy, or recovery from them.',h:'There is usable time for family, friends, rest, craft, civic life, nature, play, or contemplation.'},
-      {d:'Time',q:'My schedule is predictable enough to plan a human life around it.',h:'I can make commitments, coordinate care, and know roughly when I am available.'},
-      {d:'Agency',q:'I can understand and influence at least some of the systems that strongly affect my life.',h:'Examples include workplace rules, housing, school, neighborhood decisions, technology, finances, or public services.'},
-      {d:'Agency',q:'The technology I depend on gives me meaningful control and exit.',h:'I can export important data, switch tools, repair or replace devices, and survive at least some outages or platform failures.'},
-      {d:'Place',q:'Daily needs are close enough that ordinary life does not require excessive travel.',h:'Food, school, work, recreation, services, people, and nature are not all needlessly separated.'},
-      {d:'Place',q:'My surroundings make it reasonably safe and pleasant to walk, sit, gather, and exist outside.',h:'Shade, crossings, sidewalks or paths, seating, public space, accessibility, and traffic conditions matter.'},
-      {d:'Security',q:'A normal setback would not immediately destroy my ability to meet basic needs.',h:'Income, savings, benefits, family/community support, housing stability, or other buffers create some room to recover.'},
-      {d:'Security',q:'I have some believable path toward greater ownership, competence, or independence over time.',h:'Skills, tools, savings, a business, housing, productive assets, shared ownership, or community capacity can expand my choices.'},
-      {d:'Meaning',q:'My life contains activities that feel worthwhile beyond consumption, status, or keeping up.',h:'Care, work, service, faith, art, music, craft, study, nature, family, friendship, building, or other forms of purpose count.'}
+      {d:'Body',q:'My day makes it easy to move my body.'},
+      {d:'Body',q:'I can usually get enough sleep.'},
+      {d:'Nature',q:'I can easily get outside and be around nature.'},
+      {d:'Nature',q:'I can grow, care for, fix, or make something real.'},
+      {d:'People',q:'I have people nearby I can count on.'},
+      {d:'People',q:'I have places to be with people without spending much money.'},
+      {d:'Time',q:'I have some free time that really feels like mine.'},
+      {d:'Time',q:'My schedule is steady enough to plan around.'},
+      {d:'Agency',q:'I can understand or influence some of the systems that shape my life.'},
+      {d:'Agency',q:'I can change or leave important tech tools if I need to.'},
+      {d:'Place',q:'Most things I need each day are not too far away.'},
+      {d:'Place',q:'It feels safe and comfortable to walk, sit, or spend time outside.'},
+      {d:'Security',q:'One normal setback would not put my basic needs at risk right away.'},
+      {d:'Security',q:'I have a real path toward more skill, savings, ownership, or freedom.'},
+      {d:'Meaning',q:'My life has things that feel meaningful to me.'}
     ];
-    const labels=['Almost never','Rarely','Sometimes','Often','Usually'];
+    const labels=['Never','Rarely','Sometimes','Often','Usually'];
     const root=document.getElementById('questions');
+
     questions.forEach((item,i)=>{
-      const el=document.createElement('section');el.className='question';
-      el.innerHTML=`<h3>${i+1}. ${item.q}</h3><p>${item.h}</p><div class="scale">${labels.map((l,n)=>`<div class="choice"><input id="q${i}-${n}" type="radio" name="q${i}" value="${n}"><label for="q${i}-${n}">${n}</label></div>`).join('')}</div><div class="anchors"><span>0 · almost never</span><span>4 · usually</span></div>`;
+      const el=document.createElement('section');
+      el.className='question';
+      el.innerHTML=`<h3>${i+1}. ${item.q}</h3><div class="scale">${labels.map((label,n)=>`<div class="choice"><input id="q${i}-${n}" type="radio" name="q${i}" value="${n}"><label for="q${i}-${n}">${label}</label></div>`).join('')}</div>`;
       root.appendChild(el);
     });
-    const form=document.getElementById('audit'), status=document.getElementById('status'), results=document.getElementById('results');
-    function classification(p){
-      if(p<35)return ['High-friction environment','Your surroundings are asking you to compensate constantly. Pick one major friction to reduce rather than trying to optimize everything at once.'];
-      if(p<55)return ['More friction than support','Some important conditions are working, but everyday life still makes several human needs harder than they need to be.'];
-      if(p<75)return ['Mixed human-scale conditions','You have a meaningful base to build from. The biggest gains may come from improving the weakest domain rather than polishing the strongest.'];
-      if(p<90)return ['Supportive environment','A lot of your daily environment supports human life. Protect those conditions and look for ways to extend them to other people.'];
-      return ['Strongly human-scale environment','Your answers describe unusually supportive conditions. The interesting question now is how durable, accessible, and shareable those conditions are.'];
+
+    const form=document.getElementById('audit');
+    const status=document.getElementById('status');
+    const results=document.getElementById('results');
+
+    function level(p){
+      if(p<35) return 'Needs support';
+      if(p<60) return 'Often hard';
+      if(p<80) return 'Mixed';
+      return 'Usually supportive';
     }
+
     form.addEventListener('submit',e=>{
-      e.preventDefault(); const values=[], missing=[];
-      questions.forEach((_,i)=>{const x=form.querySelector(`input[name=q${i}]:checked`);if(!x)missing.push(i+1);else values.push(Number(x.value));});
-      if(missing.length){status.textContent=`Answer every question first. Missing: ${missing.join(', ')}.`;document.querySelector(`input[name=q${missing[0]-1}]`)?.closest('.question')?.scrollIntoView({behavior:'smooth',block:'center'});return;}
-      status.textContent=''; const max=questions.length*4, total=values.reduce((a,b)=>a+b,0), pct=Math.round(total/max*100), [grade,summary]=classification(pct);
-      document.getElementById('score').textContent=pct; document.getElementById('grade').textContent=grade; document.getElementById('summary').textContent=summary;
-      const domains={};questions.forEach((x,i)=>{domains[x.d]??={sum:0,max:0};domains[x.d].sum+=values[i];domains[x.d].max+=4;});
-      const domainEl=document.getElementById('domains');domainEl.innerHTML='';
-      Object.entries(domains).sort((a,b)=>(a[1].sum/a[1].max)-(b[1].sum/b[1].max)).forEach(([name,x])=>{const p=Math.round(x.sum/x.max*100);const d=document.createElement('div');d.className='domain';d.innerHTML=`<strong>${name}</strong><span style="float:right">${p}%</span><div class="bar"><div class="fill" style="width:${p}%"></div></div>`;domainEl.appendChild(d);});
-      const weakest=Object.entries(domains).sort((a,b)=>(a[1].sum/a[1].max)-(b[1].sum/b[1].max))[0][0];
-      document.getElementById('next').innerHTML=`<strong>Start with ${weakest.toLowerCase()}.</strong> Ask: is the friction mostly a habit I can change, a household constraint we can redesign, or a system that many people around me are also compensating for? If it is shared, that is where personal adaptation becomes civic work.`;
-      results.style.display='block';results.scrollIntoView({behavior:'smooth'});results.dataset.score=pct;
+      e.preventDefault();
+      const values=[]; const missing=[];
+      questions.forEach((_,i)=>{
+        const x=form.querySelector(`input[name=q${i}]:checked`);
+        if(!x) missing.push(i+1); else values.push(Number(x.value));
+      });
+      if(missing.length){
+        status.textContent=`Please answer every question. Missing: ${missing.join(', ')}.`;
+        document.querySelector(`input[name=q${missing[0]-1}]`)?.closest('.question')?.scrollIntoView({behavior:'smooth',block:'center'});
+        return;
+      }
+      status.textContent='';
+      const domains={};
+      questions.forEach((item,i)=>{
+        domains[item.d]??={sum:0,max:0};
+        domains[item.d].sum+=values[i];
+        domains[item.d].max+=4;
+      });
+      const sorted=Object.entries(domains).sort((a,b)=>(a[1].sum/a[1].max)-(b[1].sum/b[1].max));
+      const weakest=sorted[0][0];
+      document.getElementById('focusTitle').textContent=`Start with ${weakest.toLowerCase()}.`;
+      document.getElementById('focusCopy').textContent='This area had the most friction in your answers. It may be a useful place to look first.';
+      const domainEl=document.getElementById('domains');
+      domainEl.innerHTML='';
+      sorted.forEach(([name,x])=>{
+        const pct=Math.round((x.sum/x.max)*100);
+        const d=document.createElement('div');
+        d.className='domain';
+        d.innerHTML=`<div class="row"><strong>${name}</strong><span class="level">${level(pct)}</span></div><div class="bar"><div class="fill" style="width:${pct}%"></div></div>`;
+        domainEl.appendChild(d);
+      });
+      results.style.display='block';
+      results.scrollIntoView({behavior:'smooth'});
     });
-    document.getElementById('reset').addEventListener('click',()=>{form.reset();status.textContent='';results.style.display='none';window.scrollTo({top:0,behavior:'smooth'});});
-    document.getElementById('share').addEventListener('click',async()=>{const score=results.dataset.score||'';const text=`I tried the Human Scale Audit${score?` and scored ${score}/100`:''}. It asks whether everyday life supports movement, nature, time, community, place and agency — not just whether you have good habits.`;const url='https://tmsteph.com/human-scale/audit/';try{if(navigator.share){await navigator.share({title:'Human Scale Audit',text,url});}else{await navigator.clipboard.writeText(`${text} ${url}`);document.getElementById('share').textContent='Copied share text';}}catch(e){}}
+
+    document.getElementById('reset').addEventListener('click',()=>{
+      form.reset(); status.textContent=''; results.style.display='none'; window.scrollTo({top:0,behavior:'smooth'});
+    });
   </script>
 </body>
 </html>
