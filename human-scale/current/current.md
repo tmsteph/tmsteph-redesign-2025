@@ -45,153 +45,111 @@ The Audit is private/no-signup and deliberately provisional. It is not a scienti
 
 ---
 
-# Chapters
+# 17 Chapters
 
-## 1. Human Nature — The Environment We Were Built For
-https://tmsteph.com/human-scale/human-nature/
+1. **Human Nature — The Environment We Were Built For**  
+   https://tmsteph.com/human-scale/human-nature/  
+   Mismatch remains useful; novelty is a reason to investigate rather than condemn.
 
-Mismatch remains a useful lens, but novelty is a reason to investigate rather than condemn.
+2. **Land & Life — Reconnecting Humans to the Living World**  
+   https://tmsteph.com/human-scale/land-life/  
+   Ecological dependence survives; gardens, food forests, and “reconnection” are interventions and values rather than universal needs.
 
-## 2. Land & Life — Reconnecting Humans to the Living World
-https://tmsteph.com/human-scale/land-life/
+3. **Community — The Human Need to Belong**  
+   https://tmsteph.com/human-scale/community/  
+   Revised: https://tmsteph.com/human-scale/community/revised/  
+   Community is an outcome, not a place type. Belonging must coexist with privacy, pluralism, and exit.
 
-Ecological dependence survives; gardens, food forests, and “reconnection” become interventions and values rather than universal needs.
+4. **Work & Time — What Is a Human Life For?**  
+   https://tmsteph.com/human-scale/work-time/  
+   Human time remains central; work designs are experiments, not one universal endpoint.
 
-## 3. Community — The Human Need to Belong
-https://tmsteph.com/human-scale/community/
+5. **Technology — Tools That Serve Life**  
+   https://tmsteph.com/human-scale/technology/  
+   Agency is the goal; open/local/repairable/interoperable/quiet are mechanisms whose tradeoffs must be tested.
 
-Revised edition: https://tmsteph.com/human-scale/community/revised/
+6. **Energy — Power Without Dependence**  
+   https://tmsteph.com/human-scale/energy/  
+   Reliable abundant power, cleaner supply, strong grids, useful distributed resilience, and scale matched to function.
 
-Community is an outcome, not a place type. Belonging must coexist with privacy, pluralism, and exit.
+7. **Economics — What Is the Economy For?**  
+   https://tmsteph.com/human-scale/economics/  
+   Markets, material security, competition, ownership, entrepreneurship, public goods, automation, and practical freedom.
 
-## 4. Work & Time — What Is a Human Life For?
-https://tmsteph.com/human-scale/work-time/
+8. **Governance — Power Close Enough to Understand**  
+   https://tmsteph.com/human-scale/governance/  
+   Subsidiarity bounded by rights, capacity, coordination, legibility, accountability, and cross-boundary problems.
 
-Human time remains central; reduced-hours models are experiments, not one universal endpoint.
+9. **Food — Nourishment, Culture & Living Systems**  
+   https://tmsteph.com/human-scale/food/  
+   Safety, nourishment, affordability, resilience, ecological durability, trade, labor, culture, and measurable outcomes outrank locality as identity.
 
-## 5. Technology — Tools That Serve Life
-https://tmsteph.com/human-scale/technology/
+10. **Architecture & Place — Build for Human Life**  
+    https://tmsteph.com/human-scale/architecture-place/  
+    Human Scale architecture is functional rather than stylistic: access, safety, heat, time, housing, mobility, accessibility, ecology, and actual use.
 
-Agency is the goal; open/local/repairable/interoperable/quiet are mechanisms whose tradeoffs have to be tested.
+11. **Education & Childhood — Raising Capable Human Beings**  
+    https://tmsteph.com/human-scale/education-childhood/  
+    Knowledge, movement, sleep, belonging, capability, multiple pathways, increasing independence, and AI that scaffolds capability.
 
-## 6. Energy — Power Without Dependence
-https://tmsteph.com/human-scale/energy/
+12. **Health & Care — Keeping People Well, Caring for People When They Aren't**  
+    https://tmsteph.com/human-scale/health-care/  
+    Modern technical excellence with primary health care, safety, coordination, rehabilitation, disability support, financial protection, and dignity.
 
-Reliable abundant power, cleaner supply, strong grids, useful distributed resilience, and scale matched to function.
+13. **Family & Care — The Relationships That Carry Life**  
+    https://tmsteph.com/human-scale/family-care/  
+    Care as social infrastructure without one mandatory family form; safe continuity, caregiver support, formal care, and practical exit.
 
-## 7. Economics — What Is the Economy For?
-https://tmsteph.com/human-scale/economics/
+14. **Attention & Media — What Gets to Enter the Mind**  
+    https://tmsteph.com/human-scale/attention-media/  
+    Attention, persuasion, privacy, dark patterns, algorithms, youth safeguards, advertising, synthetic media, provenance, and freedom of expression.
 
-Markets, material security, competition, ownership, entrepreneurship, public goods, automation, and practical freedom.
+15. **Justice & Rights — A Floor Beneath Localism**  
+    https://tmsteph.com/human-scale/justice-rights/  
+    A normative rights floor beneath subsidiarity: equal dignity, pluralism, non-arbitrary power, due process, accessibility, and appeal.
 
-## 8. Governance — Power Close Enough to Understand
-https://tmsteph.com/human-scale/governance/
+16. **Spirituality & Meaning — What Is a Life For?**  
+    https://tmsteph.com/human-scale/spirituality-meaning/  
+    Ultimate questions taken seriously without pretending one metaphysics has been scientifically established for everyone.
 
-Subsidiarity bounded by rights, capacity, coordination, legibility, accountability, and cross-boundary problems.
-
-## 9. Food — Nourishment, Culture & Living Systems
-https://tmsteph.com/human-scale/food/
-
-Evidence Audit 09 now pushes the chapter toward safety, nourishment, affordability, resilience, ecological durability, and measurable outcomes rather than locality as an automatic virtue.
-
-## 10. Architecture & Place — Build for Human Life
-https://tmsteph.com/human-scale/architecture-place/
-
-Evidence Audit 10 reframes Human Scale architecture as functional rather than stylistic: access, safety, heat, time, housing, mobility, accessibility, ecology, and actual use.
-
-## 11. Education & Childhood — Raising Capable Human Beings
-https://tmsteph.com/human-scale/education-childhood/
-
-Evidence Audit 11 keeps knowledge, movement, sleep, belonging, capability, multiple pathways, and increasing independence while treating play, school structure, and AI more carefully.
-
-## 12. Health & Care — Keeping People Well, Caring for People When They Aren't
-https://tmsteph.com/human-scale/health-care/
-
-Modern medicine, prevention, primary and specialty care, public health, mental health, rehabilitation, disability support, caregiving, palliative care, safety, financial protection, and usable information.
-
-## 13. Family & Care — The Relationships That Carry Life
-https://tmsteph.com/human-scale/family-care/
-
-Care as unavoidable social infrastructure without one mandatory family form; children, chosen family, aging, disability, housing, work, caregiver support, and safe exit.
-
-## 14. Attention & Media — What Gets to Enter the Mind
-https://tmsteph.com/human-scale/attention-media/
-
-Attention, persuasion, dark patterns, youth safeguards, algorithms, advertising, political communication, AI media, provenance, and humane information systems.
-
-## 15. Justice & Rights — A Floor Beneath Localism
-https://tmsteph.com/human-scale/justice-rights/
-
-Rights remain strong enough to protect people even when local majorities, families, communities, employers, or institutions are wrong.
-
-## 16. Spirituality & Meaning — What Is a Life For?
-https://tmsteph.com/human-scale/spirituality-meaning/
-
-Science and public reason alongside religious freedom, contemplation, ritual, art, nature, moral formation, pluralism, and the human search for meaning.
-
-## 17. AI & Automation — Intelligence in Service of Human Agency
-https://tmsteph.com/human-scale/ai-automation/
-
-AI as capability, tutor, accessibility layer, coordinator, and automation tool—judged by agency, skill, privacy, accountability, distribution of gains, and what humans remain capable of doing.
+17. **AI & Automation — Intelligence in Service of Human Agency**  
+    https://tmsteph.com/human-scale/ai-automation/  
+    AI judged by capability, rights, accountability, practical exit, skill, failure handling, and distribution of gains.
 
 ---
 
-# Evidence Audits
+# 17 Evidence Audits — Full Chapter Coverage
 
-## 01 — Human Nature Under Pressure
-https://tmsteph.com/human-scale/evidence/human-nature/
+1. Human Nature: https://tmsteph.com/human-scale/evidence/human-nature/
+2. Land & Life: https://tmsteph.com/human-scale/evidence/land-life/
+3. Community: https://tmsteph.com/human-scale/evidence/community/
+4. Work & Time: https://tmsteph.com/human-scale/evidence/work-time/
+5. Technology: https://tmsteph.com/human-scale/evidence/technology/
+6. Energy: https://tmsteph.com/human-scale/evidence/energy/
+7. Economics: https://tmsteph.com/human-scale/evidence/economics/
+8. Governance: https://tmsteph.com/human-scale/evidence/governance/
+9. Food: https://tmsteph.com/human-scale/evidence/food/
+10. Architecture & Place: https://tmsteph.com/human-scale/evidence/architecture-place/
+11. Education & Childhood: https://tmsteph.com/human-scale/evidence/education-childhood/
+12. Health & Care: https://tmsteph.com/human-scale/evidence/health-care/
+13. Family & Care: https://tmsteph.com/human-scale/evidence/family-care/
+14. Attention & Media: https://tmsteph.com/human-scale/evidence/attention-media/
+15. Justice & Rights: https://tmsteph.com/human-scale/evidence/justice-rights/
+16. Spirituality & Meaning: https://tmsteph.com/human-scale/evidence/spirituality-meaning/
+17. AI & Automation: https://tmsteph.com/human-scale/evidence/ai-automation/
 
-Mismatch survives; broad ancestral claims become narrower and falsifiable.
+The audit cycle has produced corrections that now define Human Scale:
 
-## 02 — Land & Life Under Pressure
-https://tmsteph.com/human-scale/evidence/land-life/
-
-Ecological foundations survive; romantic implementation claims become technical, safety-aware, and site-specific.
-
-## 03 — Community Under Pressure
-https://tmsteph.com/human-scale/evidence/community/
-
-Supportive social connection survives; localism becomes a mechanism rather than the definition of community.
-
-## 04 — Work & Time Under Pressure
-https://tmsteph.com/human-scale/evidence/work-time/
-
-Human time remains central; schedule designs become experiments to compare by full outcomes.
-
-## 05 — Technology Under Pressure
-https://tmsteph.com/human-scale/evidence/technology/
-
-Agency survives; open, local, repairable, interoperable, and quiet become tools rather than identities.
-
-## 06 — Energy Under Pressure
-https://tmsteph.com/human-scale/evidence/energy/
-
-Reliable abundant power survives; strong shared grids and strategically useful local resilience become complements.
-
-## 07 — Economics Under Pressure
-https://tmsteph.com/human-scale/evidence/economics/
-
-Practical freedom remains the goal; markets, ownership, security, competition, and redistribution remain mechanisms to compare.
-
-## 08 — Governance Under Pressure
-https://tmsteph.com/human-scale/evidence/governance/
-
-Subsidiarity survives only with rights, institutional capacity, coordination, accountability, and evidence about scale.
-
-## 09 — Food Under Pressure
-https://tmsteph.com/human-scale/evidence/food/
-
-Safety, nourishment, affordability, resilience, and ecological durability outrank local/natural/homemade labels.
-
-## 10 — Architecture & Place Under Pressure
-https://tmsteph.com/human-scale/evidence/architecture-place/
-
-Human Scale architecture becomes functional rather than stylistic.
-
-## 11 — Education & Childhood Under Pressure
-https://tmsteph.com/human-scale/evidence/education-childhood/
-
-Knowledge, health, belonging, capability, plural pathways, and capability-preserving AI survive.
+- novelty is not evidence of harm;
+- small is not automatically good;
+- local is not automatically sustainable;
+- open is not automatically free, secure, or usable;
+- belonging is not captivity;
+- prevention is not always better than treatment;
+- engagement is not automatically harm;
+- rights are normative commitments rather than empirical discoveries;
+- spiritual experience is not metaphysical proof;
+- AI exposure is not the same thing as automation, transformation, or job loss.
 
 ---
 
@@ -223,7 +181,7 @@ https://tmsteph.com/human-scale/launch/
 Share kit:
 https://tmsteph.com/human-scale/share/
 
-San Diego campaign:
+San Diego:
 https://tmsteph.com/human-scale/san-diego/
 
 Human Scale should earn attention through useful artifacts: tools, maps, evidence corrections, failed experiments, implementation receipts, public data, and questions worth answering.
@@ -249,26 +207,26 @@ Paid amplification should wait until an organic message demonstrates meaningful 
 
 ---
 
-# Current Research Queue
+# Research Frontier — Cross-Cutting Audits
 
-1. Health & Care evidence audit
-2. Family & Care evidence audit
-3. Attention & Media evidence audit
-4. AI & Automation evidence audit
-5. Justice & Rights evidence audit
-6. Spirituality & Meaning evidence audit
-7. disability/accessibility cross-cutting audit
-8. aging and end-of-life systems
-9. transportation and mobility
-10. administrative burden
-11. ownership and automation distribution
-12. local resilience and disaster response
+Chapter-by-chapter coverage is complete. The research queue now becomes cross-cutting:
+
+1. disability & accessibility across the whole doctrine;
+2. aging & end-of-life systems;
+3. transportation & mobility;
+4. administrative burden and institutional legibility;
+5. ownership, bargaining power, and automation distribution;
+6. local resilience and disaster response;
+7. AI companionship and relational dependence;
+8. Human Scale Audit scoring/calibration;
+9. policy implementation failures and unintended consequences;
+10. comparisons with competing philosophical and political frameworks.
 
 ---
 
-# Current Implementation Queue
+# Implementation Frontier
 
-1. publish the Public Launch doorway;
+1. publish and distribute the Public Launch;
 2. invite one strong public criticism through GitHub;
 3. produce the first San Diego Human Scale receipt;
 4. calibrate the Audit with outside users;
@@ -280,18 +238,18 @@ Paid amplification should wait until an organic message demonstrates meaningful 
 
 # Build Rule
 
-Human Scale should not grow only by adding chapters.
+Human Scale should not grow only by adding pages.
 
 Each cycle should produce at least two of:
 
-- a new argument;
 - an evidence correction;
 - a usable tool;
 - a local experiment;
 - a contribution path;
 - a public implementation receipt;
 - a simpler explanation;
-- a doctrine revision caused by outside reality.
+- a doctrine revision caused by outside reality;
+- an outside critique that survives review.
 
 The project is not mature when it has enough pages.
 
