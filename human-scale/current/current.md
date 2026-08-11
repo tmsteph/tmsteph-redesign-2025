@@ -2,75 +2,46 @@
 
 **August 10, 2026**
 
-This page is the current map of the Human Scale project while the main doctrine remains intentionally compact.
+Human Scale is now a public, versioned philosophy and experiment system rather than only a doctrine.
 
-Human Scale is now more than a doctrine.
-
-It is:
-
-- a **Doctrine** — what kind of civilization should we build?
-- a **Field Guide** — what can a person or household do now?
-- a **Program** — what should communities and institutions change together?
-- an **Evidence Atlas** — which claims are evidence, hypotheses, values, or political proposals?
-- a **Lab** — what can we test?
-- an **Audit** — where does an individual environment create friction?
-- a **Contribute system** — how can outsiders challenge, correct, test, or build the project?
-- a **San Diego pilot** — how do we turn the philosophy into useful local receipts?
-- a **growth system** — how do we earn attention without manipulating it?
-
-The project is explicitly unfinished.
-
-Its public method is:
+Its operating method is:
 
 > **state the claim → grade the evidence → test the mechanism → publish the result → revise the doctrine**
+
+The main pieces are:
+
+- **Doctrine** — what kind of civilization should we build?
+- **Field Guide** — what can a person or household do now?
+- **Program** — what should communities and institutions change together?
+- **Evidence Atlas** — what is evidence, hypothesis, value judgment, or political proposal?
+- **Lab** — what can we test?
+- **Audit** — where does an individual environment create friction?
+- **Contribute** — how can outsiders challenge, correct, test, or build the project?
+- **San Diego** — the first local implementation laboratory.
+- **Public Launch** — an explicit invitation to break claims, run experiments, and build useful receipts.
 
 ---
 
 # Start
 
-## Start Here
-https://tmsteph.com/human-scale/start/
+- Start Here: https://tmsteph.com/human-scale/start/
+- Human Scale Audit: https://tmsteph.com/human-scale/audit/
+- Manifesto: https://tmsteph.com/human-scale/manifesto/
+- Doctrine: https://tmsteph.com/human-scale/
+- Public Launch: https://tmsteph.com/human-scale/launch/
 
-The project in about two minutes.
-
-## Human Scale Audit
-https://tmsteph.com/human-scale/audit/
-
-A private, no-signup reflection tool. Its score is provisional and not a scientific or medical diagnostic.
-
-## Manifesto
-https://tmsteph.com/human-scale/manifesto/
-
-The short public argument and commitments.
-
-## Doctrine
-https://tmsteph.com/human-scale/
-
-The compact living doctrine.
+The Audit is private/no-signup and deliberately provisional. It is not a scientific or medical diagnostic.
 
 ---
 
-# The Four Core Layers
+# Core Layers
 
-## Field Guide
-https://tmsteph.com/human-scale/field-guide/
-
-What can a person or household do now?
-
-## Program
-https://tmsteph.com/human-scale/program/
-
-What should we change together?
-
-## Evidence Atlas
-https://tmsteph.com/human-scale/evidence/
-
-What do we know, suspect, value, and propose politically?
-
-## Lab
-https://tmsteph.com/human-scale/lab/
-
-What can we test in the real world?
+- Field Guide: https://tmsteph.com/human-scale/field-guide/
+- Program: https://tmsteph.com/human-scale/program/
+- Evidence Atlas: https://tmsteph.com/human-scale/evidence/
+- Lab: https://tmsteph.com/human-scale/lab/
+- Contribute: https://tmsteph.com/human-scale/contribute/
+- San Diego: https://tmsteph.com/human-scale/san-diego/
 
 ---
 
@@ -79,112 +50,148 @@ What can we test in the real world?
 ## 1. Human Nature — The Environment We Were Built For
 https://tmsteph.com/human-scale/human-nature/
 
-Revised after Evidence Audit 01.
-
-Core correction: novelty is a reason to investigate, not a reason to condemn.
+Mismatch remains a useful lens, but novelty is a reason to investigate rather than condemn.
 
 ## 2. Land & Life — Reconnecting Humans to the Living World
 https://tmsteph.com/human-scale/land-life/
 
-Revised after Evidence Audit 02.
-
-Core correction: ecological dependence is real; gardening, food forests, and living-world participation are interventions/values to test rather than universal psychological necessities.
+Ecological dependence survives; gardens, food forests, and “reconnection” become interventions and values rather than universal needs.
 
 ## 3. Community — The Human Need to Belong
-
-Original public chapter:
 https://tmsteph.com/human-scale/community/
 
-Revised edition after Evidence Audit 03:
-https://tmsteph.com/human-scale/community/revised/
+Revised edition: https://tmsteph.com/human-scale/community/revised/
 
-Core correction: **community is an outcome, not a place type.**
+Community is an outcome, not a place type. Belonging must coexist with privacy, pluralism, and exit.
 
 ## 4. Work & Time — What Is a Human Life For?
 https://tmsteph.com/human-scale/work-time/
 
-Evidence Audit 04 now treats shorter work as a family of experiments rather than one universal schedule endpoint.
+Human time remains central; reduced-hours models are experiments, not one universal endpoint.
 
 ## 5. Technology — Tools That Serve Life
 https://tmsteph.com/human-scale/technology/
 
-Evidence Audit 05 now treats open source, local compute, repairability, decentralization, and calm technology as mechanisms rather than automatic proxies for freedom.
+Agency is the goal; open/local/repairable/interoperable/quiet are mechanisms whose tradeoffs have to be tested.
 
 ## 6. Energy — Power Without Dependence
 https://tmsteph.com/human-scale/energy/
 
-Abundant, reliable, cleaner energy with resilience and scale matched to the problem.
+Reliable abundant power, cleaner supply, strong grids, useful distributed resilience, and scale matched to function.
 
 ## 7. Economics — What Is the Economy For?
 https://tmsteph.com/human-scale/economics/
 
-Markets, ownership, material security, entrepreneurship, public goods, automation, and practical freedom.
+Markets, material security, competition, ownership, entrepreneurship, public goods, automation, and practical freedom.
 
 ## 8. Governance — Power Close Enough to Understand
 https://tmsteph.com/human-scale/governance/
 
-Subsidiarity, rights, capacity, legibility, accountability, and institutions at the right scale.
+Subsidiarity bounded by rights, capacity, coordination, legibility, accountability, and cross-boundary problems.
 
 ## 9. Food — Nourishment, Culture & Living Systems
 https://tmsteph.com/human-scale/food/
 
-Cooking, agriculture, soil, trade, resilience, food workers, and food culture.
+Evidence Audit 09 now pushes the chapter toward safety, nourishment, affordability, resilience, ecological durability, and measurable outcomes rather than locality as an automatic virtue.
 
 ## 10. Architecture & Place — Build for Human Life
 https://tmsteph.com/human-scale/architecture-place/
 
-Housing, streets, walking, transit, public space, climate, shade, accessibility, childhood, and human time.
+Evidence Audit 10 reframes Human Scale architecture as functional rather than stylistic: access, safety, heat, time, housing, mobility, accessibility, ecology, and actual use.
 
 ## 11. Education & Childhood — Raising Capable Human Beings
 https://tmsteph.com/human-scale/education-childhood/
 
-Knowledge, play, movement, belonging, practical competence, independence, AI, free time, and multiple paths into adulthood.
+Evidence Audit 11 keeps knowledge, movement, sleep, belonging, capability, multiple pathways, and increasing independence while treating play, school structure, and AI more carefully.
 
 ## 12. Health & Care — Keeping People Well, Caring for People When They Aren't
 https://tmsteph.com/human-scale/health-care/
 
-Modern medicine, prevention, primary care, safety, mental health, disability, caregiving, financial protection, interoperability, AI, and palliative care.
+Modern medicine, prevention, primary and specialty care, public health, mental health, rehabilitation, disability support, caregiving, palliative care, safety, financial protection, and usable information.
 
 ## 13. Family & Care — The Relationships That Carry Life
 https://tmsteph.com/human-scale/family-care/
 
-Care as unavoidable social infrastructure without one mandatory family form; includes children, chosen family, aging, disability, work, housing, caregiver support, and safe exit.
+Care as unavoidable social infrastructure without one mandatory family form; children, chosen family, aging, disability, housing, work, caregiver support, and safe exit.
 
 ## 14. Attention & Media — What Gets to Enter the Mind
 https://tmsteph.com/human-scale/attention-media/
 
 Attention, persuasion, dark patterns, youth safeguards, algorithms, advertising, political communication, AI media, provenance, and humane information systems.
 
+## 15. Justice & Rights — A Floor Beneath Localism
+https://tmsteph.com/human-scale/justice-rights/
+
+Rights remain strong enough to protect people even when local majorities, families, communities, employers, or institutions are wrong.
+
+## 16. Spirituality & Meaning — What Is a Life For?
+https://tmsteph.com/human-scale/spirituality-meaning/
+
+Science and public reason alongside religious freedom, contemplation, ritual, art, nature, moral formation, pluralism, and the human search for meaning.
+
+## 17. AI & Automation — Intelligence in Service of Human Agency
+https://tmsteph.com/human-scale/ai-automation/
+
+AI as capability, tutor, accessibility layer, coordinator, and automation tool—judged by agency, skill, privacy, accountability, distribution of gains, and what humans remain capable of doing.
+
 ---
 
 # Evidence Audits
 
-## Audit 01 — Human Nature Under Pressure
+## 01 — Human Nature Under Pressure
 https://tmsteph.com/human-scale/evidence/human-nature/
 
-Result: mismatch survives, but broad ancestral claims become narrower and falsifiable.
+Mismatch survives; broad ancestral claims become narrower and falsifiable.
 
-## Audit 02 — Land & Life Under Pressure
+## 02 — Land & Life Under Pressure
 https://tmsteph.com/human-scale/evidence/land-life/
 
-Result: ecological foundations survive; romantic nature claims become technical, safety-aware, and site-specific.
+Ecological foundations survive; romantic implementation claims become technical, safety-aware, and site-specific.
 
-## Audit 03 — Community Under Pressure
+## 03 — Community Under Pressure
 https://tmsteph.com/human-scale/evidence/community/
 
-Result: supportive social connection survives; localism becomes a mechanism rather than the definition of community.
+Supportive social connection survives; localism becomes a mechanism rather than the definition of community.
 
-## Audit 04 — Work & Time Under Pressure
+## 04 — Work & Time Under Pressure
 https://tmsteph.com/human-scale/evidence/work-time/
 
-Result: human time stays central; four-day/shorter-work designs become experiments to compare by full outcomes.
+Human time remains central; schedule designs become experiments to compare by full outcomes.
 
-## Audit 05 — Technology Under Pressure
+## 05 — Technology Under Pressure
 https://tmsteph.com/human-scale/evidence/technology/
 
-Result: agency survives as the goal; open/local/repairable/quiet become tools whose tradeoffs must be tested.
+Agency survives; open, local, repairable, interoperable, and quiet become tools rather than identities.
 
-Next audit: **Energy**.
+## 06 — Energy Under Pressure
+https://tmsteph.com/human-scale/evidence/energy/
+
+Reliable abundant power survives; strong shared grids and strategically useful local resilience become complements.
+
+## 07 — Economics Under Pressure
+https://tmsteph.com/human-scale/evidence/economics/
+
+Practical freedom remains the goal; markets, ownership, security, competition, and redistribution remain mechanisms to compare.
+
+## 08 — Governance Under Pressure
+https://tmsteph.com/human-scale/evidence/governance/
+
+Subsidiarity survives only with rights, institutional capacity, coordination, accountability, and evidence about scale.
+
+## 09 — Food Under Pressure
+https://tmsteph.com/human-scale/evidence/food/
+
+Safety, nourishment, affordability, resilience, and ecological durability outrank local/natural/homemade labels.
+
+## 10 — Architecture & Place Under Pressure
+https://tmsteph.com/human-scale/evidence/architecture-place/
+
+Human Scale architecture becomes functional rather than stylistic.
+
+## 11 — Education & Childhood Under Pressure
+https://tmsteph.com/human-scale/evidence/education-childhood/
+
+Knowledge, health, belonging, capability, plural pathways, and capability-preserving AI survive.
 
 ---
 
@@ -192,9 +199,9 @@ Next audit: **Energy**.
 
 https://tmsteph.com/human-scale/lab/
 
-Current experiment formats:
+Current experiment formats include:
 
-1. Calibrate the Human Scale Audit
+1. Human Scale Audit calibration
 2. One Week of Human Time
 3. Quiet Technology
 4. Third-Place Inventory
@@ -208,60 +215,22 @@ Lab rule:
 
 ---
 
-# Contribute
+# Public Launch & Advertising
 
-https://tmsteph.com/human-scale/contribute/
+Public launch:
+https://tmsteph.com/human-scale/launch/
 
-Contribution paths include:
+Share kit:
+https://tmsteph.com/human-scale/share/
 
-- evidence challenges;
-- doctrine critiques;
-- local experiment receipts;
-- accessibility critiques;
-- stronger sources;
-- failed interventions;
-- design/code improvements;
-- counterexamples.
-
-Contribution rule:
-
-> **Do not just agree with the doctrine. Find where it breaks.**
-
----
-
-# San Diego
-
+San Diego campaign:
 https://tmsteph.com/human-scale/san-diego/
 
-First local pilot formats:
-
-1. Third-Place & Human-Time Map
-2. Shade, Walking & Public-Space Receipt
-3. Bureaucracy Receipt
-4. Human Scale Library Session
-
-First local goal:
-
-> **Complete one public Human Scale receipt in San Diego that would be useful even if nobody cared about the philosophy behind it.**
-
----
-
-# Growth & Advertising
-
-Human Scale should earn attention through useful artifacts:
-
-- Audit results;
-- evidence corrections;
-- maps;
-- local receipts;
-- failed experiments;
-- public data;
-- open tools;
-- clear questions.
+Human Scale should earn attention through useful artifacts: tools, maps, evidence corrections, failed experiments, implementation receipts, public data, and questions worth answering.
 
 Advertising standard:
 
-1. identify the source;
+1. identify authorship and sponsorship;
 2. no fake grassroots support;
 3. no repeated unwanted outreach;
 4. no sensitive-vulnerability targeting;
@@ -282,29 +251,38 @@ Paid amplification should wait until an organic message demonstrates meaningful 
 
 # Current Research Queue
 
-1. Energy evidence audit
-2. Economics evidence audit
-3. Governance evidence audit
-4. Food evidence audit
-5. Architecture & Place evidence audit
-6. Education & Childhood evidence audit
-7. Health & Care evidence audit
-8. Family & Care evidence audit
-9. Attention & Media evidence audit
-10. deeper AI / automation work
-11. justice, rights, and institutional safeguards
-12. spirituality, meaning, ritual, and pluralism
-13. aging and end-of-life systems
-14. transportation and mobility
-15. disability and accessibility as a cross-cutting audit
+1. Health & Care evidence audit
+2. Family & Care evidence audit
+3. Attention & Media evidence audit
+4. AI & Automation evidence audit
+5. Justice & Rights evidence audit
+6. Spirituality & Meaning evidence audit
+7. disability/accessibility cross-cutting audit
+8. aging and end-of-life systems
+9. transportation and mobility
+10. administrative burden
+11. ownership and automation distribution
+12. local resilience and disaster response
 
 ---
 
-# Current Build Rule
+# Current Implementation Queue
+
+1. publish the Public Launch doorway;
+2. invite one strong public criticism through GitHub;
+3. produce the first San Diego Human Scale receipt;
+4. calibrate the Audit with outside users;
+5. get one experiment run by someone other than the author;
+6. publish failures and negative results, not only successes;
+7. identify which organic message produces useful downstream action before any paid advertising.
+
+---
+
+# Build Rule
 
 Human Scale should not grow only by adding chapters.
 
-Each cycle should try to produce at least two of the following:
+Each cycle should produce at least two of:
 
 - a new argument;
 - an evidence correction;
@@ -315,12 +293,6 @@ Each cycle should try to produce at least two of the following:
 - a simpler explanation;
 - a doctrine revision caused by outside reality.
 
-The project is not finished when it has enough pages.
+The project is not mature when it has enough pages.
 
-It becomes mature when people other than its author can:
-
-- understand it;
-- challenge it;
-- test it;
-- improve it;
-- use it without asking permission.
+It becomes mature when people other than its author can understand it, challenge it, test it, improve it, and use it without asking permission.
