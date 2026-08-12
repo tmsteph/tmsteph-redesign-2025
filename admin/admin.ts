@@ -64,6 +64,7 @@
   const authSubmit = getElement<HTMLButtonElement>('auth-submit');
   const authToggleText = getElement<HTMLElement>('auth-toggle-text');
   const toggleAuthBtn = getElement<HTMLButtonElement>('toggle-auth');
+  const restoreSessionBtn = getElement<HTMLButtonElement>('restore-session');
   const authMessage = getElement<HTMLElement>('auth-message');
   const panelMessage = getElement<HTMLElement>('panel-message');
   const aliasDisplay = getElement<HTMLElement>('alias-display');
@@ -490,6 +491,37 @@
   toggleAuthBtn.addEventListener('click', () => {
     setMode(mode === 'login' ? 'register' : 'login');
   });
+
+  const restoreSavedAccount = () => {
+    const alias = sanitizeAlias(aliasInput?.value);
+    const pair = user._?.sea as { pub?: string; epub?: string; priv?: string; epriv?: string } | undefined;
+
+    if (!alias) {
+      setAuthMessage('Enter your account alias first, then choose Restore saved account.', 'error');
+      return;
+    }
+    if (!pair?.pub || !pair?.epub || !pair?.priv || !pair?.epriv) {
+      setAuthMessage('No saved account identity was found in this browser. Use the browser where you previously signed in.', 'error');
+      return;
+    }
+    if (typeof user.create !== 'function') {
+      setAuthMessage('Account recovery is unavailable. Refresh and try again.', 'error');
+      return;
+    }
+
+    setAuthMessage('Restoring your saved account to the sync service…', 'info');
+    user.create(alias, pair as any, (ack) => {
+      if (ack?.err) {
+        setAuthMessage(ack.err, 'error');
+        return;
+      }
+      persistAlias(alias);
+      setAuthMessage('Saved account restored. Opening your dashboard…', 'success');
+      showAdminPanel();
+    });
+  };
+
+  restoreSessionBtn?.addEventListener('click', restoreSavedAccount);
 
   const clearConnectionNoticeTimeout = () => {
     if (connectionNoticeTimeout) {
