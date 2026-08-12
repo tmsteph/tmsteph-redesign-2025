@@ -1,4 +1,6 @@
-const CACHE_NAME = 'tmsteph-pwa-v5';
+// Bump whenever an offline-cached authentication or recovery flow changes.
+// Installed PWAs otherwise may continue serving a previous admin bundle.
+const CACHE_NAME = 'tmsteph-pwa-v6';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
