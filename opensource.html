@@ -85,13 +85,142 @@
         </div>
         </article>
       </div>
-      <p class="contribution-note">
-        This is a living record. I add contributions here when they are accepted by projects outside my own repositories.
-      </p>
     </div>
   </section>
 
   <section class="section card fade-in">
+    <div class="container">
+      <p class="contribution-eyebrow">Submitted upstream</p>
+      <h2>Work under review</h2>
+      <p class="contribution-intro">Current patches and pull requests submitted to upstream projects. When accepted, they move into the merged section above.</p>
+      <div class="contribution-grid">
+        <article class="contribution-card">
+          <div class="contribution-heading">
+            <div>
+              <p class="contribution-project">RISC-V · Unified Database</p>
+              <h3>Made LD/SD definitions depend on XLEN</h3>
+            </div>
+            <span class="contribution-status">Open PR</span>
+          </div>
+          <p>
+            Corrected the machine-readable ISA definitions so <code>ld</code> and <code>sd</code> are defined by <code>I</code> on RV64 and by <code>Zilsd</code> on RV32.
+          </p>
+          <ul class="contribution-details">
+            <li>Updated both doubleword load and store definitions.</li>
+            <li>Passed Unified Database schema validation across the architecture files.</li>
+          </ul>
+          <div class="contribution-links">
+            <a href="https://github.com/riscv/riscv-unified-db/pull/2487" target="_blank" rel="noopener">View pull request #2487 ↗</a>
+          </div>
+        </article>
+
+        <article class="contribution-card">
+          <div class="contribution-heading">
+            <div>
+              <p class="contribution-project">RISC-V · Glossary</p>
+              <h3>Generated an extension-name reference from UDB</h3>
+            </div>
+            <span class="contribution-status">Open PR</span>
+          </div>
+          <p>
+            Added the requested abbreviation-to-long-name reference for RISC-V extensions, generated from Unified Database metadata instead of maintaining a second hand-written list.
+          </p>
+          <ul class="contribution-details">
+            <li>Generates the reference from current UDB extension metadata.</li>
+            <li>Keeps the generated AsciiDoc committed so normal glossary builds remain standalone.</li>
+          </ul>
+          <div class="contribution-links">
+            <a href="https://github.com/riscv/riscv-glossary/pull/112" target="_blank" rel="noopener">View pull request #112 ↗</a>
+          </div>
+        </article>
+
+        <article class="contribution-card">
+          <div class="contribution-heading">
+            <div>
+              <p class="contribution-project">libimobiledevice · build system</p>
+              <h3>Fixed Python 3 discovery on systems without a python command</h3>
+            </div>
+            <span class="contribution-status">Open PR</span>
+          </div>
+          <p>
+            Fixed Autoconf ordering so systems that provide <code>python3</code> but not <code>python</code> can reach Automake's Python 3 discovery before the Python development check runs.
+          </p>
+          <div class="contribution-links">
+            <a href="https://github.com/libimobiledevice/libimobiledevice/pull/1752" target="_blank" rel="noopener">View pull request #1752 ↗</a>
+          </div>
+        </article>
+
+        <article class="contribution-card">
+          <div class="contribution-heading">
+            <div>
+              <p class="contribution-project">libimobiledevice · CI</p>
+              <h3>Removed obsolete distutils use from macOS CI</h3>
+            </div>
+            <span class="contribution-status">Open PR</span>
+          </div>
+          <p>
+            Replaced the macOS workflow's explicit <code>distutils.sysconfig</code> imports with Python's supported standard-library <code>sysconfig</code> module.
+          </p>
+          <div class="contribution-links">
+            <a href="https://github.com/libimobiledevice/libimobiledevice/pull/1753" target="_blank" rel="noopener">View pull request #1753 ↗</a>
+          </div>
+        </article>
+
+        <article class="contribution-card">
+          <div class="contribution-heading">
+            <div>
+              <p class="contribution-project">libimobiledevice · documentation</p>
+              <h3>Corrected the LGPL license-file reference</h3>
+            </div>
+            <span class="contribution-status">Open PR</span>
+          </div>
+          <p>
+            Corrected the README so its LGPL 2.1 reference points to <code>COPYING.LESSER</code> rather than the GPL text in <code>COPYING</code>.
+          </p>
+          <div class="contribution-links">
+            <a href="https://github.com/libimobiledevice/libimobiledevice/pull/1750" target="_blank" rel="noopener">View pull request #1750 ↗</a>
+          </div>
+        </article>
+
+        <article class="contribution-card">
+          <div class="contribution-heading">
+            <div>
+              <p class="contribution-project">libimobiledevice · Debian/Ubuntu docs</p>
+              <h3>Removed an obsolete libtatsu source-build note</h3>
+            </div>
+            <span class="contribution-status">Open PR</span>
+          </div>
+          <p>
+            Removed the stale instruction saying <code>libtatsu-dev</code> must be built from source now that it is available from current Debian and Ubuntu repositories.
+          </p>
+          <div class="contribution-links">
+            <a href="https://github.com/libimobiledevice/libimobiledevice/pull/1751" target="_blank" rel="noopener">View pull request #1751 ↗</a>
+          </div>
+        </article>
+
+        <article class="contribution-card">
+          <div class="contribution-heading">
+            <div>
+              <p class="contribution-project">Debian · PulseAudio</p>
+              <h3>Fixed stale README.Debian configuration guidance</h3>
+            </div>
+            <span class="contribution-status">Patch sent</span>
+          </div>
+          <p>
+            Submitted a Debian-native patch removing the stale reference to <code>/etc/default/pulseaudio</code> while preserving the valid <code>client.conf</code> guidance.
+          </p>
+          <div class="contribution-links">
+            <a href="https://bugs.debian.org/817130" target="_blank" rel="noopener">View Debian bug #817130 ↗</a>
+          </div>
+        </article>
+      </div>
+      <p class="contribution-note">
+        This is a living record. New upstream submissions are added while they are under review and moved to “Merged upstream” when accepted.
+      </p>
+    </div>
+  </section>
+
+  <section class="section card alt fade-in">
     <div class="container">
       <p class="contribution-eyebrow">Community participation</p>
       <h2>Learning and contributing in public</h2>
@@ -134,7 +263,7 @@
     </div>
   </section>
 
-  <section class="section card alt fade-in">
+  <section class="section card fade-in">
     <div class="container">
       <h2>Projects I Believe In</h2>
       <ul>
