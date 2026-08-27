@@ -69,6 +69,18 @@ test('YouTube Video Watcher loads defaults, adds a video, and disables sliders i
   await expect(page.getByRole('heading', { name: 'YouTube Video Watcher' })).toBeVisible();
   await expect(page.locator('[data-video-count]')).toHaveText('2');
   await expect(page.locator('.multiview-frame-wrapper')).toHaveCount(2);
+  await expect(page.getByText('Privacy mode', { exact: true })).toBeVisible();
+  await expect(page.getByText('Ad-free mode', { exact: true })).toHaveCount(0);
+
+  const roomTop = await page.locator('#watch-room').evaluate((node) => node.getBoundingClientRect().top);
+  const builderTop = await page.locator('#add-videos').evaluate((node) => node.getBoundingClientRect().top);
+  expect(roomTop).toBeLessThan(builderTop);
+
+  await page.locator('.multiview-focus-button').first().click();
+  await expect(page.locator('[data-multiview-grid]')).toHaveClass(/multiview-grid--focused/);
+  await expect(page.locator('.multiview-frame-wrapper:visible')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Show all videos' }).click();
+  await expect(page.locator('.multiview-frame-wrapper:visible')).toHaveCount(2);
 
   await expect(page.locator('[data-advanced-player-settings]')).not.toHaveAttribute('open', '');
   await page.fill('#video-search-query', 'lofi');

@@ -7,7 +7,7 @@
     <title>YouTube Video Watcher | tmsteph</title>
     <meta
       name="description"
-      content="Load multiple YouTube videos side by side, tune each feed with its own volume slider, and share the full watch layout with one link."
+      content="Search YouTube, build a multi-video watch room, control each feed, and share the exact layout with one link."
     />
     <link rel="stylesheet" href="../style.css" />
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
@@ -30,13 +30,12 @@
             <p class="tagline">Search. Add. Watch together.</p>
             <h1 class="handwritten">YouTube Video Watcher</h1>
             <p class="watch-hero-lede">
-              Build a side-by-side room for tutorials, live streams, or reaction feeds. Search first, drop videos straight into
-              the room, and share the exact setup with one link.
+              Keep multiple tutorials, streams, or reaction feeds in one room. Your layout and volume settings stay saved, and one link can share the room.
             </p>
             <div class="watch-hero-pills" aria-label="Key features">
-              <span class="watch-hero-pill">Add videos without leaving the page</span>
-              <span class="watch-hero-pill">Per-video volume on supported players</span>
-              <span class="watch-hero-pill">One link saves the full room</span>
+              <span class="watch-hero-pill">Multi-video playback</span>
+              <span class="watch-hero-pill">Per-video volume</span>
+              <span class="watch-hero-pill">Shareable rooms</span>
             </div>
           </div>
           <div class="watch-stat-grid" aria-label="Room summary">
@@ -53,94 +52,91 @@
       </div>
     </header>
 
-    <main class="watch-main">
-      <section class="section card watch-builder-card" data-theater-root data-default-videos="dQw4w9WgXcQ, Zi_XLOBDo_Y">
-        <div class="container watch-container">
-          <div class="watch-heading watch-heading--builder">
-            <p class="watch-eyebrow">Build the room</p>
-            <h2>Add and search videos first. The room comes right after.</h2>
-            <p>Start at the top to search YouTube, paste links, or filter what is already loaded. The newest videos stay at the top of the room.</p>
-          </div>
-
-          <div class="watch-builder-grid">
-            <div class="watch-builder-panel watch-builder-panel--primary">
-              <div class="video-search-panel">
-                <div class="video-search-header">
-                  <label class="multiview-label" for="video-search-query">Search YouTube to add</label>
-                  <p class="video-search-copy">Search first, preview the results, and drop videos directly into the room.</p>
-                </div>
-
-                <div class="video-search-form">
-                  <input
-                    id="video-search-query"
-                    class="multiview-search-input video-search-input"
-                    type="search"
-                    placeholder="Search tutorials, streams, playlists..."
-                    data-video-search-query
-                    autocomplete="off"
-                  />
-                  <button class="btn-secondary" data-video-search-button type="button">Search videos</button>
-                </div>
-                <p class="video-search-status" data-video-search-status aria-live="polite"></p>
-                <div class="video-search-results" data-video-search-results></div>
-              </div>
-
-              <details class="watch-secondary-panel" data-manual-entry-panel>
-                <summary>Paste links or IDs instead</summary>
-                <div class="watch-secondary-panel__body">
-                  <label class="multiview-label" for="multiview-input">Video links or IDs</label>
-                  <textarea
-                    id="multiview-input"
-                    class="multiview-input multiview-textarea"
-                    placeholder="https://youtu.be/dQw4w9WgXcQ&#10;https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
-                    autocomplete="off"
-                  ></textarea>
-                  <div class="multiview-controls">
-                    <button class="btn-primary" data-add-video type="button">Load pasted videos</button>
-                  </div>
-                  <p class="multiview-hint">
-                    Paste full URLs, `youtu.be` links, or 11-character IDs. Use multiple lines, then hit
-                    <strong>Ctrl/Command + Enter</strong> to load them fast.
-                  </p>
-                </div>
-              </details>
+    <main class="watch-main" data-theater-root data-default-videos="dQw4w9WgXcQ, Zi_XLOBDo_Y">
+      <section class="section card watch-room-card" id="watch-room">
+        <div class="container watch-grid-container">
+          <div class="watch-grid-heading watch-grid-heading--room">
+            <div>
+              <p class="watch-eyebrow">Watch room</p>
+              <h2>Play first. Tune each feed.</h2>
+              <p class="watch-room-intro">Use Focus when one video needs your full attention, then jump back to the grid without stopping the other players.</p>
             </div>
-
-            <section class="watch-builder-panel watch-builder-panel--secondary">
-              <div class="watch-room-panel watch-room-panel--filter">
-                <div class="watch-room-panel__header">
-                  <div>
-                    <p class="watch-side-eyebrow">Loaded videos</p>
-                    <h3>Filter the room before you scroll.</h3>
-                  </div>
-                </div>
-                <div class="multiview-search-controls">
-                  <label class="multiview-label" for="multiview-search">Search current videos</label>
-                  <input
-                    id="multiview-search"
-                    class="multiview-search-input"
-                    type="search"
-                    placeholder="Filter by title or video ID"
-                    data-multiview-search
-                    autocomplete="off"
-                  />
-                  <p class="multiview-search-hint">The share link preserves mode, video order, and each saved volume setting.</p>
-                </div>
-                <p class="multiview-status" aria-live="polite" data-multiview-status></p>
-                <p class="multiview-state-summary" data-state-summary>Per-video volume sliders are ready.</p>
-              </div>
-            </section>
           </div>
+
+          <div class="watch-room-toolbar" aria-label="Watch room tools">
+            <div class="multiview-search-controls watch-room-filter">
+              <label class="multiview-label" for="multiview-search">Filter loaded videos</label>
+              <input
+                id="multiview-search"
+                class="multiview-search-input"
+                type="search"
+                placeholder="Find a title or video ID"
+                aria-label="Filter loaded videos"
+                data-multiview-search
+                autocomplete="off"
+              />
+            </div>
+            <div class="watch-room-toolbar__actions">
+              <a class="btn-primary" href="#add-videos">+ Add videos</a>
+              <button class="btn-secondary" data-copy-share-link type="button">Copy room link</button>
+            </div>
+          </div>
+
+          <p class="multiview-status watch-room-status" aria-live="polite" data-multiview-status></p>
+          <div class="multiview-grid" data-multiview-grid></div>
         </div>
       </section>
 
-      <section class="section card">
-        <div class="container watch-grid-container">
-          <div class="watch-grid-heading">
-            <p class="watch-eyebrow">Watch room</p>
-            <h2>Your videos show up here, newest first.</h2>
+      <section class="section card watch-builder-card" id="add-videos">
+        <div class="container watch-container">
+          <div class="watch-heading watch-heading--builder">
+            <p class="watch-eyebrow">Add videos</p>
+            <h2>Search YouTube or paste a link.</h2>
+            <p>Search is the fastest path. Paste links or IDs when you already know exactly what you want.</p>
           </div>
-          <div class="multiview-grid" data-multiview-grid></div>
+
+          <div class="watch-builder-panel watch-builder-panel--primary watch-builder-panel--single">
+            <div class="video-search-panel">
+              <div class="video-search-header">
+                <label class="multiview-label" for="video-search-query">Search YouTube</label>
+                <p class="video-search-copy">Preview results here and add them directly to your room.</p>
+              </div>
+
+              <div class="video-search-form">
+                <input
+                  id="video-search-query"
+                  class="multiview-search-input video-search-input"
+                  type="search"
+                  placeholder="Search tutorials, streams, playlists..."
+                  data-video-search-query
+                  autocomplete="off"
+                />
+                <button class="btn-secondary" data-video-search-button type="button">Search videos</button>
+              </div>
+              <p class="video-search-status" data-video-search-status aria-live="polite"></p>
+              <div class="video-search-results" data-video-search-results></div>
+            </div>
+
+            <details class="watch-secondary-panel" data-manual-entry-panel>
+              <summary>Paste links or IDs instead</summary>
+              <div class="watch-secondary-panel__body">
+                <label class="multiview-label" for="multiview-input">Video links or IDs</label>
+                <textarea
+                  id="multiview-input"
+                  class="multiview-input multiview-textarea"
+                  placeholder="https://youtu.be/dQw4w9WgXcQ&#10;https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+                  autocomplete="off"
+                ></textarea>
+                <div class="multiview-controls">
+                  <button class="btn-primary" data-add-video type="button">Add pasted videos</button>
+                </div>
+                <p class="multiview-hint">
+                  Full URLs, `youtu.be` links, and 11-character IDs all work. Use multiple lines and press
+                  <strong>Ctrl/Command + Enter</strong> to add them quickly.
+                </p>
+              </div>
+            </details>
+          </div>
         </div>
       </section>
 
@@ -148,44 +144,44 @@
         <div class="container watch-grid-container">
           <div class="watch-grid-heading">
             <p class="watch-eyebrow">Room controls</p>
-            <h2>Playback, sharing, and troubleshooting live here.</h2>
+            <h2>Playback mode and room maintenance.</h2>
           </div>
           <div class="watch-controls-grid">
             <section class="watch-room-panel">
               <div class="watch-room-panel__header">
                 <div>
-                  <p class="watch-side-eyebrow">Share and reset</p>
-                  <h3>Keep the main actions close.</h3>
+                  <p class="watch-side-eyebrow">Reset room</p>
+                  <h3>Start over when you need to.</h3>
                 </div>
                 <p class="watch-room-mode">Mode: <strong data-mode-summary>Standard mode</strong></p>
               </div>
               <div class="watch-quick-actions">
-                <button class="btn-secondary" data-copy-share-link type="button">Copy share link</button>
                 <button class="btn-secondary" data-reset-videos type="button">Load example room</button>
                 <button class="btn-secondary" data-clear-videos type="button">Clear room</button>
               </div>
+              <p class="multiview-state-summary" data-state-summary>Per-video volume sliders are ready.</p>
             </section>
 
             <div class="multiview-player-toggle" role="group" aria-labelledby="multiview-player-label">
               <div class="multiview-player-copy">
                 <p class="watch-side-eyebrow" id="multiview-player-label">Playback</p>
                 <p class="multiview-player-help" data-player-help>
-                  Full youtube.com embeds with sign-in, comments, playlists, and working volume sliders.
+                  Full youtube.com embeds with sign-in, live streams, and working volume sliders.
                 </p>
               </div>
               <div class="multiview-player-options">
-                <label class="multiview-player-option">
-                  <input type="radio" name="multiview-player" value="privacy" data-player-option />
-                  <span>
-                    <strong>Ad-free mode</strong>
-                    <small>youtube-nocookie embeds with slider support.</small>
-                  </span>
-                </label>
                 <label class="multiview-player-option">
                   <input type="radio" name="multiview-player" value="standard" data-player-option checked />
                   <span>
                     <strong>Standard mode</strong>
                     <small>Best compatibility for sign-in and live streams.</small>
+                  </span>
+                </label>
+                <label class="multiview-player-option">
+                  <input type="radio" name="multiview-player" value="privacy" data-player-option />
+                  <span>
+                    <strong>Privacy mode</strong>
+                    <small>youtube-nocookie embeds with less tracking before playback.</small>
                   </span>
                 </label>
               </div>
@@ -202,7 +198,7 @@
                   </span>
                 </label>
                 <p class="watch-advanced-settings__note">
-                  Use this only when the normal players are blocked or a browser privacy setting breaks embeds.
+                  Use this only when the normal players are blocked or browser privacy settings break embeds.
                 </p>
                 <div class="multiview-diagnostics-actions">
                   <button class="btn-secondary" type="button" data-run-diagnostics>Run diagnostics</button>
