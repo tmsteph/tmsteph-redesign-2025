@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f3ed" />
+  <title>Calendar - tmsteph</title>
+  <link rel="stylesheet" href="./calendar.css" />
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <script defer src="/_vercel/analytics/script.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="back-link" href="../">← tmsteph</a>
+    <div class="topbar-actions">
+      <a href="https://calendar.google.com/" target="_blank" rel="noopener">Google Calendar</a>
+      <a href="https://portal.3dvr.tech/calendar/">3DVR Calendar</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="calendar-hero">
+      <div>
+        <p class="eyebrow">Glanceable calendar</p>
+        <h1>See the shape of the month.</h1>
+        <p class="intro">Start + end times stay visible, so the calendar makes sense before you click anything.</p>
+      </div>
+      <div class="legend" aria-label="Calendar legend">
+        <span class="legend-chip legend-chip--work">Work</span>
+        <span class="legend-chip legend-chip--personal">Personal</span>
+      </div>
+    </section>
+
+    <section class="calendar-card" aria-labelledby="month-label">
+      <div class="calendar-toolbar">
+        <div>
+          <p class="calendar-toolbar__label">Month</p>
+          <h2 id="month-label" data-month-label></h2>
+        </div>
+        <div class="calendar-toolbar__actions" aria-label="Change month">
+          <button type="button" data-month-nav="prev" aria-label="Previous month">‹</button>
+          <button type="button" data-month-today>Today</button>
+          <button type="button" data-month-nav="next" aria-label="Next month">›</button>
+        </div>
+      </div>
+
+      <div class="calendar-scroll" tabindex="0" aria-label="Scrollable month calendar">
+        <div class="calendar-grid-shell">
+          <div class="weekday-row" aria-hidden="true">
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+          </div>
+          <div class="month-grid" data-calendar-grid></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar-note" aria-label="Calendar status">
+      <strong>Safe public demo:</strong> this page demonstrates the glanceable view without publishing any private calendar events.
+      <span data-snapshot-date></span>
+    </section>
+  </main>
+
+  <script src="./calendar.js"></script>
+</body>
+</html>
