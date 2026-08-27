@@ -193,6 +193,38 @@ describe('multi-watch controller', () => {
     expect(document.querySelector('[data-video-count]').textContent).toBe('3');
   });
 
+  it('focuses one player without remounting the room', async () => {
+    const youtubeStub = createYouTubeStub();
+    const controller = createMultiWatchController({
+      root: window,
+      doc: document,
+      loadYouTubeApi: () => Promise.resolve(youtubeStub),
+    });
+
+    controller.init();
+    await Promise.resolve();
+
+    const grid = document.querySelector('[data-multiview-grid]');
+    const wrappers = Array.from(document.querySelectorAll('.multiview-frame-wrapper'));
+    const focusButtons = Array.from(document.querySelectorAll('.multiview-focus-button'));
+
+    expect(focusButtons).toHaveLength(2);
+    focusButtons[0].click();
+
+    expect(grid.classList.contains('multiview-grid--focused')).toBe(true);
+    expect(wrappers[0].classList.contains('is-focused')).toBe(true);
+    expect(wrappers[1].classList.contains('is-focused')).toBe(false);
+    expect(focusButtons[0].getAttribute('aria-pressed')).toBe('true');
+    expect(focusButtons[0].textContent).toBe('Show all');
+    expect(youtubeStub.players).toHaveLength(2);
+
+    focusButtons[0].click();
+    expect(grid.classList.contains('multiview-grid--focused')).toBe(false);
+    expect(focusButtons[0].getAttribute('aria-pressed')).toBe('false');
+    expect(focusButtons[0].textContent).toBe('Focus');
+    expect(youtubeStub.players).toHaveLength(2);
+  });
+
   it('switches into proxy mode and disables per-video mixing controls', async () => {
     const controller = createMultiWatchController({
       root: window,

@@ -14,14 +14,14 @@ const HOSTS = {
     id: 'standard',
     host: 'https://www.youtube.com',
     title: 'Standard mode',
-    help: 'Full youtube.com embeds with sign-in, comments, playlists, and working volume sliders.',
+    help: 'Full youtube.com embeds with sign-in, live streams, and working volume sliders.',
     supportsMixing: true,
   },
   privacy: {
     id: 'privacy',
     host: 'https://www.youtube-nocookie.com',
-    title: 'Ad-free mode',
-    help: 'Privacy-enhanced embeds with the same per-video volume sliders and fewer tracking surfaces.',
+    title: 'Privacy mode',
+    help: 'Privacy-enhanced youtube-nocookie embeds with the same per-video volume sliders and less tracking before playback.',
     supportsMixing: true,
   },
   proxy: {
@@ -36,7 +36,7 @@ const HOSTS = {
 const DIAGNOSTIC_TARGETS = [
   {
     id: 'privacy',
-    label: 'Ad-free youtube-nocookie player',
+    label: 'Privacy-enhanced youtube-nocookie player',
     url: 'https://www.youtube-nocookie.com/favicon.ico',
     suggestion: 'switching to Standard or Proxy mode',
   },
@@ -217,6 +217,7 @@ export function createMultiWatchController(options = {}) {
   const persistedState = hasExplicitQuery ? null : readPersistedState();
   let state = persistedState || parseTheaterState(root.location?.search || '', { defaultVideoIds });
   let searchQuery = '';
+  let focusedVideoId = '';
   let mountTokenSequence = 0;
   const playerRegistry = new Map();
   const elementRegistry = new Map();
@@ -494,6 +495,36 @@ export function createMultiWatchController(options = {}) {
     syncState();
   }
 
+  function syncFocusUI({ scroll = false } = {}) {
+    const hasFocus = Boolean(focusedVideoId && elementRegistry.has(focusedVideoId));
+    if (!hasFocus) {
+      focusedVideoId = '';
+    }
+
+    grid.classList.toggle('multiview-grid--focused', hasFocus);
+    elementRegistry.forEach((elements, videoId) => {
+      const isFocused = hasFocus && videoId === focusedVideoId;
+      elements.wrapper?.classList.toggle('is-focused', isFocused);
+      if (elements.focus) {
+        elements.focus.textContent = isFocused ? 'Show all' : 'Focus';
+        elements.focus.setAttribute('aria-pressed', String(isFocused));
+        elements.focus.setAttribute(
+          'aria-label',
+          isFocused ? 'Show all videos' : `Focus ${elements.title?.textContent || videoId}`,
+        );
+      }
+    });
+
+    if (scroll && hasFocus) {
+      elementRegistry.get(focusedVideoId)?.wrapper?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function toggleFocus(videoId) {
+    focusedVideoId = focusedVideoId === videoId ? '' : videoId;
+    syncFocusUI({ scroll: Boolean(focusedVideoId) });
+  }
+
   function addVideoIds(videoIds, { source = 'links' } = {}) {
     if (!Array.isArray(videoIds) || !videoIds.length) {
       updateStatus(`Please provide a valid YouTube ${source === 'search' ? 'result' : 'link or video ID'}.`, 'error');
@@ -522,6 +553,9 @@ export function createMultiWatchController(options = {}) {
 
   function removeVideo(videoId) {
     state.videos = state.videos.filter((entry) => entry.videoId !== videoId);
+    if (focusedVideoId === videoId) {
+      focusedVideoId = '';
+    }
     syncState();
     renderGrid();
     refreshSearchResultButtons();
@@ -705,6 +739,13 @@ export function createMultiWatchController(options = {}) {
     mute.className = 'multiview-action-button';
     mute.addEventListener('click', () => toggleMute(entry.videoId));
 
+    const focus = doc.createElement('button');
+    focus.type = 'button';
+    focus.className = 'multiview-action-button multiview-focus-button';
+    focus.textContent = 'Focus';
+    focus.setAttribute('aria-pressed', 'false');
+    focus.addEventListener('click', () => toggleFocus(entry.videoId));
+
     const open = doc.createElement('a');
     open.className = 'multiview-open-link';
     open.href = `https://youtu.be/${entry.videoId}`;
@@ -718,7 +759,10 @@ export function createMultiWatchController(options = {}) {
     remove.textContent = 'Remove';
     remove.addEventListener('click', () => removeVideo(entry.videoId));
 
-    controls.append(volumeGroup, mute, open, remove);
+    const actionRow = doc.createElement('div');
+    actionRow.className = 'multiview-frame-actions';
+    actionRow.append(mute, focus, open, remove);
+    controls.append(volumeGroup, actionRow);
 
     const proxyNote = doc.createElement('p');
     proxyNote.className = 'multiview-frame-note';
@@ -741,6 +785,7 @@ export function createMultiWatchController(options = {}) {
       slider,
       value,
       mute,
+      focus,
       proxyNote,
       error,
       mountToken,
@@ -808,6 +853,7 @@ export function createMultiWatchController(options = {}) {
         const addedCount = addVideoIds([result.videoId], { source: 'search' });
         if (addedCount) {
           updateStatus(`Added "${result.title}" to your watcher.`, 'success');
+          doc.getElementById('watch-room')?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
         }
       });
 
@@ -832,6 +878,8 @@ export function createMultiWatchController(options = {}) {
     }
 
     if (!state.videos.length) {
+      focusedVideoId = '';
+      grid.classList.remove('multiview-grid--focused');
       destroyPlayers();
       elementRegistry.forEach((elements) => {
         elements.wrapper?.remove();
@@ -886,6 +934,11 @@ export function createMultiWatchController(options = {}) {
     });
 
     const filteredVideos = getFilteredVideos();
+    if (focusedVideoId && !filteredVideos.some((entry) => entry.videoId === focusedVideoId)) {
+      focusedVideoId = '';
+    }
+    syncFocusUI();
+
     if (!filteredVideos.length) {
       const empty = doc.createElement('p');
       empty.className = 'multiview-empty';
@@ -921,6 +974,7 @@ export function createMultiWatchController(options = {}) {
 
   function clearVideos() {
     state.videos = [];
+    focusedVideoId = '';
     syncState();
     renderGrid();
     refreshSearchResultButtons();
@@ -929,6 +983,7 @@ export function createMultiWatchController(options = {}) {
 
   function resetDemoVideos() {
     state.videos = createVideoEntries(defaultVideoIds.length ? defaultVideoIds : []);
+    focusedVideoId = '';
     syncState();
     renderGrid();
     refreshSearchResultButtons();
@@ -976,7 +1031,7 @@ export function createMultiWatchController(options = {}) {
     } catch (error) {
       addSearchResults = [];
       renderSearchResults();
-      updateSearchStatus('Search is unavailable right now. Paste a YouTube link above as a fallback.', 'error');
+      updateSearchStatus('Search is unavailable right now. Open “Paste links or IDs instead” below as a fallback.', 'error');
       return [];
     } finally {
       searchQueryButton.disabled = false;
@@ -1012,6 +1067,7 @@ export function createMultiWatchController(options = {}) {
 
     searchInput?.addEventListener('input', (event) => {
       searchQuery = event.currentTarget.value || '';
+      focusedVideoId = '';
       renderGrid();
     });
 
