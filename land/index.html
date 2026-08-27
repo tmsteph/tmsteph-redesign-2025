@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#314b2b" />
+  <meta name="description" content="A Southern California guide to intentional communities, regenerative farms, cohousing, and land projects." />
+  <title>Land & Community Finder | tmsteph</title>
+  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
+  <script defer src="/_vercel/analytics/script.js"></script>
+  <style>
+    :root {
+      --bg: #eee4d0;
+      --paper: #fbf2df;
+      --paper-2: #fffaf0;
+      --ink: #26301f;
+      --muted: #6f735f;
+      --green: #314b2b;
+      --sage: #73845f;
+      --gold: #b78d46;
+      --clay: #a56542;
+      --line: rgba(38, 48, 31, 0.16);
+      --shadow: 0 24px 60px rgba(38, 48, 31, 0.12);
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Quicksand", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(183, 141, 70, 0.14), transparent 28rem),
+        radial-gradient(circle at 88% 14%, rgba(115, 132, 95, 0.16), transparent 28rem),
+        linear-gradient(180deg, #f0e7d5 0%, var(--bg) 50%, #dfd2b8 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+    }
+
+    .brand,
+    .home-link {
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .brand { font-family: "Caveat", cursive; font-size: 1.7rem; }
+    .home-link { color: var(--muted); font-size: .95rem; }
+
+    .hero {
+      padding: 46px 0 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.72);
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { margin-top: 0; }
+
+    h1 {
+      max-width: 820px;
+      margin: 16px 0 14px;
+      font-family: "Caveat", cursive;
+      font-size: clamp(3.1rem, 9vw, 6.4rem);
+      line-height: .9;
+      letter-spacing: -.03em;
+    }
+
+    .lede {
+      max-width: 760px;
+      margin: 0;
+      color: #56604d;
+      font-size: clamp(1.05rem, 3vw, 1.28rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--green);
+      background: var(--green);
+      color: #fffaf0;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .button.secondary {
+      background: rgba(255, 250, 240, .65);
+      color: var(--green);
+      border-color: var(--line);
+    }
+
+    .notice {
+      margin: 26px 0 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 14px 14px 0;
+      background: rgba(255, 250, 240, .62);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 0 24px;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar { display: none; }
+
+    .filter {
+      flex: 0 0 auto;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 250, 240, .74);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .filter[aria-pressed="true"] {
+      background: var(--green);
+      color: #fffaf0;
+      border-color: var(--green);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 20px 0 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 4vw, 2.3rem);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--paper-2), var(--paper));
+      box-shadow: var(--shadow);
+    }
+
+    .card[data-hidden="true"] { display: none; }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .place {
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 700;
+    }
+
+    .tag {
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(115, 132, 95, .16);
+      color: var(--green);
+      font-size: .74rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .tag.build { background: rgba(183, 141, 70, .18); color: #705722; }
+    .tag.visit { background: rgba(81, 88, 114, .12); color: #4d5268; }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.26rem;
+      line-height: 1.2;
+    }
+
+    .card p {
+      margin: 0 0 13px;
+      color: #59614f;
+    }
+
+    .facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0 0 15px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .facts li {
+      padding: 5px 8px;
+      border-radius: 9px;
+      background: rgba(49, 75, 43, .08);
+      color: #59614f;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .actions .button {
+      min-height: 40px;
+      padding: 8px 11px;
+      font-size: .88rem;
+    }
+
+    .our-path {
+      margin: 32px 0;
+      padding: 22px;
+      border-radius: var(--radius);
+      background: var(--green);
+      color: #fffaf0;
+      box-shadow: var(--shadow);
+    }
+
+    .our-path h2 { margin-bottom: 8px; }
+    .our-path p { max-width: 780px; margin: 0 0 16px; color: #e5eadf; }
+    .our-path .button { background: #fffaf0; color: var(--green); border-color: #fffaf0; }
+
+    footer {
+      padding: 42px 0 48px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    @media (max-width: 760px) {
+      .hero { padding-top: 28px; }
+      .grid { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+      .button { flex: 1 1 150px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container topbar">
+    <a class="brand" href="../">tmsteph</a>
+    <a class="home-link" href="../">← Home</a>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">🌱 Southern California</span>
+      <h1>Land & Community Finder</h1>
+      <p class="lede">Intentional communities, regenerative farms, cohousing experiments, and places where people are actively building a more local and resilient way of life.</p>
+      <div class="hero-actions">
+        <a class="button" href="#nearby">Start near San Diego</a>
+        <a class="button secondary" href="../regenerative-farm/">Our regenerative farm tracker</a>
+      </div>
+      <p class="notice">Discovery guide only — not an endorsement. These projects change quickly, so verify housing, membership, visitor rules, prices, and availability directly before making plans.</p>
+    </section>
+
+    <div class="filters" aria-label="Filter projects">
+      <button class="filter" aria-pressed="true" data-filter="all">Everything</button>
+      <button class="filter" aria-pressed="false" data-filter="live">Live / join</button>
+      <button class="filter" aria-pressed="false" data-filter="build">Help build</button>
+      <button class="filter" aria-pressed="false" data-filter="visit">Learn / visit</button>
+      <button class="filter" aria-pressed="false" data-filter="sandiego">San Diego area</button>
+    </div>
+
+    <section id="nearby">
+      <div class="section-head">
+        <h2>Closest to San Diego</h2>
+        <p>Best places to start exploring.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card" data-tags="live build visit sandiego">
+          <div class="topline"><span class="place">Dulzura · San Diego County</span><span class="tag">Live / join</span></div>
+          <h3>Wild Seeds Ranch</h3>
+          <p>A conscious coliving community and live-work space in nature with coworking, gardens, workshops, camping, and shared community life.</p>
+          <ul class="facts"><li>4 acres</li><li>~45 min from San Diego</li><li>Earth Labs residency</li></ul>
+          <div class="actions"><a class="button" href="https://www.wildseedsranch.com/" target="_blank" rel="noopener">Explore</a><a class="button secondary" href="https://www.wildseedsranch.com/earthlabs" target="_blank" rel="noopener">Earth Labs</a></div>
+        </article>
+
+        <article class="card" data-tags="build sandiego">
+          <div class="topline"><span class="place">Dulzura · San Diego County</span><span class="tag build">Building</span></div>
+          <h3>Dulzura Village ECOFARM</h3>
+          <p>A 40-acre Commons Restoration project intended as a subsistence and demonstration farm for intentional-community residents and the wider community.</p>
+          <ul class="facts"><li>40 acres</li><li>Food forest</li><li>Medicinal garden</li><li>Animals</li></ul>
+          <div class="actions"><a class="button" href="https://www.gettoknowidi.org/copy-of-project-one" target="_blank" rel="noopener">Project page</a></div>
+        </article>
+
+        <article class="card" data-tags="live visit sandiego">
+          <div class="topline"><span class="place">Vista · North County</span><span class="tag">Live / join</span></div>
+          <h3>Emerald Village</h3>
+          <p>A multigenerational intentional community centered on land stewardship, shared meals, personal growth, and community life.</p>
+          <ul class="facts"><li>9 acres</li><li>Permaculture</li><li>Visitor brunches</li><li>Rental path</li></ul>
+          <div class="actions"><a class="button" href="https://www.ic.org/directory/community/evo-the-emerald-village-in-vista-ca/" target="_blank" rel="noopener">Community info</a></div>
+        </article>
+
+        <article class="card" data-tags="live sandiego">
+          <div class="topline"><span class="place">Pacific Beach · San Diego</span><span class="tag">Urban</span></div>
+          <h3>Le Case EcoVillage</h3>
+          <p>An urban ecovillage across several homes on two lots, with shared meals, gardens, permaculture, and communal living near the beach.</p>
+          <ul class="facts"><li>Urban</li><li>Shared + private living</li><li>Permaculture garden</li></ul>
+          <div class="actions"><a class="button" href="https://lecaseecovillage.org/" target="_blank" rel="noopener">Explore</a></div>
+        </article>
+
+        <article class="card" data-tags="live sandiego">
+          <div class="topline"><span class="place">San Diego · near downtown</span><span class="tag">Cohousing</span></div>
+          <h3>La Querencia</h3>
+          <p>A small urban cohousing community designed around shared resources, gardens, workshops, and intentional city living.</p>
+          <ul class="facts"><li>6 units</li><li>Garden</li><li>Workshop</li><li>Urban</li></ul>
+          <div class="actions"><a class="button" href="https://www.calcoho.org/la_querencia_san_diego" target="_blank" rel="noopener">Community info</a></div>
+        </article>
+
+        <article class="card" data-tags="build live sandiego">
+          <div class="topline"><span class="place">San Diego County</span><span class="tag build">Land project</span></div>
+          <h3>Foundation Farms / Duwara</h3>
+          <p>A regenerative forest-farm vision built around farmer ownership, farmworker housing, entrepreneurship, and room-and-board exchange.</p>
+          <ul class="facts"><li>Just under 120 acres</li><li>Co-op model</li><li>Work exchange</li></ul>
+          <div class="actions"><a class="button" href="https://www.duwara.org/what-we-do/" target="_blank" rel="noopener">Project info</a></div>
+        </article>
+
+        <article class="card" data-tags="build live sandiego">
+          <div class="topline"><span class="place">North County · forming</span><span class="tag build">Founding members</span></div>
+          <h3>Contemplative Practice Community</h3>
+          <p>An early-stage residential community seeking founding members, with contemplative practice, sustainable living, and small-scale permaculture at its core.</p>
+          <ul class="facts"><li>Property search</li><li>Permaculture</li><li>Work contribution model</li></ul>
+          <div class="actions"><a class="button" href="https://cpcommunity.org/#residential" target="_blank" rel="noopener">Learn more</a></div>
+        </article>
+
+        <article class="card" data-tags="visit sandiego">
+          <div class="topline"><span class="place">Vista · North County</span><span class="tag visit">Learn / visit</span></div>
+          <h3>Sand n' Straw Community Farm</h3>
+          <p>A six-acre regenerative family farm using permaculture and organic practices — a nearby model for land stewardship and local food.</p>
+          <ul class="facts"><li>6 acres</li><li>Regenerative agriculture</li><li>Local food</li></ul>
+          <div class="actions"><a class="button" href="https://www.sandnstraw.com/about" target="_blank" rel="noopener">Explore</a></div>
+        </article>
+
+        <article class="card" data-tags="visit sandiego">
+          <div class="topline"><span class="place">Encinitas · North County</span><span class="tag visit">Learn / visit</span></div>
+          <h3>Fox Point Farms</h3>
+          <p>A regenerative farm and gathering place combining food production, local makers, dining, events, wellness, and hands-on community experiences.</p>
+          <ul class="facts"><li>Regenerative farm</li><li>Events</li><li>Market</li><li>Workshops</li></ul>
+          <div class="actions"><a class="button" href="https://www.foxpointfarms.com/" target="_blank" rel="noopener">Visit</a></div>
+        </article>
+
+        <article class="card" data-tags="visit sandiego">
+          <div class="topline"><span class="place">San Diego</span><span class="tag visit">Learn</span></div>
+          <h3>The Permaculture Lab</h3>
+          <p>Local regenerative-living education covering gardening, water, permaculture design, and practical strategies for resilient local systems.</p>
+          <ul class="facts"><li>Education</li><li>Permaculture</li><li>Water systems</li></ul>
+          <div class="actions"><a class="button" href="https://www.thepermaculturelab.com/" target="_blank" rel="noopener">Learn</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>A little farther out</h2>
+        <p>Still close enough for a day trip or visit.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card" data-tags="live build visit">
+          <div class="topline"><span class="place">Hemet · Riverside County</span><span class="tag">Established</span></div>
+          <h3>Down-to-Earth EcoShire</h3>
+          <p>An established 35-acre eco-project and cooperative with restoration work, camping, workshops, and plans for more housing and a makerspace.</p>
+          <ul class="facts"><li>35 acres</li><li>Co-op LLC</li><li>Visitors welcome</li><li>Membership shares</li></ul>
+          <div class="actions"><a class="button" href="https://ecovillage.org/ecovillage/down-to-earth-ecoshire/" target="_blank" rel="noopener">Explore</a></div>
+        </article>
+
+        <article class="card" data-tags="live build sandiego">
+          <div class="topline"><span class="place">Ramona · San Diego County</span><span class="tag build">Developing</span></div>
+          <h3>Elliott Pond</h3>
+          <p>A planned cohousing-style, walkable small-town development in Ramona built around porches, community gardens, shared spaces, and neighborhood life.</p>
+          <ul class="facts"><li>Cohousing</li><li>Walkable</li><li>Community gardens</li></ul>
+          <div class="actions"><a class="button" href="https://elliott-pond.com/" target="_blank" rel="noopener">Project site</a></div>
+        </article>
+
+        <article class="card" data-tags="live visit">
+          <div class="topline"><span class="place">Koreatown · Los Angeles</span><span class="tag">Established</span></div>
+          <h3>Los Angeles Eco-Village</h3>
+          <p>A long-running urban ecovillage demonstrating cooperative housing, lower-impact city living, community land stewardship, and neighborhood-scale projects.</p>
+          <ul class="facts"><li>~40 intentional residents</li><li>Urban co-op</li><li>Public tours</li></ul>
+          <div class="actions"><a class="button" href="https://laecovillage.org/" target="_blank" rel="noopener">Explore</a><a class="button secondary" href="https://laecovillage.org/home/tours/" target="_blank" rel="noopener">Tours</a></div>
+        </article>
+
+        <article class="card" data-tags="visit">
+          <div class="topline"><span class="place">San Juan Capistrano · Orange County</span><span class="tag visit">Learn / visit</span></div>
+          <h3>The Ecology Center</h3>
+          <p>A 28-acre regenerative organic farm and education hub demonstrating food production, ecological design, and community-facing agriculture at meaningful scale.</p>
+          <ul class="facts"><li>28 acres</li><li>Regenerative Organic Certified</li><li>Education</li></ul>
+          <div class="actions"><a class="button" href="https://theecologycenter.org/" target="_blank" rel="noopener">Explore</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="our-path">
+      <h2>Our path</h2>
+      <p>The goal is not just to find land. It is to learn from communities that already work, build relationships, test small regenerative projects, and eventually connect land, food, family, retreats, technology, and open community infrastructure.</p>
+      <a class="button" href="../regenerative-farm/">Open the Regenerative Farm Tracker</a>
+    </section>
+  </main>
+
+  <footer class="container">
+    <p>Know a Southern California project that belongs here? <a href="mailto:tmsteph1290@gmail.com">Send it my way.</a></p>
+  </footer>
+
+  <script>
+    const filters = [...document.querySelectorAll('.filter')];
+    const cards = [...document.querySelectorAll('.card')];
+
+    filters.forEach((button) => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        filters.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        cards.forEach((card) => {
+          const show = filter === 'all' || card.dataset.tags.split(' ').includes(filter);
+          card.dataset.hidden = String(!show);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
