@@ -44,13 +44,17 @@
         </div>
       </div>
 
-      <div class="calendar-scroll" tabindex="0" aria-label="Scrollable month calendar">
+      <div class="calendar-scroll" tabindex="0" aria-label="Month calendar">
         <div class="calendar-grid-shell">
           <div class="weekday-row" aria-hidden="true">
             <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
           </div>
           <div class="month-grid" data-calendar-grid></div>
         </div>
+      </div>
+      <div class="empty-month" data-empty-month hidden>
+        <span>No sample events in this month.</span>
+        <button type="button" data-demo-month>Show sample month</button>
       </div>
     </section>
 

@@ -19,10 +19,17 @@ describe('glanceable calendar', () => {
     expect(js).toContain("return `${start}–${end}${overnight ? ' +1' : ''}`;");
   });
 
-  it('keeps month cells readable instead of squeezing them on phones', async () => {
+  it('fits the full seven-day month grid on phones with compact ranges', async () => {
+    const html = await readFile('calendar/index.html', 'utf8');
+    const js = await readFile('calendar/calendar.js', 'utf8');
     const css = await readFile('calendar/calendar.css', 'utf8');
-    expect(css).toContain('.calendar-grid-shell { min-width: 920px; }');
+
+    expect(html).toContain('data-empty-month');
+    expect(html).toContain('Show sample month');
+    expect(js).toContain('function formatCompactRange(event)');
+    expect(js).toContain("let viewDate = new Date(sampleMonth.getFullYear(), sampleMonth.getMonth(), 1);");
     expect(css).toContain('@media (max-width: 700px)');
-    expect(css).toContain('.calendar-grid-shell { min-width: 820px; }');
+    expect(css).toContain('.calendar-grid-shell { min-width: 0; }');
+    expect(css).toContain('.event__time-compact { display: inline; }');
   });
 });
