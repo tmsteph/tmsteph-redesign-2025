@@ -3,6 +3,21 @@ const exploreSearchStatus = document.getElementById('explore-search-status');
 const exploreSearchEmpty = document.getElementById('explore-search-empty');
 const exploreGrid = document.getElementById('explore-project-grid');
 const appSearchJump = document.querySelector('[data-app-search-jump]');
+const heroContainer = document.querySelector('.hero .container');
+
+if (heroContainer) {
+  const primaryHeroLink = heroContainer.querySelector('.btn-primary');
+  if (primaryHeroLink) {
+    const tommyOsLink = primaryHeroLink.cloneNode(true);
+    tommyOsLink.className = 'btn-secondary';
+    tommyOsLink.href = 'https://tommyos.vercel.app';
+    tommyOsLink.textContent = 'Explore TommyOS';
+
+    primaryHeroLink.href = 'opensource.html';
+    primaryHeroLink.textContent = 'Open Source Proof · 3 upstream merges';
+    primaryHeroLink.insertAdjacentElement('afterend', tommyOsLink);
+  }
+}
 
 if (exploreSearchInput && exploreSearchStatus && exploreSearchEmpty && exploreGrid) {
   const projectCards = Array.from(exploreGrid.querySelectorAll('.project-card'));
