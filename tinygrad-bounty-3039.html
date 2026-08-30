@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091421">
+  <title>tinygrad Bounty #3039 Workbench</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(circle at top, #12304a 0, #091421 34rem, #06101a 100%); color: #ecf7ff; }
+    a { color: #7ee7d8; }
+    main { width: min(1040px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 4rem; }
+    header { padding: 2.25rem 0 1.5rem; }
+    .eyebrow { letter-spacing: .14em; text-transform: uppercase; color: #8ab7d8; font-size: .78rem; font-weight: 700; }
+    h1 { margin: .35rem 0 .8rem; font-size: clamp(2.2rem, 8vw, 4.8rem); line-height: .95; }
+    h2 { margin: 0 0 .8rem; font-size: 1.3rem; }
+    p { line-height: 1.6; }
+    .lede { max-width: 760px; color: #c9dcea; font-size: 1.08rem; }
+    .notice { border: 1px solid #5f6a2f; background: #26290f; padding: 1rem; border-radius: 16px; margin: 1.25rem 0; }
+    .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .card { background: rgba(13, 31, 48, .9); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 1.15rem; box-shadow: 0 18px 40px rgba(0,0,0,.18); }
+    .card ul { padding-left: 1.1rem; margin-bottom: 0; }
+    .checklist label { display: flex; gap: .7rem; align-items: flex-start; padding: .55rem 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .checklist label:last-child { border-bottom: 0; }
+    input[type="checkbox"] { margin-top: .22rem; width: 1.1rem; height: 1.1rem; accent-color: #7ee7d8; }
+    textarea, input[type="text"] { width: 100%; border: 1px solid rgba(255,255,255,.13); background: #081521; color: #f5fbff; border-radius: 12px; padding: .8rem; font: inherit; }
+    textarea { min-height: 180px; resize: vertical; }
+    .small { color: #9fb9ca; font-size: .9rem; }
+    code { background: #06101a; padding: .1rem .32rem; border-radius: 6px; color: #d7f4ff; }
+    .status { display: inline-flex; gap: .4rem; align-items: center; border: 1px solid rgba(126,231,216,.25); color: #aaf6ea; border-radius: 999px; padding: .4rem .7rem; font-size: .85rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+    button { border: 0; border-radius: 999px; padding: .72rem 1rem; background: #7ee7d8; color: #06201d; font-weight: 800; cursor: pointer; }
+    button.secondary { background: #162b3b; color: #dceefa; border: 1px solid rgba(255,255,255,.1); }
+    .full { grid-column: 1 / -1; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Human-authored tinygrad work</div>
+    <h1>Bounty #3039 Workbench</h1>
+    <p class="lede">A scratchpad and test plan for Thomas to implement the associative-scan bounty himself, while keeping AI assistance outside the tinygrad code contribution.</p>
+    <div class="status">$500 bounty · research/workbench only</div>
+    <div class="notice"><strong>Rule:</strong> do not copy AI-authored tinygrad code into the submission. Use this page for reasoning, test design, benchmarks, notes, and a human-authored implementation checklist.</div>
+    <p><a href="https://github.com/tinygrad/tinygrad/issues/3039">Open bounty #3039 ↗</a> · <a href="https://github.com/tinygrad/tinygrad/pull/17557">Reference closed PR #17557 ↗</a></p>
+  </header>
+
+  <section class="grid">
+    <article class="card">
+      <h2>1. Understand the target</h2>
+      <div class="checklist">
+        <label><input type="checkbox" data-key="scope"><span>Read bounty #3039 and write the exact acceptance criteria in your own words.</span></label>
+        <label><input type="checkbox" data-key="api"><span>Identify the smallest tinygrad API surface needed for an inclusive associative scan.</span></label>
+        <label><input type="checkbox" data-key="semantics"><span>Confirm axis, reverse, odd-length, dtype, and shape semantics.</span></label>
+        <label><input type="checkbox" data-key="noncomm"><span>Include a non-commutative operation test so accidental reordering is caught.</span></label>
+      </div>
+    </article>
+
+    <article class="card">
+      <h2>2. Correctness test matrix</h2>
+      <ul>
+        <li>lengths: 1, 2, 3, 5, 8, 17</li>
+        <li>forward and reverse</li>
+        <li>axis 0 and non-zero axis</li>
+        <li>integer + floating point</li>
+        <li>non-commutative matrix-prefix composition</li>
+        <li>compare to a simple sequential reference</li>
+      </ul>
+      <p class="small">Start with correctness before parallel-depth optimization.</p>
+    </article>
+
+    <article class="card">
+      <h2>3. Algorithm checkpoint</h2>
+      <p>Candidate family: work-efficient tree/prefix scan. Your implementation should preserve operation order, handle non-power-of-two lengths, and expose enough parallelism that depth grows roughly logarithmically rather than linearly.</p>
+      <p class="small">Write the algorithm yourself from primary references or your own derivation. Avoid lifting code from the abandoned AI-authored PR.</p>
+    </article>
+
+    <article class="card">
+      <h2>4. Benchmark plan</h2>
+      <div class="checklist">
+        <label><input type="checkbox" data-key="baseline"><span>Record sequential reference timing.</span></label>
+        <label><input type="checkbox" data-key="sizes"><span>Benchmark several scan lengths, including awkward odd sizes.</span></label>
+        <label><input type="checkbox" data-key="depth"><span>Inspect generated schedule/kernel count as a proxy for parallel depth.</span></label>
+        <label><input type="checkbox" data-key="regressions"><span>Check that common tinygrad tests remain green.</span></label>
+      </div>
+    </article>
+
+    <article class="card full">
+      <h2>Your implementation notes</h2>
+      <textarea id="notes" placeholder="Write your own derivation, pseudocode, failing cases, benchmark numbers, maintainer feedback, and questions here..."></textarea>
+      <div class="actions">
+        <button id="save">Save locally</button>
+        <button id="copy" class="secondary">Copy notes</button>
+        <button id="reset" class="secondary">Reset checklist</button>
+      </div>
+      <p class="small">Notes and checklist state stay in this browser via localStorage.</p>
+    </article>
+
+    <article class="card full">
+      <h2>Definition of done</h2>
+      <div class="checklist">
+        <label><input type="checkbox" data-key="human-code"><span>The tinygrad patch is personally authored and understood by Thomas.</span></label>
+        <label><input type="checkbox" data-key="correct"><span>Sequential-reference comparisons pass across the correctness matrix.</span></label>
+        <label><input type="checkbox" data-key="parallel"><span>The implementation demonstrates meaningful parallel depth/work behavior.</span></label>
+        <label><input type="checkbox" data-key="tests"><span>Relevant upstream test suites pass locally.</span></label>
+        <label><input type="checkbox" data-key="maintainer"><span>PR description explains semantics, algorithm, validation, and performance without overstating results.</span></label>
+      </div>
+    </article>
+  </section>
+</main>
+<script>
+  const prefix = 'tinygrad-3039:';
+  document.querySelectorAll('input[data-key]').forEach(box => {
+    box.checked = localStorage.getItem(prefix + box.dataset.key) === '1';
+    box.addEventListener('change', () => localStorage.setItem(prefix + box.dataset.key, box.checked ? '1' : '0'));
+  });
+  const notes = document.getElementById('notes');
+  notes.value = localStorage.getItem(prefix + 'notes') || '';
+  document.getElementById('save').addEventListener('click', () => localStorage.setItem(prefix + 'notes', notes.value));
+  document.getElementById('copy').addEventListener('click', async () => navigator.clipboard.writeText(notes.value));
+  document.getElementById('reset').addEventListener('click', () => {
+    document.querySelectorAll('input[data-key]').forEach(box => { box.checked = false; localStorage.removeItem(prefix + box.dataset.key); });
+  });
+</script>
+</body>
+</html>
