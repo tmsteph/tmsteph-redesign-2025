@@ -1,3 +1,22 @@
 {
-  "outputDirectory": "."
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "https://tmsteph.vercel.app/"
+    },
+    {
+      "source": "/css/:path*",
+      "destination": "https://tmsteph.vercel.app/css/:path*"
+    },
+    {
+      "source": "/favicon-16x16.png",
+      "destination": "https://tmsteph.vercel.app/favicon-16x16.png"
+    },
+    {
+      "source": "/manifest.webmanifest",
+      "destination": "https://tmsteph.vercel.app/manifest.webmanifest"
+    }
+  ]
 }
