@@ -1,22 +1,25 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": ".",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
-      "destination": "https://tmsteph.vercel.app/"
+      "src": "^/$",
+      "dest": "https://tmsteph.vercel.app/"
     },
     {
-      "source": "/css/:path*",
-      "destination": "https://tmsteph.vercel.app/css/:path*"
+      "src": "^/css/(.*)$",
+      "dest": "https://tmsteph.vercel.app/css/$1"
     },
     {
-      "source": "/favicon-16x16.png",
-      "destination": "https://tmsteph.vercel.app/favicon-16x16.png"
+      "src": "^/favicon-16x16\\.png$",
+      "dest": "https://tmsteph.vercel.app/favicon-16x16.png"
     },
     {
-      "source": "/manifest.webmanifest",
-      "destination": "https://tmsteph.vercel.app/manifest.webmanifest"
+      "src": "^/manifest\\.webmanifest$",
+      "dest": "https://tmsteph.vercel.app/manifest.webmanifest"
+    },
+    {
+      "handle": "filesystem"
     }
   ]
 }
