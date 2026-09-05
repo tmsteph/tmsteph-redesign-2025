@@ -20,10 +20,23 @@ printf 'kernel: '; uname -a
 [ -r /proc/device-tree/model ] && { printf 'model: '; tr '\000' '\n' </proc/device-tree/model; }
 
 section "driver and firmware"
+printf '%s\n' '-- DRM device nodes --'
+if [ -d /dev/dri ]; then
+  ls -l /dev/dri 2>/dev/null || true
+else
+  printf '/dev/dri is missing\n'
+fi
+printf '%s\n' '-- DRM drivers --'
 for node in /sys/class/drm/card*/device/driver; do
   [ -e "$node" ] || continue
   printf '%s -> %s\n' "$node" "$(readlink "$node" 2>/dev/null || true)"
 done
+printf '%s\n' '-- PowerVR kernel module --'
+if [ -d /sys/module/powervr ]; then
+  printf 'powervr module: loaded\n'
+else
+  printf 'powervr module: not loaded\n'
+fi
 fw=/lib/firmware/powervr/rogue_36.52.104.182_v1.fw
 if [ -r "$fw" ]; then
   printf 'firmware: present (%s)\n' "$fw"
