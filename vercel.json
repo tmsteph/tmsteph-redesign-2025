@@ -11,6 +11,14 @@
       "dest": "https://tmsteph.vercel.app/css/$1"
     },
     {
+      "src": "^/av$",
+      "dest": "https://tmsteph.vercel.app/av/"
+    },
+    {
+      "src": "^/av/(.*)$",
+      "dest": "https://tmsteph.vercel.app/av/$1"
+    },
+    {
       "src": "^/show-credits$",
       "dest": "https://tmsteph.vercel.app/show-credits/"
     },
