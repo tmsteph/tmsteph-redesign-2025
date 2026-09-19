@@ -44,6 +44,14 @@ else
   printf 'firmware: MISSING (%s)\n' "$fw"
 fi
 
+section "USB / xHCI"
+run "USB topology and negotiated speeds" lsusb -t
+printf "%s\n" "-- xHCI drivers --"
+for node in /sys/bus/platform/drivers/*xhci* /sys/bus/pci/drivers/xhci_hcd; do
+  [ -e "$node" ] || continue
+  printf "%s\n" "$node"
+done
+
 section "graphics userspace"
 run "Vulkan summary" vulkaninfo --summary
 run "EGL" eglinfo -B
