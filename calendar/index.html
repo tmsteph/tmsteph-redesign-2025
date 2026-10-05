@@ -1,69 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f5f3ed" />
-  <title>Calendar - tmsteph</title>
-  <link rel="stylesheet" href="./calendar.css" />
-  <link rel="icon" href="../favicon.ico" type="image/x-icon" />
-  <script defer src="/_vercel/analytics/script.js"></script>
-</head>
-<body>
-  <header class="topbar">
-    <a class="back-link" href="../">← tmsteph</a>
-    <div class="topbar-actions">
-      <a href="https://calendar.google.com/" target="_blank" rel="noopener">Google Calendar</a>
-      <a href="https://portal.3dvr.tech/calendar/">3DVR Calendar</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="calendar-hero">
-      <div>
-        <p class="eyebrow">Glanceable calendar</p>
-        <h1>See the shape of the month.</h1>
-        <p class="intro">Start + end times stay visible, so the calendar makes sense before you click anything.</p>
-      </div>
-      <div class="legend" aria-label="Calendar legend">
-        <span class="legend-chip legend-chip--work">Work</span>
-        <span class="legend-chip legend-chip--personal">Personal</span>
-      </div>
-    </section>
-
-    <section class="calendar-card" aria-labelledby="month-label">
-      <div class="calendar-toolbar">
-        <div>
-          <p class="calendar-toolbar__label">Month</p>
-          <h2 id="month-label" data-month-label></h2>
-        </div>
-        <div class="calendar-toolbar__actions" aria-label="Change month">
-          <button type="button" data-month-nav="prev" aria-label="Previous month">‹</button>
-          <button type="button" data-month-today>Today</button>
-          <button type="button" data-month-nav="next" aria-label="Next month">›</button>
-        </div>
-      </div>
-
-      <div class="calendar-scroll" tabindex="0" aria-label="Month calendar">
-        <div class="calendar-grid-shell">
-          <div class="weekday-row" aria-hidden="true">
-            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-          </div>
-          <div class="month-grid" data-calendar-grid></div>
-        </div>
-      </div>
-      <div class="empty-month" data-empty-month hidden>
-        <span>No sample events in this month.</span>
-        <button type="button" data-demo-month>Show sample month</button>
-      </div>
-    </section>
-
-    <section class="calendar-note" aria-label="Calendar status">
-      <strong>Safe public demo:</strong> this page demonstrates the glanceable view without publishing any private calendar events.
-      <span data-snapshot-date></span>
-    </section>
-  </main>
-
-  <script src="./calendar.js"></script>
-</body>
-</html>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#173d63"><title>Our calendar · tmsteph</title><link rel="stylesheet" href="./planner.css"></head>
+<body><header><a href="/">tmsteph</a><span>Our calendar</span><button id="share" hidden>Share with partner</button><button id="print" hidden>Print</button></header>
+<main><section id="locked" class="card"><h1>Our calendar</h1><p>Open your private planning link to see trips, work, and special events together.</p><p>Your plans are only available through that link.</p></section>
+<div id="planner" hidden>
+<div class="heading"><div><h1>Plan together.</h1><p id="status" role="status">Loading your calendar…</p></div><button id="add">Add a plan</button></div>
+<section class="notice" id="missing">Her work hours haven’t been added yet. Add shifts under “Partner · work”. Blank days don’t automatically mean time off.</section>
+<section id="conflicts" aria-label="Plans to check"></section>
+<nav class="toolbar" aria-label="Calendar controls"><div><button id="prev" aria-label="Previous month">‹</button><strong id="month"></strong><button id="next" aria-label="Next month">›</button><button id="today">Today</button></div><div><button id="month-view" aria-pressed="true">Month</button><button id="agenda-view" aria-pressed="false">Agenda</button></div></nav>
+<div class="filters" aria-label="Show schedules">
+<label><input type="checkbox" value="thomas-work" checked> <span class="dot thomas-work"></span>Thomas · work</label>
+<label><input type="checkbox" value="partner-work" checked> <span class="dot partner-work"></span>Partner · work</label>
+<label><input type="checkbox" value="thomas-event" checked> <span class="dot thomas-event"></span>Thomas · events</label>
+<label><input type="checkbox" value="partner-event" checked> <span class="dot partner-event"></span>Partner · events</label>
+<label><input type="checkbox" value="together" checked> <span class="dot together"></span>Together</label>
+</div>
+<div id="month-panel" class="card"><div class="weekdays"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div id="grid"></div></div>
+<section id="agenda" class="card" aria-label="Plans for the month" hidden></section>
+<section class="card" id="day-panel"><h2 id="day-title"></h2><div id="day-events"></div></section>
+<p class="footnote" id="snapshot"></p><p class="footnote">Times use San Diego / Mexico border time (America/Los_Angeles). Trip date holds have flexible hours. Added plans are shared here; they don’t change Google Calendar or work requests.</p>
+<div id="share-panel" class="card" hidden><h2>Plan together</h2><p>Anyone with this private link can view and edit the calendar. Send it only to your partner.</p><input id="share-link" readonly aria-label="Private partner link"><div class="actions"><button id="copy">Copy link</button><button id="revoke" class="secondary" hidden>Revoke partner access</button><button id="close-share" class="secondary">Close</button></div></div>
+</div></main>
+<dialog id="editor"><form id="event-form"><h2 id="editor-title">Add a plan</h2><input id="event-id" type="hidden"><label>What’s happening?<input id="title" maxlength="200" required></label><label>Whose plan?<select id="category"><option value="together">Together</option><option value="partner-work">Partner · work</option><option value="partner-event">Partner · event</option><option value="thomas-work">Thomas · work</option><option value="thomas-event">Thomas · event</option></select></label>
+<div class="pair"><label>Starts<input id="start-date" type="date" required></label><label>Ends<input id="end-date" type="date" required></label></div><div class="pair"><label>Start time (optional)<input id="start-time" type="time"></label><label>End time (optional)<input id="end-time" type="time"></label></div><label>Notes<textarea id="notes" maxlength="1000" rows="3"></textarea></label><label class="check"><input id="tentative" type="checkbox">Tentative</label><p id="form-error" role="alert"></p><div class="actions"><button type="submit" id="save">Save together</button><button type="button" id="cancel" class="secondary">Cancel</button><button type="button" id="delete" class="danger" hidden>Delete</button></div></form></dialog>
+<script type="module" src="./planner.js"></script></body></html>

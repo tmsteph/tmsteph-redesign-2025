@@ -1,0 +1,21 @@
+[Unit]
+Description=tmsteph private family calendar
+After=network.target
+[Service]
+Type=simple
+User=debian
+Group=debian
+Environment=PORT=4346
+Environment=PLANNER_DATA_DIR=/home/debian/.local/share/tmsteph-family-calendar
+ExecStart=/usr/bin/node /opt/tmsteph-family-calendar/server.mjs
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/debian/.local/share/tmsteph-family-calendar
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=0077
+[Install]
+WantedBy=multi-user.target
