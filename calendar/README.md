@@ -11,4 +11,4 @@ The Google import is a dated snapshot, not two-way sync. Shared additions and ch
 
 Validation: `node --test ops/family-calendar-server.test.mjs`, `npm test -- tests/calendar-view.test.js`, `npm run build`. Browser acceptance checks desktop/mobile rendering, event editing across two independent browser contexts, conflict cards, and revoked-link denial using a disposable private room.
 
-Month cells display separate vertical 24-hour clock bars (midnight at the top, noon halfway down) for each event, positioned by start time and sized by duration. Multi-day timed events are clipped to each date; unknown hours use stripes instead of claiming a measured duration. Tentative events are lighter. Color keys use small rectangular swatches.
+Month cells display separate vertical 24-hour clock bars (early hours at the bottom, later hours at the top, noon in the middle) for each event, positioned by start time and sized by duration. Multi-day timed events are clipped to each date; unknown hours use stripes instead of claiming a measured duration. Tentative events are lighter. Color keys use small rectangular swatches.

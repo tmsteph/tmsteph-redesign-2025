@@ -14,3 +14,6 @@ Replaced month-cell dots with clock-positioned duration bars, including midnight
 
 ### Vertical calendar bars
 Changed duration bars to vertical day columns: time flows downward, with separate side-by-side lanes for each event. Preserved duration sizing and flexible-hour stripes.
+
+### Upward calendar time scale
+Reversed the vertical clock scale so early hours sit at the bottom and later hours sit at the top, while event duration remains proportional.
