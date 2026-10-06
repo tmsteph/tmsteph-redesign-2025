@@ -25,7 +25,7 @@ items.forEach(e=>{
   const description=e.title+' · '+(span.flexible?'Flexible hours':range(e))+(e.tentative?' · tentative':'');
   track.title=description;track.setAttribute('role','img');track.setAttribute('aria-label',description);
   const fill=el('span',undefined,'time-fill '+e.category);
-  fill.style.left=span.left+'%';fill.style.width=span.width+'%';
+  fill.style.top=span.left+'%';fill.style.height=span.width+'%';
   track.append(fill);bars.append(track);
 });
 button.append(bars);items.slice(0,3).forEach(e=>{const item=el('span',e.title,'mini '+e.category);item.append(el('small',e.tentative?'Tentative · '+range(e):range(e)));button.append(item);});if(items.length>3)button.append(el('small','+'+(items.length-3)+' more'));button.onclick=()=>{selected=d;render();$('day-panel').scrollIntoView({behavior:'smooth',block:'nearest'});};$('grid').append(button);}
