@@ -2,3 +2,6 @@
 
 ## 2026-10-05 — Private shared family planner
 Replaced the tmsteph calendar demo with a private, collaborative planner. Added separate work/event schedules for two people, shared travel planning, conflict visibility, month/agenda views, print support, persistent server storage, and revocable partner links. No personal schedule data or private links are included in the public source.
+
+### Calendar duration bars
+Replaced month-cell dots with clock-positioned duration bars, including midnight/noon reference marks, per-day clipping for multi-day timed plans, and striped flexible-hour markers. Verified on mobile and desktop.

@@ -10,3 +10,5 @@ To deploy backend source, install `ops/family-calendar-server.mjs` as `/opt/tmst
 The Google import is a dated snapshot, not two-way sync. Shared additions and changes remain in this planner. Work shifts preserve their tentative status; blank days do not assert availability. All-day Google date holds have exclusive end dates converted to inclusive display dates. Flexible travel hours remain in notes rather than invented exact timestamps.
 
 Validation: `node --test ops/family-calendar-server.test.mjs`, `npm test -- tests/calendar-view.test.js`, `npm run build`. Browser acceptance checks desktop/mobile rendering, event editing across two independent browser contexts, conflict cards, and revoked-link denial using a disposable private room.
+
+Month cells display separate 24-hour clock bars for each event, positioned by start time and sized by duration. Multi-day timed events are clipped to each date; unknown hours use stripes instead of claiming a measured duration. Tentative events are lighter. Color keys use small rectangular swatches.
