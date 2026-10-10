@@ -52,6 +52,41 @@ for node in /sys/bus/platform/drivers/*xhci* /sys/bus/pci/drivers/xhci_hcd; do
   printf "%s\n" "$node"
 done
 
+section "display session"
+printf 'uid: '; id -u
+printf 'session type: %s\n' "${XDG_SESSION_TYPE:-unset}"
+printf 'runtime directory: %s\n' "${XDG_RUNTIME_DIR:-unset}"
+printf 'Wayland display: %s\n' "${WAYLAND_DISPLAY:-unset}"
+printf 'X11 display: %s\n' "${DISPLAY:-unset}"
+if [ -n "${XDG_RUNTIME_DIR:-}" ] && [ ! -d "$XDG_RUNTIME_DIR" ]; then
+  printf 'WARNING: XDG_RUNTIME_DIR does not exist\n'
+fi
+if [ -n "${WAYLAND_DISPLAY:-}" ]; then
+  wayland_name=$WAYLAND_DISPLAY
+elif [ "${XDG_SESSION_TYPE:-}" = "wayland" ]; then
+  wayland_name=wayland-0
+  printf 'Wayland display unset; checking default wayland-0\n'
+else
+  wayland_name=
+fi
+if [ -n "$wayland_name" ]; then
+  case "$wayland_name" in
+    /*) wayland_socket=$wayland_name ;;
+    *) if [ -n "${XDG_RUNTIME_DIR:-}" ]; then
+         wayland_socket=${XDG_RUNTIME_DIR%/}/$wayland_name
+       else
+         wayland_socket=
+       fi ;;
+  esac
+  if [ -n "$wayland_socket" ] && [ -S "$wayland_socket" ]; then
+    printf 'Wayland socket: present\n'
+  else
+    printf 'WARNING: Wayland socket missing or not accessible\n'
+  fi
+else
+  printf 'Wayland socket: not requested (X11 or headless is possible)\n'
+fi
+
 section "graphics userspace"
 run "Vulkan summary" vulkaninfo --summary
 run "EGL" eglinfo -B
