@@ -1,0 +1,34 @@
+name: Verify open-source ledger deployment
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'opensource.html'
+      - '.github/workflows/verify-opensource-ledger.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Verify live ledger contains current contribution receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://tmsteph.com/opensource.html'
+          expected='https://github.com/bloomberg/memray/pull/1048'
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent --show-error --location --max-time 15 --header 'Cache-Control: no-cache' "${url}?verify=${GITHUB_SHA}-${attempt}" | grep -Fq "$expected"; then
+              echo "Live ledger verified on attempt ${attempt}: ${expected}"
+              exit 0
+            fi
+            echo "Attempt ${attempt}/20: live ledger has not deployed the expected contribution yet"
+            sleep 25
+          done
+          echo '::error::Live ledger did not include the expected Memray PR after repeated checks. GitHub publication and website deployment are separate.'
+          exit 1
