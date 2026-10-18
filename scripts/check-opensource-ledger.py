@@ -58,6 +58,7 @@ def entries(html: str) -> list[tuple[str, str, str, str]]:
             match = PR_RE.match(url)
             if match:
                 found.append((*match.groups(), card["status"].strip()))
+                break  # The first PR is this card's contribution; others are context.
     return found
 
 
@@ -73,8 +74,12 @@ def github_status(owner: str, repo: str, number: str) -> str:
 
 
 def status_matches(badge: str, actual: str) -> bool:
-    """Allow an accepted review while its parent PR is still open."""
-    return badge == actual or (badge == "Review accepted" and actual == "Open PR")
+    """Match ledger wording while preserving distinctions between author and reviewer."""
+    return (
+        badge == actual
+        or (badge == "Closed · not merged" and actual == "Closed unmerged")
+        or (badge == "Review accepted" and actual in ("Open PR", "Merged"))
+    )
 
 
 def main() -> int:
