@@ -16,19 +16,36 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
-      - name: Verify live ledger contains current contribution receipts
+      - name: Verify deployed ledger matches the exact source commit
         shell: bash
         run: |
           set -euo pipefail
-          url='https://tmsteph.com/opensource.html'
-          expected='in favor of the maintainer-led PR #1055'
+          source_url="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/opensource.html"
+          live_url='https://tmsteph.com/opensource.html'
+          tmpdir="$(mktemp -d)"
+          trap 'rm -rf "$tmpdir"' EXIT
+
+          curl --fail --silent --show-error --location --retry 2 --max-time 20 \
+            "$source_url" -o "$tmpdir/source.html"
+          test -s "$tmpdir/source.html"
+          source_hash="$(sha256sum "$tmpdir/source.html" | cut -d' ' -f1)"
+          echo "Pinned source commit: ${GITHUB_SHA}"
+          echo "Source SHA-256: ${source_hash}"
+
           for attempt in $(seq 1 20); do
-            if curl --fail --silent --show-error --location --max-time 15 --header 'Cache-Control: no-cache' "${url}?verify=${GITHUB_SHA}-${attempt}" | grep -Fq "$expected"; then
-              echo "Live ledger verified on attempt ${attempt}: ${expected}"
-              exit 0
+            if curl --fail --silent --show-error --location --max-time 15 \
+              --header 'Cache-Control: no-cache' \
+              "${live_url}?verify=${GITHUB_SHA}-${attempt}" -o "$tmpdir/live.html"; then
+              live_hash="$(sha256sum "$tmpdir/live.html" | cut -d' ' -f1)"
+              if cmp -s "$tmpdir/source.html" "$tmpdir/live.html"; then
+                echo "Live ledger verified on attempt ${attempt}: HTTP 200, byte-identical SHA-256 ${source_hash}"
+                exit 0
+              fi
+              echo "Attempt ${attempt}/20: source/live mismatch (live SHA-256 ${live_hash})"
+            else
+              echo "Attempt ${attempt}/20: live fetch failed"
             fi
-            echo "Attempt ${attempt}/20: live ledger has not deployed the expected contribution yet"
-            sleep 25
+            sleep 20
           done
-          echo '::error::Live ledger did not include the corrected Memray status after repeated checks. GitHub publication and website deployment are separate.'
+          echo '::error::Live ledger did not match the pinned GitHub source after repeated checks. Inspect deployment routing/cache separately from source publication.'
           exit 1
