@@ -78,6 +78,7 @@
             </div>
             <div class="watch-room-toolbar__actions">
               <a class="btn-primary" href="#add-videos">+ Add videos</a>
+              <a class="btn-secondary" href="#spotify">Spotify</a>
               <button class="btn-secondary" data-copy-share-link type="button">Copy room link</button>
             </div>
           </div>
@@ -250,7 +251,7 @@
           iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
           iframe.loading = 'lazy';
           player.replaceChildren(iframe);
-          status.textContent = 'Spotify player loaded. Sign in through Spotify if prompted.';
+          status.textContent = 'Spotify player opened below. Sign in through Spotify if prompted.';
         });
       })();
     </script>
