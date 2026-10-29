@@ -87,6 +87,24 @@
         </div>
       </section>
 
+      <section class="section card" id="spotify">
+        <div class="container watch-container">
+          <p class="watch-eyebrow">Another way to listen</p>
+          <h2>Spotify</h2>
+          <p>Paste a Spotify song, album, playlist, podcast or show link to listen here. Playback and account requirements are handled by Spotify.</p>
+          <form id="spotify-form">
+            <label class="multiview-label" for="spotify-link">Spotify link</label>
+            <div class="video-search-form">
+              <input id="spotify-link" class="multiview-search-input video-search-input" type="url" placeholder="https://open.spotify.com/playlist/…" required />
+              <button class="btn-primary" type="submit">Open player</button>
+            </div>
+          </form>
+          <p id="spotify-status" aria-live="polite"></p>
+          <div id="spotify-player"></div>
+          <p><a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Open Spotify in your browser ↗</a></p>
+        </div>
+      </section>
+
       <section class="section card watch-builder-card" id="add-videos">
         <div class="container watch-container">
           <div class="watch-heading watch-heading--builder">
@@ -210,5 +228,31 @@
         </div>
       </section>
     </main>
+    <script>
+      (() => {
+        const form = document.getElementById('spotify-form');
+        const input = document.getElementById('spotify-link');
+        const status = document.getElementById('spotify-status');
+        const player = document.getElementById('spotify-player');
+        form.addEventListener('submit', event => {
+          event.preventDefault();
+          let url;
+          try { url = new URL(input.value.trim()); } catch { status.textContent = 'Please enter a valid Spotify link.'; return; }
+          const match = url.protocol === 'https:' && url.hostname === 'open.spotify.com' && url.pathname.match(/^\/(?:intl-[a-z-]+\/)?(track|album|playlist|episode|show)\/([a-zA-Z0-9]+)\/?$/);
+          if (!match) { status.textContent = 'Use a link to a Spotify song, album, playlist, episode, or show.'; return; }
+          const iframe = document.createElement('iframe');
+          iframe.src = 'https://open.spotify.com/embed/' + match[1] + '/' + match[2];
+          iframe.title = 'Spotify player';
+          iframe.width = '100%';
+          iframe.height = match[1] === 'track' || match[1] === 'episode' ? '152' : '352';
+          iframe.style.border = '0';
+          iframe.style.borderRadius = '12px';
+          iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+          iframe.loading = 'lazy';
+          player.replaceChildren(iframe);
+          status.textContent = 'Spotify player loaded. Sign in through Spotify if prompted.';
+        });
+      })();
+    </script>
   </body>
 </html>
