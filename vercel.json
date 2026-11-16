@@ -35,6 +35,30 @@
       "dest": "https://tmsteph.vercel.app/av-resume/$1"
     },
     {
+      "src": "^/union$",
+      "dest": "https://tmsteph.vercel.app/union/"
+    },
+    {
+      "src": "^/union/(.*)$",
+      "dest": "https://tmsteph.vercel.app/union/$1"
+    },
+    {
+      "src": "^/human-language$",
+      "dest": "https://tmsteph.vercel.app/human-language/"
+    },
+    {
+      "src": "^/human-language/(.*)$",
+      "dest": "https://tmsteph.vercel.app/human-language/$1"
+    },
+    {
+      "src": "^/gnome-paper-cuts$",
+      "dest": "https://tmsteph.vercel.app/gnome-paper-cuts/"
+    },
+    {
+      "src": "^/gnome-paper-cuts/(.*)$",
+      "dest": "https://tmsteph.vercel.app/gnome-paper-cuts/$1"
+    },
+    {
       "src": "^/favicon-16x16\\.png$",
       "dest": "https://tmsteph.vercel.app/favicon-16x16.png"
     },
